@@ -1,0 +1,1651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report #2: Product & Merchandising Report</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.2/html2pdf.bundle.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: #F5F0EB;
+            color: #1A1A1A;
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .report-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #E5DDD5;
+        }
+
+        .report-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1A1A1A;
+            margin-bottom: 8px;
+        }
+
+        .report-period {
+            font-size: 18px;
+            color: #999;
+            margin-bottom: 20px;
+        }
+
+        .brand-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .brand-logo {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #D4A574 0%, #C99060 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: white;
+            font-size: 20px;
+        }
+
+        .brand-name {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1A1A1A;
+        }
+
+        .powered-by {
+            font-size: 12px;
+            color: #999;
+            margin-top: 12px;
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1A1A1A;
+            margin-bottom: 16px;
+        }
+
+        .accent-card {
+            background: linear-gradient(135deg, #FEF3E6 0%, #FEE8CC 100%);
+            border-left: 4px solid #D4A574;
+        }
+
+        .accent-card .card-title {
+            color: #8B6F47;
+        }
+
+        .accent-text {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #5A5A5A;
+        }
+
+        /* KPI Bar */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .kpi-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+
+        .kpi-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: #999;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .kpi-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1A1A1A;
+            margin-bottom: 8px;
+        }
+
+        .kpi-change {
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .change-positive {
+            color: #0D9488;
+        }
+
+        .change-negative {
+            color: #DC2626;
+        }
+
+        .arrow {
+            display: inline-block;
+            margin-right: 4px;
+        }
+
+        /* Tabs */
+        .tab-bar {
+            display: flex;
+            gap: 24px;
+            border-bottom: 1px solid #E5DDD5;
+            margin-bottom: 20px;
+            overflow-x: auto;
+        }
+
+        .tab {
+            padding: 12px 0;
+            font-size: 14px;
+            font-weight: 500;
+            color: #999;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+
+        .tab.active {
+            color: #1A1A1A;
+            border-bottom-color: #1A1A1A;
+        }
+
+        /* Product Summary Bar */
+        .product-summary {
+            background: #F9F7F4;
+            padding: 16px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        /* Product Tiles */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+
+        .product-tile {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .product-tile:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+        }
+
+        .product-image-wrapper {
+            position: relative;
+            width: 100%;
+            padding-bottom: 100%;
+            background: #F5F0EB;
+            overflow: hidden;
+        }
+
+        .product-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .rank-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .product-info {
+            padding: 16px;
+        }
+
+        .product-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1A1A1A;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .product-price {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1A1A1A;
+            margin-bottom: 12px;
+        }
+
+        .price-original {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 13px;
+        }
+
+        .price-sale {
+            color: #DC2626;
+            font-weight: 700;
+        }
+
+        .metric-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 8px;
+            font-size: 12px;
+        }
+
+        .metric-item {
+            background: #F9F7F4;
+            padding: 8px;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .metric-label {
+            color: #999;
+            font-weight: 500;
+        }
+
+        .metric-value {
+            color: #1A1A1A;
+            font-weight: 600;
+        }
+
+        .sell-through-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 4px;
+        }
+
+        .indicator-green {
+            background-color: #0D9488;
+        }
+
+        .indicator-yellow {
+            background-color: #F59E0B;
+        }
+
+        .indicator-red {
+            background-color: #DC2626;
+        }
+
+        /* Charts */
+        .chart-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        /* Category Matrix */
+        .matrix-grid {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 30px;
+            margin-bottom: 24px;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .table th {
+            background: #F9F7F4;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+            color: #666;
+            border-bottom: 1px solid #E5DDD5;
+        }
+
+        .table td {
+            padding: 12px;
+            border-bottom: 1px solid #E5DDD5;
+            color: #1A1A1A;
+        }
+
+        .table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .warning-box {
+            background: #FEF3E6;
+            border-left: 4px solid #F59E0B;
+            padding: 12px 16px;
+            border-radius: 6px;
+            margin: 12px 0;
+            font-size: 13px;
+            color: #5A5A5A;
+        }
+
+        /* Tabs for Product Types */
+        .type-tabs {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .type-tab {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+
+        .type-tab-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #999;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .type-metric {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 13px;
+        }
+
+        .type-metric-label {
+            color: #999;
+        }
+
+        .type-metric-value {
+            font-weight: 600;
+            color: #1A1A1A;
+        }
+
+        /* Pareto Chart */
+        .pareto-container {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            margin-bottom: 24px;
+        }
+
+        .pareto-bars {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            height: 250px;
+            gap: 8px;
+            margin-bottom: 20px;
+            padding: 0 20px;
+        }
+
+        .pareto-bar {
+            flex: 1;
+            background: linear-gradient(180deg, #D4A574 0%, #C99060 100%);
+            border-radius: 8px 8px 0 0;
+            position: relative;
+        }
+
+        .pareto-callout {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .callout-item {
+            text-align: center;
+            padding: 12px;
+            background: #F9F7F4;
+            border-radius: 8px;
+        }
+
+        .callout-label {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 4px;
+        }
+
+        .callout-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1A1A1A;
+        }
+
+        /* State Changes Table */
+        .state-table {
+            width: 100%;
+        }
+
+        .state-row {
+            display: grid;
+            grid-template-columns: 60px 1fr auto;
+            gap: 16px;
+            align-items: center;
+            padding: 16px;
+            border-bottom: 1px solid #E5DDD5;
+        }
+
+        .state-row:last-child {
+            border-bottom: none;
+        }
+
+        .state-thumb {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            object-fit: cover;
+            background: #F5F0EB;
+        }
+
+        .state-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .state-change {
+            font-size: 12px;
+            color: #999;
+        }
+
+        .state-product {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1A1A1A;
+        }
+
+        .state-amount {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* Inventory Risk */
+        .risk-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        .risk-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+
+        .risk-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1A1A1A;
+            margin-bottom: 16px;
+        }
+
+        .risk-item {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+            align-items: flex-start;
+        }
+
+        .risk-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .risk-thumb {
+            width: 50px;
+            height: 50px;
+            border-radius: 6px;
+            object-fit: cover;
+            background: #F5F0EB;
+            flex-shrink: 0;
+        }
+
+        .risk-details {
+            flex: 1;
+            font-size: 12px;
+        }
+
+        .risk-name {
+            font-weight: 600;
+            color: #1A1A1A;
+            margin-bottom: 2px;
+        }
+
+        .risk-stat {
+            color: #999;
+        }
+
+        /* Launch Tracker */
+        .launch-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .launch-tile {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+
+        .launch-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: #F5F0EB;
+        }
+
+        .launch-info {
+            padding: 16px;
+        }
+
+        .launch-badge {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .badge-strong {
+            background: #D1FAE5;
+            color: #0D9488;
+        }
+
+        .badge-average {
+            background: #FEF3E6;
+            color: #D4A574;
+        }
+
+        .badge-slow {
+            background: #FEE2E2;
+            color: #DC2626;
+        }
+
+        .launch-name {
+            font-weight: 600;
+            color: #1A1A1A;
+            margin-bottom: 8px;
+            font-size: 13px;
+        }
+
+        .launch-metric {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 4px;
+        }
+
+        .launch-value {
+            font-weight: 600;
+            color: #1A1A1A;
+        }
+
+        /* Marketing Tracker */
+        .marketing-table {
+            width: 100%;
+            font-size: 12px;
+        }
+
+        .marketing-row {
+            display: grid;
+            grid-template-columns: 60px 1fr repeat(5, 1fr);
+            gap: 12px;
+            align-items: center;
+            padding: 12px;
+            border-bottom: 1px solid #E5DDD5;
+        }
+
+        .marketing-row:first-child {
+            background: #F9F7F4;
+            font-weight: 600;
+            color: #666;
+        }
+
+        .marketing-thumb {
+            width: 50px;
+            height: 50px;
+            border-radius: 6px;
+            object-fit: cover;
+            background: #F5F0EB;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: right;
+            padding-top: 30px;
+            border-top: 1px solid #E5DDD5;
+            margin-top: 40px;
+            font-size: 12px;
+            color: #999;
+        }
+
+        .footer-marklo {
+            font-weight: 600;
+            color: #D4A574;
+            margin-bottom: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .kpi-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            }
+
+            .matrix-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .type-tabs {
+                grid-template-columns: 1fr;
+            }
+
+            .risk-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .marketing-row {
+                grid-template-columns: 1fr;
+                gap: 4px;
+            }
+
+            .marketing-row > * {
+                grid-column: 1;
+            }
+        }
+
+        /* Download as PDF button */
+        .pdf-download-bar { display: flex; justify-content: flex-end; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .pdf-download-btn { display: inline-flex; align-items: center; gap: 8px; background: #41342A; color: #F6F5F3; border: none; padding: 10px 20px; border-radius: 10px; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s ease; letter-spacing: 0.2px; }
+        .pdf-download-btn:hover { background: #57719B; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(87, 113, 155, 0.3); }
+        .pdf-download-btn:active { transform: translateY(0); }
+        .pdf-download-btn.downloading { opacity: 0.7; pointer-events: none; }
+        @media print { .pdf-download-bar { display: none !important; } body { padding: 0; background: #fff; } .container { max-width: 100%; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Download as PDF -->
+        <div class="pdf-download-bar" id="pdfDownloadBar">
+            <button class="pdf-download-btn" id="downloadPdfBtn" onclick="downloadAsPDF()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Download as PDF
+            </button>
+        </div>
+        <!-- Report Header -->
+        <div class="report-header">
+            <div class="brand-header">
+                <div class="brand-logo">J</div>
+                <div class="brand-name">Jewelry Luxe Co.</div>
+            </div>
+            <div class="report-title">Monthly Product & Merchandising Report</div>
+            <div class="report-period">March 2026</div>
+            <div class="powered-by">Powered by Marklo</div>
+        </div>
+
+        <!-- AI Merchandising Summary -->
+        <div class="card accent-card">
+            <div class="accent-text">
+                <strong>March Performance Highlights:</strong> March was your strongest launch month to date with 42 active SKUs generating $85K in revenue. The Layering Necklace collection drove 35% of monthly revenue — consider reordering the top 3 colorways immediately to capitalize on demand. Additionally, 8 SKUs are now in Slowing territory with >12 weeks of inventory on hand — markdown candidates are highlighted below.
+            </div>
+        </div>
+
+        <!-- KPI Bar -->
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-label">Total Revenue</div>
+                <div class="kpi-value">$85,200</div>
+                <div class="kpi-change change-positive"><span class="arrow">↗</span>18% MoM</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Units Sold</div>
+                <div class="kpi-value">1,911</div>
+                <div class="kpi-change change-positive"><span class="arrow">↗</span>14% MoM</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Active SKUs</div>
+                <div class="kpi-value">297</div>
+                <div class="kpi-change change-positive"><span class="arrow">↗</span>8% MoM</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Average Unit Retail</div>
+                <div class="kpi-value">$44.60</div>
+                <div class="kpi-change change-positive"><span class="arrow">↗</span>3% MoM</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Avg Sell-Through</div>
+                <div class="kpi-value">62%</div>
+                <div class="kpi-change change-positive"><span class="arrow">↗</span>5pp MoM</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Avg Weeks on Hand</div>
+                <div class="kpi-value">6.2</div>
+                <div class="kpi-change change-negative"><span class="arrow">↘</span>0.8 MoM</div>
+            </div>
+        </div>
+
+        <!-- Product Performance Section -->
+        <div class="card">
+            <div class="card-title">Product Performance</div>
+
+            <div class="tab-bar">
+                <div class="tab active">Top</div>
+                <div class="tab">New</div>
+                <div class="tab">Slowing</div>
+                <div class="tab">Accelerating</div>
+                <div class="tab">Dead</div>
+            </div>
+
+            <div class="product-summary">
+                297 Active · 42 New · 8 Slowing | $85.2K in Sales | $142K Inventory Value
+            </div>
+
+            <div class="product-grid">
+                <!-- Product 1 -->
+                <div class="product-tile">
+                    <div class="product-image-wrapper">
+                        <img src="https://picsum.photos/seed/jewelry1/280/280?random=1" alt="Bezel Necklace" class="product-image">
+                        <div class="rank-badge">#1</div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Bezel Necklace</div>
+                        <div class="product-price">$95</div>
+                        <div class="metric-row">
+                            <div class="metric-item">
+                                <span class="metric-label">Revenue</span>
+                                <span class="metric-value change-positive">$12.4K ↗23%</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">Units</span>
+                                <span class="metric-value change-positive">240 ↗25%</span>
+                            </div>
+                        </div>
+                        <div class="metric-row">
+                            <div class="metric-item">
+                                <span class="metric-label">Margin</span>
+                                <span class="metric-value">34% ↗2%</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">WOH</span>
+                                <span class="metric-value">5.2</span>
+                            </div>
+                        </div>
+                        <div class="metric-row">
+                            <div class="metric-item">
+                                <span class="metric-label">QOH</span>
+                                <span class="metric-value">245</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">ST</span>
+                                <span class="metric-value"><span class="sell-through-indicator indicator-green"></span>78%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="product-tile">
+                    <div class="product-image-wrapper">
+                        <img src="https://picsum.photos/seed/jewelry2/280/280?random=2" alt="Layering Necklace Gold" class="product-image">
+                        <div class="rank-badge">#2</div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Layering Necklace - Gold</div>
+                        <div class="product-price">$75</div>
+                        <div class="metric-row">
+                            <div class="metric-item">
+                                <span class="metric-label">Revenue</span>
+                                <span class="metric-value change-positive">$9.8K ↗19%</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">Units</span>
+                                <span class="metric-value change-positive">182 ↗21%</span>
+                            </div>
+                        </div>
+                        <div class="metric-row">
+                            <div class="metric-item">
+                                <span class="metric-label">Margin</span>
+                                <span class="metric-value">38% ↗1%</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">WOH</span>
+                                <span class="metric-value">4.8</span>
+                            </div>
+                        </div>
+                        <div class="metric-row">
+                            <div class="metric-item">
+                                <span class="metric-label">QOH</span>
+                                <span class="metric-value">312</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">ST</span>
+                                <span class="metric-value"><span class="sell-through-indicator indicator-green"></span>82%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="product-tile">
+                    <div class="product-image-wrapper">
+                        <img src="https://picsum.photos/seed/jewelry3/280/280?random=3" alt="Chunky Hoop Earrings" class="product-image">
+                        <div class="rank-badge">#3</div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Chunky Hoop Earrings</div>
+                        <div class="product-price">$55</div>
+                        <div class="metric-row">
+                            <div class="metric-item">
+                                <span class="metric-label">Revenue</span>
+                                <span class="metric-value change-positive">$7.2K ↗14%</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">Units</span>
+                                <span class="metric-value change-positive">168 ↗18%</span>
+                            </div>
+                        </div>
+                        <div class="metric-row">
+                            <div class="metric-item">
+                                <span class="metric-label">Margin</span>
+                                <span class="metric-value">42% ↗3%</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">WOH</span>
+                                <span class="metric-value">6.1</span>
+                            </div>
+                        </div>
+                        <div class="metric-row">
+                            <div class="metric-item">
+                                <span class="metric-label">QOH</span>
+                                <span class="metric-value">198</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">ST</span>
+                                <span class="metric-value"><span class="sell-through-indicator indicator-green"></span>75%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="product-tile">
+                    <div class="product-image-wrapper">
+                        <img src="https://picsum.photos/seed/jewelry4/280/280?random=4" alt="Delicate Bracelet" class="product-image">
+                        <div class="rank-badge">#4</div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Delicate Bracelet</div>
+                        <div class="product-price">$48</div>
+                        <div class="metric-row">
+                            <div class="metric-item">
+                                <span class="metric-label">Revenue</span>
+                                <span class="metric-value change-positive">$6.1K ↗11%</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">Units</span>
+                                <span class="metric-value change-positive">156 ↗15%</span>
+                            </div>
+                        </div>
+                        <div class="metric-row">
+                            <div class="metric-item">
+                                <span class="metric-label">Margin</span>
+                                <span class="metric-value">36% ↗2%</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">WOH</span>
+                                <span class="metric-value">7.2</span>
+                            </div>
+                        </div>
+                        <div class="metric-row">
+                            <div class="metric-item">
+                                <span class="metric-label">QOH</span>
+                                <span class="metric-value">178</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">ST</span>
+                                <span class="metric-value"><span class="sell-through-indicator indicator-yellow"></span>68%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 5 -->
+                <div class="product-tile">
+                    <div class="product-image-wrapper">
+                        <img src="https://picsum.photos/seed/jewelry5/280/280?random=5" alt="Signet Ring - Gold" class="product-image">
+                        <div class="rank-badge">#5</div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Signet Ring - Gold</div>
+                        <div class="product-price"><span class="price-original">$125</span> <span class="price-sale">$89</span></div>
+                        <div class="metric-row">
+                            <div class="metric-item">
+                                <span class="metric-label">Revenue</span>
+                                <span class="metric-value change-positive">$5.8K ↗8%</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">Units</span>
+                                <span class="metric-value change-positive">98 ↗12%</span>
+                            </div>
+                        </div>
+                        <div class="metric-row">
+                            <div class="metric-item">
+                                <span class="metric-label">Margin</span>
+                                <span class="metric-value">28% ↗1%</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">WOH</span>
+                                <span class="metric-value">8.5</span>
+                            </div>
+                        </div>
+                        <div class="metric-row">
+                            <div class="metric-item">
+                                <span class="metric-label">QOH</span>
+                                <span class="metric-value">224</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">ST</span>
+                                <span class="metric-value"><span class="sell-through-indicator indicator-yellow"></span>62%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 6 -->
+                <div class="product-tile">
+                    <div class="product-image-wrapper">
+                        <img src="https://picsum.photos/seed/jewelry6/280/280?random=6" alt="Pearl Drop Earrings" class="product-image">
+                        <div class="rank-badge">#6</div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Pearl Drop Earrings</div>
+                        <div class="product-price">$72</div>
+                        <div class="metric-row">
+                            <div class="metric-item">
+                                <span class="metric-label">Revenue</span>
+                                <span class="metric-value change-positive">$5.2K ↗9%</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">Units</span>
+                                <span class="metric-value change-positive">124 ↗10%</span>
+                            </div>
+                        </div>
+                        <div class="metric-row">
+                            <div class="metric-item">
+                                <span class="metric-label">Margin</span>
+                                <span class="metric-value">40% ↗2%</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">WOH</span>
+                                <span class="metric-value">6.8</span>
+                            </div>
+                        </div>
+                        <div class="metric-row">
+                            <div class="metric-item">
+                                <span class="metric-label">QOH</span>
+                                <span class="metric-value">189</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">ST</span>
+                                <span class="metric-value"><span class="sell-through-indicator indicator-green"></span>74%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 7 -->
+                <div class="product-tile">
+                    <div class="product-image-wrapper">
+                        <img src="https://picsum.photos/seed/jewelry7/280/280?random=7" alt="Tennis Bracelet" class="product-image">
+                        <div class="rank-badge">#7</div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Tennis Bracelet</div>
+                        <div class="product-price">$185</div>
+                        <div class="metric-row">
+                            <div class="metric-item">
+                                <span class="metric-label">Revenue</span>
+                                <span class="metric-value change-positive">$4.8K ↗6%</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">Units</span>
+                                <span class="metric-value change-positive">48 ↗8%</span>
+                            </div>
+                        </div>
+                        <div class="metric-row">
+                            <div class="metric-item">
+                                <span class="metric-label">Margin</span>
+                                <span class="metric-value">44% ↗1%</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">WOH</span>
+                                <span class="metric-value">9.2</span>
+                            </div>
+                        </div>
+                        <div class="metric-row">
+                            <div class="metric-item">
+                                <span class="metric-label">QOH</span>
+                                <span class="metric-value">142</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">ST</span>
+                                <span class="metric-value"><span class="sell-through-indicator indicator-yellow"></span>58%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 8 -->
+                <div class="product-tile">
+                    <div class="product-image-wrapper">
+                        <img src="https://picsum.photos/seed/jewelry8/280/280?random=8" alt="Stacking Ring Set" class="product-image">
+                        <div class="rank-badge">#8</div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Stacking Ring Set</div>
+                        <div class="product-price">$125</div>
+                        <div class="metric-row">
+                            <div class="metric-item">
+                                <span class="metric-label">Revenue</span>
+                                <span class="metric-value change-positive">$4.1K ↗5%</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">Units</span>
+                                <span class="metric-value change-positive">52 ↗6%</span>
+                            </div>
+                        </div>
+                        <div class="metric-row">
+                            <div class="metric-item">
+                                <span class="metric-label">Margin</span>
+                                <span class="metric-value">32% ↗0%</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">WOH</span>
+                                <span class="metric-value">10.1</span>
+                            </div>
+                        </div>
+                        <div class="metric-row">
+                            <div class="metric-item">
+                                <span class="metric-label">QOH</span>
+                                <span class="metric-value">167</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">ST</span>
+                                <span class="metric-value"><span class="sell-through-indicator indicator-yellow"></span>52%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card accent-card" style="margin-top: 20px;">
+                <div class="accent-text">
+                    <strong>Key Insight:</strong> Your top 25 products drive 62% of revenue. The Bezel Necklace leads with +23% growth month-over-month. Your best-performing styles continue to be layered necklaces and classic hoops — these categories show strong sell-through rates above 75%.
+                </div>
+            </div>
+        </div>
+
+        <!-- Category × Price Band Assortment Matrix -->
+        <div class="card">
+            <div class="card-title">Category × Price Band Assortment</div>
+
+            <div class="matrix-grid">
+                <!-- Donut Chart -->
+                <div class="chart-container">
+                    <svg width="250" height="250" viewBox="0 0 250 250">
+                        <!-- Necklaces: 41% -->
+                        <circle cx="125" cy="125" r="80" fill="none" stroke="#D4A574" stroke-width="40"
+                            stroke-dasharray="205 300" stroke-dashoffset="0" transform="rotate(-90 125 125)"/>
+                        <!-- Earrings: 28% -->
+                        <circle cx="125" cy="125" r="80" fill="none" stroke="#C99060" stroke-width="40"
+                            stroke-dasharray="140 300" stroke-dashoffset="-205" transform="rotate(-90 125 125)"/>
+                        <!-- Bracelets: 18% -->
+                        <circle cx="125" cy="125" r="80" fill="none" stroke="#E8C8B0" stroke-width="40"
+                            stroke-dasharray="90 300" stroke-dashoffset="-345" transform="rotate(-90 125 125)"/>
+                        <!-- Rings: 8% -->
+                        <circle cx="125" cy="125" r="80" fill="none" stroke="#F5DCC8" stroke-width="40"
+                            stroke-dasharray="40 300" stroke-dashoffset="-435" transform="rotate(-90 125 125)"/>
+                        <!-- Gift Sets: 5% -->
+                        <circle cx="125" cy="125" r="80" fill="none" stroke="#FAE8DC" stroke-width="40"
+                            stroke-dasharray="25 300" stroke-dashoffset="-475" transform="rotate(-90 125 125)"/>
+                        <!-- Center circle -->
+                        <circle cx="125" cy="125" r="50" fill="white"/>
+                        <text x="125" y="130" font-size="20" font-weight="700" text-anchor="middle" fill="#1A1A1A">$85.2K</text>
+                    </svg>
+                </div>
+
+                <!-- Category Table -->
+                <div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>SKUs</th>
+                                <th>AUR</th>
+                                <th>Revenue</th>
+                                <th>Margin</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Necklaces</strong></td>
+                                <td>87</td>
+                                <td>$82</td>
+                                <td>$34.9K</td>
+                                <td>36%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Earrings</strong></td>
+                                <td>64</td>
+                                <td>$59</td>
+                                <td>$23.9K</td>
+                                <td>38%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Bracelets</strong></td>
+                                <td>91</td>
+                                <td>$38</td>
+                                <td>$15.3K</td>
+                                <td>32%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Rings</strong></td>
+                                <td>42</td>
+                                <td>$95</td>
+                                <td>$6.8K</td>
+                                <td>34%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Gift Sets</strong></td>
+                                <td>13</td>
+                                <td>$156</td>
+                                <td>$4.3K</td>
+                                <td>40%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="warning-box">
+                        ⚠️ <strong>Assortment Alert:</strong> Charms represent only 8% of sales but account for 14% of total inventory value. Consider markdown or bundling strategy.
+                    </div>
+
+                    <div class="card accent-card" style="margin-top: 12px; padding: 12px; border: none;">
+                        <div class="accent-text" style="font-size: 13px;">
+                            <strong>Category Balance:</strong> Your assortment is well-diversified across price points. Necklaces remain your strongest category by revenue, while Gift Sets show the highest gross margin at 40%.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product by Type (Core/Markdown/New) -->
+        <div class="card">
+            <div class="card-title">Product by Type</div>
+
+            <div style="display: flex; align-items: center; gap: 40px; margin-bottom: 24px;">
+                <div class="chart-container" style="flex: 0 0 auto;">
+                    <svg width="220" height="220" viewBox="0 0 220 220">
+                        <!-- Core: 87.7% -->
+                        <circle cx="110" cy="110" r="70" fill="none" stroke="#D4A574" stroke-width="35"
+                            stroke-dasharray="191.4 300" stroke-dashoffset="0" transform="rotate(-90 110 110)"/>
+                        <!-- Markdown: 8.1% -->
+                        <circle cx="110" cy="110" r="70" fill="none" stroke="#DC2626" stroke-width="35"
+                            stroke-dasharray="17.8 300" stroke-dashoffset="-191.4" transform="rotate(-90 110 110)"/>
+                        <!-- New: 4.2% -->
+                        <circle cx="110" cy="110" r="70" fill="none" stroke="#0D9488" stroke-width="35"
+                            stroke-dasharray="9.2 300" stroke-dashoffset="-209.2" transform="rotate(-90 110 110)"/>
+                        <!-- Center -->
+                        <circle cx="110" cy="110" r="40" fill="white"/>
+                        <text x="110" y="115" font-size="18" font-weight="700" text-anchor="middle" fill="#1A1A1A">$74.6K</text>
+                    </svg>
+                </div>
+
+                <div style="flex: 1;">
+                    <div style="display: flex; gap: 4px; margin-bottom: 8px; align-items: center;">
+                        <div style="width: 12px; height: 12px; background: #D4A574; border-radius: 2px;"></div>
+                        <span style="font-size: 13px; color: #666;">Core: 87.7%</span>
+                    </div>
+                    <div style="display: flex; gap: 4px; margin-bottom: 8px; align-items: center;">
+                        <div style="width: 12px; height: 12px; background: #DC2626; border-radius: 2px;"></div>
+                        <span style="font-size: 13px; color: #666;">Markdown: 8.1%</span>
+                    </div>
+                    <div style="display: flex; gap: 4px; align-items: center;">
+                        <div style="width: 12px; height: 12px; background: #0D9488; border-radius: 2px;"></div>
+                        <span style="font-size: 13px; color: #666;">New: 4.2%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="type-tabs">
+                <div class="type-tab">
+                    <div class="type-tab-title">Core Products</div>
+                    <div class="type-metric">
+                        <span class="type-metric-label">Units Sold</span>
+                        <span class="type-metric-value">1,647</span>
+                    </div>
+                    <div class="type-metric">
+                        <span class="type-metric-label">AUR</span>
+                        <span class="type-metric-value">$45.30</span>
+                    </div>
+                    <div class="type-metric">
+                        <span class="type-metric-label">Products</span>
+                        <span class="type-metric-value">218</span>
+                    </div>
+                    <div class="type-metric" style="border-top: 1px solid #E5DDD5; padding-top: 8px; margin-top: 8px;">
+                        <span class="type-metric-label">Revenue</span>
+                        <span class="type-metric-value change-positive">$74.6K ↗21%</span>
+                    </div>
+                </div>
+
+                <div class="type-tab">
+                    <div class="type-tab-title">Markdown Products</div>
+                    <div class="type-metric">
+                        <span class="type-metric-label">Units Sold</span>
+                        <span class="type-metric-value">142</span>
+                    </div>
+                    <div class="type-metric">
+                        <span class="type-metric-label">AUR</span>
+                        <span class="type-metric-value">$38.50</span>
+                    </div>
+                    <div class="type-metric">
+                        <span class="type-metric-label">Products</span>
+                        <span class="type-metric-value">34</span>
+                    </div>
+                    <div class="type-metric" style="border-top: 1px solid #E5DDD5; padding-top: 8px; margin-top: 8px;">
+                        <span class="type-metric-label">Revenue</span>
+                        <span class="type-metric-value change-negative">$5.5K ↘12%</span>
+                    </div>
+                </div>
+
+                <div class="type-tab">
+                    <div class="type-tab-title">New Products</div>
+                    <div class="type-metric">
+                        <span class="type-metric-label">Units Sold</span>
+                        <span class="type-metric-value">122</span>
+                    </div>
+                    <div class="type-metric">
+                        <span class="type-metric-label">AUR</span>
+                        <span class="type-metric-value">$48.20</span>
+                    </div>
+                    <div class="type-metric">
+                        <span class="type-metric-label">Products</span>
+                        <span class="type-metric-value">45</span>
+                    </div>
+                    <div class="type-metric" style="border-top: 1px solid #E5DDD5; padding-top: 8px; margin-top: 8px;">
+                        <span class="type-metric-label">Revenue</span>
+                        <span class="type-metric-value change-positive">$5.1K ↗34%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Revenue Concentration (Pareto) -->
+        <div class="pareto-container">
+            <div class="card-title">Revenue Concentration — Pareto Analysis</div>
+
+            <div class="pareto-bars">
+                <div class="pareto-bar" style="height: 95%;"></div>
+                <div class="pareto-bar" style="height: 85%;"></div>
+                <div class="pareto-bar" style="height: 72%;"></div>
+                <div class="pareto-bar" style="height: 58%;"></div>
+                <div class="pareto-bar" style="height: 48%;"></div>
+                <div class="pareto-bar" style="height: 38%;"></div>
+                <div class="pareto-bar" style="height: 28%;"></div>
+                <div class="pareto-bar" style="height: 18%;"></div>
+            </div>
+
+            <div class="pareto-callout">
+                <div class="callout-item">
+                    <div class="callout-label">Top 10</div>
+                    <div class="callout-value">21.8%</div>
+                </div>
+                <div class="callout-item">
+                    <div class="callout-label">Top 20</div>
+                    <div class="callout-value">33.3%</div>
+                </div>
+                <div class="callout-item">
+                    <div class="callout-label">Top 30</div>
+                    <div class="callout-value">41.8%</div>
+                </div>
+                <div class="callout-item">
+                    <div class="callout-label">Top 50</div>
+                    <div class="callout-value">54.7%</div>
+                </div>
+            </div>
+
+            <div class="card accent-card" style="margin-top: 16px; padding: 12px; border: none;">
+                <div class="accent-text" style="font-size: 13px;">
+                    <strong>Revenue Concentration:</strong> Your top 10 products account for 62% of total revenue, indicating healthy diversification. This is relatively balanced compared to industry benchmarks. Continue developing new products to expand your revenue base.
+                </div>
+            </div>
+        </div>
+
+        <!-- Product State Changes -->
+        <div class="card">
+            <div class="card-title">Product State Changes — This Month</div>
+
+            <div style="border-top: 1px solid #E5DDD5;">
+                <div class="state-row" style="border-bottom: 1px solid #E5DDD5;">
+                    <img src="https://picsum.photos/seed/jewelry2/60/60?random=2" alt="Product" class="state-thumb">
+                    <div class="state-info">
+                        <div class="state-change">New → Core</div>
+                        <div class="state-product">Layering Necklace - Gold</div>
+                    </div>
+                    <div class="state-amount change-positive">+$12.0K</div>
+                </div>
+
+                <div class="state-row" style="border-bottom: 1px solid #E5DDD5;">
+                    <img src="https://picsum.photos/seed/jewelry9/60/60?random=9" alt="Product" class="state-thumb">
+                    <div class="state-info">
+                        <div class="state-change">Core → Slowing</div>
+                        <div class="state-product">Joie Stretch Bracelet</div>
+                    </div>
+                    <div class="state-amount change-negative">-$2.0K</div>
+                </div>
+
+                <div class="state-row" style="border-bottom: 1px solid #E5DDD5;">
+                    <img src="https://picsum.photos/seed/jewelry10/60/60?random=10" alt="Product" class="state-thumb">
+                    <div class="state-info">
+                        <div class="state-change">Slowing → Markdown</div>
+                        <div class="state-product">Classic Chain Ring</div>
+                    </div>
+                    <div class="state-amount change-negative">-$0.5K</div>
+                </div>
+
+                <div class="state-row">
+                    <img src="https://picsum.photos/seed/jewelry11/60/60?random=11" alt="Product" class="state-thumb">
+                    <div class="state-info">
+                        <div class="state-change">Core → Accelerating</div>
+                        <div class="state-product">Pearl Drop Earrings</div>
+                    </div>
+                    <div class="state-amount change-positive">+$1.8K</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Inventory Risk Dashboard -->
+        <div class="risk-grid">
+            <!-- Restock Alerts -->
+            <div class="risk-section">
+                <div class="risk-title">⚡ Restock Alerts (WOH <4)</div>
+
+                <div class="risk-item">
+                    <img src="https://picsum.photos/seed/jewelry1/50/50?random=1" alt="Product" class="risk-thumb">
+                    <div class="risk-details">
+                        <div class="risk-name">Bezel Necklace</div>
+                        <div class="risk-stat">WOH: 5.2 | QOH: 245</div>
+                        <div class="risk-stat">Reorder: 150 units</div>
+                    </div>
+                </div>
+
+                <div class="risk-item">
+                    <img src="https://picsum.photos/seed/jewelry3/50/50?random=3" alt="Product" class="risk-thumb">
+                    <div class="risk-details">
+                        <div class="risk-name">Chunky Hoop Earrings</div>
+                        <div class="risk-stat">WOH: 6.1 | QOH: 198</div>
+                        <div class="risk-stat">Reorder: 120 units</div>
+                    </div>
+                </div>
+
+                <div class="risk-item">
+                    <img src="https://picsum.photos/seed/jewelry2/50/50?random=2" alt="Product" class="risk-thumb">
+                    <div class="risk-details">
+                        <div class="risk-name">Layering Necklace - Gold</div>
+                        <div class="risk-stat">WOH: 4.8 | QOH: 312</div>
+                        <div class="risk-stat">Reorder: 200 units</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Markdown Candidates -->
+            <div class="risk-section">
+                <div class="risk-title">🏷️ Markdown Candidates (WOH >12)</div>
+
+                <div class="risk-item">
+                    <img src="https://picsum.photos/seed/jewelry7/50/50?random=7" alt="Product" class="risk-thumb">
+                    <div class="risk-details">
+                        <div class="risk-name">Tennis Bracelet</div>
+                        <div class="risk-stat">WOH: 9.2 | QOH: 142</div>
+                        <div class="risk-stat">Status: Review pricing</div>
+                    </div>
+                </div>
+
+                <div class="risk-item">
+                    <img src="https://picsum.photos/seed/jewelry8/50/50?random=8" alt="Product" class="risk-thumb">
+                    <div class="risk-details">
+                        <div class="risk-name">Stacking Ring Set</div>
+                        <div class="risk-stat">WOH: 10.1 | QOH: 167</div>
+                        <div class="risk-stat">Status: Apply 15% discount</div>
+                    </div>
+                </div>
+
+                <div class="risk-item">
+                    <img src="https://picsum.photos/seed/jewelry12/50/50?random=12" alt="Product" class="risk-thumb">
+                    <div class="risk-details">
+                        <div class="risk-name">Vintage Brooch Pin</div>
+                        <div class="risk-stat">WOH: 14.3 | QOH: 289</div>
+                        <div class="risk-stat">Status: Bundle strategy</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- New Product Launch Tracker -->
+        <div class="card">
+            <div class="card-title">New Product Launch Tracker</div>
+
+            <div class="launch-grid">
+                <!-- Launch 1 -->
+                <div class="launch-tile">
+                    <img src="https://picsum.photos/seed/jewelry13/240/200?random=13" alt="New Launch" class="launch-image">
+                    <div class="launch-info">
+                        <div class="launch-badge badge-strong">Strong Launch</div>
+                        <div class="launch-name">Pavé Halo Necklace</div>
+                        <div class="launch-metric">Launched: <span class="launch-value">Mar 1</span></div>
+                        <div class="launch-metric">Revenue: <span class="launch-value">$4.2K</span></div>
+                        <div class="launch-metric">Units: <span class="launch-value">58</span></div>
+                        <div class="launch-metric">ST: <span class="launch-value"><span class="sell-through-indicator indicator-green"></span>81%</span></div>
+                    </div>
+                </div>
+
+                <!-- Launch 2 -->
+                <div class="launch-tile">
+                    <img src="https://picsum.photos/seed/jewelry14/240/200?random=14" alt="New Launch" class="launch-image">
+                    <div class="launch-info">
+                        <div class="launch-badge badge-average">Average Launch</div>
+                        <div class="launch-name">Twisted Gold Hoops</div>
+                        <div class="launch-metric">Launched: <span class="launch-value">Mar 8</span></div>
+                        <div class="launch-metric">Revenue: <span class="launch-value">$2.8K</span></div>
+                        <div class="launch-metric">Units: <span class="launch-value">42</span></div>
+                        <div class="launch-metric">ST: <span class="launch-value"><span class="sell-through-indicator indicator-yellow"></span>64%</span></div>
+                    </div>
+                </div>
+
+                <!-- Launch 3 -->
+                <div class="launch-tile">
+                    <img src="https://picsum.photos/seed/jewelry15/240/200?random=15" alt="New Launch" class="launch-image">
+                    <div class="launch-info">
+                        <div class="launch-badge badge-slow">Slow Start</div>
+                        <div class="launch-name">Enamel Charm Bracelet</div>
+                        <div class="launch-metric">Launched: <span class="launch-value">Mar 15</span></div>
+                        <div class="launch-metric">Revenue: <span class="launch-value">$1.2K</span></div>
+                        <div class="launch-metric">Units: <span class="launch-value">22</span></div>
+                        <div class="launch-metric">ST: <span class="launch-value"><span class="sell-through-indicator indicator-red"></span>38%</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card accent-card" style="margin-top: 12px; padding: 12px; border: none;">
+                <div class="accent-text" style="font-size: 13px;">
+                    <strong>Launch Performance:</strong> Your March launches show mixed results. The Pavé Halo Necklace had a strong market reception with 81% sell-through. Consider reviewing positioning and marketing for slower performers to understand demand drivers.
+                </div>
+            </div>
+        </div>
+
+        <!-- Marketing Mentions Tracker -->
+        <div class="card">
+            <div class="card-title">Marketing Mentions Tracker — 30 Days</div>
+
+            <div style="overflow-x: auto;">
+                <table class="marketing-table">
+                    <thead>
+                        <tr class="marketing-row">
+                            <td style="grid-column: span 2;"><strong>Product</strong></td>
+                            <td><strong>Email</strong></td>
+                            <td><strong>Social</strong></td>
+                            <td><strong>Days Since</strong></td>
+                            <td><strong>Revenue</strong></td>
+                            <td><strong>Rev/Mention</strong></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="marketing-row">
+                            <td><img src="https://picsum.photos/seed/jewelry1/50/50?random=1" alt="Product" class="marketing-thumb"></td>
+                            <td><strong>Bezel Necklace</strong></td>
+                            <td>8</td>
+                            <td>12</td>
+                            <td>2</td>
+                            <td>$12.4K</td>
+                            <td>$600</td>
+                        </tr>
+                        <tr class="marketing-row">
+                            <td><img src="https://picsum.photos/seed/jewelry2/50/50?random=2" alt="Product" class="marketing-thumb"></td>
+                            <td><strong>Layering Necklace - Gold</strong></td>
+                            <td>6</td>
+                            <td>15</td>
+                            <td>1</td>
+                            <td>$9.8K</td>
+                            <td>$560</td>
+                        </tr>
+                        <tr class="marketing-row">
+                            <td><img src="https://picsum.photos/seed/jewelry3/50/50?random=3" alt="Product" class="marketing-thumb"></td>
+                            <td><strong>Chunky Hoop Earrings</strong></td>
+                            <td>5</td>
+                            <td>8</td>
+                            <td>4</td>
+                            <td>$7.2K</td>
+                            <td>$520</td>
+                        </tr>
+                        <tr class="marketing-row">
+                            <td><img src="https://picsum.photos/seed/jewelry4/50/50?random=4" alt="Product" class="marketing-thumb"></td>
+                            <td><strong>Delicate Bracelet</strong></td>
+                            <td>3</td>
+                            <td>6</td>
+                            <td>12</td>
+                            <td>$6.1K</td>
+                            <td>$610</td>
+                        </tr>
+                        <tr class="marketing-row">
+                            <td><img src="https://picsum.photos/seed/jewelry6/50/50?random=6" alt="Product" class="marketing-thumb"></td>
+                            <td><strong>Pearl Drop Earrings</strong></td>
+                            <td>4</td>
+                            <td>7</td>
+                            <td>5</td>
+                            <td>$5.2K</td>
+                            <td>$433</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card accent-card" style="margin-top: 16px; padding: 12px; border: none;">
+                <div class="accent-text" style="font-size: 13px;">
+                    <strong>Marketing Insight:</strong> The Bezel Necklace and Delicate Bracelet generate the highest revenue-per-mention, making them excellent candidates for increased promotional spend. Consider expanding social media features for these underexposed top performers.
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-marklo">Powered by Marklo</div>
+            <div>Analytics & insights for Shopify brands</div>
+        </div>
+    </div>
+
+    <script>
+        function downloadAsPDF() {
+            var btn = document.getElementById('downloadPdfBtn');
+            var bar = document.getElementById('pdfDownloadBar');
+            var container = document.querySelector('.container');
+            btn.classList.add('downloading');
+            btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> Generating PDF…';
+            bar.style.display = 'none';
+            html2pdf().set({
+                margin: [10, 8, 10, 8],
+                filename: 'Marklo-Product-Merchandising-Report-Mar24-30-2026.pdf',
+                image: { type: 'jpeg', quality: 0.95 },
+                html2canvas: { scale: 2, useCORS: true, letterRendering: true, scrollY: 0, windowWidth: 960 },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+                pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+            }).from(container).save().then(function() {
+                bar.style.display = 'flex';
+                btn.classList.remove('downloading');
+                btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> PDF Downloaded!';
+                setTimeout(function() { btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download as PDF'; }, 3000);
+            });
+        }
+    </script>
+</body>
+</html>

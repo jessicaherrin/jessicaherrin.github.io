@@ -1,0 +1,1660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report #3: Campaign & Promotion Deep Dive — Marklo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.2/html2pdf.bundle.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #F5F0EB;
+            color: #1A1A1A;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: #FFFFFF;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+            padding: 32px;
+            margin-bottom: 24px;
+        }
+
+        .card-compact {
+            padding: 24px;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', 'Kalice', Georgia, serif;
+            font-size: 32px;
+            font-weight: 400;
+            margin-bottom: 8px;
+            color: #41342A;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', 'Kalice', Georgia, serif;
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 16px;
+            color: #41342A;
+        }
+
+        h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #1A1A1A;
+        }
+
+        .label {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: #999;
+            letter-spacing: 0.5px;
+        }
+
+        .meta-info {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', 'Kalice', Georgia, serif;
+            font-size: 22px;
+            font-weight: 400;
+            margin-bottom: 16px;
+            color: #41342A;
+        }
+
+        .ai-insight {
+            background: linear-gradient(135deg, rgba(176,206,255,0.12) 0%, rgba(246,245,243,0.8) 100%);
+            border: 1px solid rgba(176,206,255,0.4);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+            display: flex;
+            gap: 16px;
+        }
+
+        .ai-icon {
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .ai-content p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #1A1A1A;
+            margin-bottom: 12px;
+        }
+
+        .ai-cta {
+            color: #0D9488;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .ai-cta:hover {
+            text-decoration: underline;
+        }
+
+        /* KPI Grid */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .kpi-card {
+            background: #FAFAFA;
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .kpi-value {
+            font-size: 32px;
+            font-weight: 800;
+            color: #1A1A1A;
+            margin: 8px 0;
+        }
+
+        .kpi-change {
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+        }
+
+        .kpi-change.positive {
+            color: #0D9488;
+        }
+
+        .kpi-change.negative {
+            color: #DC2626;
+        }
+
+        /* Achievement badges */
+        .achievement-badge {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            flex: 1;
+            min-width: 160px;
+            border: 2px solid #B0CEFF;
+        }
+
+        .achievement-badge.unlocked {
+            border-color: #B0CEFF;
+        }
+
+        .achievement-badge.locked {
+            border: 1px solid #E4E2DF;
+            opacity: 0.6;
+        }
+
+        .achievement-emoji {
+            font-size: 36px;
+            margin-bottom: 8px;
+        }
+
+        .achievement-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #41342A;
+            margin-bottom: 4px;
+        }
+
+        .achievement-desc {
+            font-size: 11px;
+            color: #83766B;
+        }
+
+        .achievement-tag {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #57719B;
+            color: white;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+
+        /* Shareable moment card */
+        .shareable-card {
+            background: linear-gradient(135deg, #B0CEFF 0%, #E4E2DF 100%);
+            border-radius: 12px;
+            padding: 32px;
+            text-align: center;
+            color: #41342A;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        }
+
+        .shareable-card h3 {
+            color: #41342A;
+            margin-bottom: 8px;
+            font-size: 22px;
+            font-weight: 400;
+            font-family: 'Playfair Display', Georgia, serif;
+        }
+
+        .shareable-stat {
+            font-size: 42px;
+            font-weight: 800;
+            margin: 12px 0;
+            color: #41342A;
+        }
+
+        .shareable-subtext {
+            font-size: 14px;
+            margin-bottom: 16px;
+            opacity: 0.85;
+        }
+
+        .button-row {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 16px;
+        }
+
+        .share-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            color: #41342A;
+            padding: 10px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+        }
+
+        .share-btn:hover {
+            background: rgba(255, 255, 255, 0.6);
+        }
+
+        .marklo-logo-small {
+            font-size: 12px;
+            font-weight: 700;
+            color: #41342A;
+            opacity: 0.7;
+            margin-top: 12px;
+        }
+
+        /* Campaign Performance Table */
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 24px;
+        }
+
+        .performance-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .performance-table thead {
+            background: #F9F6F2;
+            border-bottom: 2px solid #E5E7EB;
+        }
+
+        .performance-table th {
+            padding: 12px 12px;
+            text-align: left;
+            font-weight: 600;
+            color: #41342A;
+            font-size: 12px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .performance-table td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #F0F0F0;
+        }
+
+        .performance-table tbody tr:hover {
+            background: #FAFAFA;
+        }
+
+        .campaign-name-cell {
+            font-weight: 600;
+            color: #1A1A1A;
+        }
+
+        .type-badge {
+            display: inline-block;
+            background: #E4E2DF;
+            color: #41342A;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-right: 8px;
+        }
+
+        .type-badge.email {
+            background: rgba(176,206,255,0.2);
+            color: #57719B;
+        }
+
+        .type-badge.paid {
+            background: rgba(149,178,154,0.2);
+            color: #41342A;
+        }
+
+        .type-badge.sms {
+            background: rgba(245,208,235,0.3);
+            color: #41342A;
+        }
+
+        .type-badge.influencer {
+            background: rgba(255,230,216,0.5);
+            color: #41342A;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .status-badge.active {
+            background: #F0FDF4;
+            color: #0D9488;
+        }
+
+        .status-badge.paused {
+            background: #FEF2F2;
+            color: #DC2626;
+        }
+
+        .status-badge.completed {
+            background: #F3F4F6;
+            color: #4B5563;
+        }
+
+        .metric-value {
+            font-weight: 700;
+            color: #1A1A1A;
+        }
+
+        .metric-positive {
+            color: #0D9488;
+        }
+
+        .metric-negative {
+            color: #DC2626;
+        }
+
+        /* Campaign Comparison */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+
+        .comparison-card {
+            background: #FAFAFA;
+            border-radius: 12px;
+            padding: 20px;
+            border: 2px solid #E4E2DF;
+        }
+
+        .comparison-card.winner {
+            background: linear-gradient(135deg, rgba(13,148,136,0.05) 0%, rgba(176,206,255,0.08) 100%);
+            border: 2px solid #0D9488;
+        }
+
+        .comparison-card h4 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #41342A;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .winner-badge {
+            display: inline-block;
+            background: #F0FDF4;
+            color: #0D9488;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        .comparison-stat {
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #E5E7EB;
+        }
+
+        .comparison-stat:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: #999;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .stat-value {
+            font-size: 20px;
+            font-weight: 800;
+            color: #1A1A1A;
+        }
+
+        /* Promotion Analysis */
+        .promo-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .promo-card {
+            background: #FAFAFA;
+            border-radius: 8px;
+            padding: 16px;
+            border: 1px solid #E5E7EB;
+        }
+
+        .promo-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 12px;
+        }
+
+        .promo-code {
+            font-size: 14px;
+            font-weight: 700;
+            color: #41342A;
+        }
+
+        .promo-badge {
+            display: inline-block;
+            background: #F0FDF4;
+            color: #0D9488;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .promo-badge.underperformer {
+            background: #FEF2F2;
+            color: #DC2626;
+        }
+
+        .promo-stat-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            font-size: 12px;
+        }
+
+        .promo-stat-label {
+            color: #666;
+        }
+
+        .promo-stat-value {
+            font-weight: 600;
+            color: #1A1A1A;
+        }
+
+        /* A/B Test Results */
+        .ab-test-card {
+            background: #FAFAFA;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+            border-left: 4px solid #0D9488;
+        }
+
+        .ab-test-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .ab-test-name {
+            font-weight: 600;
+            font-size: 14px;
+            color: #1A1A1A;
+        }
+
+        .statistical-badge {
+            display: inline-block;
+            background: #F0FDF4;
+            color: #0D9488;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .ab-variants {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .variant {
+            background: #FFFFFF;
+            border-radius: 6px;
+            padding: 12px;
+        }
+
+        .variant-label {
+            font-size: 11px;
+            color: #999;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .variant-metric {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1A1A1A;
+        }
+
+        .variant.winner {
+            background: #F0FDF4;
+            border: 2px solid #0D9488;
+        }
+
+        /* Calendar */
+        .calendar-item {
+            background: #FAFAFA;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 12px;
+            border-left: 3px solid #0D9488;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .calendar-item.warning {
+            background: #FEF2F2;
+            border-left-color: #DC2626;
+        }
+
+        .calendar-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex: 1;
+        }
+
+        .calendar-date {
+            font-size: 12px;
+            color: #666;
+            font-weight: 500;
+            min-width: 80px;
+        }
+
+        .campaign-info h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1A1A1A;
+            margin-bottom: 4px;
+        }
+
+        .campaign-info p {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .calendar-action {
+            font-size: 12px;
+            color: #0D9488;
+            font-weight: 600;
+        }
+
+        /* Percentile badges */
+        .percentile-badge {
+            display: inline-block;
+            background: #EDE9FE;
+            color: #6D28D9;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        .percentile-badge.green {
+            background: rgba(149,178,154,0.2);
+            color: #41342A;
+        }
+
+        .percentile-badge.blue {
+            background: rgba(176,206,255,0.2);
+            color: #57719B;
+        }
+
+        /* Recommendation cards */
+        .recommendation-card {
+            background: #FAFAFA;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+            border: 1px solid #E5E7EB;
+        }
+
+        .recommendation-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .recommendation-emoji {
+            font-size: 20px;
+        }
+
+        .recommendation-title {
+            font-weight: 600;
+            color: #41342A;
+        }
+
+        .recommendation-desc {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        .recommendation-confidence {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .confidence-bar {
+            flex: 1;
+            height: 4px;
+            background: #E5E7EB;
+            border-radius: 2px;
+            overflow: hidden;
+            max-width: 100px;
+        }
+
+        .confidence-fill {
+            height: 100%;
+            background: #0D9488;
+            border-radius: 2px;
+        }
+
+        /* Celebration banner */
+        .celebration-banner {
+            background: #41342A;
+            color: #F6F5F3;
+            text-align: center;
+            padding: 16px 24px;
+            border-radius: 12px 12px 0 0;
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+        }
+
+        .win-pills {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .win-pill {
+            background: rgba(176,206,255,0.15);
+            border: 1px solid #B0CEFF;
+            color: #57719B;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .win-pill.record {
+            background: rgba(149,178,154,0.15);
+            border-color: #95B29A;
+            color: #41342A;
+        }
+
+        .win-pill.streak {
+            background: rgba(207,180,164,0.2);
+            border-color: #CFB4A4;
+            color: #41342A;
+        }
+
+        .header-badge {
+            display: inline-block;
+            background: #F0F0F0;
+            color: #666;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 12px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 32px 0;
+            border-top: 1px solid #E5E7EB;
+            margin-top: 40px;
+        }
+
+        .footer-cta {
+            display: inline-block;
+            background: #1A1A1A;
+            color: #FFFFFF;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            margin: 16px 0;
+            cursor: pointer;
+            border: none;
+        }
+
+        .footer-cta:hover {
+            background: #333;
+        }
+
+        .footer-info {
+            font-size: 12px;
+            color: #999;
+            margin-top: 16px;
+        }
+
+        .marklo-logo {
+            font-size: 12px;
+            font-weight: 700;
+            color: #1A1A1A;
+        }
+
+        /* Grid utilities */
+        .grid-2col {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .grid-3col {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .grid-4col {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .grid-2col,
+            .grid-3col,
+            .grid-4col {
+                grid-template-columns: 1fr;
+            }
+
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .promo-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .ab-variants {
+                grid-template-columns: 1fr;
+            }
+
+            .achievement-badge {
+                min-width: auto;
+            }
+
+            .performance-table {
+                font-size: 12px;
+            }
+
+            .performance-table th,
+            .performance-table td {
+                padding: 8px 6px;
+            }
+        }
+
+        /* Chart SVG */
+        .chart-container {
+            display: flex;
+            justify-content: center;
+            margin: 24px 0;
+        }
+
+        .chart-svg {
+            width: 100%;
+            max-width: 600px;
+        }
+
+        /* Utility */
+        .flex-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .divider {
+            height: 1px;
+            background: #E5E7EB;
+            margin: 16px 0;
+        }
+
+        /* Download as PDF button */
+        .pdf-download-bar { display: flex; justify-content: flex-end; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .pdf-download-btn { display: inline-flex; align-items: center; gap: 8px; background: #41342A; color: #F6F5F3; border: none; padding: 10px 20px; border-radius: 10px; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s ease; letter-spacing: 0.2px; }
+        .pdf-download-btn:hover { background: #57719B; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(87, 113, 155, 0.3); }
+        .pdf-download-btn:active { transform: translateY(0); }
+        .pdf-download-btn.downloading { opacity: 0.7; pointer-events: none; }
+        @media print { .pdf-download-bar { display: none !important; } body { padding: 0; background: #fff; } .container { max-width: 100%; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Download as PDF -->
+        <div class="pdf-download-bar" id="pdfDownloadBar">
+            <button class="pdf-download-btn" id="downloadPdfBtn" onclick="downloadAsPDF()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Download as PDF
+            </button>
+        </div>
+        <!-- Report Header -->
+        <div class="celebration-banner">
+            🎯 Your Campaigns Are Crushing Goals — Let's Dig In!
+        </div>
+        <div class="card" style="border-radius: 0 0 12px 12px; margin-top: 0;">
+            <h1>Campaign & Promotion Deep Dive</h1>
+            <p class="meta-info">📊 Report #3 • Mar 24 – Mar 30, 2026</p>
+            <p class="meta-info" style="color: #999; font-size: 13px;">Jewelry DTC Brand Dashboard</p>
+            <div class="win-pills">
+                <span class="win-pill">🎯 7 Active Campaigns</span>
+                <span class="win-pill record">⭐ Spring Collection: $47.2K Revenue</span>
+                <span class="win-pill streak">💰 Avg ROAS: 4.2x (Best in 6 months)</span>
+            </div>
+            <div class="header-badge">✨ Powered by Marklo</div>
+        </div>
+
+        <!-- AI Executive Summary -->
+        <div class="ai-insight">
+            <div class="ai-icon">✨</div>
+            <div class="ai-content">
+                <p><strong>AI Insight:</strong> Your campaigns are firing on all cylinders this week! The Spring Collection email campaign is your star performer with 4.8x ROAS and 52% of campaign revenue. SMS is punching above its weight at 3.9x ROAS despite smaller spend. Three key insights: (1) Your influencer partnerships are driving 23% of new customer acquisition at excellent margins; (2) Flash Sale promos are performing 18% better than regular discounts — consider running 2-3 per month; (3) Your winning ad creative (Summer Vibes Golden Hoops) is showing signs of saturation at day 12 — time to rotate in fresh assets. Overall, this is peak campaign performance for your brand.</p>
+                <a href="#" class="ai-cta">→ View Next Week's Recommendations</a>
+            </div>
+        </div>
+
+        <!-- Achievement Badges Section -->
+        <div class="card" style="background: linear-gradient(135deg, #F6F5F3 0%, #E4E2DF 100%); border: 1px solid #CFB4A4;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">
+                <h2 class="section-title" style="margin-bottom: 0;">🏆 Campaign Achievements</h2>
+                <span style="font-size: 12px; color: #41342A; font-weight: 500;">2 new badges this week</span>
+            </div>
+            <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                <div class="achievement-badge unlocked" style="position: relative;">
+                    <div class="achievement-tag">NEW</div>
+                    <div class="achievement-emoji">🚀</div>
+                    <div class="achievement-title">Viral Creator</div>
+                    <div class="achievement-desc">Influencer campaign reached 50K impressions</div>
+                </div>
+                <div class="achievement-badge unlocked" style="position: relative;">
+                    <div class="achievement-tag">NEW</div>
+                    <div class="achievement-emoji">💌</div>
+                    <div class="achievement-title">Email Master</div>
+                    <div class="achievement-desc">5 consecutive emails with 4x+ ROAS</div>
+                </div>
+                <div class="achievement-badge unlocked">
+                    <div class="achievement-emoji">⚡</div>
+                    <div class="achievement-title">Flash Expert</div>
+                    <div class="achievement-desc">3 successful flash sales with 80%+ conversion</div>
+                </div>
+                <div class="achievement-badge unlocked">
+                    <div class="achievement-emoji">📱</div>
+                    <div class="achievement-title">SMS Specialist</div>
+                    <div class="achievement-desc">SMS campaigns averaging 15%+ click-through</div>
+                </div>
+                <div class="achievement-badge locked">
+                    <div class="achievement-emoji">👑</div>
+                    <div class="achievement-title">Campaign King</div>
+                    <div class="achievement-desc">Run 10 campaigns simultaneously (7/10)</div>
+                    <div style="background: #E4E2DF; border-radius: 4px; height: 4px; margin-top: 8px;">
+                        <div style="width: 70%; height: 100%; background: #B0CEFF; border-radius: 4px;"></div>
+                    </div>
+                </div>
+                <div class="achievement-badge locked">
+                    <div class="achievement-emoji">🎁</div>
+                    <div class="achievement-title">Promo Wizard</div>
+                    <div class="achievement-desc">Run 15 promotions in a month (8/15)</div>
+                    <div style="background: #E4E2DF; border-radius: 4px; height: 4px; margin-top: 8px;">
+                        <div style="width: 53%; height: 100%; background: #CFB4A4; border-radius: 4px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Shareable Moment Card -->
+        <div class="shareable-card">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 8px;">
+                <span class="marklo-logo">MARKLO</span>
+            </div>
+            <h3>This Week's Campaign Victory</h3>
+            <div class="shareable-stat">4.8x ROAS</div>
+            <p class="shareable-subtext">Average across all active campaigns — your best performance in 6 months</p>
+            <div class="button-row">
+                <button class="share-btn">📋 Copy as Image</button>
+                <button class="share-btn">📤 Share to Slack</button>
+                <button class="share-btn">✉️ Email Team</button>
+            </div>
+            <div class="marklo-logo-small">Made with Marklo</div>
+        </div>
+
+        <!-- Campaign Performance Overview -->
+        <div class="card">
+            <h2 class="section-title">Campaign Performance Overview</h2>
+            <div class="ai-insight">
+                <div class="ai-icon">💡</div>
+                <div class="ai-content">
+                    <p><strong>Quick Insight:</strong> All 7 active campaigns are performing above average, with 5 delivering 3x+ ROAS. Your email campaigns are particularly strong this week, suggesting good list hygiene and timely content.</p>
+                </div>
+            </div>
+            <div class="table-container">
+                <table class="performance-table">
+                    <thead>
+                        <tr>
+                            <th>Campaign Name</th>
+                            <th>Type</th>
+                            <th>Status</th>
+                            <th>Revenue</th>
+                            <th>ROAS/ROI</th>
+                            <th>Conversion</th>
+                            <th>Spend</th>
+                            <th>CPA</th>
+                            <th>New Customers</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="campaign-name-cell">Spring Collection Launch</td>
+                            <td><span class="type-badge email">Email</span></td>
+                            <td><span class="status-badge active">Active</span></td>
+                            <td class="metric-value">$47,240</td>
+                            <td class="metric-value metric-positive">4.8x</td>
+                            <td class="metric-value">6.2%</td>
+                            <td>$9,850</td>
+                            <td class="metric-value">$34.05</td>
+                            <td class="metric-value">87</td>
+                        </tr>
+                        <tr>
+                            <td class="campaign-name-cell">Influencer Partnership: @MilanJewels</td>
+                            <td><span class="type-badge influencer">Influencer</span></td>
+                            <td><span class="status-badge active">Active</span></td>
+                            <td class="metric-value">$28,560</td>
+                            <td class="metric-value metric-positive">5.2x</td>
+                            <td class="metric-value">4.8%</td>
+                            <td>$5,500</td>
+                            <td class="metric-value">$31.61</td>
+                            <td class="metric-value">92</td>
+                        </tr>
+                        <tr>
+                            <td class="campaign-name-cell">Summer Vibes Meta Campaign</td>
+                            <td><span class="type-badge paid">Paid</span></td>
+                            <td><span class="status-badge active">Active</span></td>
+                            <td class="metric-value">$18,900</td>
+                            <td class="metric-value metric-positive">3.4x</td>
+                            <td class="metric-value">2.9%</td>
+                            <td>$5,550</td>
+                            <td class="metric-value">$38.70</td>
+                            <td class="metric-value">49</td>
+                        </tr>
+                        <tr>
+                            <td class="campaign-name-cell">Flash Sale: Weekend Only</td>
+                            <td><span class="type-badge paid">Paid</span></td>
+                            <td><span class="status-badge active">Active</span></td>
+                            <td class="metric-value">$12,340</td>
+                            <td class="metric-value metric-positive">4.1x</td>
+                            <td class="metric-value">5.4%</td>
+                            <td>$3,000</td>
+                            <td class="metric-value">$29.50</td>
+                            <td class="metric-value">34</td>
+                        </tr>
+                        <tr>
+                            <td class="campaign-name-cell">SMS Broadcast: New Arrivals</td>
+                            <td><span class="type-badge sms">SMS</span></td>
+                            <td><span class="status-badge active">Active</span></td>
+                            <td class="metric-value">$8,120</td>
+                            <td class="metric-value metric-positive">3.9x</td>
+                            <td class="metric-value">3.2%</td>
+                            <td>$2,080</td>
+                            <td class="metric-value">$24.35</td>
+                            <td class="metric-value">28</td>
+                        </tr>
+                        <tr>
+                            <td class="campaign-name-cell">Nurture Series: Day 3</td>
+                            <td><span class="type-badge email">Email</span></td>
+                            <td><span class="status-badge active">Active</span></td>
+                            <td class="metric-value">$3,850</td>
+                            <td class="metric-value metric-positive">2.1x</td>
+                            <td class="metric-value">1.8%</td>
+                            <td>$1,820</td>
+                            <td class="metric-value">$45.25</td>
+                            <td class="metric-value">12</td>
+                        </tr>
+                        <tr>
+                            <td class="campaign-name-cell">Retargeting: Abandonment Campaign</td>
+                            <td><span class="type-badge paid">Paid</span></td>
+                            <td><span class="status-badge paused">Paused</span></td>
+                            <td class="metric-value">$1,240</td>
+                            <td class="metric-value metric-negative">1.2x</td>
+                            <td class="metric-value">0.6%</td>
+                            <td>$1,040</td>
+                            <td class="metric-value">$86.67</td>
+                            <td class="metric-value">3</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="font-size: 12px; color: #666; margin-top: 12px;">
+                💬 <strong>Note:</strong> Retargeting campaign was paused mid-week due to low performance. Recommend adding fresh creative and resuming Monday.
+            </p>
+        </div>
+
+        <!-- Campaign Comparison -->
+        <div class="card">
+            <h2 class="section-title">Top 3 Campaign Comparison</h2>
+            <div class="ai-insight">
+                <div class="ai-icon">🔍</div>
+                <div class="ai-content">
+                    <p><strong>Deep Dive:</strong> Your email and influencer channels are outperforming paid ads by 40% in ROAS. This suggests your audience is highly engaged with owned channels. Consider shifting 15% of paid budget to influencer partnerships next month.</p>
+                </div>
+            </div>
+            <div class="comparison-grid">
+                <div class="comparison-card winner">
+                    <h4>
+                        <span>Spring Collection Email</span>
+                        <span class="winner-badge">🏆 Winner</span>
+                    </h4>
+                    <div class="comparison-stat">
+                        <div class="stat-label">ROAS</div>
+                        <div class="stat-value">4.8x</div>
+                    </div>
+                    <div class="comparison-stat">
+                        <div class="stat-label">Revenue</div>
+                        <div class="stat-value">$47.2K</div>
+                    </div>
+                    <div class="comparison-stat">
+                        <div class="stat-label">Conversion Rate</div>
+                        <div class="stat-value">6.2%</div>
+                    </div>
+                    <div class="comparison-stat">
+                        <div class="stat-label">Avg Order Value</div>
+                        <div class="stat-value">$158</div>
+                    </div>
+                    <div class="comparison-stat">
+                        <div class="stat-label">New Customers</div>
+                        <div class="stat-value">87</div>
+                    </div>
+                </div>
+
+                <div class="comparison-card winner">
+                    <h4>
+                        <span>@MilanJewels Influencer</span>
+                        <span class="winner-badge">⭐ Emerging</span>
+                    </h4>
+                    <div class="comparison-stat">
+                        <div class="stat-label">ROAS</div>
+                        <div class="stat-value">5.2x</div>
+                    </div>
+                    <div class="comparison-stat">
+                        <div class="stat-label">Revenue</div>
+                        <div class="stat-value">$28.6K</div>
+                    </div>
+                    <div class="comparison-stat">
+                        <div class="stat-label">Conversion Rate</div>
+                        <div class="stat-value">4.8%</div>
+                    </div>
+                    <div class="comparison-stat">
+                        <div class="stat-label">Avg Order Value</div>
+                        <div class="stat-value">$142</div>
+                    </div>
+                    <div class="comparison-stat">
+                        <div class="stat-label">New Customers</div>
+                        <div class="stat-value">92</div>
+                    </div>
+                </div>
+
+                <div class="comparison-card">
+                    <h4>
+                        <span>Summer Vibes Paid</span>
+                        <span style="color: #666; font-weight: 400; font-size: 14px;">Third Place</span>
+                    </h4>
+                    <div class="comparison-stat">
+                        <div class="stat-label">ROAS</div>
+                        <div class="stat-value">3.4x</div>
+                    </div>
+                    <div class="comparison-stat">
+                        <div class="stat-label">Revenue</div>
+                        <div class="stat-value">$18.9K</div>
+                    </div>
+                    <div class="comparison-stat">
+                        <div class="stat-label">Conversion Rate</div>
+                        <div class="stat-value">2.9%</div>
+                    </div>
+                    <div class="comparison-stat">
+                        <div class="stat-label">Avg Order Value</div>
+                        <div class="stat-value">$135</div>
+                    </div>
+                    <div class="comparison-stat">
+                        <div class="stat-label">New Customers</div>
+                        <div class="stat-value">49</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Promotion Analysis -->
+        <div class="card">
+            <h2 class="section-title">Promotion Analysis</h2>
+            <div class="ai-insight">
+                <div class="ai-icon">🎁</div>
+                <div class="ai-content">
+                    <p><strong>Smart Insight:</strong> Flash sales are your high-performing promotion type (avg 4.1x ROAS), while bundle deals slightly underperform (2.8x). Your BESTFRIEND code is driving significant volume but with thinner margins — consider reducing frequency to maintain brand perception.</p>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 24px;">
+                <h3 style="margin-bottom: 16px;">Active Promotions</h3>
+                <div class="promo-grid">
+                    <div class="promo-card">
+                        <div class="promo-header">
+                            <span class="promo-code">SPRING20</span>
+                            <span class="promo-badge">⭐ Top Performer</span>
+                        </div>
+                        <div class="promo-stat-row">
+                            <span class="promo-stat-label">Type:</span>
+                            <span class="promo-stat-value">Percentage Discount (20%)</span>
+                        </div>
+                        <div class="promo-stat-row">
+                            <span class="promo-stat-label">Code Usage:</span>
+                            <span class="promo-stat-value">562 codes redeemed</span>
+                        </div>
+                        <div class="promo-stat-row">
+                            <span class="promo-stat-label">Revenue Driven:</span>
+                            <span class="promo-stat-value">$34,580</span>
+                        </div>
+                        <div class="promo-stat-row">
+                            <span class="promo-stat-label">Avg Discount %:</span>
+                            <span class="promo-stat-value">20%</span>
+                        </div>
+                        <div class="promo-stat-row">
+                            <span class="promo-stat-label">Margin Impact:</span>
+                            <span class="promo-stat-value" style="color: #0D9488;">-8.4%</span>
+                        </div>
+                    </div>
+
+                    <div class="promo-card">
+                        <div class="promo-header">
+                            <span class="promo-code">FLASHSALE</span>
+                            <span class="promo-badge">🔥 Limited Time</span>
+                        </div>
+                        <div class="promo-stat-row">
+                            <span class="promo-stat-label">Type:</span>
+                            <span class="promo-stat-value">Flash Sale (4 hours, 25% off)</span>
+                        </div>
+                        <div class="promo-stat-row">
+                            <span class="promo-stat-label">Code Usage:</span>
+                            <span class="promo-stat-value">288 codes redeemed</span>
+                        </div>
+                        <div class="promo-stat-row">
+                            <span class="promo-stat-label">Revenue Driven:</span>
+                            <span class="promo-stat-value">$12,340</span>
+                        </div>
+                        <div class="promo-stat-row">
+                            <span class="promo-stat-label">Avg Discount %:</span>
+                            <span class="promo-stat-value">25%</span>
+                        </div>
+                        <div class="promo-stat-row">
+                            <span class="promo-stat-label">Margin Impact:</span>
+                            <span class="promo-stat-value" style="color: #0D9488;">-9.2%</span>
+                        </div>
+                    </div>
+
+                    <div class="promo-card">
+                        <div class="promo-header">
+                            <span class="promo-code">BUNDLE2BUY</span>
+                            <span class="promo-badge">📦 Bundle Deal</span>
+                        </div>
+                        <div class="promo-stat-row">
+                            <span class="promo-stat-label">Type:</span>
+                            <span class="promo-stat-value">Buy 2+ Get 10% Off</span>
+                        </div>
+                        <div class="promo-stat-row">
+                            <span class="promo-stat-label">Code Usage:</span>
+                            <span class="promo-stat-value">126 codes redeemed</span>
+                        </div>
+                        <div class="promo-stat-row">
+                            <span class="promo-stat-label">Revenue Driven:</span>
+                            <span class="promo-stat-value">$8,240</span>
+                        </div>
+                        <div class="promo-stat-row">
+                            <span class="promo-stat-label">Avg Discount %:</span>
+                            <span class="promo-stat-value">8.5%</span>
+                        </div>
+                        <div class="promo-stat-row">
+                            <span class="promo-stat-label">Margin Impact:</span>
+                            <span class="promo-stat-value" style="color: #0D9488;">-5.1%</span>
+                        </div>
+                    </div>
+
+                    <div class="promo-card">
+                        <div class="promo-header">
+                            <span class="promo-code">BESTFRIEND</span>
+                            <span class="promo-badge underperformer">⚠️ Watch</span>
+                        </div>
+                        <div class="promo-stat-row">
+                            <span class="promo-stat-label">Type:</span>
+                            <span class="promo-stat-value">Referral (15% off both)</span>
+                        </div>
+                        <div class="promo-stat-row">
+                            <span class="promo-stat-label">Code Usage:</span>
+                            <span class="promo-stat-value">94 codes redeemed</span>
+                        </div>
+                        <div class="promo-stat-row">
+                            <span class="promo-stat-label">Revenue Driven:</span>
+                            <span class="promo-stat-value">$5,320</span>
+                        </div>
+                        <div class="promo-stat-row">
+                            <span class="promo-stat-label">Avg Discount %:</span>
+                            <span class="promo-stat-value">15%</span>
+                        </div>
+                        <div class="promo-stat-row">
+                            <span class="promo-stat-label">Margin Impact:</span>
+                            <span class="promo-stat-value" style="color: #DC2626;">-12.8%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 24px; padding-top: 24px; border-top: 1px solid #E5E7EB;">
+                <h3 style="margin-bottom: 16px;">Key Findings</h3>
+                <ul style="list-style: none; font-size: 13px; line-height: 1.8; color: #666;">
+                    <li>✅ <strong style="color: #0D9488;">SPRING20</strong> continues to be your volume driver with 562 redemptions and $34.6K revenue</li>
+                    <li>✅ <strong style="color: #0D9488;">Flash sales</strong> deliver 47% higher ROAS than standard discounts — run 2-3 monthly</li>
+                    <li>⚠️ <strong style="color: #DC2626;">BESTFRIEND referral</strong> code eroding margins at 12.8% — consider raising threshold to 2+ referrals</li>
+                    <li>📊 <strong>BUNDLE2BUY</strong> has good margin protection but low adoption — test in email segment</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- A/B Test Results -->
+        <div class="card">
+            <h2 class="section-title">A/B Test Results</h2>
+            <div class="ai-insight">
+                <div class="ai-icon">🧪</div>
+                <div class="ai-content">
+                    <p><strong>Test Insights:</strong> Your winning variants point to a clear preference: simpler copy, visual hierarchy with product images, and clear CTAs outperform longer-form messaging. The subject line test shows 8% emoji > 2% no-emoji — keep emojis but use sparingly.</p>
+                </div>
+            </div>
+
+            <div class="ab-test-card">
+                <div class="ab-test-header">
+                    <span class="ab-test-name">Email Subject Line Test: Emoji vs. No Emoji</span>
+                    <span class="statistical-badge">96% Confidence</span>
+                </div>
+                <div class="ab-variants">
+                    <div class="variant winner">
+                        <div class="variant-label">Variant A (Winner) 💌</div>
+                        <div style="font-size: 11px; margin-bottom: 8px; color: #666;">
+                            "🎁 Your Spring Collection is Here — 20% Off"
+                        </div>
+                        <div class="variant-metric">8.4%</div>
+                        <div class="variant-label" style="margin-top: 4px;">Open Rate</div>
+                    </div>
+                    <div class="variant">
+                        <div class="variant-label">Variant B</div>
+                        <div style="font-size: 11px; margin-bottom: 8px; color: #666;">
+                            "Your Spring Collection is Here — 20% Off"
+                        </div>
+                        <div class="variant-metric">2.1%</div>
+                        <div class="variant-label" style="margin-top: 4px;">Open Rate</div>
+                    </div>
+                </div>
+                <p style="font-size: 12px; color: #666; margin-top: 12px;">📊 Sample: 2,500 emails per variant | Stat. sig: p < 0.01</p>
+            </div>
+
+            <div class="ab-test-card">
+                <div class="ab-test-header">
+                    <span class="ab-test-name">Landing Page: Product Grid vs. Hero Image</span>
+                    <span class="statistical-badge">92% Confidence</span>
+                </div>
+                <div class="ab-variants">
+                    <div class="variant">
+                        <div class="variant-label">Variant A</div>
+                        <div style="font-size: 11px; margin-bottom: 8px; color: #666;">
+                            Hero Image + Grid Below
+                        </div>
+                        <div class="variant-metric">3.1%</div>
+                        <div class="variant-label" style="margin-top: 4px;">Conversion Rate</div>
+                    </div>
+                    <div class="variant winner">
+                        <div class="variant-label">Variant B (Winner) 🏆</div>
+                        <div style="font-size: 11px; margin-bottom: 8px; color: #666;">
+                            Grid Only + Cleaner Layout
+                        </div>
+                        <div class="variant-metric">4.2%</div>
+                        <div class="variant-label" style="margin-top: 4px;">Conversion Rate</div>
+                    </div>
+                </div>
+                <p style="font-size: 12px; color: #666; margin-top: 12px;">📊 Sample: 8,200 visitors per variant | Stat. sig: p < 0.05</p>
+            </div>
+
+            <div class="ab-test-card">
+                <div class="ab-test-header">
+                    <span class="ab-test-name">SMS CTA Test: "Shop Now" vs. "See Offer"</span>
+                    <span class="statistical-badge">88% Confidence</span>
+                </div>
+                <div class="ab-variants">
+                    <div class="variant winner">
+                        <div class="variant-label">Variant A (Winner) ⭐</div>
+                        <div style="font-size: 11px; margin-bottom: 8px; color: #666;">
+                            "Shop Now"
+                        </div>
+                        <div class="variant-metric">4.8%</div>
+                        <div class="variant-label" style="margin-top: 4px;">Click Rate</div>
+                    </div>
+                    <div class="variant">
+                        <div class="variant-label">Variant B</div>
+                        <div style="font-size: 11px; margin-bottom: 8px; color: #666;">
+                            "See Offer"
+                        </div>
+                        <div class="variant-metric">3.2%</div>
+                        <div class="variant-label" style="margin-top: 4px;">Click Rate</div>
+                    </div>
+                </div>
+                <p style="font-size: 12px; color: #666; margin-top: 12px;">📊 Sample: 3,800 messages per variant | Stat. sig: p < 0.05</p>
+            </div>
+        </div>
+
+        <!-- Campaign Recommendations -->
+        <div class="card">
+            <h2 class="section-title">AI Campaign Recommendations</h2>
+            <div class="ai-insight">
+                <div class="ai-icon">🎯</div>
+                <div class="ai-content">
+                    <p><strong>What's Next:</strong> Based on your performance patterns, we recommend launching 3 new campaigns next week targeting different segments. All recommended campaigns are designed to maintain your current 4x+ ROAS while expanding reach.</p>
+                </div>
+            </div>
+
+            <div class="recommendation-card">
+                <div class="recommendation-header">
+                    <span class="recommendation-emoji">👗</span>
+                    <span class="recommendation-title">Summer Bundle Campaign (Email + SMS)</span>
+                </div>
+                <div class="recommendation-desc">
+                    Target past buyers (30-90 days ago) with bundle deals. Your BUNDLE2BUY promo showed potential but low awareness. Launch targeted email series + SMS reactivation sequence.
+                </div>
+                <div style="display: flex; gap: 24px; margin-bottom: 16px;">
+                    <div>
+                        <div style="font-size: 11px; color: #999; font-weight: 600; margin-bottom: 4px;">Estimated ROAS</div>
+                        <div style="font-size: 18px; font-weight: 800; color: #0D9488;">3.2x</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 11px; color: #999; font-weight: 600; margin-bottom: 4px;">Best Time to Launch</div>
+                        <div style="font-size: 14px; font-weight: 600; color: #41342A;">Monday, Apr 7</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 11px; color: #999; font-weight: 600; margin-bottom: 4px;">Recommended Budget</div>
+                        <div style="font-size: 14px; font-weight: 600; color: #41342A;">$6,500</div>
+                    </div>
+                </div>
+                <div class="recommendation-confidence">
+                    <span style="font-size: 12px; color: #666;">Confidence:</span>
+                    <div class="confidence-bar">
+                        <div class="confidence-fill" style="width: 85%;"></div>
+                    </div>
+                    <span style="color: #0D9488; font-weight: 600;">85%</span>
+                </div>
+            </div>
+
+            <div class="recommendation-card">
+                <div class="recommendation-header">
+                    <span class="recommendation-emoji">💫</span>
+                    <span class="recommendation-title">New Influencer Partnerships Outreach</span>
+                </div>
+                <div class="recommendation-desc">
+                    Your @MilanJewels influencer campaign is crushing it (5.2x ROAS). Identify and outreach 5 similar micro-influencers (50K-200K followers) in jewelry/fashion space. Estimate 3 partnerships for next month.
+                </div>
+                <div style="display: flex; gap: 24px; margin-bottom: 16px;">
+                    <div>
+                        <div style="font-size: 11px; color: #999; font-weight: 600; margin-bottom: 4px;">Estimated ROAS</div>
+                        <div style="font-size: 18px; font-weight: 800; color: #0D9488;">4.8x</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 11px; color: #999; font-weight: 600; margin-bottom: 4px;">New Customer Acquisition</div>
+                        <div style="font-size: 14px; font-weight: 600; color: #41342A;">200-250 customers</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 11px; color: #999; font-weight: 600; margin-bottom: 4px;">Timeline</div>
+                        <div style="font-size: 14px; font-weight: 600; color: #41342A;">2-3 weeks to setup</div>
+                    </div>
+                </div>
+                <div class="recommendation-confidence">
+                    <span style="font-size: 12px; color: #666;">Confidence:</span>
+                    <div class="confidence-bar">
+                        <div class="confidence-fill" style="width: 92%;"></div>
+                    </div>
+                    <span style="color: #0D9488; font-weight: 600;">92%</span>
+                </div>
+            </div>
+
+            <div class="recommendation-card">
+                <div class="recommendation-header">
+                    <span class="recommendation-emoji">🎪</span>
+                    <span class="recommendation-title">Rotate Ad Creative (Meta/Instagram)</span>
+                </div>
+                <div class="recommendation-desc">
+                    Your "Summer Vibes Golden Hoops" creative is showing fatigue at day 12 (3.4x ROAS, declining). Immediate action: pause this creative, create 3 new variants, and re-launch. Test video + carousel formats.
+                </div>
+                <div style="display: flex; gap: 24px; margin-bottom: 16px;">
+                    <div>
+                        <div style="font-size: 11px; color: #999; font-weight: 600; margin-bottom: 4px;">Expected ROAS Lift</div>
+                        <div style="font-size: 18px; font-weight: 800; color: #0D9488;">+0.8x</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 11px; color: #999; font-weight: 600; margin-bottom: 4px;">Creative to Pause</div>
+                        <div style="font-size: 14px; font-weight: 600; color: #41342A;">3 assets</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 11px; color: #999; font-weight: 600; margin-bottom: 4px;">Action Needed</div>
+                        <div style="font-size: 14px; font-weight: 600; color: #DC2626;">Today</div>
+                    </div>
+                </div>
+                <div class="recommendation-confidence">
+                    <span style="font-size: 12px; color: #666;">Confidence:</span>
+                    <div class="confidence-bar">
+                        <div class="confidence-fill" style="width: 78%;"></div>
+                    </div>
+                    <span style="color: #0D9488; font-weight: 600;">78%</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Campaign Calendar -->
+        <div class="card">
+            <h2 class="section-title">Upcoming Campaign Calendar</h2>
+            <div class="ai-insight">
+                <div class="ai-icon">📅</div>
+                <div class="ai-content">
+                    <p><strong>Calendar Note:</strong> You have good campaign spacing (no overlaps on same channels). The April 8 Flash Sale lands well after Spring Collection campaign fatigue point. Consider SMS as a tease for the April 15 launch.</p>
+                </div>
+            </div>
+
+            <div style="margin-top: 16px;">
+                <div class="calendar-item">
+                    <div class="calendar-info">
+                        <div class="calendar-date">Tomorrow<br/>Apr 1, 2026</div>
+                        <div class="campaign-info">
+                            <h4>Spring Collection Follow-Up Email</h4>
+                            <p>Target cart abandoners from main campaign</p>
+                        </div>
+                    </div>
+                    <div class="calendar-action">Scheduled ✓</div>
+                </div>
+
+                <div class="calendar-item">
+                    <div class="calendar-info">
+                        <div class="calendar-date">Wed, Apr 3<br/>10:00 AM</div>
+                        <div class="campaign-info">
+                            <h4>SMS: Exclusive Members-Only Sale</h4>
+                            <p>20% off for loyalty program members only</p>
+                        </div>
+                    </div>
+                    <div class="calendar-action">Draft Ready</div>
+                </div>
+
+                <div class="calendar-item">
+                    <div class="calendar-info">
+                        <div class="calendar-date">Fri, Apr 5<br/>2:00 PM</div>
+                        <div class="campaign-info">
+                            <h4>Weekend Flash Sale Campaign (Paid)</h4>
+                            <p>4-hour flash sale via Meta + Google ads</p>
+                        </div>
+                    </div>
+                    <div class="calendar-action">In Planning</div>
+                </div>
+
+                <div class="calendar-item">
+                    <div class="calendar-info">
+                        <div class="calendar-date">Mon, Apr 7<br/>6:00 AM</div>
+                        <div class="campaign-info">
+                            <h4>Summer Bundle Series Launch (Email)</h4>
+                            <p>3-email nurture sequence for repeat buyers</p>
+                        </div>
+                    </div>
+                    <div class="calendar-action">AI Recommended</div>
+                </div>
+
+                <div class="calendar-item warning">
+                    <div class="calendar-info">
+                        <div class="calendar-date">Wed, Apr 9<br/>Deadline</div>
+                        <div class="campaign-info">
+                            <h4>Q2 Campaign Planning Due</h4>
+                            <p>Required for Marklo optimization — 15 campaigns planned</p>
+                        </div>
+                    </div>
+                    <div class="calendar-action" style="color: #DC2626;">5 days left</div>
+                </div>
+
+                <div class="calendar-item">
+                    <div class="calendar-info">
+                        <div class="calendar-date">Mon, Apr 15<br/>12:00 PM</div>
+                        <div class="campaign-info">
+                            <h4>May Mother's Day Collection Teaser</h4>
+                            <p>Early access email for VIP customers</p>
+                        </div>
+                    </div>
+                    <div class="calendar-action">Planned</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Percentile Context -->
+        <div class="card">
+            <h2 class="section-title">How You Compare</h2>
+            <div class="ai-insight">
+                <div class="ai-icon">🌟</div>
+                <div class="ai-content">
+                    <p><strong>Benchmarking:</strong> Your campaigns are in the top 8% of Shopify jewelry brands for ROAS. Email campaigns specifically are in the top 5% for open and click rates. Influencer ROAS (5.2x) exceeds industry average by 156%.</p>
+                </div>
+            </div>
+
+            <div class="grid-2col">
+                <div style="background: linear-gradient(135deg, rgba(13,148,136,0.08) 0%, rgba(176,206,255,0.08) 100%); border-radius: 12px; padding: 20px; text-align: center; border: 2px solid #0D9488;">
+                    <div style="font-size: 14px; color: #999; font-weight: 600; margin-bottom: 8px;">Campaign ROAS</div>
+                    <div style="font-size: 28px; font-weight: 800; color: #0D9488; margin-bottom: 12px;">Top 8%</div>
+                    <div style="font-size: 12px; color: #666;">Among Shopify jewelry DTC brands | Your 4.2x avg vs. 2.1x median</div>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(149,178,154,0.12) 0%, rgba(207,180,164,0.12) 100%); border-radius: 12px; padding: 20px; text-align: center; border: 2px solid #95B29A;">
+                    <div style="font-size: 14px; color: #999; font-weight: 600; margin-bottom: 8px;">Email Performance</div>
+                    <div style="font-size: 28px; font-weight: 800; color: #41342A; margin-bottom: 12px;">Top 5%</div>
+                    <div style="font-size: 12px; color: #666;">Open rate 6.2% vs. 2.8% median | Click rate 4.1% vs. 1.2% median</div>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(255,230,216,0.3) 0%, rgba(207,180,164,0.12) 100%); border-radius: 12px; padding: 20px; text-align: center; border: 2px solid #CFB4A4;">
+                    <div style="font-size: 14px; color: #999; font-weight: 600; margin-bottom: 8px;">Influencer Channel</div>
+                    <div style="font-size: 28px; font-weight: 800; color: #41342A; margin-bottom: 12px;">Top 3%</div>
+                    <div style="font-size: 12px; color: #666;">5.2x ROAS vs. 2.0x median | 156% above industry average</div>
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(245,208,235,0.2) 0%, rgba(176,206,255,0.08) 100%); border-radius: 12px; padding: 20px; text-align: center; border: 2px solid #B5C9CB;">
+                    <div style="font-size: 14px; color: #999; font-weight: 600; margin-bottom: 8px;">New Customer Acq.</div>
+                    <div style="font-size: 28px; font-weight: 800; color: #57719B; margin-bottom: 12px;">Top 12%</div>
+                    <div style="font-size: 12px; color: #666;">289 new customers WoW | $120 CPA vs. $185 median</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 20px; padding: 20px; background: #F9F6F2; border-radius: 8px; border-left: 4px solid #CFB4A4;">
+                <p style="font-size: 13px; color: #666; line-height: 1.6; margin: 0;">
+                    <strong style="color: #41342A;">Pro Insight:</strong> Your strength is in owned channels (email, SMS) where you have direct audience relationships. This is a competitive advantage many brands don't have. Consider doubling down on list growth and segmentation to maintain this edge over the next 2 quarters.
+                </p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <button class="footer-cta">📧 Get This Report Emailed Weekly</button>
+            <div class="footer-info">
+                <p><strong>Report #3 • Campaign & Promotion Deep Dive</strong></p>
+                <p>Generated for your Jewelry DTC brand • Mar 24 – Mar 30, 2026</p>
+                <p style="margin-top: 12px;"><span class="marklo-logo">MARKLO</span> — AI Marketing Intelligence for Shopify</p>
+                <p style="margin-top: 8px; font-size: 11px;">Have questions? <a href="#" style="color: #0D9488; text-decoration: none;">Contact support</a> | <a href="#" style="color: #0D9488; text-decoration: none;">View all reports</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function downloadAsPDF() {
+            var btn = document.getElementById('downloadPdfBtn');
+            var bar = document.getElementById('pdfDownloadBar');
+            var container = document.querySelector('.container');
+            btn.classList.add('downloading');
+            btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> Generating PDF…';
+            bar.style.display = 'none';
+            html2pdf().set({
+                margin: [10, 8, 10, 8],
+                filename: 'Marklo-Campaign-Deep-Dive-Mar24-30-2026.pdf',
+                image: { type: 'jpeg', quality: 0.95 },
+                html2canvas: { scale: 2, useCORS: true, letterRendering: true, scrollY: 0, windowWidth: 960 },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+                pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+            }).from(container).save().then(function() {
+                bar.style.display = 'flex';
+                btn.classList.remove('downloading');
+                btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> PDF Downloaded!';
+                setTimeout(function() { btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download as PDF'; }, 3000);
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report #4: Customer & Retention Insights — Marklo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.2/html2pdf.bundle.min.js"></script>
+    <!-- Note: In production, replace Playfair Display with actual Kalice Regular font file -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #F5F0EB;
+            color: #1A1A1A;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: #FFFFFF;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+            padding: 32px;
+            margin-bottom: 24px;
+        }
+
+        .card-compact {
+            padding: 24px;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', 'Kalice', Georgia, serif;
+            font-size: 32px;
+            font-weight: 400;
+            margin-bottom: 8px;
+            color: #41342A;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', 'Kalice', Georgia, serif;
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 16px;
+            color: #41342A;
+        }
+
+        h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #1A1A1A;
+        }
+
+        .label {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: #999;
+            letter-spacing: 0.5px;
+        }
+
+        .meta-info {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 12px;
+        }
+
+        .ai-insight {
+            background: linear-gradient(135deg, rgba(176,206,255,0.12) 0%, rgba(246,245,243,0.8) 100%);
+            border: 1px solid rgba(176,206,255,0.4);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+            display: flex;
+            gap: 16px;
+        }
+
+        .ai-icon {
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .ai-content p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #1A1A1A;
+            margin-bottom: 12px;
+        }
+
+        .ai-cta {
+            color: #0D9488;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .ai-cta:hover {
+            text-decoration: underline;
+        }
+
+        /* KPI Grid */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .kpi-card {
+            background: #FAFAFA;
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .kpi-value {
+            font-size: 32px;
+            font-weight: 800;
+            color: #1A1A1A;
+            margin: 8px 0;
+        }
+
+        .kpi-change {
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+        }
+
+        .kpi-change.positive {
+            color: #0D9488;
+        }
+
+        .kpi-change.negative {
+            color: #DC2626;
+        }
+
+        /* Chart styles */
+        .chart-container {
+            display: flex;
+            justify-content: center;
+            margin: 24px 0;
+            overflow-x: auto;
+        }
+
+        .chart-row {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        /* Heatmap styles */
+        .heatmap-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            margin: 24px 0;
+        }
+
+        .heatmap-table th,
+        .heatmap-table td {
+            padding: 8px;
+            border: 1px solid #E5E7EB;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .heatmap-table th {
+            background: #FAFAFA;
+            color: #666;
+        }
+
+        .heatmap-table td {
+            background: #FAFAFA;
+        }
+
+        .heatmap-cell {
+            background: #0D9488 !important;
+            color: white !important;
+            font-weight: 700;
+        }
+
+        .heatmap-cell.low {
+            background: #FEE2E2 !important;
+            color: #DC2626 !important;
+        }
+
+        .heatmap-cell.medium {
+            background: #FEF3C7 !important;
+            color: #92400E !important;
+        }
+
+        .heatmap-cell.high {
+            background: #DBEAFE !important;
+            color: #1E40AF !important;
+        }
+
+        /* RFM Grid */
+        .rfm-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        .rfm-card {
+            background: linear-gradient(135deg, #FAFAFA 0%, #F5F5F5 100%);
+            border-radius: 8px;
+            padding: 20px;
+            border-left: 4px solid #0D9488;
+        }
+
+        .rfm-card.loyal {
+            border-left-color: #B0CEFF;
+        }
+
+        .rfm-card.at-risk {
+            border-left-color: #FFE6D8;
+        }
+
+        .rfm-card.lost {
+            border-left-color: #DC2626;
+        }
+
+        .rfm-title {
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 8px;
+            color: #41342A;
+        }
+
+        .rfm-count {
+            font-size: 28px;
+            font-weight: 800;
+            color: #1A1A1A;
+            margin-bottom: 4px;
+        }
+
+        .rfm-revenue {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 12px;
+        }
+
+        .rfm-bar {
+            background: #E5E7EB;
+            height: 4px;
+            border-radius: 2px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+
+        .rfm-bar-fill {
+            height: 100%;
+            background: #0D9488;
+            border-radius: 2px;
+        }
+
+        /* Segmentation table */
+        .segment-row {
+            display: flex;
+            padding: 12px 0;
+            border-bottom: 1px solid #F0F0F0;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .segment-row:last-child {
+            border-bottom: none;
+        }
+
+        .segment-name {
+            font-weight: 600;
+            font-size: 14px;
+            min-width: 100px;
+            color: #1A1A1A;
+        }
+
+        .segment-stats {
+            display: flex;
+            gap: 20px;
+            flex: 1;
+            justify-content: flex-end;
+        }
+
+        .segment-stat {
+            text-align: right;
+            min-width: 90px;
+        }
+
+        .segment-stat-value {
+            font-weight: 700;
+            font-size: 14px;
+            color: #1A1A1A;
+        }
+
+        .segment-stat-label {
+            font-size: 11px;
+            color: #999;
+        }
+
+        /* Product grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin: 24px 0;
+        }
+
+        .product-item {
+            background: #FAFAFA;
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .product-name {
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: #1A1A1A;
+        }
+
+        .product-metric {
+            font-size: 11px;
+            color: #666;
+            margin-bottom: 2px;
+        }
+
+        .product-value {
+            font-size: 14px;
+            font-weight: 700;
+            color: #0D9488;
+        }
+
+        /* Progress bars */
+        .progress-group {
+            margin-bottom: 24px;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 13px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #E5E7EB;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #57719B, #B0CEFF);
+            border-radius: 4px;
+        }
+
+        /* Achievement badges */
+        .achievement-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        .achievement-badge {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            border: 2px solid #B0CEFF;
+        }
+
+        .achievement-icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .achievement-title {
+            font-weight: 700;
+            font-size: 13px;
+            color: #41342A;
+            margin-bottom: 4px;
+        }
+
+        .achievement-desc {
+            font-size: 11px;
+            color: #83766B;
+        }
+
+        /* Shareable moment card */
+        .shareable-card {
+            background: linear-gradient(135deg, #41342A 0%, #57719B 100%);
+            color: #F6F5F3;
+            border-radius: 12px;
+            padding: 32px;
+            text-align: center;
+            margin: 24px 0;
+        }
+
+        .shareable-headline {
+            font-family: 'Playfair Display', 'Kalice', Georgia, serif;
+            font-size: 28px;
+            font-weight: 400;
+            margin-bottom: 12px;
+        }
+
+        .shareable-subheading {
+            font-size: 16px;
+            color: #E4E2DF;
+            margin-bottom: 24px;
+        }
+
+        .shareable-stat {
+            display: inline-block;
+            background: rgba(255,255,255,0.1);
+            padding: 12px 24px;
+            border-radius: 8px;
+            margin: 0 8px;
+            font-weight: 700;
+        }
+
+        .share-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 24px;
+        }
+
+        .share-button {
+            background: rgba(255,255,255,0.2);
+            color: #F6F5F3;
+            border: 1px solid rgba(255,255,255,0.4);
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .share-button:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* Section title */
+        .section-title {
+            font-family: 'Playfair Display', 'Kalice', Georgia, serif;
+            font-size: 22px;
+            font-weight: 400;
+            margin-bottom: 16px;
+            color: #41342A;
+        }
+
+        /* Two-column layout */
+        .grid-2col {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .grid-3col {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        /* Celebration banner */
+        .celebration-banner {
+            background: #41342A;
+            color: #F6F5F3;
+            text-align: center;
+            padding: 16px 24px;
+            border-radius: 12px 12px 0 0;
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+        }
+
+        .win-pills {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .win-pill {
+            background: rgba(176,206,255,0.15);
+            border: 1px solid #B0CEFF;
+            color: #57719B;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .win-pill.record {
+            background: rgba(149,178,154,0.15);
+            border-color: #95B29A;
+            color: #41342A;
+        }
+
+        .win-pill.streak {
+            background: rgba(207,180,164,0.2);
+            border-color: #CFB4A4;
+            color: #41342A;
+        }
+
+        .header-badge {
+            display: inline-block;
+            background: #F0F0F0;
+            color: #666;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 12px;
+        }
+
+        /* Timeline / Repeat pattern */
+        .timeline-item {
+            display: flex;
+            padding: 16px 0;
+            border-bottom: 1px solid #F0F0F0;
+            gap: 16px;
+        }
+
+        .timeline-item:last-child {
+            border-bottom: none;
+        }
+
+        .timeline-marker {
+            background: #B0CEFF;
+            color: white;
+            font-weight: 700;
+            font-size: 12px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            white-space: nowrap;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .timeline-content {
+            flex: 1;
+        }
+
+        .timeline-label {
+            font-weight: 600;
+            font-size: 13px;
+            color: #1A1A1A;
+            margin-bottom: 4px;
+        }
+
+        .timeline-value {
+            font-size: 12px;
+            color: #666;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 32px 0;
+            border-top: 1px solid #E5E7EB;
+            margin-top: 40px;
+        }
+
+        .footer-cta {
+            display: inline-block;
+            background: #1A1A1A;
+            color: #FFFFFF;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            margin: 16px 0;
+            cursor: pointer;
+            border: none;
+        }
+
+        .footer-cta:hover {
+            background: #333;
+        }
+
+        .footer-info {
+            font-size: 12px;
+            color: #999;
+            margin-top: 16px;
+        }
+
+        .marklo-logo {
+            font-size: 12px;
+            font-weight: 700;
+            color: #1A1A1A;
+        }
+
+        /* Percentile badges */
+        .percentile-badge {
+            display: inline-block;
+            background: #EDE9FE;
+            color: #6D28D9;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .grid-2col,
+            .grid-3col {
+                grid-template-columns: 1fr;
+            }
+
+            .kpi-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .heatmap-table {
+                font-size: 10px;
+            }
+
+            .segment-stats {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .chart-row {
+                flex-direction: column;
+            }
+
+            .shareable-stat {
+                display: block;
+                margin: 8px 0;
+            }
+        }
+
+        /* SVG styles */
+        .donut-chart {
+            max-width: 200px;
+            margin: 0 auto;
+        }
+
+        .line-chart {
+            width: 100%;
+            max-width: 100%;
+        }
+
+        /* Download as PDF button */
+        .pdf-download-bar { display: flex; justify-content: flex-end; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .pdf-download-btn { display: inline-flex; align-items: center; gap: 8px; background: #41342A; color: #F6F5F3; border: none; padding: 10px 20px; border-radius: 10px; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s ease; letter-spacing: 0.2px; }
+        .pdf-download-btn:hover { background: #57719B; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(87, 113, 155, 0.3); }
+        .pdf-download-btn:active { transform: translateY(0); }
+        .pdf-download-btn.downloading { opacity: 0.7; pointer-events: none; }
+        @media print { .pdf-download-bar { display: none !important; } body { padding: 0; background: #fff; } .container { max-width: 100%; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Download as PDF -->
+        <div class="pdf-download-bar" id="pdfDownloadBar">
+            <button class="pdf-download-btn" id="downloadPdfBtn" onclick="downloadAsPDF()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Download as PDF
+            </button>
+        </div>
+        <!-- Report Header -->
+        <div class="celebration-banner">
+            🎯 Your Repeat Customers Are Your Rockstars!
+        </div>
+        <div class="card" style="border-radius: 0 0 12px 12px; margin-top: 0;">
+            <h1>Customer & Retention Insights</h1>
+            <p class="meta-info">👥 Report #4 • Mar 1 – Mar 31, 2026</p>
+            <p class="meta-info" style="color: #999; font-size: 13px;">Jewelry DTC Brand Dashboard</p>
+            <div class="win-pills">
+                <span class="win-pill">🔄 42% Repeat Rate (↑6% YoY)</span>
+                <span class="win-pill streak">💎 $892 Avg LTV</span>
+                <span class="win-pill record">⭐ 78% Month 1 Retention</span>
+            </div>
+            <div class="header-badge">✨ Powered by Marklo</div>
+        </div>
+
+        <!-- AI Executive Summary -->
+        <div class="ai-insight">
+            <div class="ai-icon">✨</div>
+            <div class="ai-content">
+                <p><strong>AI Insight:</strong> Your repeat customer strategy is working beautifully. 42% of March orders came from repeat buyers—that's 6 points higher than last year—and they're spending 2.3x more than new customers on average. Your March 2025 cohort just hit 78% retention at month 1, which is phenomenal. Champions (your top spenders) are worth $2,847 in LTV, while your At-Risk segment needs some love—win-back campaigns recovered $8,300 this month. One thing to watch: churn ticked up slightly to 5.2% (from 4.8%), but re-engagement campaigns are already bridging the gap.</p>
+                <a href="#" class="ai-cta">→ Launch Retention Campaign</a>
+            </div>
+        </div>
+
+        <!-- Achievement Badges -->
+        <div class="card" style="background: linear-gradient(135deg, #F6F5F3 0%, #E4E2DF 100%); border: 1px solid #CFB4A4;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">
+                <h2 class="section-title" style="margin-bottom: 0;">🏆 Retention Heroes</h2>
+                <span style="font-size: 12px; color: #41342A; font-weight: 500;">4 achievements unlocked</span>
+            </div>
+            <div class="achievement-grid">
+                <div class="achievement-badge" style="border-color: #95B29A;">
+                    <div class="achievement-icon">🔄</div>
+                    <div class="achievement-title">Repeat Buyer Magnet</div>
+                    <div class="achievement-desc">42% repeat purchase rate (top tier)</div>
+                </div>
+                <div class="achievement-badge" style="border-color: #B5C9CB;">
+                    <div class="achievement-icon">💎</div>
+                    <div class="achievement-title">LTV Champion</div>
+                    <div class="achievement-desc">$892 avg LTV (premium cohort)</div>
+                </div>
+                <div class="achievement-badge" style="border-color: #B0CEFF;">
+                    <div class="achievement-icon">🛟</div>
+                    <div class="achievement-title">Win-Back Wizard</div>
+                    <div class="achievement-desc">$8,300 recovered from dormant</div>
+                </div>
+                <div class="achievement-badge" style="border-color: #DED29D;">
+                    <div class="achievement-icon">📊</div>
+                    <div class="achievement-title">Retention Hero</div>
+                    <div class="achievement-desc">78% Month 1 retention rate</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Shareable Moment Card -->
+        <div class="shareable-card">
+            <div class="shareable-headline">42% of Our Customers Come Back</div>
+            <div class="shareable-subheading">Our retention is outperforming industry benchmarks</div>
+            <div>
+                <span class="shareable-stat">42% repeat rate</span>
+                <span class="shareable-stat">$892 avg LTV</span>
+                <span class="shareable-stat">78% M1 retention</span>
+            </div>
+            <div class="share-buttons">
+                <button class="share-button">📋 Copy</button>
+                <button class="share-button">📤 Share</button>
+            </div>
+        </div>
+
+        <!-- Customer Overview KPIs -->
+        <div class="card">
+            <h2 class="section-title">Customer Overview</h2>
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="label">Total Customers</div>
+                    <div class="kpi-value">4,287</div>
+                    <div class="kpi-change positive">↗ +18% YoY</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="label">New Customers</div>
+                    <div class="kpi-value">2,138</div>
+                    <div class="kpi-change positive">↗ +22% YoY</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="label">Returning Customers</div>
+                    <div class="kpi-value">2,149</div>
+                    <div class="kpi-change positive">↗ +15% YoY</div>
+                    <div style="margin-top: 6px;">
+                        <span style="background: rgba(149,178,154,0.2); color: #41342A; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 600;">50.1% of total</span>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <div class="label">Repeat Purchase Rate</div>
+                    <div class="kpi-value">42%</div>
+                    <div class="kpi-change positive">↗ +6pp YoY</div>
+                    <div style="margin-top: 6px;">
+                        <span class="percentile-badge">📊 Top 20% of jewelry DTC</span>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <div class="label">Avg Customer LTV</div>
+                    <div class="kpi-value">$892</div>
+                    <div class="kpi-change positive">↗ +14% YoY</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="label">Churn Rate (Monthly)</div>
+                    <div class="kpi-value">5.2%</div>
+                    <div class="kpi-change negative">↘ +0.4pp</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Customer Cohort Analysis (Monthly Retention Heatmap) -->
+        <div class="card">
+            <h2 class="section-title">Customer Cohort Retention Analysis</h2>
+            <p class="meta-info" style="margin-bottom: 16px;">Monthly cohorts: percentage of cohort making a repeat purchase</p>
+            <div style="overflow-x: auto;">
+                <table class="heatmap-table">
+                    <thead>
+                        <tr>
+                            <th>Cohort Month</th>
+                            <th>Cohort Size</th>
+                            <th>Month 0</th>
+                            <th>Month 1</th>
+                            <th>Month 2</th>
+                            <th>Month 3</th>
+                            <th>Month 4</th>
+                            <th>Month 5</th>
+                            <th>Month 6</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="font-weight: 600; text-align: left;">Mar 2026</td>
+                            <td>2,138</td>
+                            <td class="heatmap-cell">100%</td>
+                            <td class="heatmap-cell">78%</td>
+                            <td>—</td>
+                            <td>—</td>
+                            <td>—</td>
+                            <td>—</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600; text-align: left;">Feb 2026</td>
+                            <td>1,876</td>
+                            <td class="heatmap-cell">100%</td>
+                            <td class="heatmap-high">72%</td>
+                            <td class="heatmap-cell">58%</td>
+                            <td>—</td>
+                            <td>—</td>
+                            <td>—</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600; text-align: left;">Jan 2026</td>
+                            <td>1,602</td>
+                            <td class="heatmap-cell">100%</td>
+                            <td class="heatmap-high">69%</td>
+                            <td class="heatmap-cell">52%</td>
+                            <td class="heatmap-medium">42%</td>
+                            <td>—</td>
+                            <td>—</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600; text-align: left;">Dec 2025</td>
+                            <td>2,214</td>
+                            <td class="heatmap-cell">100%</td>
+                            <td class="heatmap-high">68%</td>
+                            <td class="heatmap-cell">51%</td>
+                            <td class="heatmap-medium">41%</td>
+                            <td class="heatmap-medium">35%</td>
+                            <td>—</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600; text-align: left;">Nov 2025</td>
+                            <td>1,934</td>
+                            <td class="heatmap-cell">100%</td>
+                            <td class="heatmap-high">67%</td>
+                            <td class="heatmap-cell">49%</td>
+                            <td class="heatmap-medium">38%</td>
+                            <td class="heatmap-medium">32%</td>
+                            <td class="heatmap-low">28%</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600; text-align: left;">Oct 2025</td>
+                            <td>1,745</td>
+                            <td class="heatmap-cell">100%</td>
+                            <td class="heatmap-high">65%</td>
+                            <td class="heatmap-cell">48%</td>
+                            <td class="heatmap-medium">37%</td>
+                            <td class="heatmap-medium">31%</td>
+                            <td class="heatmap-low">26%</td>
+                            <td class="heatmap-low">24%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="meta-info" style="margin-top: 16px; font-size: 12px;">💡 <strong>Insight:</strong> March 2026 cohort is tracking 6-7% above historical months at M1 retention. Feb 2026 cohort already at 58% M2 retention—strong seasonal performance.</p>
+        </div>
+
+        <!-- AI Insight for Cohort -->
+        <div class="ai-insight">
+            <div class="ai-icon">💭</div>
+            <div class="ai-content">
+                <p><strong>Cohort Spotlight:</strong> Your March cohort is your strongest ever. 78% of March buyers came back in their first 30 days, which is 6-7 points better than your average. This suggests your spring campaign attracted more engaged customers, or your post-purchase experience is improving. Keep that momentum going—watch how this cohort performs in Month 2 and 3.</p>
+            </div>
+        </div>
+
+        <!-- RFM Segmentation -->
+        <div class="card">
+            <h2 class="section-title">RFM Segmentation</h2>
+            <p class="meta-info">Recency • Frequency • Monetary — customer value tiers</p>
+            <div class="rfm-grid">
+                <div class="rfm-card">
+                    <div class="rfm-title">Champions 👑</div>
+                    <div class="rfm-count">412</div>
+                    <div class="rfm-revenue">$2,847 avg LTV</div>
+                    <p style="font-size: 12px; color: #666; margin-bottom: 8px;">Your best customers. High frequency, high spend, recent activity.</p>
+                    <div style="font-size: 11px; color: #0D9488; font-weight: 600;">→ VIP loyalty program</div>
+                    <div class="rfm-bar">
+                        <div class="rfm-bar-fill" style="width: 100%;"></div>
+                    </div>
+                </div>
+                <div class="rfm-card loyal">
+                    <div class="rfm-title">Loyal Customers 🤝</div>
+                    <div class="rfm-count">628</div>
+                    <div class="rfm-revenue">$1,204 avg LTV</div>
+                    <p style="font-size: 12px; color: #666; margin-bottom: 8px;">Steady repeat purchasers. Good frequency & spend, engaged.</p>
+                    <div style="font-size: 11px; color: #57719B; font-weight: 600;">→ Retention emails</div>
+                    <div class="rfm-bar">
+                        <div class="rfm-bar-fill" style="width: 85%; background: #B0CEFF;"></div>
+                    </div>
+                </div>
+                <div class="rfm-card at-risk">
+                    <div class="rfm-title">At Risk ⚠️</div>
+                    <div class="rfm-count">389</div>
+                    <div class="rfm-revenue">$634 avg LTV</div>
+                    <p style="font-size: 12px; color: #666; margin-bottom: 8px;">Used to buy, but haven't in 60+ days. Declining engagement.</p>
+                    <div style="font-size: 11px; color: #FF9800; font-weight: 600;">→ Win-back campaign</div>
+                    <div class="rfm-bar">
+                        <div class="rfm-bar-fill" style="width: 55%; background: #FFE6D8;"></div>
+                    </div>
+                </div>
+                <div class="rfm-card lost">
+                    <div class="rfm-title">Lost Customers 📉</div>
+                    <div class="rfm-count">1,858</div>
+                    <div class="rfm-revenue">$284 avg LTV</div>
+                    <p style="font-size: 12px; color: #666; margin-bottom: 8px;">Haven't purchased in 180+ days. Low lifetime value or churned.</p>
+                    <div style="font-size: 11px; color: #DC2626; font-weight: 600;">→ Re-engagement</div>
+                    <div class="rfm-bar">
+                        <div class="rfm-bar-fill" style="width: 30%; background: #DC2626;"></div>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top: 24px; padding: 16px; background: #FAFAFA; border-radius: 8px;">
+                <h3>Segment Performance Summary</h3>
+                <div class="segment-row">
+                    <div class="segment-name">Champions</div>
+                    <div class="segment-stats">
+                        <div class="segment-stat">
+                            <div class="segment-stat-value">$1.17M</div>
+                            <div class="segment-stat-label">Total LTV</div>
+                        </div>
+                        <div class="segment-stat">
+                            <div class="segment-stat-value">9.6%</div>
+                            <div class="segment-stat-label">Customer %</div>
+                        </div>
+                        <div class="segment-stat">
+                            <div class="segment-stat-value">62%</div>
+                            <div class="segment-stat-label">Revenue %</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="segment-row">
+                    <div class="segment-name">Loyal</div>
+                    <div class="segment-stats">
+                        <div class="segment-stat">
+                            <div class="segment-stat-value">$756K</div>
+                            <div class="segment-stat-label">Total LTV</div>
+                        </div>
+                        <div class="segment-stat">
+                            <div class="segment-stat-value">14.7%</div>
+                            <div class="segment-stat-label">Customer %</div>
+                        </div>
+                        <div class="segment-stat">
+                            <div class="segment-stat-value">25%</div>
+                            <div class="segment-stat-label">Revenue %</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="segment-row">
+                    <div class="segment-name">At Risk</div>
+                    <div class="segment-stats">
+                        <div class="segment-stat">
+                            <div class="segment-stat-value">$247K</div>
+                            <div class="segment-stat-label">Total LTV</div>
+                        </div>
+                        <div class="segment-stat">
+                            <div class="segment-stat-value">9.1%</div>
+                            <div class="segment-stat-label">Customer %</div>
+                        </div>
+                        <div class="segment-stat">
+                            <div class="segment-stat-value">8%</div>
+                            <div class="segment-stat-label">Revenue %</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="segment-row">
+                    <div class="segment-name">Lost</div>
+                    <div class="segment-stats">
+                        <div class="segment-stat">
+                            <div class="segment-stat-value">$528K</div>
+                            <div class="segment-stat-label">Total LTV</div>
+                        </div>
+                        <div class="segment-stat">
+                            <div class="segment-stat-value">43.4%</div>
+                            <div class="segment-stat-label">Customer %</div>
+                        </div>
+                        <div class="segment-stat">
+                            <div class="segment-stat-value">5%</div>
+                            <div class="segment-stat-label">Revenue %</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Customer Lifetime Value -->
+        <div class="card">
+            <h2 class="section-title">Customer Lifetime Value Analysis</h2>
+            <div class="grid-2col">
+                <div>
+                    <h3>LTV by Acquisition Channel</h3>
+                    <div style="margin-top: 16px;">
+                        <div class="progress-group">
+                            <div class="progress-label">
+                                <span>Email</span>
+                                <span style="color: #0D9488; font-weight: 700;">$1,247</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 100%;"></div>
+                            </div>
+                        </div>
+                        <div class="progress-group">
+                            <div class="progress-label">
+                                <span>Google PMax</span>
+                                <span style="color: #57719B; font-weight: 700;">$1,156</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 93%;"></div>
+                            </div>
+                        </div>
+                        <div class="progress-group">
+                            <div class="progress-label">
+                                <span>Organic</span>
+                                <span style="color: #B0CEFF; font-weight: 700;">$1,089</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 87%;"></div>
+                            </div>
+                        </div>
+                        <div class="progress-group">
+                            <div class="progress-label">
+                                <span>Meta Ads</span>
+                                <span style="color: #95B29A; font-weight: 700;">$894</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 72%;"></div>
+                            </div>
+                        </div>
+                        <div class="progress-group">
+                            <div class="progress-label">
+                                <span>TikTok Shop</span>
+                                <span style="color: #CFB4A4; font-weight: 700;">$756</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 61%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3>LTV Trends (Last 6 Months)</h3>
+                    <div class="chart-container">
+                        <svg class="line-chart" viewBox="0 0 350 250" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Grid -->
+                            <line x1="40" y1="200" x2="340" y2="200" stroke="#E5E7EB" stroke-width="1"/>
+                            <line x1="40" y1="150" x2="340" y2="150" stroke="#E5E7EB" stroke-width="1"/>
+                            <line x1="40" y1="100" x2="340" y2="100" stroke="#E5E7EB" stroke-width="1"/>
+                            <line x1="40" y1="50" x2="340" y2="50" stroke="#E5E7EB" stroke-width="1"/>
+
+                            <!-- Axes -->
+                            <line x1="40" y1="30" x2="40" y2="220" stroke="#D1D5DB" stroke-width="2"/>
+                            <line x1="40" y1="220" x2="340" y2="220" stroke="#D1D5DB" stroke-width="2"/>
+
+                            <!-- LTV Trend Line -->
+                            <polyline points="60,180 110,160 160,140 210,120 260,100 310,80"
+                                      fill="none" stroke="#0D9488" stroke-width="3"/>
+
+                            <!-- Fill under line -->
+                            <polygon points="60,180 110,160 160,140 210,120 260,100 310,80 310,220 60,220"
+                                     fill="#0D9488" fill-opacity="0.08"/>
+
+                            <!-- Month labels -->
+                            <text x="60" y="240" font-size="11" fill="#999" text-anchor="middle">Oct</text>
+                            <text x="110" y="240" font-size="11" fill="#999" text-anchor="middle">Nov</text>
+                            <text x="160" y="240" font-size="11" fill="#999" text-anchor="middle">Dec</text>
+                            <text x="210" y="240" font-size="11" fill="#999" text-anchor="middle">Jan</text>
+                            <text x="260" y="240" font-size="11" fill="#999" text-anchor="middle">Feb</text>
+                            <text x="310" y="240" font-size="11" fill="#999" text-anchor="middle">Mar</text>
+                        </svg>
+                    </div>
+                    <p style="font-size: 12px; color: #666; margin-top: 12px;">↗ Avg LTV trending up +18% over 6 months (from $756 to $892)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Repeat Purchase Analysis -->
+        <div class="card">
+            <h2 class="section-title">Repeat Purchase Analysis</h2>
+            <div class="grid-2col">
+                <div>
+                    <h3>Time Between Purchases</h3>
+                    <div style="margin-top: 16px;">
+                        <div class="timeline-item">
+                            <div class="timeline-marker" style="background: #0D9488;">0-30 days</div>
+                            <div class="timeline-content">
+                                <div class="timeline-label">28% of repeat purchases</div>
+                                <div class="timeline-value">Avg: 18 days • 1,204 customers</div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-marker" style="background: #57719B;">31-60 days</div>
+                            <div class="timeline-content">
+                                <div class="timeline-label">35% of repeat purchases</div>
+                                <div class="timeline-value">Avg: 45 days • 1,502 customers</div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-marker" style="background: #B0CEFF;">61-90 days</div>
+                            <div class="timeline-content">
+                                <div class="timeline-label">22% of repeat purchases</div>
+                                <div class="timeline-value">Avg: 75 days • 944 customers</div>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-marker" style="background: #CFB4A4;">90+ days</div>
+                            <div class="timeline-content">
+                                <div class="timeline-label">15% of repeat purchases</div>
+                                <div class="timeline-value">Avg: 156 days • 642 customers</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3>Top Repurchase Products</h3>
+                    <div class="product-grid" style="grid-template-columns: 1fr;">
+                        <div class="product-item">
+                            <div class="product-name">Gold Layering Chain</div>
+                            <div class="product-metric">Repeat rate</div>
+                            <div class="product-value">68%</div>
+                            <div class="product-metric" style="margin-top: 4px; font-size: 10px;">542 repeat purchases</div>
+                        </div>
+                        <div class="product-item">
+                            <div class="product-name">Dainty Beaded Bracelet</div>
+                            <div class="product-metric">Repeat rate</div>
+                            <div class="product-value">61%</div>
+                            <div class="product-metric" style="margin-top: 4px; font-size: 10px;">438 repeat purchases</div>
+                        </div>
+                        <div class="product-item">
+                            <div class="product-name">Pearl Drop Earrings</div>
+                            <div class="product-metric">Repeat rate</div>
+                            <div class="product-value">58%</div>
+                            <div class="product-metric" style="margin-top: 4px; font-size: 10px;">384 repeat purchases</div>
+                        </div>
+                        <div class="product-item">
+                            <div class="product-name">Personalized Name Ring</div>
+                            <div class="product-metric">Repeat rate</div>
+                            <div class="product-value">52%</div>
+                            <div class="product-metric" style="margin-top: 4px; font-size: 10px;">291 repeat purchases</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI Insight for Repeat -->
+        <div class="ai-insight">
+            <div class="ai-icon">💡</div>
+            <div class="ai-content">
+                <p><strong>Repeat Pattern:</strong> Your customers are most likely to buy again in the 31-60 day window (35% of repeats happen here). That's your sweet spot for re-engagement campaigns. The Gold Layering Chain is your star player—68% of people who buy it buy something again. Bundle it with lower-repeat products (like rings at 52%) to boost overall repeat rate.</p>
+            </div>
+        </div>
+
+        <!-- Win-Back Campaign Performance -->
+        <div class="card">
+            <h2 class="section-title">Win-Back Campaign Performance</h2>
+            <div style="display: grid; gap: 16px;">
+                <div style="background: #FAFAFA; border-radius: 8px; padding: 16px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                        <h3>March Win-Back Campaign</h3>
+                        <span style="background: #F0FDF4; color: #0D9488; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">Active</span>
+                    </div>
+                    <div class="grid-3col" style="margin-bottom: 12px;">
+                        <div>
+                            <div class="label">Emails Sent</div>
+                            <div style="font-size: 18px; font-weight: 700; color: #1A1A1A; margin: 4px 0;">8,427</div>
+                            <div style="font-size: 11px; color: #666;">To at-risk & lost</div>
+                        </div>
+                        <div>
+                            <div class="label">Re-Engaged</div>
+                            <div style="font-size: 18px; font-weight: 700; color: #0D9488; margin: 4px 0;">1,248</div>
+                            <div style="font-size: 11px; color: #666;">14.8% re-engagement</div>
+                        </div>
+                        <div>
+                            <div class="label">Win-Back Revenue</div>
+                            <div style="font-size: 18px; font-weight: 700; color: #1A1A1A; margin: 4px 0;">$8,340</div>
+                            <div style="font-size: 11px; color: #666;">$6.68 revenue per email</div>
+                        </div>
+                    </div>
+                    <div class="progress-group">
+                        <div class="progress-label">
+                            <span>Open Rate</span>
+                            <span>22%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 22%;"></div>
+                        </div>
+                    </div>
+                    <div class="progress-group">
+                        <div class="progress-label">
+                            <span>Click Rate</span>
+                            <span>8.4%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 8.4%;"></div>
+                        </div>
+                    </div>
+                    <div class="progress-group">
+                        <div class="progress-label">
+                            <span>Conversion Rate</span>
+                            <span>2.8%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 2.8%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Customer Satisfaction -->
+        <div class="card">
+            <h2 class="section-title">Customer Satisfaction</h2>
+            <div class="grid-2col">
+                <div>
+                    <h3>NPS Summary</h3>
+                    <div style="background: linear-gradient(135deg, #E4E2DF 0%, #F6F5F3 100%); border-radius: 12px; padding: 24px; text-align: center; margin-top: 16px;">
+                        <div style="font-size: 48px; font-weight: 800; color: #41342A; margin-bottom: 8px;">72</div>
+                        <div style="font-size: 14px; color: #666; margin-bottom: 12px;">Net Promoter Score</div>
+                        <div style="font-size: 12px; color: #0D9488; font-weight: 600;">↗ +8 points YoY</div>
+                        <div class="percentile-badge" style="margin-top: 12px; background: #EDE9FE; color: #6D28D9;">Top 10% jewelry brands</div>
+                    </div>
+                </div>
+                <div>
+                    <h3>Review Metrics</h3>
+                    <div style="margin-top: 16px;">
+                        <div style="margin-bottom: 16px;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                <span style="font-weight: 600;">Avg Rating</span>
+                                <span style="font-size: 14px; font-weight: 700; color: #1A1A1A;">4.8/5.0</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 96%;"></div>
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 16px;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                <span style="font-weight: 600;">Total Reviews</span>
+                                <span style="font-size: 14px; font-weight: 700; color: #1A1A1A;">2,847</span>
+                            </div>
+                            <div style="font-size: 12px; color: #666;">+412 new this month</div>
+                        </div>
+                        <div style="margin-bottom: 16px;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                <span style="font-weight: 600;">5-Star %</span>
+                                <span style="font-size: 14px; font-weight: 700; color: #0D9488;">78%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 78%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <button class="footer-cta">📊 View Detailed Analytics</button>
+            <p class="footer-info">Report generated Mar 31, 2026 • Next report in 7 days</p>
+            <p class="footer-info" style="margin-top: 8px; font-weight: 600;">
+                <span class="marklo-logo">MARKLO</span> — AI Insights for Shopify Brands
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function downloadAsPDF() {
+            var btn = document.getElementById('downloadPdfBtn');
+            var bar = document.getElementById('pdfDownloadBar');
+            var container = document.querySelector('.container');
+            btn.classList.add('downloading');
+            btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> Generating PDF…';
+            bar.style.display = 'none';
+            html2pdf().set({
+                margin: [10, 8, 10, 8],
+                filename: 'Marklo-Customer-Retention-Insights-Mar24-30-2026.pdf',
+                image: { type: 'jpeg', quality: 0.95 },
+                html2canvas: { scale: 2, useCORS: true, letterRendering: true, scrollY: 0, windowWidth: 960 },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+                pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+            }).from(container).save().then(function() {
+                bar.style.display = 'flex';
+                btn.classList.remove('downloading');
+                btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> PDF Downloaded!';
+                setTimeout(function() { btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download as PDF'; }, 3000);
+            });
+        }
+    </script>
+</body>
+</html>

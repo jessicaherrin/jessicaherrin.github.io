@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marklo — Report Mockups</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, sans-serif; background: #F5F0EB; color: #41342A; min-height: 100vh; padding: 60px 20px; }
+        .container { max-width: 720px; margin: 0 auto; }
+        .logo { display: flex; align-items: center; gap: 12px; margin-bottom: 40px; }
+        .logo svg { flex-shrink: 0; }
+        .logo span { font-size: 18px; font-weight: 700; letter-spacing: 2px; color: #41342A; }
+        h1 { font-family: 'Playfair Display', Georgia, serif; font-size: 36px; font-weight: 400; color: #41342A; margin-bottom: 8px; }
+        .subtitle { font-size: 15px; color: #83766B; margin-bottom: 40px; line-height: 1.6; }
+        .report-list { display: flex; flex-direction: column; gap: 16px; }
+        .report-link { display: flex; align-items: center; gap: 20px; background: #fff; border-radius: 12px; padding: 24px 28px; text-decoration: none; color: #41342A; box-shadow: 0 1px 3px rgba(0,0,0,0.06); transition: all 0.2s ease; border: 1px solid transparent; }
+        .report-link:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(65,52,42,0.1); border-color: #B0CEFF; }
+        .report-num { font-size: 13px; font-weight: 700; color: #fff; background: #41342A; width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .report-info { flex: 1; }
+        .report-title { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+        .report-desc { font-size: 13px; color: #83766B; }
+        .arrow { color: #B0CEFF; font-size: 20px; flex-shrink: 0; }
+        .footer { margin-top: 48px; text-align: center; font-size: 12px; color: #83766B; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <svg width="36" height="36" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
+                <rect width="28" height="28" rx="7" fill="#B0CEFF"/>
+                <rect x="7" y="11" width="3" height="10" rx="0.5" fill="#41342A"/>
+                <rect x="11.5" y="7" width="3" height="14" rx="0.5" fill="#41342A"/>
+                <rect x="16" y="9" width="3" height="12" rx="0.5" fill="#41342A"/>
+                <rect x="20.5" y="7" width="3" height="14" rx="0.5" fill="#41342A"/>
+            </svg>
+            <span>MARKLO</span>
+        </div>
+
+        <h1>Report Mockups</h1>
+        <p class="subtitle">Interactive mockups for Marklo's automated reporting system. Each report includes celebratory features, AI insights, and Download as PDF.</p>
+
+        <div class="report-list">
+            <a class="report-link" href="report-1-weekly-marketing-summary.html">
+                <div class="report-num">1</div>
+                <div class="report-info">
+                    <div class="report-title">Weekly Marketing Summary</div>
+                    <div class="report-desc">Revenue, channel performance, campaign highlights, AI executive summary</div>
+                </div>
+                <div class="arrow">&rarr;</div>
+            </a>
+            <a class="report-link" href="report-2-product-merchandising.html">
+                <div class="report-num">2</div>
+                <div class="report-info">
+                    <div class="report-title">Product & Merchandising</div>
+                    <div class="report-desc">Top sellers, product velocity, collection performance, trending items</div>
+                </div>
+                <div class="arrow">&rarr;</div>
+            </a>
+            <a class="report-link" href="report-3-campaign-promo-deep-dive.html">
+                <div class="report-num">3</div>
+                <div class="report-info">
+                    <div class="report-title">Campaign & Promotion Deep Dive</div>
+                    <div class="report-desc">Campaign comparison, A/B testing, promotion analysis, AI recommendations</div>
+                </div>
+                <div class="arrow">&rarr;</div>
+            </a>
+            <a class="report-link" href="report-4-customer-retention-insights.html">
+                <div class="report-num">4</div>
+                <div class="report-info">
+                    <div class="report-title">Customer & Retention Insights</div>
+                    <div class="report-desc">Cohort retention, RFM segmentation, LTV by channel, win-back performance</div>
+                </div>
+                <div class="arrow">&rarr;</div>
+            </a>
+            <a class="report-link" href="report-5-inventory-merchandising.html">
+                <div class="report-num">5</div>
+                <div class="report-info">
+                    <div class="report-title">Inventory & Merchandising Health</div>
+                    <div class="report-desc">Inventory risk matrix, sell-through rates, reorder alerts, dead stock analysis</div>
+                </div>
+                <div class="arrow">&rarr;</div>
+            </a>
+            <a class="report-link" href="report-6-competitive-market-intel.html">
+                <div class="report-num">6</div>
+                <div class="report-info">
+                    <div class="report-title">Competitive & Market Intelligence</div>
+                    <div class="report-desc">Industry benchmarks, competitor watch, pricing intel, SEO share of voice</div>
+                </div>
+                <div class="arrow">&rarr;</div>
+            </a>
+        </div>
+
+        <div class="footer">Marklo MVP Report Mockups &bull; Mar 2026 &bull; Confidential</div>
+    </div>
+</body>
+</html>

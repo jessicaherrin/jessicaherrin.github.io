@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report #6: Competitive & Market Intelligence — Marklo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.2/html2pdf.bundle.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #F5F0EB;
+            color: #1A1A1A;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: #FFFFFF;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+            padding: 32px;
+            margin-bottom: 24px;
+        }
+
+        .card-compact {
+            padding: 24px;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', 'Kalice', Georgia, serif;
+            font-size: 32px;
+            font-weight: 400;
+            margin-bottom: 8px;
+            color: #41342A;
+        }
+
+        h2, .section-title {
+            font-family: 'Playfair Display', 'Kalice', Georgia, serif;
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 16px;
+            color: #41342A;
+        }
+
+        h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #1A1A1A;
+        }
+
+        .label {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: #999;
+            letter-spacing: 0.5px;
+        }
+
+        .meta-info {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 12px;
+        }
+
+        .celebration-banner {
+            background: #41342A;
+            color: #F6F5F3;
+            text-align: center;
+            padding: 16px 24px;
+            border-radius: 12px 12px 0 0;
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+        }
+
+        .win-pills {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .win-pill {
+            background: rgba(176,206,255,0.15);
+            border: 1px solid #B0CEFF;
+            color: #57719B;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .win-pill.competitor {
+            background: rgba(181,201,203,0.15);
+            border-color: #B5C9CB;
+            color: #41342A;
+        }
+
+        .win-pill.opportunity {
+            background: rgba(149,178,154,0.15);
+            border-color: #95B29A;
+            color: #41342A;
+        }
+
+        .ai-insight {
+            background: linear-gradient(135deg, rgba(176,206,255,0.12) 0%, rgba(246,245,243,0.8) 100%);
+            border: 1px solid rgba(176,206,255,0.4);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+            display: flex;
+            gap: 16px;
+        }
+
+        .ai-icon {
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .ai-content p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #1A1A1A;
+            margin-bottom: 12px;
+        }
+
+        .ai-cta {
+            color: #0D9488;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .ai-cta:hover {
+            text-decoration: underline;
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .kpi-card {
+            background: #FAFAFA;
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+            border: 1px solid #F0F0F0;
+        }
+
+        .kpi-value {
+            font-size: 32px;
+            font-weight: 800;
+            color: #1A1A1A;
+            margin: 8px 0;
+        }
+
+        .kpi-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #666;
+            text-transform: uppercase;
+        }
+
+        .percentile-badge {
+            background: linear-gradient(135deg, rgba(149,178,154,0.15), rgba(207,180,164,0.15));
+            border: 1px solid #95B29A;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 16px;
+            font-size: 13px;
+            color: #41342A;
+            font-weight: 600;
+        }
+
+        .metric-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #F0F0F0;
+        }
+
+        .metric-row:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .metric-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .metric-label {
+            font-size: 13px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .metric-value {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1A1A1A;
+        }
+
+        .comparison-row {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+            gap: 16px;
+            padding: 12px 0;
+            border-bottom: 1px solid #F0F0F0;
+            align-items: center;
+        }
+
+        .comparison-row:last-child {
+            border-bottom: none;
+        }
+
+        .comparison-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #1A1A1A;
+        }
+
+        .comparison-value {
+            font-size: 13px;
+            font-weight: 500;
+            color: #1A1A1A;
+            text-align: center;
+        }
+
+        .comparison-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .badge-positive {
+            background: rgba(13,148,136,0.15);
+            color: #0D9488;
+        }
+
+        .badge-negative {
+            background: rgba(220,38,38,0.15);
+            color: #DC2626;
+        }
+
+        .badge-neutral {
+            background: rgba(87,113,155,0.15);
+            color: #57719B;
+        }
+
+        .achievement-badge {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            flex: 1;
+            min-width: 140px;
+            border: 2px solid #B0CEFF;
+            position: relative;
+        }
+
+        .achievement-badge.gold {
+            border: 2px solid #DED29D;
+        }
+
+        .achievement-badge.silver {
+            border: 2px solid #CFB4A4;
+        }
+
+        .badge-icon {
+            font-size: 36px;
+            margin-bottom: 8px;
+        }
+
+        .badge-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #41342A;
+            margin-bottom: 4px;
+        }
+
+        .badge-subtitle {
+            font-size: 11px;
+            color: #83766B;
+        }
+
+        .competitor-card {
+            background: #FAFAFA;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 12px;
+            border-left: 4px solid #B0CEFF;
+        }
+
+        .competitor-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .competitor-name {
+            font-size: 14px;
+            font-weight: 700;
+            color: #1A1A1A;
+        }
+
+        .competitor-rank {
+            font-size: 12px;
+            background: #E4E2DF;
+            color: #41342A;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        .competitor-activity {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .shareable-card {
+            background: linear-gradient(135deg, #41342A 0%, #57719B 100%);
+            color: #F6F5F3;
+            border-radius: 12px;
+            padding: 32px;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .shareable-headline {
+            font-family: 'Playfair Display', 'Kalice', Georgia, serif;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #F6F5F3;
+        }
+
+        .shareable-stat {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            color: #FFE6D8;
+        }
+
+        .shareable-detail {
+            font-size: 13px;
+            color: rgba(246,245,243,0.8);
+            margin-bottom: 20px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .button {
+            background: rgba(246,245,243,0.15);
+            border: 1px solid rgba(246,245,243,0.3);
+            color: #F6F5F3;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+        }
+
+        .button:hover {
+            background: rgba(246,245,243,0.25);
+        }
+
+        .chart-container {
+            display: flex;
+            justify-content: center;
+            margin: 24px 0;
+        }
+
+        .bar-chart {
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .trend-item {
+            background: #FAFAFA;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 12px;
+            border-left: 3px solid #DED29D;
+        }
+
+        .trend-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #1A1A1A;
+            margin-bottom: 4px;
+        }
+
+        .trend-data {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .opportunity-alert {
+            background: linear-gradient(135deg, rgba(149,178,154,0.1), rgba(207,180,164,0.1));
+            border: 1px solid #95B29A;
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+
+        .alert-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .alert-icon {
+            font-size: 18px;
+        }
+
+        .alert-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #41342A;
+        }
+
+        .alert-description {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .header-badge {
+            display: inline-block;
+            background: rgba(87,113,155,0.1);
+            color: #57719B;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-top: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .kpi-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .metric-row {
+                grid-template-columns: 1fr;
+            }
+
+            .comparison-row {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .button {
+                justify-content: center;
+            }
+        }
+
+        /* Download as PDF button */
+        .pdf-download-bar { display: flex; justify-content: flex-end; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .pdf-download-btn { display: inline-flex; align-items: center; gap: 8px; background: #41342A; color: #F6F5F3; border: none; padding: 10px 20px; border-radius: 10px; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s ease; letter-spacing: 0.2px; }
+        .pdf-download-btn:hover { background: #57719B; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(87, 113, 155, 0.3); }
+        .pdf-download-btn:active { transform: translateY(0); }
+        .pdf-download-btn.downloading { opacity: 0.7; pointer-events: none; }
+        @media print { .pdf-download-bar { display: none !important; } body { padding: 0; background: #fff; } .container { max-width: 100%; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Download as PDF -->
+        <div class="pdf-download-bar" id="pdfDownloadBar">
+            <button class="pdf-download-btn" id="downloadPdfBtn" onclick="downloadAsPDF()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Download as PDF
+            </button>
+        </div>
+        <!-- Report Header -->
+        <div class="celebration-banner">
+            📊 You're Outpacing Your Competition
+        </div>
+        <div class="card" style="border-radius: 0 0 12px 12px; margin-top: 0;">
+            <h1>Competitive & Market Intelligence</h1>
+            <p class="meta-info">📈 Report #6 • Mar 24 – Mar 30, 2026</p>
+            <p class="meta-info" style="color: #999; font-size: 13px;">Jewelry DTC Brand Dashboard</p>
+            <div class="win-pills">
+                <span class="win-pill competitor">🎯 Top 8% of Category</span>
+                <span class="win-pill opportunity">💡 5 Market Opportunities Identified</span>
+                <span class="win-pill">🔍 Monitoring 47 Competitors</span>
+            </div>
+            <div class="header-badge">✨ Powered by Marklo</div>
+        </div>
+
+        <!-- AI Executive Summary -->
+        <div class="ai-insight">
+            <div class="ai-icon">✨</div>
+            <div class="ai-content">
+                <p><strong>AI Insight:</strong> You're in a strong position within your jewelry category. Your conversion rate outperforms 92% of Shopify jewelry brands, and your email engagement is exceptional. We've spotted 5 major competitors making pricing moves this week — most are aggressively lowering prices on layered necklaces. The good news? Your positioning around quality and storytelling gives you pricing power. We've also identified 3 emerging product trends (moonstone rings, pearl studs, minimalist bracelets) that could be perfect for your audience.</p>
+                <a href="#" class="ai-cta">→ Explore Trend Opportunities</a>
+            </div>
+        </div>
+
+        <!-- Shareable Moment Card -->
+        <div class="shareable-card">
+            <div style="font-size: 24px; margin-bottom: 8px;">🏆</div>
+            <div class="shareable-headline">We're in the Top 8% for Conversion</div>
+            <div class="shareable-stat">4.2%</div>
+            <div class="shareable-detail">Your conversion rate vs 1.8% category average</div>
+            <div class="button-group">
+                <button class="button" onclick="navigator.clipboard.writeText('🏆 Our jewelry brand is in the top 8% for conversion rate on Shopify (4.2% vs 1.8% category avg). Powered by Marklo market intelligence.')">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                    Copy
+                </button>
+                <button class="button">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+                    Share
+                </button>
+            </div>
+        </div>
+
+        <!-- Achievement Badges Section -->
+        <div class="card" style="background: linear-gradient(135deg, #F6F5F3 0%, #E4E2DF 100%); border: 1px solid #CFB4A4;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">
+                <h2 class="section-title" style="margin-bottom: 0;">🏅 Competitive Strengths</h2>
+                <span style="font-size: 12px; color: #41342A; font-weight: 500;">Your top 3 competitive advantages</span>
+            </div>
+            <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                <div class="achievement-badge gold">
+                    <div class="badge-icon">🚀</div>
+                    <div class="badge-title">Market Leader</div>
+                    <div class="badge-subtitle">Top conversion rate in category</div>
+                </div>
+                <div class="achievement-badge gold">
+                    <div class="badge-icon">🔍</div>
+                    <div class="badge-title">Trend Spotter</div>
+                    <div class="badge-subtitle">Early adopter of seasonal products</div>
+                </div>
+                <div class="achievement-badge silver">
+                    <div class="badge-icon">💰</div>
+                    <div class="badge-title">Price Competitor</div>
+                    <div class="badge-subtitle">Competitive positioning on premium products</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Market Position KPIs -->
+        <div class="card">
+            <h2 class="section-title">📊 Market Position</h2>
+
+            <div class="percentile-badge">
+                ✨ Top 8% of Shopify jewelry brands in conversion rate — you're in elite company
+            </div>
+
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-label">Category Rank</div>
+                    <div class="kpi-value">142</div>
+                    <div style="font-size: 12px; color: #0D9488; font-weight: 600;">↑ 18 positions vs last month</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Estimated Market Share</div>
+                    <div class="kpi-value">2.8%</div>
+                    <div style="font-size: 12px; color: #0D9488; font-weight: 600;">↑ 0.3% vs last month</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Price Position</div>
+                    <div class="kpi-value">Premium</div>
+                    <div style="font-size: 12px; color: #666; font-weight: 600;">+18% vs category avg</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Growth vs Category</div>
+                    <div class="kpi-value">+12%</div>
+                    <div style="font-size: 12px; color: #0D9488; font-weight: 600;">Category: +4% YoY</div>
+                </div>
+            </div>
+
+            <div class="ai-insight" style="margin-bottom: 0;">
+                <div class="ai-icon">💡</div>
+                <div class="ai-content">
+                    <p><strong>AI Insight:</strong> You're climbing the rankings fast. Your 12% growth rate is 3x the category average, putting you on track to break into the top 100 brands by Q3. Your premium pricing strategy is resonating — customers see your brand as higher quality than competitors at similar price points.</p>
+                    <a href="#" class="ai-cta">→ View Ranking History</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Industry Benchmark Comparison -->
+        <div class="card">
+            <h2 class="section-title">📈 Industry Benchmark Comparison</h2>
+            <p style="font-size: 13px; color: #666; margin-bottom: 20px;">Your metrics vs Shopify jewelry category averages</p>
+
+            <div class="comparison-row">
+                <div class="comparison-label">Conversion Rate (1st-time buyers)</div>
+                <div class="comparison-value">
+                    <span style="font-weight: 700; color: #1A1A1A;">4.2%</span><br>
+                    <span style="font-size: 12px; color: #666;">Your brand</span>
+                </div>
+                <div class="comparison-value">
+                    <span style="color: #0D9488;">↑ +133%</span><br>
+                    <span style="font-size: 12px; color: #666;">vs 1.8% avg</span>
+                </div>
+            </div>
+
+            <div class="comparison-row">
+                <div class="comparison-label">Average Order Value</div>
+                <div class="comparison-value">
+                    <span style="font-weight: 700; color: #1A1A1A;">$143</span><br>
+                    <span style="font-size: 12px; color: #666;">Your brand</span>
+                </div>
+                <div class="comparison-value">
+                    <span style="color: #0D9488;">↑ +18%</span><br>
+                    <span style="font-size: 12px; color: #666;">vs $121 avg</span>
+                </div>
+            </div>
+
+            <div class="comparison-row">
+                <div class="comparison-label">Email Open Rate</div>
+                <div class="comparison-value">
+                    <span style="font-weight: 700; color: #1A1A1A;">42.3%</span><br>
+                    <span style="font-size: 12px; color: #666;">Your brand</span>
+                </div>
+                <div class="comparison-value">
+                    <span style="color: #0D9488;">↑ +64%</span><br>
+                    <span style="font-size: 12px; color: #666;">vs 25.8% avg</span>
+                </div>
+            </div>
+
+            <div class="comparison-row">
+                <div class="comparison-label">Email Click-Through Rate</div>
+                <div class="comparison-value">
+                    <span style="font-weight: 700; color: #1A1A1A;">8.7%</span><br>
+                    <span style="font-size: 12px; color: #666;">Your brand</span>
+                </div>
+                <div class="comparison-value">
+                    <span style="color: #0D9488;">↑ +87%</span><br>
+                    <span style="font-size: 12px; color: #666;">vs 4.6% avg</span>
+                </div>
+            </div>
+
+            <div class="comparison-row">
+                <div class="comparison-label">Customer Repeat Purchase Rate</div>
+                <div class="comparison-value">
+                    <span style="font-weight: 700; color: #1A1A1A;">28%</span><br>
+                    <span style="font-size: 12px; color: #666;">Your brand</span>
+                </div>
+                <div class="comparison-value">
+                    <span style="color: #0D9488;">↑ +40%</span><br>
+                    <span style="font-size: 12px; color: #666;">vs 20% avg</span>
+                </div>
+            </div>
+
+            <div class="ai-insight" style="margin-bottom: 0;">
+                <div class="ai-icon">✨</div>
+                <div class="ai-content">
+                    <p><strong>AI Insight:</strong> You're crushing it across the board. Your email engagement is exceptional — most jewelry brands struggle to hit 30% open rates. Your repeat purchase rate shows strong customer loyalty, meaning your product quality and customer experience are top-tier. Focus on scaling what's working: email segment quality and product curation.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Competitor Watch -->
+        <div class="card">
+            <h2 class="section-title">🔎 Competitor Watch</h2>
+            <p style="font-size: 13px; color: #666; margin-bottom: 20px;">Top 5 competitors & recent moves detected this week</p>
+
+            <div class="competitor-card">
+                <div class="competitor-header">
+                    <div class="competitor-name">Luxury Gems Co.</div>
+                    <div class="competitor-rank">#28 Category</div>
+                </div>
+                <div class="competitor-activity">
+                    <strong>Recent Activity:</strong><br>
+                    ✋ Launched "Minimalist Collection" (3 new SKUs)<br>
+                    💰 Price drop: 15% off layered necklaces (limited time)<br>
+                    📧 Email: "Spring Refresh" campaign targeting existing customers
+                </div>
+            </div>
+
+            <div class="competitor-card">
+                <div class="competitor-header">
+                    <div class="competitor-name">Shimmer & Stone</div>
+                    <div class="competitor-rank">#34 Category</div>
+                </div>
+                <div class="competitor-activity">
+                    <strong>Recent Activity:</strong><br>
+                    🆕 New partnership with micro-influencer (3M followers)<br>
+                    📱 Instagram campaign: #ShimmerSpring (10K+ hashtag uses)<br>
+                    🎁 Bundle promotions on bestsellers
+                </div>
+            </div>
+
+            <div class="competitor-card">
+                <div class="competitor-header">
+                    <div class="competitor-name">Eternal Elegance</div>
+                    <div class="competitor-rank">#41 Category</div>
+                </div>
+                <div class="competitor-activity">
+                    <strong>Recent Activity:</strong><br>
+                    📊 New "Jewelry Bar" landing page (customization focus)<br>
+                    ⭐ Customer review campaign (leveraging UGC)<br>
+                    🔔 SMS opt-in incentive: 20% off first purchase
+                </div>
+            </div>
+
+            <div class="competitor-card">
+                <div class="competitor-header">
+                    <div class="competitor-name">Pearls & Petals</div>
+                    <div class="competitor-rank">#52 Category</div>
+                </div>
+                <div class="competitor-activity">
+                    <strong>Recent Activity:</strong><br>
+                    💎 Premium positioning shift (raising prices 12%)<br>
+                    📸 New lifestyle photography (targeting affluent millennials)<br>
+                    🎬 TikTok expansion: 15+ new product videos
+                </div>
+            </div>
+
+            <div class="ai-insight" style="margin-bottom: 0;">
+                <div class="ai-icon">🎯</div>
+                <div class="ai-content">
+                    <p><strong>AI Insight:</strong> Your competitors are divided: some are slashing prices, others are betting on lifestyle & influencer. You're in the sweet spot — premium positioning with exceptional conversion proves quality sells. Watch Luxury Gems' necklace discounts closely; if they steal share, consider a limited bundle counter-promotion. Micro-influencer partnerships (like Shimmer & Stone) are working — worth exploring for Q2.</p>
+                    <a href="#" class="ai-cta">→ See Pricing Intelligence</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pricing Intelligence -->
+        <div class="card">
+            <h2 class="section-title">💰 Pricing Intelligence</h2>
+            <p style="font-size: 13px; color: #666; margin-bottom: 20px;">Your price positioning vs market for similar product categories</p>
+
+            <div class="metric-row">
+                <div>
+                    <div class="metric-label">Layered Necklaces</div>
+                    <div style="margin-top: 8px;">
+                        <div style="font-size: 12px; margin-bottom: 4px;">Your Price: <strong>$89</strong></div>
+                        <div style="font-size: 12px; color: #666;">Category Avg: $74</div>
+                        <div style="font-size: 11px; color: #0D9488; font-weight: 600; margin-top: 4px;">+20% Premium (justified by quality)</div>
+                    </div>
+                </div>
+                <div>
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px;">
+                        <span class="comparison-badge badge-neutral">Luxury Gems: $63</span>
+                        <span class="comparison-badge badge-positive">Shimmer: $84</span>
+                        <span class="comparison-badge badge-positive">Eternal: $91</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="metric-row">
+                <div>
+                    <div class="metric-label">Pearl Stud Earrings</div>
+                    <div style="margin-top: 8px;">
+                        <div style="font-size: 12px; margin-bottom: 4px;">Your Price: <strong>$67</strong></div>
+                        <div style="font-size: 12px; color: #666;">Category Avg: $58</div>
+                        <div style="font-size: 11px; color: #0D9488; font-weight: 600; margin-top: 4px;">+15% Premium (steady demand)</div>
+                    </div>
+                </div>
+                <div>
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px;">
+                        <span class="comparison-badge badge-neutral">Shimmer: $49</span>
+                        <span class="comparison-badge badge-neutral">Pearls&Petals: $71</span>
+                        <span class="comparison-badge badge-positive">Eternal: $62</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="metric-row">
+                <div>
+                    <div class="metric-label">Gold Bracelets</div>
+                    <div style="margin-top: 8px;">
+                        <div style="font-size: 12px; margin-bottom: 4px;">Your Price: <strong>$132</strong></div>
+                        <div style="font-size: 12px; color: #666;">Category Avg: $118</div>
+                        <div style="font-size: 11px; color: #0D9488; font-weight: 600; margin-top: 4px;">+12% Premium (strong conversion)</div>
+                    </div>
+                </div>
+                <div>
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px;">
+                        <span class="comparison-badge badge-positive">Luxury Gems: $145</span>
+                        <span class="comparison-badge badge-neutral">Shimmer: $112</span>
+                        <span class="comparison-badge badge-positive">Pearls&Petals: $138</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ai-insight" style="margin-bottom: 0;">
+                <div class="ai-icon">💡</div>
+                <div class="ai-content">
+                    <p><strong>AI Insight:</strong> Your pricing is optimal. You're commanding premiums on all major categories and your conversion rates prove customers are willing to pay. Don't undercut — it would erode margins and damage your "premium quality" positioning. Luxury Gems' aggressive discounting on necklaces is a volume play that's working for them but wouldn't work for your brand. Stick with your strategy.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Trending Products in Category -->
+        <div class="card">
+            <h2 class="section-title">🔥 Trending Products This Week</h2>
+            <p style="font-size: 13px; color: #666; margin-bottom: 20px;">What's hot in Shopify jewelry this week (trending up 20%+ vs baseline)</p>
+
+            <div class="trend-item">
+                <div class="trend-title">🌙 Moonstone Rings</div>
+                <div class="trend-data">
+                    <strong>+58% search interest</strong> | Trending on TikTok | Avg price: $76 | Conversion: 3.8%<br>
+                    <span style="color: #0D9488; font-weight: 600;">✓ Opportunity: You don't have moonstone rings. Consider 3 SKUs for Q2 launch</span>
+                </div>
+            </div>
+
+            <div class="trend-item">
+                <div class="trend-title">💎 Pearl & Diamond Combos</div>
+                <div class="trend-data">
+                    <strong>+42% interest</strong> | Instagram Reels trending | Avg price: $128 | Conversion: 4.1%<br>
+                    <span style="color: #0D9488; font-weight: 600;">✓ Fit: You have similar products. Bundle these for 15% discount</span>
+                </div>
+            </div>
+
+            <div class="trend-item">
+                <div class="trend-title">✨ Minimalist Gold Studs</div>
+                <div class="trend-data">
+                    <strong>+35% demand</strong> | Competitors launching | Avg price: $62 | Conversion: 3.2%<br>
+                    <span style="color: #666; font-weight: 600;">○ You have these. Boost in-email feature to capitalize on trend</span>
+                </div>
+            </div>
+
+            <div class="trend-item">
+                <div class="trend-title">🌺 Colorful Enamel Pieces</div>
+                <div class="trend-data">
+                    <strong>+28% interest</strong> | Emerging niche | Avg price: $48 | Conversion: 2.9%<br>
+                    <span style="color: #999; font-weight: 600;">○ Emerging trend but lower price point. Low priority for premium positioning</span>
+                </div>
+            </div>
+
+            <div class="ai-insight" style="margin-bottom: 0;">
+                <div class="ai-icon">🎯</div>
+                <div class="ai-content">
+                    <p><strong>AI Insight:</strong> Moonstone rings are your white whale. High search interest, good pricing power ($76 avg), and strong conversion. This is a perfect fit for your premium positioning. Launch 3 designs (simple, ornate, cocktail ring style) by mid-April to capture the trend before it saturates. Pearl combos are already working for you — feature these in your weekend email for a 15-20% conversion boost.</p>
+                    <a href="#" class="ai-cta">→ View Product Research</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEO & Share of Voice -->
+        <div class="card">
+            <h2 class="section-title">🔍 SEO & Share of Voice</h2>
+            <p style="font-size: 13px; color: #666; margin-bottom: 20px;">Your branded search trends & social mention volume</p>
+
+            <div style="margin-bottom: 24px;">
+                <h3 style="font-size: 14px; margin-bottom: 12px;">Branded Search Trends (Last 30 Days)</h3>
+                <svg class="bar-chart" viewBox="0 0 800 250" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Grid -->
+                    <line x1="80" y1="220" x2="800" y2="220" stroke="#E4E2DF" stroke-width="1"/>
+                    <line x1="80" y1="170" x2="800" y2="170" stroke="#E4E2DF" stroke-width="1"/>
+                    <line x1="80" y1="120" x2="800" y2="120" stroke="#E4E2DF" stroke-width="1"/>
+                    <line x1="80" y1="70" x2="800" y2="70" stroke="#E4E2DF" stroke-width="1"/>
+
+                    <!-- Y-axis labels -->
+                    <text x="70" y="225" text-anchor="end" font-size="11" fill="#999">0</text>
+                    <text x="70" y="175" text-anchor="end" font-size="11" fill="#999">250</text>
+                    <text x="70" y="125" text-anchor="end" font-size="11" fill="#999">500</text>
+                    <text x="70" y="75" text-anchor="end" font-size="11" fill="#999">750</text>
+
+                    <!-- Bars -->
+                    <rect x="110" y="80" width="60" height="140" fill="#B0CEFF" rx="4"/>
+                    <rect x="190" y="40" width="60" height="180" fill="#B0CEFF" rx="4"/>
+                    <rect x="270" y="60" width="60" height="160" fill="#0D9488" rx="4"/>
+                    <rect x="350" y="100" width="60" height="120" fill="#83766B" rx="4"/>
+                    <rect x="430" y="30" width="60" height="190" fill="#B0CEFF" rx="4"/>
+                    <rect x="510" y="50" width="60" height="170" fill="#B0CEFF" rx="4"/>
+                    <rect x="590" y="20" width="60" height="200" fill="#0D9488" rx="4"/>
+                    <rect x="670" y="40" width="60" height="180" fill="#B0CEFF" rx="4"/>
+
+                    <!-- X-axis labels -->
+                    <text x="140" y="245" text-anchor="middle" font-size="11" fill="#666">Week 1</text>
+                    <text x="220" y="245" text-anchor="middle" font-size="11" fill="#666">Week 2</text>
+                    <text x="300" y="245" text-anchor="middle" font-size="11" fill="#666">Week 3</text>
+                    <text x="380" y="245" text-anchor="middle" font-size="11" fill="#666">Week 4</text>
+                    <text x="460" y="245" text-anchor="middle" font-size="11" fill="#666">Week 5</text>
+                    <text x="540" y="245" text-anchor="middle" font-size="11" fill="#666">Week 6</text>
+                    <text x="620" y="245" text-anchor="middle" font-size="11" fill="#666">Week 7</text>
+                    <text x="700" y="245" text-anchor="middle" font-size="11" fill="#666">Week 8</text>
+
+                    <!-- Legend -->
+                    <rect x="110" y="10" width="12" height="12" fill="#B0CEFF"/>
+                    <text x="130" y="19" font-size="11" fill="#1A1A1A">Your Brand Searches</text>
+                    <rect x="340" y="10" width="12" height="12" fill="#0D9488"/>
+                    <text x="360" y="19" font-size="11" fill="#1A1A1A">Trending Weeks</text>
+                </svg>
+            </div>
+
+            <div class="metric-row">
+                <div>
+                    <div class="metric-label">Total Branded Searches (30 Days)</div>
+                    <div style="font-size: 24px; font-weight: 700; color: #1A1A1A; margin-top: 8px;">4,284</div>
+                    <div style="font-size: 12px; color: #0D9488; font-weight: 600;">↑ +34% vs previous month</div>
+                </div>
+                <div>
+                    <div class="metric-label">Social Mention Volume (30 Days)</div>
+                    <div style="font-size: 24px; font-weight: 700; color: #1A1A1A; margin-top: 8px;">1,847</div>
+                    <div style="font-size: 12px; color: #0D9488; font-weight: 600;">↑ +28% vs previous month</div>
+                </div>
+            </div>
+
+            <h3 style="font-size: 14px; margin: 20px 0 12px 0;">Top Search Keywords</h3>
+            <div class="comparison-row" style="padding-top: 0; border-bottom: none;">
+                <div>1. "Your Brand Name"</div>
+                <div class="comparison-value">2,148 searches</div>
+                <div class="comparison-badge badge-positive">+42%</div>
+            </div>
+            <div class="comparison-row">
+                <div>2. "Your Brand Name + jewelry"</div>
+                <div class="comparison-value">891 searches</div>
+                <div class="comparison-badge badge-positive">+18%</div>
+            </div>
+            <div class="comparison-row">
+                <div>3. "Your Brand Name + reviews"</div>
+                <div class="comparison-value">568 searches</div>
+                <div class="comparison-badge badge-positive">+25%</div>
+            </div>
+            <div class="comparison-row">
+                <div>4. "Your Brand Name + necklace"</div>
+                <div class="comparison-value">421 searches</div>
+                <div class="comparison-badge badge-positive">+8%</div>
+            </div>
+            <div class="comparison-row">
+                <div>5. "Your Brand Name + sale"</div>
+                <div class="comparison-value">256 searches</div>
+                <div class="comparison-badge badge-negative">-12%</div>
+            </div>
+
+            <div class="ai-insight" style="margin-bottom: 0;">
+                <div class="ai-icon">✨</div>
+                <div class="ai-content">
+                    <p><strong>AI Insight:</strong> Your brand awareness is surging. Branded search volume is up 34% — this means your existing customer base is growing and people are searching for you by name (best indicator of brand strength). The dip in "sale" searches is actually good news: it means you're not being searched primarily as a discount destination. Keep building brand equity through email and content.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Market Opportunity Alerts -->
+        <div class="card">
+            <h2 class="section-title">🎯 Market Opportunity Alerts</h2>
+            <p style="font-size: 13px; color: #666; margin-bottom: 20px;">AI-identified gaps and opportunities from competitive analysis</p>
+
+            <div class="opportunity-alert">
+                <div class="alert-header">
+                    <div class="alert-icon">💡</div>
+                    <div class="alert-title">Underserved Product Gap: Moonstones</div>
+                </div>
+                <div class="alert-description">
+                    None of your top 5 competitors offer moonstone rings. Trend interest is +58% WoW. Launch window: 30 days before trend peaks (mid-April). Recommended: 3 designs, $65-$89 price range. Est. capture: 150-200 units in Q2.
+                </div>
+            </div>
+
+            <div class="opportunity-alert">
+                <div class="alert-header">
+                    <div class="alert-icon">💬</div>
+                    <div class="alert-title">Customer Sentiment: Quality Over Price</div>
+                </div>
+                <div class="alert-description">
+                    Your reviews emphasize durability & craftsmanship (72% of 5-star reviews mention quality). Competitors are fighting on price. Lean into this — create a "Heirloom Quality" positioning. Email campaign opportunity: "Jewelry Built to Last" showcasing customer stories.
+                </div>
+            </div>
+
+            <div class="opportunity-alert">
+                <div class="alert-header">
+                    <div class="alert-icon">📱</div>
+                    <div class="alert-title">Micro-Influencer Partnerships Underexploited</div>
+                </div>
+                <div class="alert-description">
+                    Shimmer & Stone's influencer campaign is driving 2x average engagement. You have budget for 3-4 micro-influencers (10K-100K followers). Target: lifestyle/sustainability niches. Timeline: 30-day campaign starting mid-April. Est. ROI: 3.2x.
+                </div>
+            </div>
+
+            <div class="opportunity-alert">
+                <div class="alert-header">
+                    <div class="alert-icon">🌱</div>
+                    <div class="alert-title">Sustainability Messaging Gap</div>
+                </div>
+                <div class="alert-description">
+                    None of your competitors emphasize sustainable sourcing or ethical production. High-value customer segment (25-40 yr old women) increasingly values this. Opportunity: Sustainability statement on landing page + product sourcing transparency.
+                </div>
+            </div>
+
+            <div class="opportunity-alert">
+                <div class="alert-header">
+                    <div class="alert-icon">🎬</div>
+                    <div class="alert-title">TikTok Content Expansion</div>
+                </div>
+                <div class="alert-description">
+                    Pearls & Petals just launched 15 TikTok videos (testing platform). Early engagement is strong. Your brand hasn't committed to TikTok yet. Opportunity: 20 videos in 60 days (styling guides, behind-scenes, trend participation). Est. reach: 500K views, 2-3% conversion to site traffic.
+                </div>
+            </div>
+
+            <div class="ai-insight" style="margin-bottom: 0;">
+                <div class="ai-icon">🚀</div>
+                <div class="ai-content">
+                    <p><strong>AI Insight:</strong> You have 5 major moves available. The highest ROI (and fastest to execute) are: (1) Launch moonstone rings by mid-April, (2) Micro-influencer campaign featuring your best customers, (3) Sustainability messaging. These three changes could add $40-50K in Q2 revenue. We recommend tackling all 5 by end of Q2 to maintain competitive advantage.</p>
+                    <a href="#" class="ai-cta">→ Create Action Plan</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Percentile Context Badges -->
+        <div class="card" style="background: linear-gradient(135deg, rgba(207,180,164,0.08), rgba(176,206,255,0.08));">
+            <h2 class="section-title">📊 Your Percentile Context</h2>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
+                <div style="background: white; border-radius: 8px; padding: 16px; border-left: 4px solid #0D9488;">
+                    <div style="font-size: 11px; color: #666; text-transform: uppercase; font-weight: 600; margin-bottom: 4px;">Conversion Rate Percentile</div>
+                    <div style="font-size: 24px; font-weight: 800; color: #1A1A1A; margin-bottom: 4px;">Top 8%</div>
+                    <div style="font-size: 12px; color: #666;">Your 4.2% CR vs 1.8% category avg</div>
+                </div>
+
+                <div style="background: white; border-radius: 8px; padding: 16px; border-left: 4px solid #0D9488;">
+                    <div style="font-size: 11px; color: #666; text-transform: uppercase; font-weight: 600; margin-bottom: 4px;">AOV Percentile</div>
+                    <div style="font-size: 24px; font-weight: 800; color: #1A1A1A; margin-bottom: 4px;">Top 22%</div>
+                    <div style="font-size: 12px; color: #666;">Your $143 AOV vs $121 category avg</div>
+                </div>
+
+                <div style="background: white; border-radius: 8px; padding: 16px; border-left: 4px solid #0D9488;">
+                    <div style="font-size: 11px; color: #666; text-transform: uppercase; font-weight: 600; margin-bottom: 4px;">Email Open Rate Percentile</div>
+                    <div style="font-size: 24px; font-weight: 800; color: #1A1A1A; margin-bottom: 4px;">Top 5%</div>
+                    <div style="font-size: 12px; color: #666;">Your 42.3% open rate vs 25.8% avg</div>
+                </div>
+
+                <div style="background: white; border-radius: 8px; padding: 16px; border-left: 4px solid #0D9488;">
+                    <div style="font-size: 11px; color: #666; text-transform: uppercase; font-weight: 600; margin-bottom: 4px;">Repeat Purchase Rate Percentile</div>
+                    <div style="font-size: 24px; font-weight: 800; color: #1A1A1A; margin-bottom: 4px;">Top 15%</div>
+                    <div style="font-size: 12px; color: #666;">Your 28% repeat rate vs 20% avg</div>
+                </div>
+
+                <div style="background: white; border-radius: 8px; padding: 16px; border-left: 4px solid #95B29A;">
+                    <div style="font-size: 11px; color: #666; text-transform: uppercase; font-weight: 600; margin-bottom: 4px;">Growth Rate Percentile</div>
+                    <div style="font-size: 24px; font-weight: 800; color: #1A1A1A; margin-bottom: 4px;">Top 12%</div>
+                    <div style="font-size: 12px; color: #666;">Your 12% YoY growth vs 4% avg</div>
+                </div>
+
+                <div style="background: white; border-radius: 8px; padding: 16px; border-left: 4px solid #DED29D;">
+                    <div style="font-size: 11px; color: #666; text-transform: uppercase; font-weight: 600; margin-bottom: 4px;">Market Rank Percentile</div>
+                    <div style="font-size: 24px; font-weight: 800; color: #1A1A1A; margin-bottom: 4px;">Top 15%</div>
+                    <div style="font-size: 12px; color: #666;">#142 of ~1,200 Shopify jewelry brands</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div style="text-align: center; padding: 40px 0; font-size: 13px; color: #999;">
+            <p style="margin-bottom: 8px;">✨ Marklo Competitive Intelligence Report</p>
+            <p>Data captured through March 30, 2026 | Next update April 6, 2026</p>
+        </div>
+
+    </div>
+
+    <script>
+        function downloadAsPDF() {
+            var btn = document.getElementById('downloadPdfBtn');
+            var bar = document.getElementById('pdfDownloadBar');
+            var container = document.querySelector('.container');
+            btn.classList.add('downloading');
+            btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> Generating PDF…';
+            bar.style.display = 'none';
+            html2pdf().set({
+                margin: [10, 8, 10, 8],
+                filename: 'Marklo-Competitive-Intel-Mar24-30-2026.pdf',
+                image: { type: 'jpeg', quality: 0.95 },
+                html2canvas: { scale: 2, useCORS: true, letterRendering: true, scrollY: 0, windowWidth: 960 },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+                pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+            }).from(container).save().then(function() {
+                bar.style.display = 'flex';
+                btn.classList.remove('downloading');
+                btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> PDF Downloaded!';
+                setTimeout(function() { btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download as PDF'; }, 3000);
+            });
+        }
+    </script>
+</body>
+</html>

@@ -65,18 +65,16 @@
         h4 {
             font-size: 13px;
             font-weight: 600;
-            text-transform: uppercase;
+            text-transform: none
             color: #666;
             margin-bottom: 12px;
-            letter-spacing: 0.5px;
         }
 
         .label {
             font-size: 12px;
             font-weight: 600;
-            text-transform: uppercase;
+            text-transform: none
             color: #999;
-            letter-spacing: 0.5px;
         }
 
         .meta-info {
@@ -108,7 +106,7 @@
         }
 
         .ai-cta {
-            color: #0D9488;
+            color: #6B9C78;
             text-decoration: none;
             font-weight: 600;
             font-size: 14px;
@@ -151,11 +149,11 @@
         }
 
         .kpi-change.positive {
-            color: #0D9488;
+            color: #6B9C78;
         }
 
         .kpi-change.negative {
-            color: #DC2626;
+            color: #8B6EA3;
         }
 
         /* Achievement Badges */
@@ -183,8 +181,7 @@
             font-size: 12px;
             font-weight: 700;
             color: #41342A;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
+            text-transform: none
         }
 
         .badge-subtitle {
@@ -207,7 +204,6 @@
             font-size: 22px;
             font-weight: 700;
             margin-bottom: 8px;
-            letter-spacing: -0.5px;
         }
 
         .shareable-metric {
@@ -219,8 +215,7 @@
         .shareable-branding {
             font-size: 12px;
             font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            text-transform: none
             margin-bottom: 20px;
             opacity: 0.85;
         }
@@ -257,7 +252,6 @@
             border-radius: 12px 12px 0 0;
             font-size: 18px;
             font-weight: 700;
-            letter-spacing: -0.3px;
         }
 
         .win-pills {
@@ -286,9 +280,9 @@
         }
 
         .win-pill.alert {
-            background: rgba(220,38,38,0.15);
-            border-color: #DC2626;
-            color: #DC2626;
+            background: rgba(139,110,163,0.15);
+            border-color: #8B6EA3;
+            color: #8B6EA3;
         }
 
         .section-title {
@@ -315,30 +309,29 @@
         }
 
         .matrix-quadrant.urgent {
-            border-color: #DC2626;
+            border-color: #8B6EA3;
             background: #FEF2F2;
         }
 
         .matrix-quadrant.healthy {
-            border-color: #0D9488;
-            background: #F0FDF4;
+            border-color: #6B9C78;
+            background: rgba(149,192,160,0.1);
         }
 
         .matrix-label {
             font-size: 12px;
             font-weight: 700;
-            text-transform: uppercase;
+            text-transform: none
             color: #666;
             margin-bottom: 12px;
-            letter-spacing: 0.3px;
         }
 
         .matrix-quadrant.urgent .matrix-label {
-            color: #DC2626;
+            color: #8B6EA3;
         }
 
         .matrix-quadrant.healthy .matrix-label {
-            color: #0D9488;
+            color: #6B9C78;
         }
 
         .matrix-items {
@@ -353,11 +346,11 @@
             border-radius: 6px;
             font-size: 12px;
             font-weight: 500;
-            border-left: 3px solid #0D9488;
+            border-left: 3px solid #6B9C78;
         }
 
         .matrix-item.urgent {
-            border-left-color: #DC2626;
+            border-left-color: #8B6EA3;
         }
 
         .matrix-item-name {
@@ -458,7 +451,7 @@
 
         .alert-badge {
             background: #FEF2F2;
-            color: #DC2626;
+            color: #8B6EA3;
             padding: 4px 8px;
             border-radius: 4px;
             font-size: 11px;
@@ -466,8 +459,8 @@
         }
 
         .success-badge {
-            background: #F0FDF4;
-            color: #0D9488;
+            background: rgba(149,192,160,0.1);
+            color: #6B9C78;
             padding: 4px 8px;
             border-radius: 4px;
             font-size: 11px;
@@ -525,8 +518,7 @@
             color: #666;
             border-bottom: 2px solid #E5E7EB;
             font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
+            text-transform: none
         }
 
         .data-table td {
@@ -550,16 +542,55 @@
 
         /* Download as PDF button */
         .pdf-download-bar { display: flex; justify-content: flex-end; align-items: center; gap: 12px; margin-bottom: 12px; }
-        .pdf-download-btn { display: inline-flex; align-items: center; gap: 8px; background: #41342A; color: #F6F5F3; border: none; padding: 10px 20px; border-radius: 10px; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s ease; letter-spacing: 0.2px; }
         .pdf-download-btn:hover { background: #57719B; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(87, 113, 155, 0.3); }
         .pdf-download-btn:active { transform: translateY(0); }
         .pdf-download-btn.downloading { opacity: 0.7; pointer-events: none; }
         @media print { .pdf-download-bar { display: none !important; } body { padding: 0; background: #fff; } .container { max-width: 100%; } }
 
-    </style>
+    
+        /* -- In-Report Action Bar -- */
+        .report-action-bar {
+            display: flex; align-items: center; justify-content: space-between;
+            background: white; border: 1px solid #EDE8E2; border-radius: 12px;
+            padding: 12px 20px; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        }
+        .action-bar-left { display: flex; align-items: center; gap: 6px; }
+        .action-bar-left a { font-size: 12px; color: #83766B; text-decoration: none; }
+        .action-bar-left a:hover { color: #41342A; }
+        .action-bar-left .sep { color: #EDE8E2; font-size: 10px; }
+        .action-bar-right { display: flex; align-items: center; gap: 8px; }
+        .action-btn {
+            display: inline-flex; align-items: center; gap: 5px;
+            padding: 7px 14px; border-radius: 8px; font-size: 12px; font-weight: 500;
+            font-family: inherit; cursor: pointer; transition: all 0.15s; white-space: nowrap;
+        }
+        .action-btn-outline { background: transparent; border: 1.5px solid #EDE8E2; color: #41342A; }
+        .action-btn-outline:hover { border-color: #B0CEFF; }
+        .action-btn-filled { background: #41342A; border: 1.5px solid #41342A; color: #F5F0EB; }
+        .action-btn-filled:hover { background: #5A4F44; border-color: #5A4F44; }
+        .action-btn svg { flex-shrink: 0; }
+
+   </style>
 </head>
 <body>
     <div class="container">
+
+        <!-- In-Report Action Bar -->
+        <div class="report-action-bar">
+            <div class="action-bar-left">
+                <a href="index.html">Reports Library</a>
+                <span class="sep">/</span>
+                <a href="#" style="color:#41342A;font-weight:500;">Discount & Promotion Health</a>
+            </div>
+            <div class="action-bar-right">
+                <button class="action-btn action-btn-outline"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 3h8M2 6h8M2 9h5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>Customize</button>
+                <button class="action-btn action-btn-outline"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M5 7l2-2M4.5 5.5L3 7a2.12 2.12 0 003 3l1.5-1.5M7.5 6.5L9 5a2.12 2.12 0 00-3-3L4.5 3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>Share</button>
+                <button class="action-btn action-btn-outline"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v7M3 5l3 3 3-3M2 10h8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>PDF</button>
+                <button class="action-btn action-btn-outline"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 7l10-4-3.5 8-2-3.5L2 7z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Send</button>
+                <button class="action-btn action-btn-filled"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v2M6 9v2M1 6h2M9 6h2M2.1 2.1l1.4 1.4M8.5 8.5l1.4 1.4M2.1 9.9l1.4-1.4M8.5 3.5l1.4-1.4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>Schedule</button>
+            </div>
+        </div>
+
         <!-- Download as PDF -->
         <div class="pdf-download-bar" id="pdfDownloadBar">
             <button class="pdf-download-btn" id="downloadPdfBtn" onclick="downloadAsPDF()">
@@ -800,8 +831,8 @@
                 <text x="85" y="45" text-anchor="end" font-size="11" fill="#999">100%</text>
 
                 <!-- Target line -->
-                <line x1="100" y1="80" x2="760" y2="80" stroke="#0D9488" stroke-width="2" stroke-dasharray="4,4"/>
-                <text x="765" y="85" font-size="10" fill="#0D9488" font-weight="600">Target: 65%</text>
+                <line x1="100" y1="80" x2="760" y2="80" stroke="#6B9C78" stroke-width="2" stroke-dasharray="4,4"/>
+                <text x="765" y="85" font-size="10" fill="#6B9C78" font-weight="600">Target: 65%</text>
             </svg>
         </div>
 
@@ -824,7 +855,7 @@
 
                 <!-- Bars (WOH buckets) -->
                 <!-- 0-7 days: 16 units -->
-                <rect x="130" y="168" width="60" height="52" fill="#0D9488" rx="3"/>
+                <rect x="130" y="168" width="60" height="52" fill="#6B9C78" rx="3"/>
                 <text x="160" y="155" text-anchor="middle" font-size="12" font-weight="700" fill="#1A1A1A">16</text>
 
                 <!-- 7-14 days: 42 units -->
@@ -844,8 +875,8 @@
                 <text x="480" y="184" text-anchor="middle" font-size="12" font-weight="700" fill="#1A1A1A">6</text>
 
                 <!-- 35+ days: 2 units -->
-                <rect x="530" y="210" width="60" height="10" fill="#DC2626" rx="3"/>
-                <text x="560" y="197" text-anchor="middle" font-size="11" font-weight="700" fill="#DC2626">2</text>
+                <rect x="530" y="210" width="60" height="10" fill="#8B6EA3" rx="3"/>
+                <text x="560" y="197" text-anchor="middle" font-size="11" font-weight="700" fill="#8B6EA3">2</text>
 
                 <!-- X labels -->
                 <text x="160" y="250" text-anchor="middle" font-size="11" fill="#666">0–7</text>
@@ -864,8 +895,8 @@
                 <text x="85" y="64" text-anchor="end" font-size="11" fill="#999">80</text>
 
                 <!-- Sweet spot annotation -->
-                <rect x="285" y="35" width="70" height="2" fill="#0D9488"/>
-                <text x="395" y="32" font-size="10" fill="#0D9488" font-weight="600">Optimal Zone</text>
+                <rect x="285" y="35" width="70" height="2" fill="#6B9C78"/>
+                <text x="395" y="32" font-size="10" fill="#6B9C78" font-weight="600">Optimal Zone</text>
             </svg>
         </div>
 
@@ -1167,13 +1198,13 @@
         <div class="card">
             <h2 class="section-title">Performance in Context</h2>
             <div class="grid-3col">
-                <div style="background: #F0FDF4; border: 1px solid #0D9488; border-radius: 8px; padding: 20px; text-align: center;">
-                    <div style="font-size: 28px; font-weight: 700; color: #0D9488; margin-bottom: 8px;">92nd</div>
+                <div style="background: rgba(149,192,160,0.1); border: 1px solid #6B9C78; border-radius: 8px; padding: 20px; text-align: center;">
+                    <div style="font-size: 28px; font-weight: 700; color: #6B9C78; margin-bottom: 8px;">92nd</div>
                     <div style="font-size: 12px; color: #666; font-weight: 600;">Inventory Health Percentile</div>
                     <div style="font-size: 11px; color: #999; margin-top: 6px;">vs all Shopify jewelry brands</div>
                 </div>
-                <div style="background: #FEF2F2; border: 1px solid #DC2626; border-radius: 8px; padding: 20px; text-align: center;">
-                    <div style="font-size: 28px; font-weight: 700; color: #DC2626; margin-bottom: 8px;">8.4%</div>
+                <div style="background: #FEF2F2; border: 1px solid #8B6EA3; border-radius: 8px; padding: 20px; text-align: center;">
+                    <div style="font-size: 28px; font-weight: 700; color: #8B6EA3; margin-bottom: 8px;">8.4%</div>
                     <div style="font-size: 12px; color: #666; font-weight: 600;">Dead Stock Rate</div>
                     <div style="font-size: 11px; color: #999; margin-top: 6px;">Industry avg: 12–15%</div>
                 </div>
@@ -1188,7 +1219,7 @@
         <!-- Report Footer -->
         <div class="report-footer">
             <p>Report generated on March 31, 2026 at 2:14 PM. Data reflects inventory as of 11:59 PM EDT on March 30, 2026.</p>
-            <p style="margin-top: 8px;">Powered by Marklo AI — Advanced analytics for Shopify jewelry brands. <a href="#" style="color: #0D9488; text-decoration: none;">Schedule a follow-up analysis →</a></p>
+            <p style="margin-top: 8px;">Powered by Marklo AI — Advanced analytics for Shopify jewelry brands. <a href="#" style="color: #6B9C78; text-decoration: none;">Schedule a follow-up analysis →</a></p>
         </div>
 
     </div>

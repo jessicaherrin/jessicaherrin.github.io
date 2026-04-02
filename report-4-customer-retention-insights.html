@@ -65,9 +65,8 @@
         .label {
             font-size: 12px;
             font-weight: 600;
-            text-transform: uppercase;
+            text-transform: none
             color: #999;
-            letter-spacing: 0.5px;
         }
 
         .meta-info {
@@ -99,7 +98,7 @@
         }
 
         .ai-cta {
-            color: #0D9488;
+            color: #6B9C78;
             text-decoration: none;
             font-weight: 600;
             font-size: 14px;
@@ -142,11 +141,11 @@
         }
 
         .kpi-change.positive {
-            color: #0D9488;
+            color: #6B9C78;
         }
 
         .kpi-change.negative {
-            color: #DC2626;
+            color: #8B6EA3;
         }
 
         /* Chart styles */
@@ -189,14 +188,14 @@
         }
 
         .heatmap-cell {
-            background: #0D9488 !important;
+            background: #6B9C78 !important;
             color: white !important;
             font-weight: 700;
         }
 
         .heatmap-cell.low {
-            background: #FEE2E2 !important;
-            color: #DC2626 !important;
+            background: rgba(139,110,163,0.12) !important;
+            color: #8B6EA3 !important;
         }
 
         .heatmap-cell.medium {
@@ -221,7 +220,7 @@
             background: linear-gradient(135deg, #FAFAFA 0%, #F5F5F5 100%);
             border-radius: 8px;
             padding: 20px;
-            border-left: 4px solid #0D9488;
+            border-left: 4px solid #6B9C78;
         }
 
         .rfm-card.loyal {
@@ -233,7 +232,7 @@
         }
 
         .rfm-card.lost {
-            border-left-color: #DC2626;
+            border-left-color: #8B6EA3;
         }
 
         .rfm-title {
@@ -266,7 +265,7 @@
 
         .rfm-bar-fill {
             height: 100%;
-            background: #0D9488;
+            background: #6B9C78;
             border-radius: 2px;
         }
 
@@ -344,7 +343,7 @@
         .product-value {
             font-size: 14px;
             font-weight: 700;
-            color: #0D9488;
+            color: #6B9C78;
         }
 
         /* Progress bars */
@@ -491,7 +490,6 @@
             border-radius: 12px 12px 0 0;
             font-size: 18px;
             font-weight: 700;
-            letter-spacing: -0.3px;
         }
 
         .win-pills {
@@ -616,8 +614,8 @@
         /* Percentile badges */
         .percentile-badge {
             display: inline-block;
-            background: #EDE9FE;
-            color: #6D28D9;
+            background: rgba(177,151,199,0.12);
+            color: #b197c7;
             padding: 4px 8px;
             border-radius: 4px;
             font-size: 10px;
@@ -668,15 +666,54 @@
 
         /* Download as PDF button */
         .pdf-download-bar { display: flex; justify-content: flex-end; align-items: center; gap: 12px; margin-bottom: 12px; }
-        .pdf-download-btn { display: inline-flex; align-items: center; gap: 8px; background: #41342A; color: #F6F5F3; border: none; padding: 10px 20px; border-radius: 10px; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s ease; letter-spacing: 0.2px; }
         .pdf-download-btn:hover { background: #57719B; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(87, 113, 155, 0.3); }
         .pdf-download-btn:active { transform: translateY(0); }
         .pdf-download-btn.downloading { opacity: 0.7; pointer-events: none; }
         @media print { .pdf-download-bar { display: none !important; } body { padding: 0; background: #fff; } .container { max-width: 100%; } }
-    </style>
+    
+        /* -- In-Report Action Bar -- */
+        .report-action-bar {
+            display: flex; align-items: center; justify-content: space-between;
+            background: white; border: 1px solid #EDE8E2; border-radius: 12px;
+            padding: 12px 20px; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        }
+        .action-bar-left { display: flex; align-items: center; gap: 6px; }
+        .action-bar-left a { font-size: 12px; color: #83766B; text-decoration: none; }
+        .action-bar-left a:hover { color: #41342A; }
+        .action-bar-left .sep { color: #EDE8E2; font-size: 10px; }
+        .action-bar-right { display: flex; align-items: center; gap: 8px; }
+        .action-btn {
+            display: inline-flex; align-items: center; gap: 5px;
+            padding: 7px 14px; border-radius: 8px; font-size: 12px; font-weight: 500;
+            font-family: inherit; cursor: pointer; transition: all 0.15s; white-space: nowrap;
+        }
+        .action-btn-outline { background: transparent; border: 1.5px solid #EDE8E2; color: #41342A; }
+        .action-btn-outline:hover { border-color: #B0CEFF; }
+        .action-btn-filled { background: #41342A; border: 1.5px solid #41342A; color: #F5F0EB; }
+        .action-btn-filled:hover { background: #5A4F44; border-color: #5A4F44; }
+        .action-btn svg { flex-shrink: 0; }
+
+   </style>
 </head>
 <body>
     <div class="container">
+
+        <!-- In-Report Action Bar -->
+        <div class="report-action-bar">
+            <div class="action-bar-left">
+                <a href="index.html">Reports Library</a>
+                <span class="sep">/</span>
+                <a href="#" style="color:#41342A;font-weight:500;">Customer Intelligence Report</a>
+            </div>
+            <div class="action-bar-right">
+                <button class="action-btn action-btn-outline"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 3h8M2 6h8M2 9h5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>Customize</button>
+                <button class="action-btn action-btn-outline"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M5 7l2-2M4.5 5.5L3 7a2.12 2.12 0 003 3l1.5-1.5M7.5 6.5L9 5a2.12 2.12 0 00-3-3L4.5 3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>Share</button>
+                <button class="action-btn action-btn-outline"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v7M3 5l3 3 3-3M2 10h8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>PDF</button>
+                <button class="action-btn action-btn-outline"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 7l10-4-3.5 8-2-3.5L2 7z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Send</button>
+                <button class="action-btn action-btn-filled"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v2M6 9v2M1 6h2M9 6h2M2.1 2.1l1.4 1.4M8.5 8.5l1.4 1.4M2.1 9.9l1.4-1.4M8.5 3.5l1.4-1.4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>Schedule</button>
+            </div>
+        </div>
+
         <!-- Download as PDF -->
         <div class="pdf-download-bar" id="pdfDownloadBar">
             <button class="pdf-download-btn" id="downloadPdfBtn" onclick="downloadAsPDF()">
@@ -712,7 +749,7 @@
         <!-- Achievement Badges -->
         <div class="card" style="background: linear-gradient(135deg, #F6F5F3 0%, #E4E2DF 100%); border: 1px solid #CFB4A4;">
             <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">
-                <h2 class="section-title" style="margin-bottom: 0;">🏆 Retention Heroes</h2>
+                <h2 class="section-title" style="margin-bottom: 0;">Retention Heroes</h2>
                 <span style="font-size: 12px; color: #41342A; font-weight: 500;">4 achievements unlocked</span>
             </div>
             <div class="achievement-grid">
@@ -907,7 +944,7 @@
                     <div class="rfm-count">412</div>
                     <div class="rfm-revenue">$2,847 avg LTV</div>
                     <p style="font-size: 12px; color: #666; margin-bottom: 8px;">Your best customers. High frequency, high spend, recent activity.</p>
-                    <div style="font-size: 11px; color: #0D9488; font-weight: 600;">→ VIP loyalty program</div>
+                    <div style="font-size: 11px; color: #6B9C78; font-weight: 600;">→ VIP loyalty program</div>
                     <div class="rfm-bar">
                         <div class="rfm-bar-fill" style="width: 100%;"></div>
                     </div>
@@ -937,9 +974,9 @@
                     <div class="rfm-count">1,858</div>
                     <div class="rfm-revenue">$284 avg LTV</div>
                     <p style="font-size: 12px; color: #666; margin-bottom: 8px;">Haven't purchased in 180+ days. Low lifetime value or churned.</p>
-                    <div style="font-size: 11px; color: #DC2626; font-weight: 600;">→ Re-engagement</div>
+                    <div style="font-size: 11px; color: #8B6EA3; font-weight: 600;">→ Re-engagement</div>
                     <div class="rfm-bar">
-                        <div class="rfm-bar-fill" style="width: 30%; background: #DC2626;"></div>
+                        <div class="rfm-bar-fill" style="width: 30%; background: #8B6EA3;"></div>
                     </div>
                 </div>
             </div>
@@ -1026,7 +1063,7 @@
                         <div class="progress-group">
                             <div class="progress-label">
                                 <span>Email</span>
-                                <span style="color: #0D9488; font-weight: 700;">$1,247</span>
+                                <span style="color: #6B9C78; font-weight: 700;">$1,247</span>
                             </div>
                             <div class="progress-bar">
                                 <div class="progress-fill" style="width: 100%;"></div>
@@ -1086,11 +1123,11 @@
 
                             <!-- LTV Trend Line -->
                             <polyline points="60,180 110,160 160,140 210,120 260,100 310,80"
-                                      fill="none" stroke="#0D9488" stroke-width="3"/>
+                                      fill="none" stroke="#6B9C78" stroke-width="3"/>
 
                             <!-- Fill under line -->
                             <polygon points="60,180 110,160 160,140 210,120 260,100 310,80 310,220 60,220"
-                                     fill="#0D9488" fill-opacity="0.08"/>
+                                     fill="#6B9C78" fill-opacity="0.08"/>
 
                             <!-- Month labels -->
                             <text x="60" y="240" font-size="11" fill="#999" text-anchor="middle">Oct</text>
@@ -1114,7 +1151,7 @@
                     <h3>Time Between Purchases</h3>
                     <div style="margin-top: 16px;">
                         <div class="timeline-item">
-                            <div class="timeline-marker" style="background: #0D9488;">0-30 days</div>
+                            <div class="timeline-marker" style="background: #6B9C78;">0-30 days</div>
                             <div class="timeline-content">
                                 <div class="timeline-label">28% of repeat purchases</div>
                                 <div class="timeline-value">Avg: 18 days • 1,204 customers</div>
@@ -1190,7 +1227,7 @@
                 <div style="background: #FAFAFA; border-radius: 8px; padding: 16px;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
                         <h3>March Win-Back Campaign</h3>
-                        <span style="background: #F0FDF4; color: #0D9488; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">Active</span>
+                        <span style="background: rgba(149,192,160,0.1); color: #6B9C78; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">Active</span>
                     </div>
                     <div class="grid-3col" style="margin-bottom: 12px;">
                         <div>
@@ -1200,7 +1237,7 @@
                         </div>
                         <div>
                             <div class="label">Re-Engaged</div>
-                            <div style="font-size: 18px; font-weight: 700; color: #0D9488; margin: 4px 0;">1,248</div>
+                            <div style="font-size: 18px; font-weight: 700; color: #6B9C78; margin: 4px 0;">1,248</div>
                             <div style="font-size: 11px; color: #666;">14.8% re-engagement</div>
                         </div>
                         <div>
@@ -1249,8 +1286,8 @@
                     <div style="background: linear-gradient(135deg, #E4E2DF 0%, #F6F5F3 100%); border-radius: 12px; padding: 24px; text-align: center; margin-top: 16px;">
                         <div style="font-size: 48px; font-weight: 800; color: #41342A; margin-bottom: 8px;">72</div>
                         <div style="font-size: 14px; color: #666; margin-bottom: 12px;">Net Promoter Score</div>
-                        <div style="font-size: 12px; color: #0D9488; font-weight: 600;">↗ +8 points YoY</div>
-                        <div class="percentile-badge" style="margin-top: 12px; background: #EDE9FE; color: #6D28D9;">Top 10% jewelry brands</div>
+                        <div style="font-size: 12px; color: #6B9C78; font-weight: 600;">↗ +8 points YoY</div>
+                        <div class="percentile-badge" style="margin-top: 12px; background: rgba(177,151,199,0.12); color: #b197c7;">Top 10% jewelry brands</div>
                     </div>
                 </div>
                 <div>
@@ -1275,7 +1312,7 @@
                         <div style="margin-bottom: 16px;">
                             <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
                                 <span style="font-weight: 600;">5-Star %</span>
-                                <span style="font-size: 14px; font-weight: 700; color: #0D9488;">78%</span>
+                                <span style="font-size: 14px; font-weight: 700; color: #6B9C78;">78%</span>
                             </div>
                             <div class="progress-bar">
                                 <div class="progress-fill" style="width: 78%;"></div>

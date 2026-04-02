@@ -64,9 +64,8 @@
         .label {
             font-size: 12px;
             font-weight: 600;
-            text-transform: uppercase;
+            text-transform: none
             color: #999;
-            letter-spacing: 0.5px;
         }
 
         .meta-info {
@@ -83,7 +82,6 @@
             border-radius: 12px 12px 0 0;
             font-size: 18px;
             font-weight: 700;
-            letter-spacing: -0.3px;
         }
 
         .win-pills {
@@ -139,7 +137,7 @@
         }
 
         .ai-cta {
-            color: #0D9488;
+            color: #6B9C78;
             text-decoration: none;
             font-weight: 600;
             font-size: 14px;
@@ -176,7 +174,7 @@
             font-size: 12px;
             font-weight: 600;
             color: #666;
-            text-transform: uppercase;
+            text-transform: none
         }
 
         .percentile-badge {
@@ -259,13 +257,13 @@
         }
 
         .badge-positive {
-            background: rgba(13,148,136,0.15);
-            color: #0D9488;
+            background: rgba(107,156,120,0.15);
+            color: #6B9C78;
         }
 
         .badge-negative {
-            background: rgba(220,38,38,0.15);
-            color: #DC2626;
+            background: rgba(139,110,163,0.15);
+            color: #8B6EA3;
         }
 
         .badge-neutral {
@@ -499,15 +497,54 @@
 
         /* Download as PDF button */
         .pdf-download-bar { display: flex; justify-content: flex-end; align-items: center; gap: 12px; margin-bottom: 12px; }
-        .pdf-download-btn { display: inline-flex; align-items: center; gap: 8px; background: #41342A; color: #F6F5F3; border: none; padding: 10px 20px; border-radius: 10px; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s ease; letter-spacing: 0.2px; }
         .pdf-download-btn:hover { background: #57719B; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(87, 113, 155, 0.3); }
         .pdf-download-btn:active { transform: translateY(0); }
         .pdf-download-btn.downloading { opacity: 0.7; pointer-events: none; }
         @media print { .pdf-download-bar { display: none !important; } body { padding: 0; background: #fff; } .container { max-width: 100%; } }
-    </style>
+    
+        /* -- In-Report Action Bar -- */
+        .report-action-bar {
+            display: flex; align-items: center; justify-content: space-between;
+            background: white; border: 1px solid #EDE8E2; border-radius: 12px;
+            padding: 12px 20px; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        }
+        .action-bar-left { display: flex; align-items: center; gap: 6px; }
+        .action-bar-left a { font-size: 12px; color: #83766B; text-decoration: none; }
+        .action-bar-left a:hover { color: #41342A; }
+        .action-bar-left .sep { color: #EDE8E2; font-size: 10px; }
+        .action-bar-right { display: flex; align-items: center; gap: 8px; }
+        .action-btn {
+            display: inline-flex; align-items: center; gap: 5px;
+            padding: 7px 14px; border-radius: 8px; font-size: 12px; font-weight: 500;
+            font-family: inherit; cursor: pointer; transition: all 0.15s; white-space: nowrap;
+        }
+        .action-btn-outline { background: transparent; border: 1.5px solid #EDE8E2; color: #41342A; }
+        .action-btn-outline:hover { border-color: #B0CEFF; }
+        .action-btn-filled { background: #41342A; border: 1.5px solid #41342A; color: #F5F0EB; }
+        .action-btn-filled:hover { background: #5A4F44; border-color: #5A4F44; }
+        .action-btn svg { flex-shrink: 0; }
+
+   </style>
 </head>
 <body>
     <div class="container">
+
+        <!-- In-Report Action Bar -->
+        <div class="report-action-bar">
+            <div class="action-bar-left">
+                <a href="index.html">Reports Library</a>
+                <span class="sep">/</span>
+                <a href="#" style="color:#41342A;font-weight:500;">Competitive & Market Intel</a>
+            </div>
+            <div class="action-bar-right">
+                <button class="action-btn action-btn-outline"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 3h8M2 6h8M2 9h5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>Customize</button>
+                <button class="action-btn action-btn-outline"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M5 7l2-2M4.5 5.5L3 7a2.12 2.12 0 003 3l1.5-1.5M7.5 6.5L9 5a2.12 2.12 0 00-3-3L4.5 3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>Share</button>
+                <button class="action-btn action-btn-outline"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v7M3 5l3 3 3-3M2 10h8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>PDF</button>
+                <button class="action-btn action-btn-outline"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 7l10-4-3.5 8-2-3.5L2 7z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Send</button>
+                <button class="action-btn action-btn-filled"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v2M6 9v2M1 6h2M9 6h2M2.1 2.1l1.4 1.4M8.5 8.5l1.4 1.4M2.1 9.9l1.4-1.4M8.5 3.5l1.4-1.4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>Schedule</button>
+            </div>
+        </div>
+
         <!-- Download as PDF -->
         <div class="pdf-download-bar" id="pdfDownloadBar">
             <button class="pdf-download-btn" id="downloadPdfBtn" onclick="downloadAsPDF()">
@@ -561,7 +598,7 @@
         <!-- Achievement Badges Section -->
         <div class="card" style="background: linear-gradient(135deg, #F6F5F3 0%, #E4E2DF 100%); border: 1px solid #CFB4A4;">
             <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">
-                <h2 class="section-title" style="margin-bottom: 0;">🏅 Competitive Strengths</h2>
+                <h2 class="section-title" style="margin-bottom: 0;">Competitive Strengths</h2>
                 <span style="font-size: 12px; color: #41342A; font-weight: 500;">Your top 3 competitive advantages</span>
             </div>
             <div style="display: flex; gap: 16px; flex-wrap: wrap;">
@@ -585,7 +622,7 @@
 
         <!-- Market Position KPIs -->
         <div class="card">
-            <h2 class="section-title">📊 Market Position</h2>
+            <h2 class="section-title">Market Position</h2>
 
             <div class="percentile-badge">
                 ✨ Top 8% of Shopify jewelry brands in conversion rate — you're in elite company
@@ -595,12 +632,12 @@
                 <div class="kpi-card">
                     <div class="kpi-label">Category Rank</div>
                     <div class="kpi-value">142</div>
-                    <div style="font-size: 12px; color: #0D9488; font-weight: 600;">↑ 18 positions vs last month</div>
+                    <div style="font-size: 12px; color: #6B9C78; font-weight: 600;">↑ 18 positions vs last month</div>
                 </div>
                 <div class="kpi-card">
                     <div class="kpi-label">Estimated Market Share</div>
                     <div class="kpi-value">2.8%</div>
-                    <div style="font-size: 12px; color: #0D9488; font-weight: 600;">↑ 0.3% vs last month</div>
+                    <div style="font-size: 12px; color: #6B9C78; font-weight: 600;">↑ 0.3% vs last month</div>
                 </div>
                 <div class="kpi-card">
                     <div class="kpi-label">Price Position</div>
@@ -610,7 +647,7 @@
                 <div class="kpi-card">
                     <div class="kpi-label">Growth vs Category</div>
                     <div class="kpi-value">+12%</div>
-                    <div style="font-size: 12px; color: #0D9488; font-weight: 600;">Category: +4% YoY</div>
+                    <div style="font-size: 12px; color: #6B9C78; font-weight: 600;">Category: +4% YoY</div>
                 </div>
             </div>
 
@@ -625,7 +662,7 @@
 
         <!-- Industry Benchmark Comparison -->
         <div class="card">
-            <h2 class="section-title">📈 Industry Benchmark Comparison</h2>
+            <h2 class="section-title">Industry Benchmark Comparison</h2>
             <p style="font-size: 13px; color: #666; margin-bottom: 20px;">Your metrics vs Shopify jewelry category averages</p>
 
             <div class="comparison-row">
@@ -635,7 +672,7 @@
                     <span style="font-size: 12px; color: #666;">Your brand</span>
                 </div>
                 <div class="comparison-value">
-                    <span style="color: #0D9488;">↑ +133%</span><br>
+                    <span style="color: #6B9C78;">↑ +133%</span><br>
                     <span style="font-size: 12px; color: #666;">vs 1.8% avg</span>
                 </div>
             </div>
@@ -647,7 +684,7 @@
                     <span style="font-size: 12px; color: #666;">Your brand</span>
                 </div>
                 <div class="comparison-value">
-                    <span style="color: #0D9488;">↑ +18%</span><br>
+                    <span style="color: #6B9C78;">↑ +18%</span><br>
                     <span style="font-size: 12px; color: #666;">vs $121 avg</span>
                 </div>
             </div>
@@ -659,7 +696,7 @@
                     <span style="font-size: 12px; color: #666;">Your brand</span>
                 </div>
                 <div class="comparison-value">
-                    <span style="color: #0D9488;">↑ +64%</span><br>
+                    <span style="color: #6B9C78;">↑ +64%</span><br>
                     <span style="font-size: 12px; color: #666;">vs 25.8% avg</span>
                 </div>
             </div>
@@ -671,7 +708,7 @@
                     <span style="font-size: 12px; color: #666;">Your brand</span>
                 </div>
                 <div class="comparison-value">
-                    <span style="color: #0D9488;">↑ +87%</span><br>
+                    <span style="color: #6B9C78;">↑ +87%</span><br>
                     <span style="font-size: 12px; color: #666;">vs 4.6% avg</span>
                 </div>
             </div>
@@ -683,7 +720,7 @@
                     <span style="font-size: 12px; color: #666;">Your brand</span>
                 </div>
                 <div class="comparison-value">
-                    <span style="color: #0D9488;">↑ +40%</span><br>
+                    <span style="color: #6B9C78;">↑ +40%</span><br>
                     <span style="font-size: 12px; color: #666;">vs 20% avg</span>
                 </div>
             </div>
@@ -698,7 +735,7 @@
 
         <!-- Competitor Watch -->
         <div class="card">
-            <h2 class="section-title">🔎 Competitor Watch</h2>
+            <h2 class="section-title">Competitor Watch</h2>
             <p style="font-size: 13px; color: #666; margin-bottom: 20px;">Top 5 competitors & recent moves detected this week</p>
 
             <div class="competitor-card">
@@ -764,7 +801,7 @@
 
         <!-- Pricing Intelligence -->
         <div class="card">
-            <h2 class="section-title">💰 Pricing Intelligence</h2>
+            <h2 class="section-title">Pricing Intelligence</h2>
             <p style="font-size: 13px; color: #666; margin-bottom: 20px;">Your price positioning vs market for similar product categories</p>
 
             <div class="metric-row">
@@ -773,7 +810,7 @@
                     <div style="margin-top: 8px;">
                         <div style="font-size: 12px; margin-bottom: 4px;">Your Price: <strong>$89</strong></div>
                         <div style="font-size: 12px; color: #666;">Category Avg: $74</div>
-                        <div style="font-size: 11px; color: #0D9488; font-weight: 600; margin-top: 4px;">+20% Premium (justified by quality)</div>
+                        <div style="font-size: 11px; color: #6B9C78; font-weight: 600; margin-top: 4px;">+20% Premium (justified by quality)</div>
                     </div>
                 </div>
                 <div>
@@ -791,7 +828,7 @@
                     <div style="margin-top: 8px;">
                         <div style="font-size: 12px; margin-bottom: 4px;">Your Price: <strong>$67</strong></div>
                         <div style="font-size: 12px; color: #666;">Category Avg: $58</div>
-                        <div style="font-size: 11px; color: #0D9488; font-weight: 600; margin-top: 4px;">+15% Premium (steady demand)</div>
+                        <div style="font-size: 11px; color: #6B9C78; font-weight: 600; margin-top: 4px;">+15% Premium (steady demand)</div>
                     </div>
                 </div>
                 <div>
@@ -809,7 +846,7 @@
                     <div style="margin-top: 8px;">
                         <div style="font-size: 12px; margin-bottom: 4px;">Your Price: <strong>$132</strong></div>
                         <div style="font-size: 12px; color: #666;">Category Avg: $118</div>
-                        <div style="font-size: 11px; color: #0D9488; font-weight: 600; margin-top: 4px;">+12% Premium (strong conversion)</div>
+                        <div style="font-size: 11px; color: #6B9C78; font-weight: 600; margin-top: 4px;">+12% Premium (strong conversion)</div>
                     </div>
                 </div>
                 <div>
@@ -831,14 +868,14 @@
 
         <!-- Trending Products in Category -->
         <div class="card">
-            <h2 class="section-title">🔥 Trending Products This Week</h2>
+            <h2 class="section-title">Trending Products This Week</h2>
             <p style="font-size: 13px; color: #666; margin-bottom: 20px;">What's hot in Shopify jewelry this week (trending up 20%+ vs baseline)</p>
 
             <div class="trend-item">
                 <div class="trend-title">🌙 Moonstone Rings</div>
                 <div class="trend-data">
                     <strong>+58% search interest</strong> | Trending on TikTok | Avg price: $76 | Conversion: 3.8%<br>
-                    <span style="color: #0D9488; font-weight: 600;">✓ Opportunity: You don't have moonstone rings. Consider 3 SKUs for Q2 launch</span>
+                    <span style="color: #6B9C78; font-weight: 600;">✓ Opportunity: You don't have moonstone rings. Consider 3 SKUs for Q2 launch</span>
                 </div>
             </div>
 
@@ -846,7 +883,7 @@
                 <div class="trend-title">💎 Pearl & Diamond Combos</div>
                 <div class="trend-data">
                     <strong>+42% interest</strong> | Instagram Reels trending | Avg price: $128 | Conversion: 4.1%<br>
-                    <span style="color: #0D9488; font-weight: 600;">✓ Fit: You have similar products. Bundle these for 15% discount</span>
+                    <span style="color: #6B9C78; font-weight: 600;">✓ Fit: You have similar products. Bundle these for 15% discount</span>
                 </div>
             </div>
 
@@ -877,7 +914,7 @@
 
         <!-- SEO & Share of Voice -->
         <div class="card">
-            <h2 class="section-title">🔍 SEO & Share of Voice</h2>
+            <h2 class="section-title">SEO & Share of Voice</h2>
             <p style="font-size: 13px; color: #666; margin-bottom: 20px;">Your branded search trends & social mention volume</p>
 
             <div style="margin-bottom: 24px;">
@@ -898,11 +935,11 @@
                     <!-- Bars -->
                     <rect x="110" y="80" width="60" height="140" fill="#B0CEFF" rx="4"/>
                     <rect x="190" y="40" width="60" height="180" fill="#B0CEFF" rx="4"/>
-                    <rect x="270" y="60" width="60" height="160" fill="#0D9488" rx="4"/>
+                    <rect x="270" y="60" width="60" height="160" fill="#6B9C78" rx="4"/>
                     <rect x="350" y="100" width="60" height="120" fill="#83766B" rx="4"/>
                     <rect x="430" y="30" width="60" height="190" fill="#B0CEFF" rx="4"/>
                     <rect x="510" y="50" width="60" height="170" fill="#B0CEFF" rx="4"/>
-                    <rect x="590" y="20" width="60" height="200" fill="#0D9488" rx="4"/>
+                    <rect x="590" y="20" width="60" height="200" fill="#6B9C78" rx="4"/>
                     <rect x="670" y="40" width="60" height="180" fill="#B0CEFF" rx="4"/>
 
                     <!-- X-axis labels -->
@@ -918,7 +955,7 @@
                     <!-- Legend -->
                     <rect x="110" y="10" width="12" height="12" fill="#B0CEFF"/>
                     <text x="130" y="19" font-size="11" fill="#1A1A1A">Your Brand Searches</text>
-                    <rect x="340" y="10" width="12" height="12" fill="#0D9488"/>
+                    <rect x="340" y="10" width="12" height="12" fill="#6B9C78"/>
                     <text x="360" y="19" font-size="11" fill="#1A1A1A">Trending Weeks</text>
                 </svg>
             </div>
@@ -927,12 +964,12 @@
                 <div>
                     <div class="metric-label">Total Branded Searches (30 Days)</div>
                     <div style="font-size: 24px; font-weight: 700; color: #1A1A1A; margin-top: 8px;">4,284</div>
-                    <div style="font-size: 12px; color: #0D9488; font-weight: 600;">↑ +34% vs previous month</div>
+                    <div style="font-size: 12px; color: #6B9C78; font-weight: 600;">↑ +34% vs previous month</div>
                 </div>
                 <div>
                     <div class="metric-label">Social Mention Volume (30 Days)</div>
                     <div style="font-size: 24px; font-weight: 700; color: #1A1A1A; margin-top: 8px;">1,847</div>
-                    <div style="font-size: 12px; color: #0D9488; font-weight: 600;">↑ +28% vs previous month</div>
+                    <div style="font-size: 12px; color: #6B9C78; font-weight: 600;">↑ +28% vs previous month</div>
                 </div>
             </div>
 
@@ -973,7 +1010,7 @@
 
         <!-- Market Opportunity Alerts -->
         <div class="card">
-            <h2 class="section-title">🎯 Market Opportunity Alerts</h2>
+            <h2 class="section-title">Market Opportunity Alerts</h2>
             <p style="font-size: 13px; color: #666; margin-bottom: 20px;">AI-identified gaps and opportunities from competitive analysis</p>
 
             <div class="opportunity-alert">
@@ -1037,41 +1074,41 @@
 
         <!-- Percentile Context Badges -->
         <div class="card" style="background: linear-gradient(135deg, rgba(207,180,164,0.08), rgba(176,206,255,0.08));">
-            <h2 class="section-title">📊 Your Percentile Context</h2>
+            <h2 class="section-title">Your Percentile Context</h2>
 
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
-                <div style="background: white; border-radius: 8px; padding: 16px; border-left: 4px solid #0D9488;">
-                    <div style="font-size: 11px; color: #666; text-transform: uppercase; font-weight: 600; margin-bottom: 4px;">Conversion Rate Percentile</div>
+                <div style="background: white; border-radius: 8px; padding: 16px; border-left: 4px solid #6B9C78;">
+                    <div style="font-size: 11px; color: #666; text-transform: none font-weight: 600; margin-bottom: 4px;">Conversion Rate Percentile</div>
                     <div style="font-size: 24px; font-weight: 800; color: #1A1A1A; margin-bottom: 4px;">Top 8%</div>
                     <div style="font-size: 12px; color: #666;">Your 4.2% CR vs 1.8% category avg</div>
                 </div>
 
-                <div style="background: white; border-radius: 8px; padding: 16px; border-left: 4px solid #0D9488;">
-                    <div style="font-size: 11px; color: #666; text-transform: uppercase; font-weight: 600; margin-bottom: 4px;">AOV Percentile</div>
+                <div style="background: white; border-radius: 8px; padding: 16px; border-left: 4px solid #6B9C78;">
+                    <div style="font-size: 11px; color: #666; text-transform: none font-weight: 600; margin-bottom: 4px;">AOV Percentile</div>
                     <div style="font-size: 24px; font-weight: 800; color: #1A1A1A; margin-bottom: 4px;">Top 22%</div>
                     <div style="font-size: 12px; color: #666;">Your $143 AOV vs $121 category avg</div>
                 </div>
 
-                <div style="background: white; border-radius: 8px; padding: 16px; border-left: 4px solid #0D9488;">
-                    <div style="font-size: 11px; color: #666; text-transform: uppercase; font-weight: 600; margin-bottom: 4px;">Email Open Rate Percentile</div>
+                <div style="background: white; border-radius: 8px; padding: 16px; border-left: 4px solid #6B9C78;">
+                    <div style="font-size: 11px; color: #666; text-transform: none font-weight: 600; margin-bottom: 4px;">Email Open Rate Percentile</div>
                     <div style="font-size: 24px; font-weight: 800; color: #1A1A1A; margin-bottom: 4px;">Top 5%</div>
                     <div style="font-size: 12px; color: #666;">Your 42.3% open rate vs 25.8% avg</div>
                 </div>
 
-                <div style="background: white; border-radius: 8px; padding: 16px; border-left: 4px solid #0D9488;">
-                    <div style="font-size: 11px; color: #666; text-transform: uppercase; font-weight: 600; margin-bottom: 4px;">Repeat Purchase Rate Percentile</div>
+                <div style="background: white; border-radius: 8px; padding: 16px; border-left: 4px solid #6B9C78;">
+                    <div style="font-size: 11px; color: #666; text-transform: none font-weight: 600; margin-bottom: 4px;">Repeat Purchase Rate Percentile</div>
                     <div style="font-size: 24px; font-weight: 800; color: #1A1A1A; margin-bottom: 4px;">Top 15%</div>
                     <div style="font-size: 12px; color: #666;">Your 28% repeat rate vs 20% avg</div>
                 </div>
 
                 <div style="background: white; border-radius: 8px; padding: 16px; border-left: 4px solid #95B29A;">
-                    <div style="font-size: 11px; color: #666; text-transform: uppercase; font-weight: 600; margin-bottom: 4px;">Growth Rate Percentile</div>
+                    <div style="font-size: 11px; color: #666; text-transform: none font-weight: 600; margin-bottom: 4px;">Growth Rate Percentile</div>
                     <div style="font-size: 24px; font-weight: 800; color: #1A1A1A; margin-bottom: 4px;">Top 12%</div>
                     <div style="font-size: 12px; color: #666;">Your 12% YoY growth vs 4% avg</div>
                 </div>
 
                 <div style="background: white; border-radius: 8px; padding: 16px; border-left: 4px solid #DED29D;">
-                    <div style="font-size: 11px; color: #666; text-transform: uppercase; font-weight: 600; margin-bottom: 4px;">Market Rank Percentile</div>
+                    <div style="font-size: 11px; color: #666; text-transform: none font-weight: 600; margin-bottom: 4px;">Market Rank Percentile</div>
                     <div style="font-size: 24px; font-weight: 800; color: #1A1A1A; margin-bottom: 4px;">Top 15%</div>
                     <div style="font-size: 12px; color: #666;">#142 of ~1,200 Shopify jewelry brands</div>
                 </div>

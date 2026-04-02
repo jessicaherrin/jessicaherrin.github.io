@@ -8,12 +8,9 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', -apple-system, sans-serif; background: #F5F0EB; color: #41342A; min-height: 100vh; }
-
         /* Top nav removed — handled by Marklo app shell */
-
         /* ── Page Layout ── */
         .page { display: flex; min-height: 100vh; }
-
         /* ── Sidebar ── */
         .sidebar {
             width: 220px; padding: 28px 20px; border-right: 1px solid #EDE8E2;
@@ -40,10 +37,8 @@
             margin-left: auto; font-size: 11px; color: #B8AFA6;
             font-weight: 500;
         }
-
         /* ── Main Content ── */
         .main { flex: 1; padding: 28px 36px; overflow-y: auto; }
-
         /* ── Page Header ── */
         .page-header { margin-bottom: 28px; }
         .page-header h1 {
@@ -52,7 +47,6 @@
             margin-bottom: 6px;
         }
         .page-header p { font-size: 14px; color: #83766B; line-height: 1.5; }
-
         /* ── Search & Filters Bar ── */
         .filters-bar {
             display: flex; align-items: center; gap: 12px;
@@ -71,17 +65,19 @@
             font-family: 'Inter', sans-serif; background: transparent; width: 100%;
         }
         .search-box input::placeholder { color: #B8AFA6; }
-        .filter-pill {
+        .filter-dropdown {
             display: flex; align-items: center; gap: 6px;
             background: #fff; border: 1px solid #EDE8E2;
             border-radius: 10px; padding: 9px 14px; font-size: 13px;
-            color: #83766B; cursor: pointer; transition: all 0.15s;
-            white-space: nowrap;
+            color: #41342A; cursor: pointer; transition: all 0.15s;
+            white-space: nowrap; font-family: 'Inter', sans-serif;
+            font-weight: 500; appearance: none; -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%2383766B' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat; background-position: right 12px center;
+            padding-right: 32px;
         }
-        .filter-pill:hover { border-color: #B0CEFF; color: #41342A; }
-        .filter-pill.active { background: #41342A; color: #F5F0EB; border-color: #41342A; }
-        .filter-pill.active:hover { background: #5A4F44; border-color: #5A4F44; }
-
+        .filter-dropdown:hover { border-color: #B0CEFF; }
+        .filter-dropdown:focus { border-color: #B0CEFF; outline: none; }
         /* ── Spotlight Card ── */
         .spotlight {
             background: #fff; border-radius: 16px;
@@ -156,7 +152,6 @@
             .spotlight { flex-direction: column; }
             .spotlight-thumb { width: 100%; height: 200px; }
         }
-
         /* ── Section Headers ── */
         .section-header {
             display: flex; align-items: center; justify-content: space-between;
@@ -175,7 +170,6 @@
             font-weight: 500;
         }
         .section-header a:hover { color: #41342A; }
-
         /* ── Report Cards Grid ── */
         .cards-grid {
             display: grid;
@@ -194,7 +188,6 @@
             box-shadow: 0 12px 32px rgba(65,52,42,0.1);
             border-color: #B0CEFF;
         }
-
         /* Card Thumbnail */
         .card-thumb {
             height: 160px; position: relative; overflow: hidden;
@@ -211,7 +204,6 @@
         .thumb-customer { background: linear-gradient(145deg, #e0ddd4 0%, #d6d2c7 50%, #cdc9be 100%); }
         .thumb-inventory { background: linear-gradient(145deg, #d4dee0 0%, #c5d2d6 50%, #bccacd 100%); }
         .thumb-competitive { background: linear-gradient(145deg, #e0d8d4 0%, #d6cec7 50%, #cdc4be 100%); }
-
         /* Mini preview illustrations inside cards */
         .mini-chart {
             background: rgba(255,255,255,0.7);
@@ -236,17 +228,14 @@
         }
         .mini-kpi .val { font-size: 11px; font-weight: 700; color: #41342A; }
         .mini-kpi .lbl { font-size: 7px; color: #83766B; }
-
         /* Donut mini */
         .mini-donut-wrap { display: flex; align-items: center; gap: 12px; }
         .mini-legend { display: flex; flex-direction: column; gap: 3px; }
         .mini-legend-item { display: flex; align-items: center; gap: 4px; font-size: 8px; color: #83766B; }
         .mini-legend-dot { width: 6px; height: 6px; border-radius: 50%; }
-
         /* Heatmap mini */
         .mini-heatmap { display: grid; grid-template-columns: repeat(6, 1fr); gap: 3px; }
         .mini-heat-cell { height: 14px; border-radius: 3px; }
-
         /* Card Body */
         .card-body { padding: 18px 20px; flex: 1; display: flex; flex-direction: column; }
         .card-title-row { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 6px; }
@@ -275,7 +264,6 @@
             font-size: 10px; color: #B8AFA6; font-weight: 500;
             display: flex; align-items: center; gap: 4px;
         }
-
         /* V2 badge for upcoming reports */
         .card-badge-v2 {
             position: absolute; top: 12px; right: 12px;
@@ -288,7 +276,6 @@
             background: rgba(245,240,235,0.35);
             z-index: 1;
         }
-
         /* ── Card Activation Row ── */
         .card-activation {
             display: flex; align-items: center; justify-content: space-between;
@@ -315,7 +302,6 @@
             font-family: 'Inter', sans-serif;
         }
         .btn-configure:hover { background: #57493D; }
-
         /* ── Spotlight Activation Row ── */
         .spotlight-activation {
             display: flex; align-items: center; justify-content: space-between;
@@ -342,8 +328,65 @@
         .insight-remove:hover { background: rgba(139,110,163,0.12); color: #8B6EA3; }
         .insights-well ul { margin: 4px 0 0; padding-left: 16px; }
         .insights-helper { font-size: 11px; color: #B8AFA6; margin-top: 8px; }
-
-
+        /* ── Scorecard card thumb ── */
+        .thumb-scorecard { background: linear-gradient(145deg, #e0ddd4 0%, #d6d2c7 50%, #cdc9be 100%); }
+        /* ── Report Archive Panel ── */
+        .archive-section {
+            background: #fff; border-radius: 14px; border: 1px solid #EDE8E2;
+            margin-bottom: 36px; overflow: hidden;
+        }
+        .archive-header {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 16px 24px; border-bottom: 1px solid #EDE8E2; cursor: pointer;
+        }
+        .archive-header:hover { background: #FAFAF8; }
+        .archive-title { display: flex; align-items: center; gap: 10px; }
+        .archive-title h3 { font-size: 15px; font-weight: 600; color: #41342A; }
+        .archive-title .archive-count {
+            font-size: 11px; font-weight: 500; color: #83766B;
+            background: #F6F5F3; padding: 2px 8px; border-radius: 10px;
+        }
+        .archive-chevron { color: #83766B; transition: transform 0.2s; }
+        .archive-section.expanded .archive-chevron { transform: rotate(180deg); }
+        .archive-body { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+        .archive-section.expanded .archive-body { max-height: 600px; }
+        .archive-month-group { padding: 0 24px; }
+        .archive-month-label {
+            font-size: 11px; font-weight: 600; color: #83766B;
+            text-transform: uppercase; letter-spacing: 0.5px;
+            padding: 12px 0 8px; border-bottom: 1px solid #F0EBE5;
+        }
+        .archive-entry {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 10px 0; border-bottom: 1px solid #F6F5F3;
+        }
+        .archive-entry:last-child { border-bottom: none; }
+        .archive-entry-left { display: flex; align-items: center; gap: 12px; }
+        .archive-entry-icon {
+            width: 32px; height: 32px; border-radius: 8px; background: #F6F5F3;
+            display: flex; align-items: center; justify-content: center; font-size: 14px;
+        }
+        .archive-entry-title { font-size: 13px; font-weight: 500; color: #41342A; }
+        .archive-entry-meta { font-size: 11px; color: #83766B; }
+        .archive-entry-channels { display: flex; gap: 4px; }
+        .archive-channel-icon {
+            font-size: 10px; background: #F6F5F3; padding: 2px 6px;
+            border-radius: 4px; color: #83766B;
+        }
+        .btn-view-archive {
+            font-size: 11px; font-weight: 500; color: #57719B; background: rgba(176,206,255,0.15);
+            border: none; padding: 5px 12px; border-radius: 6px; cursor: pointer;
+            font-family: 'Inter', sans-serif; transition: all 0.15s;
+        }
+        .btn-view-archive:hover { background: rgba(176,206,255,0.3); }
+        /* View History button on cards */
+        .btn-history {
+            display: flex; align-items: center; gap: 4px;
+            font-size: 10px; font-weight: 500; color: #83766B; background: none;
+            border: 1px solid #EDE8E2; padding: 4px 10px; border-radius: 6px;
+            cursor: pointer; font-family: 'Inter', sans-serif; transition: all 0.15s;
+        }
+        .btn-history:hover { border-color: #B0CEFF; color: #57719B; }
         /* ── Configuration Modal ── */
         .modal-overlay {
             display: none; position: fixed; inset: 0;
@@ -379,7 +422,6 @@
             font-size: 11px; font-weight: 600; color: #83766B;
             letter-spacing: 0.3px; margin-bottom: 10px; display: block;
         }
-
         /* Frequency multi-select */
         .freq-grid { display: flex; gap: 8px; flex-wrap: wrap; }
         .freq-option {
@@ -401,7 +443,6 @@
         }
         .freq-text { font-size: 13px; font-weight: 500; color: #41342A; }
         .freq-sub { font-size: 10px; color: #83766B; margin-top: 1px; }
-
         /* Day/time selectors */
         .schedule-row {
             display: flex; align-items: center; gap: 10px;
@@ -416,7 +457,6 @@
         .schedule-row .freq-label {
             font-weight: 600; min-width: 70px; color: #83766B; font-size: 11px;
         }
-
         /* Delivery channels */
         .delivery-grid { display: flex; gap: 10px; }
         .delivery-option {
@@ -429,7 +469,6 @@
         .delivery-icon { font-size: 20px; margin-bottom: 6px; }
         .delivery-name { font-size: 12px; font-weight: 600; color: #41342A; }
         .delivery-desc { font-size: 10px; color: #83766B; margin-top: 2px; }
-
         /* Recipients */
         .recipients-input {
             width: 100%; border: 1.5px solid #EDE8E2; border-radius: 10px;
@@ -450,7 +489,6 @@
             line-height: 1; margin-left: 2px;
         }
         .chip-remove:hover { color: #8B6EA3; }
-
         /* Toggle */
         .toggle-row {
             display: flex; align-items: center; justify-content: space-between;
@@ -471,7 +509,6 @@
             box-shadow: 0 1px 3px rgba(0,0,0,0.15);
         }
         .toggle.on::after { left: 21px; }
-
         /* Modal footer */
         .modal-footer {
             padding: 16px 28px 24px; display: flex;
@@ -485,6 +522,64 @@
             font-family: 'Inter', sans-serif; transition: all 0.15s;
         }
         .btn-preview:hover { border-color: #41342A; color: #41342A; }
+        /* ── Preview & Send Overlay ── */
+        .preview-overlay {
+            display: none; position: fixed; inset: 0;
+            background: rgba(65,52,42,0.4); backdrop-filter: blur(4px);
+            z-index: 1100; align-items: center; justify-content: center;
+        }
+        .preview-overlay.open { display: flex; }
+        .preview-panel {
+            background: #fff; border-radius: 16px; width: 640px;
+            max-height: 90vh; overflow-y: auto;
+            box-shadow: 0 24px 64px rgba(65,52,42,0.2);
+        }
+        .preview-header {
+            padding: 24px 28px 16px; border-bottom: 1px solid #F0EBE5;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .preview-header h3 { font-size: 16px; font-weight: 700; color: #41342A; margin: 0; }
+        .preview-close { background: none; border: none; font-size: 20px; color: #B8AFA6; cursor: pointer; padding: 4px 8px; border-radius: 6px; }
+        .preview-close:hover { background: #F6F5F3; color: #41342A; }
+        .preview-body { padding: 24px 28px; }
+        .preview-report-meta {
+            display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
+            padding-bottom: 16px; border-bottom: 1px solid #F0EBE5;
+        }
+        .preview-report-icon {
+            width: 40px; height: 40px; border-radius: 10px; background: #F6F5F3;
+            display: flex; align-items: center; justify-content: center; font-size: 18px;
+        }
+        .preview-report-name { font-size: 14px; font-weight: 600; color: #41342A; }
+        .preview-report-detail { font-size: 12px; color: #83766B; margin-top: 2px; }
+        .preview-section-label {
+            display: flex; align-items: center; gap: 6px;
+            font-size: 13px; font-weight: 600; color: #41342A; margin-bottom: 12px;
+        }
+        .preview-section-label svg { flex-shrink: 0; }
+        .preview-section-sublabel { font-weight: 400; color: #83766B; font-size: 11px; margin-left: 4px; }
+        .preview-insights-toolbar {
+            display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;
+        }
+        .preview-footer {
+            padding: 16px 28px 24px; display: flex;
+            align-items: center; justify-content: space-between;
+            border-top: 1px solid #F0EBE5;
+        }
+        .btn-back-config {
+            background: none; border: 1.5px solid #EDE8E2;
+            padding: 10px 20px; border-radius: 10px; font-size: 13px;
+            font-weight: 500; color: #83766B; cursor: pointer;
+            font-family: 'Inter', sans-serif; transition: all 0.15s;
+        }
+        .btn-back-config:hover { border-color: #41342A; color: #41342A; }
+        .btn-send-now {
+            background: #41342A; color: #F5F0EB; border: none;
+            padding: 10px 24px; border-radius: 10px; font-size: 13px;
+            font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif;
+            transition: all 0.15s; display: flex; align-items: center; gap: 6px;
+        }
+        .btn-send-now:hover { background: #57493D; }
         .btn-activate {
             background: #41342A; color: #F5F0EB; border: none;
             padding: 10px 24px; border-radius: 10px; font-size: 13px;
@@ -492,7 +587,6 @@
             transition: all 0.15s;
         }
         .btn-activate:hover { background: #57493D; }
-
         /* ── Responsive ── */
         @media (max-width: 900px) {
             .sidebar { display: none; }
@@ -506,10 +600,8 @@
     </style>
 </head>
 <body>
-
 <!-- ── Page (nav handled by Marklo app shell) ── -->
 <div class="page">
-
     <!-- ── Sidebar ── -->
     <aside class="sidebar">
         <div class="sidebar-section">
@@ -528,7 +620,6 @@
                 Recent
             </a>
         </div>
-
         <div class="sidebar-section">
             <div class="sidebar-label">Categories</div>
             <a class="sidebar-item" href="#">
@@ -552,7 +643,6 @@
                 <span class="sidebar-count">1</span>
             </a>
         </div>
-
         <div class="sidebar-section">
             <div class="sidebar-label">Data Sources</div>
             <a class="sidebar-item" href="#">
@@ -569,28 +659,32 @@
             </a>
         </div>
     </aside>
-
     <!-- ── Main Content ── -->
     <div class="main">
-
         <!-- Page Header -->
         <div class="page-header">
             <h1>Reports Library</h1>
             <p>Automated weekly insights powered by your Shopify and Klaviyo data. Each report includes analysis and PDF export.</p>
         </div>
-
         <!-- Search & Filters -->
         <div class="filters-bar">
             <div class="search-box">
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="5" stroke="#B8AFA6" stroke-width="1.5"/><path d="M10.5 10.5L15 15" stroke="#B8AFA6" stroke-width="1.5" stroke-linecap="round"/></svg>
                 <input type="text" placeholder="Search reports...">
             </div>
-            <div class="filter-pill active">All</div>
-            <div class="filter-pill">Weekly</div>
-            <div class="filter-pill">Monthly</div>
-            <div class="filter-pill">Auto-triggered</div>
+            <select class="filter-dropdown">
+                <option value="all">All Topics</option>
+                <option value="revenue">Revenue & Sales</option>
+                <option value="campaign">Campaign & Email</option>
+                <option value="product">Product & Inventory</option>
+                <option value="customer">Customer & Retention</option>
+                <option value="competitive">Competitive & Market</option>
+            </select>
         </div>
-
+        <!-- Marketing Costs Info Callout -->
+        <div style="background: rgba(139,110,163,0.08); border-left: 3px solid #8B6EA3; border-radius: 8px; padding: 16px 18px; margin-bottom: 28px; font-size: 13px; color: #41342A; line-height: 1.5;">
+            <strong style="color: #8B6EA3; font-weight: 600;">Marketing Cost Inputs</strong> — Configure your agency fees, platform costs, and content creation spend in <strong>Settings → Marketing Costs</strong> to unlock True ROI metrics across all reports.
+        </div>
         <!-- Spotlight Report -->
         <div class="spotlight">
             <div class="spotlight-thumb">
@@ -669,14 +763,11 @@
                 <a href="report-1-weekly-marketing-summary.html" style="display: block; text-align: center; padding: 12px; color: #83766B; font-size: 12px; text-decoration: none; border-top: 1px solid #EDE8E2; margin-top: 12px;">View Report →</a>
             </div>
         </div>
-
         <!-- ── Active Reports ── -->
         <div class="section-header">
             <h3>Active Reports <span class="count">5</span></h3>
         </div>
-
         <div class="cards-grid">
-
             <!-- Card 1: Marketing Summary -->
             <div class="report-card" data-report="weekly-marketing">
                 <a href="report-1-weekly-marketing-summary.html" style="text-decoration:none;color:inherit;">
@@ -703,7 +794,7 @@
                 </div>
                 <div class="card-body">
                     <div class="card-title">Marketing Summary</div>
-                    <div class="card-desc">Revenue trends, channel performance, campaign highlights, and an executive summary of your week.</div>
+                    <div class="card-desc">Revenue trends, channel performance, campaign highlights, and an executive summary of your week. Deep Links to Analytics & True Cost per Channel.</div>
                     <div class="card-footer">
                         <div class="card-tags">
                             <span class="card-tag shopify">Shopify</span>
@@ -726,13 +817,18 @@
                             <span class="card-freq-pill">M</span>
                         </div>
                     </div>
-                    <button class="btn-configure" onclick="openConfig('Marketing Summary', ['weekly','monthly'], ['email','slack'], true)">
-                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v2M6 9v2M1 6h2M9 6h2M2.1 2.1l1.4 1.4M8.5 8.5l1.4 1.4M2.1 9.9l1.4-1.4M8.5 3.5l1.4-1.4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
-                        Configure
-                    </button>
+                    <div style="display:flex;gap:6px;align-items:center;">
+                        <button class="btn-history" onclick="toggleArchive(event)">
+                            <svg width="10" height="10" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.3"/><path d="M6 3v3l2 1.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+                            History
+                        </button>
+                        <button class="btn-configure" onclick="openConfig('Marketing Summary', ['weekly','monthly'], ['email','slack'], true)">
+                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v2M6 9v2M1 6h2M9 6h2M2.1 2.1l1.4 1.4M8.5 8.5l1.4 1.4M2.1 9.9l1.4-1.4M8.5 3.5l1.4-1.4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+                            Configure
+                        </button>
+                    </div>
                 </div>
             </div>
-
             <!-- Card 2: Product & Merchandising -->
             <div class="report-card" data-report="product-merch">
                 <a href="report-2-product-merchandising.html" style="text-decoration:none;color:inherit;">
@@ -783,7 +879,6 @@
                     </button>
                 </div>
             </div>
-
             <!-- Card 3: Campaign & Promotion -->
             <div class="report-card" data-report="campaign-promo">
                 <a href="report-3-campaign-promo-deep-dive.html" style="text-decoration:none;color:inherit;">
@@ -833,7 +928,6 @@
                     </button>
                 </div>
             </div>
-
             <!-- Card 4: Customer & Retention -->
             <div class="report-card" data-report="customer-retention">
                 <a href="report-4-customer-retention-insights.html" style="text-decoration:none;color:inherit;">
@@ -897,7 +991,6 @@
                     </button>
                 </div>
             </div>
-
             <!-- Card 5: Inventory & Merchandising Health -->
             <div class="report-card" data-report="inventory">
                 <a href="report-5-inventory-merchandising.html" style="text-decoration:none;color:inherit;">
@@ -953,14 +1046,195 @@
                     </button>
                 </div>
             </div>
-
         </div>
-
+        <!-- ── Report Archive ── -->
+        <div class="archive-section" id="reportArchive">
+            <div class="archive-header" onclick="document.getElementById('reportArchive').classList.toggle('expanded')">
+                <div class="archive-title">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="#83766B" stroke-width="1.3"/><path d="M8 4v4l2.5 1.5" stroke="#83766B" stroke-width="1.3" stroke-linecap="round"/></svg>
+                    <h3>Report Archive</h3>
+                    <span class="archive-count">12 reports</span>
+                </div>
+                <svg class="archive-chevron" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.25l3.5 3.5 3.5-3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="archive-body">
+                <div class="archive-month-group">
+                    <div class="archive-month-label">March 2026</div>
+                    <div class="archive-entry">
+                        <div class="archive-entry-left">
+                            <div class="archive-entry-icon">📊</div>
+                            <div>
+                                <div class="archive-entry-title">Marketing Summary — Week of Mar 30</div>
+                                <div class="archive-entry-meta">Sent Mon Mar 30, 7:00am · 3 recipients</div>
+                            </div>
+                        </div>
+                        <div style="display:flex;align-items:center;gap:8px;">
+                            <div class="archive-entry-channels">
+                                <span class="archive-channel-icon">📧</span>
+                                <span class="archive-channel-icon">💬</span>
+                            </div>
+                            <a href="report-1-weekly-marketing-summary.html" class="btn-view-archive">View →</a>
+                        </div>
+                    </div>
+                    <div class="archive-entry">
+                        <div class="archive-entry-left">
+                            <div class="archive-entry-icon">📊</div>
+                            <div>
+                                <div class="archive-entry-title">Marketing Summary — Week of Mar 23</div>
+                                <div class="archive-entry-meta">Sent Mon Mar 23, 7:00am · 3 recipients</div>
+                            </div>
+                        </div>
+                        <div style="display:flex;align-items:center;gap:8px;">
+                            <div class="archive-entry-channels">
+                                <span class="archive-channel-icon">📧</span>
+                                <span class="archive-channel-icon">💬</span>
+                            </div>
+                            <button class="btn-view-archive">View →</button>
+                        </div>
+                    </div>
+                    <div class="archive-entry">
+                        <div class="archive-entry-left">
+                            <div class="archive-entry-icon">📊</div>
+                            <div>
+                                <div class="archive-entry-title">Marketing Summary — Week of Mar 16</div>
+                                <div class="archive-entry-meta">Sent Mon Mar 16, 7:00am · 3 recipients</div>
+                            </div>
+                        </div>
+                        <div style="display:flex;align-items:center;gap:8px;">
+                            <div class="archive-entry-channels">
+                                <span class="archive-channel-icon">📧</span>
+                            </div>
+                            <button class="btn-view-archive">View →</button>
+                        </div>
+                    </div>
+                    <div class="archive-entry">
+                        <div class="archive-entry-left">
+                            <div class="archive-entry-icon">📦</div>
+                            <div>
+                                <div class="archive-entry-title">Product & Merchandising — March 2026</div>
+                                <div class="archive-entry-meta">Sent Tue Mar 1, 7:00am · 5 recipients</div>
+                            </div>
+                        </div>
+                        <div style="display:flex;align-items:center;gap:8px;">
+                            <div class="archive-entry-channels">
+                                <span class="archive-channel-icon">📧</span>
+                                <span class="archive-channel-icon">💬</span>
+                            </div>
+                            <button class="btn-view-archive">View →</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="archive-month-group">
+                    <div class="archive-month-label">February 2026</div>
+                    <div class="archive-entry">
+                        <div class="archive-entry-left">
+                            <div class="archive-entry-icon">📊</div>
+                            <div>
+                                <div class="archive-entry-title">Marketing Summary — Week of Feb 23</div>
+                                <div class="archive-entry-meta">Sent Mon Feb 23, 7:00am · 3 recipients</div>
+                            </div>
+                        </div>
+                        <div style="display:flex;align-items:center;gap:8px;">
+                            <div class="archive-entry-channels">
+                                <span class="archive-channel-icon">📧</span>
+                                <span class="archive-channel-icon">💬</span>
+                            </div>
+                            <button class="btn-view-archive">View →</button>
+                        </div>
+                    </div>
+                    <div class="archive-entry">
+                        <div class="archive-entry-left">
+                            <div class="archive-entry-icon">📊</div>
+                            <div>
+                                <div class="archive-entry-title">Marketing Summary — Week of Feb 16</div>
+                                <div class="archive-entry-meta">Sent Mon Feb 16, 7:00am · 3 recipients</div>
+                            </div>
+                        </div>
+                        <div style="display:flex;align-items:center;gap:8px;">
+                            <div class="archive-entry-channels">
+                                <span class="archive-channel-icon">📧</span>
+                            </div>
+                            <button class="btn-view-archive">View →</button>
+                        </div>
+                    </div>
+                </div>
+                <div style="padding:12px 24px 16px;text-align:center;">
+                    <button class="btn-view-archive" style="padding:8px 24px;">View all 12 archived reports →</button>
+                </div>
+            </div>
+        </div>
+        <!-- ── Monthly KPI Scorecard ── -->
+        <div class="section-header">
+            <h3>Reference Reports <span class="count">1</span></h3>
+        </div>
+        <div class="cards-grid">
+            <div class="report-card" data-report="kpi-scorecard">
+                <a href="report-7-monthly-kpi-scorecard.html" style="text-decoration:none;color:inherit;">
+                <div class="card-thumb">
+                    <div class="card-thumb-inner thumb-scorecard">
+                        <div class="mini-chart">
+                            <div class="mini-chart-title">Monthly Scorecard</div>
+                            <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:3px;margin-bottom:6px;">
+                                <div style="height:12px;border-radius:2px;background:rgba(107,156,120,0.2);"></div>
+                                <div style="height:12px;border-radius:2px;background:rgba(107,156,120,0.3);"></div>
+                                <div style="height:12px;border-radius:2px;background:rgba(139,110,163,0.2);"></div>
+                                <div style="height:12px;border-radius:2px;background:rgba(107,156,120,0.25);"></div>
+                                <div style="height:12px;border-radius:2px;background:rgba(107,156,120,0.4);"></div>
+                                <div style="height:12px;border-radius:2px;background:rgba(107,156,120,0.5);"></div>
+                                <div style="height:12px;border-radius:2px;background:rgba(139,110,163,0.15);"></div>
+                                <div style="height:12px;border-radius:2px;background:rgba(107,156,120,0.2);"></div>
+                                <div style="height:12px;border-radius:2px;background:rgba(107,156,120,0.35);"></div>
+                                <div style="height:12px;border-radius:2px;background:rgba(139,110,163,0.25);"></div>
+                                <div style="height:12px;border-radius:2px;background:rgba(107,156,120,0.3);"></div>
+                                <div style="height:12px;border-radius:2px;background:rgba(107,156,120,0.45);"></div>
+                                <div style="height:12px;border-radius:2px;background:rgba(107,156,120,0.3);"></div>
+                                <div style="height:12px;border-radius:2px;background:rgba(107,156,120,0.4);"></div>
+                                <div style="height:12px;border-radius:2px;background:rgba(139,110,163,0.2);"></div>
+                                <div style="height:12px;border-radius:2px;background:rgba(107,156,120,0.35);"></div>
+                                <div style="height:12px;border-radius:2px;background:rgba(107,156,120,0.5);"></div>
+                                <div style="height:12px;border-radius:2px;background:rgba(107,156,120,0.55);"></div>
+                            </div>
+                            <div class="mini-kpis">
+                                <div class="mini-kpi"><div class="val">24</div><div class="lbl">KPIs</div></div>
+                                <div class="mini-kpi"><div class="val">6 mo</div><div class="lbl">Trailing</div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-title">Monthly KPI Scorecard</div>
+                    <div class="card-desc">Goals vs Actuals, True ROI / Marketing P&L, YoY comparison toggle, multi-format download (PDF/CSV/PNG). Dense, Excel-style grid of all key metrics by month — spot trends at a glance.</div>
+                    <div class="card-footer">
+                        <div class="card-tags">
+                            <span class="card-tag shopify">Shopify</span>
+                            <span class="card-tag klaviyo">Klaviyo</span>
+                            <span class="card-tag meta">Meta</span>
+                        </div>
+                        <div class="card-formats">
+                            <span class="card-fmt">Email</span>
+                        </div>
+                    </div>
+                </div>
+                </a>
+                <div class="card-activation">
+                    <div class="card-status">
+                        <span class="status-dot active"></span>
+                        <span style="color:#6B9C78;">Active</span>
+                        <div class="card-freq-pills">
+                            <span class="card-freq-pill">M</span>
+                        </div>
+                    </div>
+                    <button class="btn-configure" onclick="openConfig('Monthly KPI Scorecard', ['monthly'], ['email'], true)">
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v2M6 9v2M1 6h2M9 6h2M2.1 2.1l1.4 1.4M8.5 8.5l1.4 1.4M2.1 9.9l1.4-1.4M8.5 3.5l1.4-1.4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+                        Configure
+                    </button>
+                </div>
+            </div>
+        </div>
         <!-- ── Coming Soon ── -->
         <div class="section-header">
             <h3>Coming Soon <span class="count">V2</span></h3>
         </div>
-
         <div class="cards-grid">
             <!-- Card 6: Competitive & Market Intel — V2 -->
             <div class="report-card" style="opacity: 0.7;">
@@ -995,16 +1269,12 @@
                 </div>
             </div>
         </div>
-
         <!-- Footer -->
         <div style="text-align: center; padding: 32px 0 16px; font-size: 11px; color: #B8AFA6;">
             Marklo Reports Library &middot; Stella &amp; Dot &middot; Apr 2026
         </div>
-
     </div>
 </div>
-
-
 <!-- ═══ Configuration Modal ═══ -->
 <div class="modal-overlay" id="configModal">
     <div class="modal">
@@ -1018,13 +1288,11 @@
             </button>
         </div>
         <div class="modal-body">
-
             <!-- Report Name -->
             <div class="modal-section">
                 <label class="modal-label">Report Name</label>
                 <input class="report-name-input" id="reportNameInput" type="text" value="Marketing Summary" style="width:100%;border:1.5px solid #EDE8E2;border-radius:10px;padding:10px 14px;font-size:13px;color:#41342A;font-family:'Inter',sans-serif;background:white;">
             </div>
-
             <!-- Frequency Multi-Select -->
             <div class="modal-section">
                 <label class="modal-label">Frequency (select all that apply)</label>
@@ -1050,7 +1318,6 @@
                         <div><div class="freq-text">Annually</div><div class="freq-sub">Year-end review</div></div>
                     </div>
                 </div>
-
                 <!-- Schedule details (appears for selected frequencies) -->
                 <div id="scheduleDetails">
                     <div class="schedule-row" id="sched-daily" style="display:none;">
@@ -1075,7 +1342,6 @@
                     </div>
                 </div>
             </div>
-
             <!-- Delivery Channels -->
             <div class="modal-section">
                 <label class="modal-label">Delivery Channels</label>
@@ -1097,7 +1363,6 @@
                     </div>
                 </div>
             </div>
-
             <!-- Recipients -->
             <div class="modal-section">
                 <label class="modal-label">Recipients</label>
@@ -1106,7 +1371,6 @@
                     <div class="recipient-chip">jessica@stelladot.com <span class="chip-remove" onclick="this.parentElement.remove()">x</span></div>
                 </div>
             </div>
-
             <!-- Slack Channel (conditional) -->
             <div class="modal-section" id="slackSection" style="display:none;">
                 <label class="modal-label">Slack Channel</label>
@@ -1117,7 +1381,6 @@
                     <option>#general</option>
                 </select>
             </div>
-
             <!-- Settings -->
             <div class="modal-section">
                 <label class="modal-label">Settings</label>
@@ -1126,62 +1389,96 @@
                     <div class="toggle on" onclick="this.classList.toggle('on')"></div>
                 </div>
             </div>
-
-            <!-- Insights Preview -->
-            <div class="modal-section insights-preview-section" id="insightsPreviewSection">
-                <div class="insights-preview-header">
-                    <label class="modal-label" style="margin: 0;"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="vertical-align:-2px;margin-right:4px;"><path d="M7.5 1L3 8h4l-1 5 5-7H7l.5-5z" fill="#41342A"/></svg>Insights <span style="font-weight:400;color:#83766B;font-size:11px;margin-left:4px;">Included in every report</span></label>
-                    <button class="btn-regenerate" onclick="regenerateInsights()">
-                        <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1 5a4 4 0 0 1 6.18-3.82m-8.36 3.64a4 4 0 0 0 6.18 3.82" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        Regenerate
-                    </button>
-                </div>
-                <div class="insights-well" id="insightsWell">
-                    <div class="insight-section">
-                        <button class="insight-remove" onclick="removeInsightSection(this)" title="Remove section">&times;</button>
-                        <h4 contenteditable="true">Executive Summary</h4>
-                        <p contenteditable="true">Revenue grew 12% week-over-week to $178K, driven primarily by strong performance across email and paid social channels. The surge in conversions from Meta Ads suggests the recent campaign refresh is resonating with your core audience segment.</p>
-                    </div>
-                    <div class="insight-section">
-                        <button class="insight-remove" onclick="removeInsightSection(this)" title="Remove section">&times;</button>
-                        <h4 contenteditable="true">Key Callouts</h4>
-                        <ul contenteditable="true">
-                            <li>Email revenue up 18% — highest open rate in 3 months</li>
-                            <li>Organic social slowed 6% — consider refreshing content strategy</li>
-                        </ul>
-                    </div>
-                    <div class="insight-section">
-                        <button class="insight-remove" onclick="removeInsightSection(this)" title="Remove section">&times;</button>
-                        <h4 contenteditable="true">Recommended Actions</h4>
-                        <ul contenteditable="true">
-                            <li>Increase email sends to Mon/Tues high-engagement window</li>
-                            <li>Test higher bid multiplier on Meta Ads for top-converting audiences</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="insights-helper">Edit any text inline, or hover to remove a section</div>
-            </div>
+            <!-- Insights moved to Preview & Send flow -->
         </div>
-
         <div class="modal-footer">
             <div style="display:flex;align-items:center;gap:12px;">
                 <button class="btn-share-link" onclick="copyShareLink()" style="background:none;border:1.5px solid #EDE8E2;border-radius:10px;padding:9px 14px;font-size:12px;color:#83766B;cursor:pointer;font-family:'Inter',sans-serif;display:flex;align-items:center;gap:5px;white-space:nowrap;">
                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M5 7l2-2M4.5 5.5L3 7a2.12 2.12 0 003 3l1.5-1.5M7.5 6.5L9 5a2.12 2.12 0 00-3-3L4.5 3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
                     Share Link
                 </button>
-                <button class="btn-preview" onclick="closeConfig()">Review &amp; Send Preview</button>
+                <button class="btn-preview" onclick="openPreviewSend()">Review &amp; Send Preview</button>
             </div>
             <button class="btn-activate" onclick="closeConfig()">Save &amp; Activate</button>
         </div>
     </div>
 </div>
 
+<!-- ═══ Preview & Send Overlay ═══ -->
+<div class="preview-overlay" id="previewOverlay">
+    <div class="preview-panel">
+        <div class="preview-header">
+            <h3>Review &amp; Send</h3>
+            <button class="preview-close" onclick="closePreview()">&times;</button>
+        </div>
+        <div class="preview-body">
+            <!-- Report meta -->
+            <div class="preview-report-meta">
+                <div class="preview-report-icon">📊</div>
+                <div>
+                    <div class="preview-report-name" id="previewReportName">Marketing Summary</div>
+                    <div class="preview-report-detail" id="previewReportDetail">Weekly · Email, PDF · 3 recipients</div>
+                </div>
+            </div>
+
+            <!-- Insights edit section -->
+            <div class="preview-insights-toolbar">
+                <div class="preview-section-label">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7.5 1L3 8h4l-1 5 5-7H7l.5-5z" fill="#41342A"/></svg>
+                    Insights<span class="preview-section-sublabel">Edit before sending</span>
+                </div>
+                <button class="btn-regenerate" onclick="regeneratePreviewInsights()">
+                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1 5a4 4 0 0 1 6.18-3.82m-8.36 3.64a4 4 0 0 0 6.18 3.82" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    Regenerate
+                </button>
+            </div>
+            <div class="insights-well" id="previewInsightsWell">
+                <div class="insight-section">
+                    <button class="insight-remove" onclick="removeInsightSection(this)" title="Remove section">&times;</button>
+                    <h4 contenteditable="true">Executive Summary</h4>
+                    <p contenteditable="true">Revenue grew 12% week-over-week to $178K, driven primarily by strong performance across email and paid social channels. The surge in conversions from Meta Ads suggests the recent campaign refresh is resonating with your core audience segment.</p>
+                </div>
+                <div class="insight-section">
+                    <button class="insight-remove" onclick="removeInsightSection(this)" title="Remove section">&times;</button>
+                    <h4 contenteditable="true">Key Callouts</h4>
+                    <ul contenteditable="true">
+                        <li>Email revenue up 18% — highest open rate in 3 months</li>
+                        <li>Organic social slowed 6% — consider refreshing content strategy</li>
+                    </ul>
+                </div>
+                <div class="insight-section">
+                    <button class="insight-remove" onclick="removeInsightSection(this)" title="Remove section">&times;</button>
+                    <h4 contenteditable="true">Recommended Actions</h4>
+                    <ul contenteditable="true">
+                        <li>Increase email sends to Mon/Tues high-engagement window</li>
+                        <li>Test higher bid multiplier on Meta Ads for top-converting audiences</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="insights-helper">Edit any text inline, or hover to remove a section</div>
+        </div>
+        <div class="preview-footer">
+            <button class="btn-back-config" onclick="backToConfig()">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style="vertical-align:-1px;margin-right:4px;"><path d="M7.5 2L3.5 6l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Back to Configure
+            </button>
+            <button class="btn-send-now" onclick="sendReport()">
+                <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M11.5 1.5L5.5 11.5l-1-4.5L0.5 6l11-4.5z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Send Now
+            </button>
+        </div>
+    </div>
+</div>
+
 <script>
+function toggleArchive(e) {
+    e.stopPropagation();
+    document.getElementById('reportArchive').classList.toggle('expanded');
+    document.getElementById('reportArchive').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
 function openConfig(name, activeFreqs, activeChannels, isActive) {
     document.getElementById('modalTitle').textContent = 'Configure Report';
     document.getElementById('reportNameInput').value = name;
     document.getElementById('configModal').classList.add('open');
-
     // Reset all freq options
     document.querySelectorAll('.freq-option').forEach(el => {
         el.classList.remove('selected');
@@ -1192,7 +1489,6 @@ function openConfig(name, activeFreqs, activeChannels, isActive) {
         const el = document.querySelector('.freq-option[data-freq="' + f + '"]');
         if (el) { el.classList.add('selected'); document.getElementById('sched-' + f).style.display = 'flex'; }
     });
-
     // Reset delivery options
     document.querySelectorAll('.delivery-option').forEach(el => el.classList.remove('selected'));
     activeChannels.forEach(c => {
@@ -1201,11 +1497,9 @@ function openConfig(name, activeFreqs, activeChannels, isActive) {
     });
     updateSlackVisibility();
 }
-
 function closeConfig() {
     document.getElementById('configModal').classList.remove('open');
 }
-
 function copyShareLink() {
     const name = document.getElementById('reportNameInput').value.replace(/\s+/g, '-').toLowerCase();
     const link = 'https://app.marklo.com/reports/share/' + name + '-' + Math.random().toString(36).substring(2, 8);
@@ -1217,24 +1511,20 @@ function copyShareLink() {
     btn.style.borderColor = '#6B9C78';
     setTimeout(() => { btn.innerHTML = orig; btn.style.color = ''; btn.style.borderColor = ''; }, 2000);
 }
-
 function toggleFreq(el) {
     el.classList.toggle('selected');
     const freq = el.dataset.freq;
     const sched = document.getElementById('sched-' + freq);
     sched.style.display = el.classList.contains('selected') ? 'flex' : 'none';
 }
-
 function toggleDelivery(el) {
     el.classList.toggle('selected');
     updateSlackVisibility();
 }
-
 function updateSlackVisibility() {
     const slackSelected = document.querySelector('.delivery-option[data-channel="slack"]').classList.contains('selected');
     document.getElementById('slackSection').style.display = slackSelected ? 'block' : 'none';
 }
-
 function addRecipient(input) {
     const email = input.value.trim();
     if (email && email.includes('@')) {
@@ -1245,13 +1535,10 @@ function addRecipient(input) {
         input.value = '';
     }
 }
-
 // Close modal on overlay click
 document.getElementById('configModal').addEventListener('click', function(e) {
     if (e.target === this) closeConfig();
 });
-
-
 function removeInsightSection(btn) {
     const section = btn.parentElement;
     section.style.opacity = '0';
@@ -1259,9 +1546,36 @@ function removeInsightSection(btn) {
     section.style.transition = 'opacity 0.2s, transform 0.2s';
     setTimeout(() => section.remove(), 200);
 }
-
-function regenerateInsights() {
-    const well = document.getElementById('insightsWell');
+function openPreviewSend() {
+    // Pull report name from config modal
+    const name = document.getElementById('reportNameInput').value;
+    document.getElementById('previewReportName').textContent = name;
+    // Build detail string from selected freq + channels
+    const freqs = Array.from(document.querySelectorAll('.freq-option.selected')).map(el => el.textContent.trim());
+    const channels = Array.from(document.querySelectorAll('.delivery-option.selected')).map(el => el.textContent.trim());
+    const chips = document.querySelectorAll('.recipient-chip');
+    const detail = (freqs.join(', ') || 'On-demand') + ' · ' + (channels.join(', ') || 'PDF') + ' · ' + chips.length + ' recipient' + (chips.length !== 1 ? 's' : '');
+    document.getElementById('previewReportDetail').textContent = detail;
+    // Close config, open preview
+    document.getElementById('configModal').classList.remove('open');
+    document.getElementById('previewOverlay').classList.add('open');
+}
+function closePreview() {
+    document.getElementById('previewOverlay').classList.remove('open');
+}
+function backToConfig() {
+    document.getElementById('previewOverlay').classList.remove('open');
+    document.getElementById('configModal').classList.add('open');
+}
+function sendReport() {
+    const btn = document.querySelector('.btn-send-now');
+    const orig = btn.innerHTML;
+    btn.innerHTML = '<svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 6.5l3 3 5-5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Sent!';
+    btn.style.background = '#6B9C78';
+    setTimeout(() => { btn.innerHTML = orig; btn.style.background = ''; closePreview(); }, 1800);
+}
+function regeneratePreviewInsights() {
+    const well = document.getElementById('previewInsightsWell');
     well.innerHTML = `
                     <div class="insight-section">
                         <button class="insight-remove" onclick="removeInsightSection(this)" title="Remove section">&times;</button>
@@ -1286,9 +1600,10 @@ function regenerateInsights() {
                     </div>
     `;
 }
-
-
+// Close preview on overlay click
+document.getElementById('previewOverlay').addEventListener('click', function(e) {
+    if (e.target === this) closePreview();
+});
 </script>
-
 </body>
 </html>

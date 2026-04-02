@@ -82,48 +82,79 @@
         .filter-pill svg { width: 14px; height: 14px; }
         .sort-pill { margin-left: auto; }
 
-        /* ── Featured Banner ── */
-        .featured-banner {
-            background: linear-gradient(135deg, #41342A 0%, #57493D 100%);
-            border-radius: 16px; padding: 28px 32px;
+        /* ── Spotlight Card ── */
+        .spotlight {
+            background: #fff; border-radius: 16px;
+            border: 1px solid #EDE8E2; overflow: hidden;
             margin-bottom: 32px; display: flex;
-            align-items: center; justify-content: space-between;
-            position: relative; overflow: hidden;
+            transition: all 0.2s; text-decoration: none; color: inherit;
         }
-        .featured-banner::before {
+        .spotlight:hover {
+            box-shadow: 0 12px 32px rgba(65,52,42,0.1);
+            border-color: #B0CEFF;
+        }
+        .spotlight-thumb {
+            width: 340px; flex-shrink: 0; position: relative;
+            background: linear-gradient(160deg, #E7EBF1 0%, #E1E6EF 40%, #DDE3ED 70%, #D8DFEB 100%);
+            display: flex; align-items: center; justify-content: center;
+            padding: 24px; overflow: hidden;
+        }
+        .spotlight-thumb::before {
             content: '';
-            position: absolute; top: -40px; right: -20px;
+            position: absolute; top: -60px; right: -30px;
             width: 200px; height: 200px; border-radius: 50%;
-            background: rgba(176, 206, 255, 0.08);
+            background: radial-gradient(circle, rgba(176,206,255,0.25) 0%, transparent 65%);
         }
-        .featured-banner::after {
-            content: '';
-            position: absolute; bottom: -60px; right: 80px;
-            width: 140px; height: 140px; border-radius: 50%;
-            background: rgba(149, 192, 160, 0.06);
+        .spotlight-preview {
+            background: rgba(255,255,255,0.75); backdrop-filter: blur(8px);
+            border-radius: 12px; padding: 18px 20px; width: 100%;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.06); position: relative; z-index: 1;
         }
-        .featured-text { position: relative; z-index: 1; }
-        .featured-badge {
+        .spotlight-preview-title {
+            font-size: 10px; font-weight: 600; color: #83766B; margin-bottom: 10px;
+        }
+        .spotlight-preview-kpis {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 12px;
+        }
+        .spotlight-kpi { text-align: center; }
+        .spotlight-kpi .val { font-size: 16px; font-weight: 800; color: #41342A; }
+        .spotlight-kpi .lbl { font-size: 8px; color: #83766B; }
+        .spotlight-mini-bars { display: flex; align-items: flex-end; gap: 3px; height: 36px; }
+        .spotlight-mini-bar { flex: 1; border-radius: 2px 2px 0 0; }
+        .spotlight-body { padding: 28px 32px; flex: 1; display: flex; flex-direction: column; justify-content: center; }
+        .spotlight-badge {
             display: inline-flex; align-items: center; gap: 5px;
-            background: rgba(176,206,255,0.15); color: #B0CEFF;
+            background: rgba(87,113,155,0.1); color: #57719B;
             font-size: 10px; font-weight: 600; padding: 4px 10px;
-            border-radius: 20px; margin-bottom: 12px;
+            border-radius: 20px; margin-bottom: 14px; width: fit-content;
         }
-        .featured-text h2 {
+        .spotlight-body h2 {
             font-family: 'Playfair Display', Georgia, serif;
-            font-size: 20px; font-weight: 500; color: #F5F0EB;
-            margin-bottom: 6px;
+            font-size: 22px; font-weight: 500; color: #41342A;
+            margin-bottom: 8px; line-height: 1.3;
         }
-        .featured-text p { font-size: 13px; color: #B8AFA6; line-height: 1.5; max-width: 440px; }
-        .featured-stats {
-            display: flex; gap: 24px; position: relative; z-index: 1;
+        .spotlight-body > p {
+            font-size: 13px; color: rgba(65,52,42,0.55); line-height: 1.5;
+            margin-bottom: 18px;
         }
-        .featured-stat { text-align: center; }
-        .featured-stat .val {
-            font-size: 24px; font-weight: 700; color: #F5F0EB;
+        .spotlight-benefits { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+        .spotlight-benefit {
+            display: flex; align-items: center; gap: 8px;
+            font-size: 12px; color: #41342A;
         }
-        .featured-stat .lbl {
-            font-size: 10px; color: #B8AFA6; margin-top: 2px;
+        .spotlight-benefit-icon {
+            width: 20px; height: 20px; border-radius: 6px;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0; font-size: 10px;
+        }
+        .spotlight-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+        .spotlight-tag {
+            font-size: 10px; font-weight: 500; padding: 3px 8px;
+            border-radius: 6px;
+        }
+        @media (max-width: 900px) {
+            .spotlight { flex-direction: column; }
+            .spotlight-thumb { width: 100%; height: 200px; }
         }
 
         /* ── Section Headers ── */
@@ -256,11 +287,191 @@
             z-index: 1;
         }
 
+        /* ── Card Activation Row ── */
+        .card-activation {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 10px 20px; background: #F6F5F3; border-top: 1px solid #F0EBE5;
+        }
+        .card-status {
+            display: flex; align-items: center; gap: 6px;
+            font-size: 11px; font-weight: 500;
+        }
+        .status-dot { width: 7px; height: 7px; border-radius: 50%; }
+        .status-dot.active { background: #6B9C78; }
+        .status-dot.inactive { background: #B8AFA6; }
+        .card-freq-pills { display: flex; gap: 4px; }
+        .card-freq-pill {
+            font-size: 9px; font-weight: 600; padding: 2px 7px;
+            border-radius: 8px; background: rgba(149,192,160,0.15); color: #6B9C78;
+        }
+        .card-freq-pill.off { background: #EDE8E2; color: #B8AFA6; }
+        .btn-configure {
+            display: flex; align-items: center; gap: 5px;
+            background: #41342A; color: #F5F0EB; border: none;
+            padding: 6px 14px; border-radius: 8px; font-size: 11px;
+            font-weight: 600; cursor: pointer; transition: all 0.15s;
+            font-family: 'Inter', sans-serif;
+        }
+        .btn-configure:hover { background: #57493D; }
+
+        /* ── Configuration Modal ── */
+        .modal-overlay {
+            display: none; position: fixed; inset: 0;
+            background: rgba(65,52,42,0.4); backdrop-filter: blur(4px);
+            z-index: 1000; align-items: center; justify-content: center;
+        }
+        .modal-overlay.open { display: flex; }
+        .modal {
+            background: #fff; border-radius: 16px; width: 560px;
+            max-height: 90vh; overflow-y: auto;
+            box-shadow: 0 24px 64px rgba(65,52,42,0.2);
+        }
+        .modal-header {
+            padding: 24px 28px 16px; border-bottom: 1px solid #F0EBE5;
+            display: flex; align-items: flex-start; justify-content: space-between;
+        }
+        .modal-header h3 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 20px; font-weight: 500; color: #41342A; margin: 0;
+        }
+        .modal-header p { font-size: 12px; color: #83766B; margin-top: 4px; }
+        .modal-close {
+            background: none; border: none; cursor: pointer;
+            width: 32px; height: 32px; border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            color: #83766B; transition: all 0.15s;
+        }
+        .modal-close:hover { background: #F6F5F3; color: #41342A; }
+        .modal-body { padding: 24px 28px; }
+        .modal-section { margin-bottom: 24px; }
+        .modal-section:last-child { margin-bottom: 0; }
+        .modal-label {
+            font-size: 11px; font-weight: 600; color: #83766B;
+            letter-spacing: 0.3px; margin-bottom: 10px; display: block;
+        }
+
+        /* Frequency multi-select */
+        .freq-grid { display: flex; gap: 8px; flex-wrap: wrap; }
+        .freq-option {
+            display: flex; align-items: center; gap: 8px;
+            padding: 10px 16px; border-radius: 10px;
+            border: 1.5px solid #EDE8E2; cursor: pointer;
+            transition: all 0.15s; flex: 1; min-width: 100px;
+        }
+        .freq-option:hover { border-color: #B0CEFF; }
+        .freq-option.selected { border-color: #41342A; background: #F6F5F3; }
+        .freq-check {
+            width: 18px; height: 18px; border-radius: 5px;
+            border: 1.5px solid #EDE8E2; display: flex;
+            align-items: center; justify-content: center; flex-shrink: 0;
+            transition: all 0.15s;
+        }
+        .freq-option.selected .freq-check {
+            background: #41342A; border-color: #41342A;
+        }
+        .freq-text { font-size: 13px; font-weight: 500; color: #41342A; }
+        .freq-sub { font-size: 10px; color: #83766B; margin-top: 1px; }
+
+        /* Day/time selectors */
+        .schedule-row {
+            display: flex; align-items: center; gap: 10px;
+            padding: 10px 14px; background: #F6F5F3; border-radius: 10px;
+            margin-top: 8px; font-size: 12px; color: #41342A;
+        }
+        .schedule-row select, .schedule-row input[type="time"] {
+            border: 1px solid #EDE8E2; border-radius: 6px;
+            padding: 5px 8px; font-size: 12px; color: #41342A;
+            font-family: 'Inter', sans-serif; background: #fff;
+        }
+        .schedule-row .freq-label {
+            font-weight: 600; min-width: 70px; color: #83766B; font-size: 11px;
+        }
+
+        /* Delivery channels */
+        .delivery-grid { display: flex; gap: 10px; }
+        .delivery-option {
+            flex: 1; padding: 14px 16px; border-radius: 10px;
+            border: 1.5px solid #EDE8E2; cursor: pointer;
+            transition: all 0.15s; text-align: center;
+        }
+        .delivery-option:hover { border-color: #B0CEFF; }
+        .delivery-option.selected { border-color: #41342A; background: #F6F5F3; }
+        .delivery-icon { font-size: 20px; margin-bottom: 6px; }
+        .delivery-name { font-size: 12px; font-weight: 600; color: #41342A; }
+        .delivery-desc { font-size: 10px; color: #83766B; margin-top: 2px; }
+
+        /* Recipients */
+        .recipients-input {
+            width: 100%; border: 1.5px solid #EDE8E2; border-radius: 10px;
+            padding: 10px 14px; font-size: 13px; color: #41342A;
+            font-family: 'Inter', sans-serif; outline: none;
+            transition: border-color 0.15s;
+        }
+        .recipients-input:focus { border-color: #B0CEFF; }
+        .recipient-chips { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+        .recipient-chip {
+            display: flex; align-items: center; gap: 4px;
+            background: #F6F5F3; border: 1px solid #EDE8E2;
+            padding: 4px 10px; border-radius: 8px; font-size: 11px;
+            color: #41342A; font-weight: 500;
+        }
+        .chip-remove {
+            cursor: pointer; color: #B8AFA6; font-size: 14px;
+            line-height: 1; margin-left: 2px;
+        }
+        .chip-remove:hover { color: #8B6EA3; }
+
+        /* Toggle */
+        .toggle-row {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 12px 0;
+        }
+        .toggle-label { font-size: 13px; color: #41342A; }
+        .toggle-label span { font-size: 11px; color: #83766B; display: block; margin-top: 2px; }
+        .toggle {
+            width: 40px; height: 22px; border-radius: 11px;
+            background: #EDE8E2; cursor: pointer; position: relative;
+            transition: background 0.2s;
+        }
+        .toggle.on { background: #6B9C78; }
+        .toggle::after {
+            content: ''; position: absolute; top: 3px; left: 3px;
+            width: 16px; height: 16px; border-radius: 50%;
+            background: #fff; transition: left 0.2s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+        }
+        .toggle.on::after { left: 21px; }
+
+        /* Modal footer */
+        .modal-footer {
+            padding: 16px 28px 24px; display: flex;
+            align-items: center; justify-content: space-between;
+            border-top: 1px solid #F0EBE5;
+        }
+        .btn-preview {
+            background: none; border: 1.5px solid #EDE8E2;
+            padding: 10px 20px; border-radius: 10px; font-size: 13px;
+            font-weight: 600; color: #83766B; cursor: pointer;
+            font-family: 'Inter', sans-serif; transition: all 0.15s;
+        }
+        .btn-preview:hover { border-color: #41342A; color: #41342A; }
+        .btn-activate {
+            background: #41342A; color: #F5F0EB; border: none;
+            padding: 10px 24px; border-radius: 10px; font-size: 13px;
+            font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif;
+            transition: all 0.15s;
+        }
+        .btn-activate:hover { background: #57493D; }
+
         /* ── Responsive ── */
         @media (max-width: 900px) {
             .sidebar { display: none; }
-            .featured-stats { display: none; }
+            .spotlight { flex-direction: column; }
+            .spotlight-thumb { width: 100%; height: 200px; }
             .cards-grid { grid-template-columns: 1fr; }
+            .modal { width: 95%; margin: 20px; }
+            .freq-grid { flex-direction: column; }
+            .delivery-grid { flex-direction: column; }
         }
     </style>
 </head>
@@ -358,31 +569,69 @@
             </div>
         </div>
 
-        <!-- Featured Banner -->
-        <div class="featured-banner">
-            <div class="featured-text">
-                <div class="featured-badge">
+        <!-- Spotlight Report -->
+        <a class="spotlight" href="report-1-weekly-marketing-summary.html">
+            <div class="spotlight-thumb">
+                <div class="spotlight-preview">
+                    <div class="spotlight-preview-title">This Week's Snapshot</div>
+                    <div class="spotlight-preview-kpis">
+                        <div class="spotlight-kpi"><div class="val">$178K</div><div class="lbl">Revenue</div></div>
+                        <div class="spotlight-kpi"><div class="val">+12%</div><div class="lbl">WoW</div></div>
+                        <div class="spotlight-kpi"><div class="val">892</div><div class="lbl">Orders</div></div>
+                    </div>
+                    <div class="spotlight-mini-bars">
+                        <div class="spotlight-mini-bar" style="height:40%;background:#d0c9a4;"></div>
+                        <div class="spotlight-mini-bar" style="height:55%;background:#95c0a0;"></div>
+                        <div class="spotlight-mini-bar" style="height:48%;background:#95c0a0;"></div>
+                        <div class="spotlight-mini-bar" style="height:62%;background:#95c0a0;"></div>
+                        <div class="spotlight-mini-bar" style="height:58%;background:#95c0a0;"></div>
+                        <div class="spotlight-mini-bar" style="height:71%;background:#6B9C78;"></div>
+                        <div class="spotlight-mini-bar" style="height:82%;background:#6B9C78;"></div>
+                        <div class="spotlight-mini-bar" style="height:90%;background:#6B9C78;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="spotlight-body">
+                <div class="spotlight-badge">
                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1l1.3 2.6 2.9.4-2.1 2 .5 2.9L6 7.6 3.4 8.9l.5-2.9-2.1-2 2.9-.4L6 1z" fill="currentColor"/></svg>
-                    This week's highlight
+                    Spotlight report
                 </div>
-                <h2>Stella &amp; Dot Weekly Summary</h2>
-                <p>Revenue up 12% WoW with strong email performance. 3 new product launches exceeded targets. AI detected a gap in your May campaign calendar.</p>
+                <h2>Weekly Marketing Summary</h2>
+                <p>Your complete weekly pulse — revenue, channels, campaigns, and products in one view with AI-powered insights.</p>
+                <div class="spotlight-benefits">
+                    <div class="spotlight-benefit">
+                        <div class="spotlight-benefit-icon" style="background: rgba(149,192,160,0.15);">
+                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6.5l3 3 5-5.5" stroke="#6B9C78" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                        Cross-channel performance — Email, Paid, Social, Organic in one place
+                    </div>
+                    <div class="spotlight-benefit">
+                        <div class="spotlight-benefit-icon" style="background: rgba(176,206,255,0.2);">
+                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v4l2.5 1.5" stroke="#57719B" stroke-width="1.5" stroke-linecap="round"/></svg>
+                        </div>
+                        AI executive summary — know what matters in 30 seconds
+                    </div>
+                    <div class="spotlight-benefit">
+                        <div class="spotlight-benefit-icon" style="background: rgba(177,151,199,0.12);">
+                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 9l2.5-3L6 8l4-6" stroke="#8B6EA3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                        Product movers — see what's hot, accelerating, and slowing
+                    </div>
+                    <div class="spotlight-benefit">
+                        <div class="spotlight-benefit-icon" style="background: rgba(208,201,164,0.2);">
+                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><rect x="2" y="2" width="3.5" height="3.5" rx="0.5" stroke="#8B8560" stroke-width="1.2"/><rect x="6.5" y="2" width="3.5" height="3.5" rx="0.5" stroke="#8B8560" stroke-width="1.2"/><rect x="2" y="6.5" width="3.5" height="3.5" rx="0.5" stroke="#8B8560" stroke-width="1.2"/><rect x="6.5" y="6.5" width="3.5" height="3.5" rx="0.5" stroke="#8B8560" stroke-width="1.2"/></svg>
+                        </div>
+                        Campaign calendar with AI gap detection
+                    </div>
+                </div>
+                <div class="spotlight-tags">
+                    <span class="spotlight-tag" style="background: rgba(149,192,160,0.15); color: #6B9C78;">Shopify</span>
+                    <span class="spotlight-tag" style="background: rgba(177,151,199,0.15); color: #8B6EA3;">Klaviyo</span>
+                    <span class="spotlight-tag" style="background: rgba(176,206,255,0.2); color: #57719B;">Meta Ads</span>
+                    <span class="spotlight-tag" style="background: #F6F5F3; color: #83766B;">Weekly</span>
+                </div>
             </div>
-            <div class="featured-stats">
-                <div class="featured-stat">
-                    <div class="val">$178K</div>
-                    <div class="lbl">Weekly Revenue</div>
-                </div>
-                <div class="featured-stat">
-                    <div class="val">+12%</div>
-                    <div class="lbl">vs Last Week</div>
-                </div>
-                <div class="featured-stat">
-                    <div class="val">5</div>
-                    <div class="lbl">Reports Ready</div>
-                </div>
-            </div>
-        </div>
+        </a>
 
         <!-- ── Active Reports ── -->
         <div class="section-header">
@@ -392,7 +641,8 @@
         <div class="cards-grid">
 
             <!-- Card 1: Weekly Marketing Summary -->
-            <a class="report-card" href="report-1-weekly-marketing-summary.html">
+            <div class="report-card" data-report="weekly-marketing">
+                <a href="report-1-weekly-marketing-summary.html" style="text-decoration:none;color:inherit;">
                 <div class="card-thumb">
                     <div class="card-thumb-inner thumb-marketing">
                         <div class="mini-chart">
@@ -423,16 +673,28 @@
                             <span class="card-tag klaviyo">Klaviyo</span>
                             <span class="card-tag meta">Meta</span>
                         </div>
-                        <div class="card-frequency">
-                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="4.5" stroke="currentColor" stroke-width="1.2"/><path d="M6 3.5v2.5l1.5 1.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
-                            Weekly
-                        </div>
                     </div>
                 </div>
-            </a>
+                </a>
+                <div class="card-activation">
+                    <div class="card-status">
+                        <span class="status-dot active"></span>
+                        <span style="color:#6B9C78;">Active</span>
+                        <div class="card-freq-pills">
+                            <span class="card-freq-pill">W</span>
+                            <span class="card-freq-pill">M</span>
+                        </div>
+                    </div>
+                    <button class="btn-configure" onclick="openConfig('Weekly Marketing Summary', ['weekly','monthly'], ['email','slack'], true)">
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v2M6 9v2M1 6h2M9 6h2M2.1 2.1l1.4 1.4M8.5 8.5l1.4 1.4M2.1 9.9l1.4-1.4M8.5 3.5l1.4-1.4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+                        Configure
+                    </button>
+                </div>
+            </div>
 
             <!-- Card 2: Product & Merchandising -->
-            <a class="report-card" href="report-2-product-merchandising.html">
+            <div class="report-card" data-report="product-merch">
+                <a href="report-2-product-merchandising.html" style="text-decoration:none;color:inherit;">
                 <div class="card-thumb">
                     <div class="card-thumb-inner thumb-product">
                         <div class="mini-chart">
@@ -459,16 +721,27 @@
                         <div class="card-tags">
                             <span class="card-tag shopify">Shopify</span>
                         </div>
-                        <div class="card-frequency">
-                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="4.5" stroke="currentColor" stroke-width="1.2"/><path d="M6 3.5v2.5l1.5 1.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
-                            Weekly
-                        </div>
                     </div>
                 </div>
-            </a>
+                </a>
+                <div class="card-activation">
+                    <div class="card-status">
+                        <span class="status-dot active"></span>
+                        <span style="color:#6B9C78;">Active</span>
+                        <div class="card-freq-pills">
+                            <span class="card-freq-pill">M</span>
+                        </div>
+                    </div>
+                    <button class="btn-configure" onclick="openConfig('Product & Merchandising', ['monthly'], ['email','slack'], true)">
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v2M6 9v2M1 6h2M9 6h2M2.1 2.1l1.4 1.4M8.5 8.5l1.4 1.4M2.1 9.9l1.4-1.4M8.5 3.5l1.4-1.4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+                        Configure
+                    </button>
+                </div>
+            </div>
 
             <!-- Card 3: Campaign & Promotion -->
-            <a class="report-card" href="report-3-campaign-promo-deep-dive.html">
+            <div class="report-card" data-report="campaign-promo">
+                <a href="report-3-campaign-promo-deep-dive.html" style="text-decoration:none;color:inherit;">
                 <div class="card-thumb">
                     <div class="card-thumb-inner thumb-campaign">
                         <div class="mini-chart">
@@ -488,23 +761,34 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="card-title">Campaign & Promotion Deep Dive</div>
-                    <div class="card-desc">Campaign comparison, A/B testing results, promotion ROI analysis, and AI-driven recommendations.</div>
+                    <div class="card-title">Campaign Performance Snapshot</div>
+                    <div class="card-desc">Auto-generated 48hrs after campaign end. AI verdict, per-channel breakdown, and follow-up actions.</div>
                     <div class="card-footer">
                         <div class="card-tags">
                             <span class="card-tag klaviyo">Klaviyo</span>
                             <span class="card-tag shopify">Shopify</span>
                         </div>
-                        <div class="card-frequency">
-                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="4.5" stroke="currentColor" stroke-width="1.2"/><path d="M6 3.5v2.5l1.5 1.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
-                            Weekly
-                        </div>
                     </div>
                 </div>
-            </a>
+                </a>
+                <div class="card-activation">
+                    <div class="card-status">
+                        <span class="status-dot inactive"></span>
+                        <span style="color:#83766B;">Inactive</span>
+                        <div class="card-freq-pills">
+                            <span class="card-freq-pill off">Per campaign</span>
+                        </div>
+                    </div>
+                    <button class="btn-configure" onclick="openConfig('Campaign Performance Snapshot', [], ['email'], false)">
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v2M6 9v2M1 6h2M9 6h2M2.1 2.1l1.4 1.4M8.5 8.5l1.4 1.4M2.1 9.9l1.4-1.4M8.5 3.5l1.4-1.4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+                        Activate
+                    </button>
+                </div>
+            </div>
 
             <!-- Card 4: Customer & Retention -->
-            <a class="report-card" href="report-4-customer-retention-insights.html">
+            <div class="report-card" data-report="customer-retention">
+                <a href="report-4-customer-retention-insights.html" style="text-decoration:none;color:inherit;">
                 <div class="card-thumb">
                     <div class="card-thumb-inner thumb-customer">
                         <div class="mini-chart">
@@ -537,23 +821,34 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="card-title">Customer & Retention Insights</div>
-                    <div class="card-desc">Cohort retention heatmaps, RFM segmentation, LTV analysis, and win-back campaign performance.</div>
+                    <div class="card-title">Customer Intelligence Report</div>
+                    <div class="card-desc">Cohort retention heatmaps, RFM segmentation, LTV analysis, cross-sell patterns, and win-back segments.</div>
                     <div class="card-footer">
                         <div class="card-tags">
                             <span class="card-tag shopify">Shopify</span>
                             <span class="card-tag klaviyo">Klaviyo</span>
                         </div>
-                        <div class="card-frequency">
-                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="4.5" stroke="currentColor" stroke-width="1.2"/><path d="M6 3.5v2.5l1.5 1.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
-                            Weekly
-                        </div>
                     </div>
                 </div>
-            </a>
+                </a>
+                <div class="card-activation">
+                    <div class="card-status">
+                        <span class="status-dot active"></span>
+                        <span style="color:#6B9C78;">Active</span>
+                        <div class="card-freq-pills">
+                            <span class="card-freq-pill">M</span>
+                        </div>
+                    </div>
+                    <button class="btn-configure" onclick="openConfig('Customer Intelligence Report', ['monthly'], ['email','slack'], true)">
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v2M6 9v2M1 6h2M9 6h2M2.1 2.1l1.4 1.4M8.5 8.5l1.4 1.4M2.1 9.9l1.4-1.4M8.5 3.5l1.4-1.4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+                        Configure
+                    </button>
+                </div>
+            </div>
 
             <!-- Card 5: Inventory & Merchandising Health -->
-            <a class="report-card" href="report-5-inventory-merchandising.html">
+            <div class="report-card" data-report="inventory">
+                <a href="report-5-inventory-merchandising.html" style="text-decoration:none;color:inherit;">
                 <div class="card-thumb">
                     <div class="card-thumb-inner thumb-inventory">
                         <div class="mini-chart">
@@ -579,19 +874,29 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="card-title">Inventory & Merchandising Health</div>
-                    <div class="card-desc">Inventory risk matrix, sell-through rates, reorder alerts, markdown recommendations, and dead stock analysis.</div>
+                    <div class="card-title">Discount & Promotion Health</div>
+                    <div class="card-desc">Discount depth analysis, margin impact, promotional frequency tracking, and cannibalization scoring.</div>
                     <div class="card-footer">
                         <div class="card-tags">
                             <span class="card-tag shopify">Shopify</span>
                         </div>
-                        <div class="card-frequency">
-                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="4.5" stroke="currentColor" stroke-width="1.2"/><path d="M6 3.5v2.5l1.5 1.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
-                            Weekly
-                        </div>
                     </div>
                 </div>
-            </a>
+                </a>
+                <div class="card-activation">
+                    <div class="card-status">
+                        <span class="status-dot inactive"></span>
+                        <span style="color:#83766B;">Inactive</span>
+                        <div class="card-freq-pills">
+                            <span class="card-freq-pill off">M</span>
+                        </div>
+                    </div>
+                    <button class="btn-configure" onclick="openConfig('Discount & Promotion Health', [], ['email','slack'], false)">
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v2M6 9v2M1 6h2M9 6h2M2.1 2.1l1.4 1.4M8.5 8.5l1.4 1.4M2.1 9.9l1.4-1.4M8.5 3.5l1.4-1.4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+                        Activate
+                    </button>
+                </div>
+            </div>
 
         </div>
 
@@ -601,9 +906,8 @@
         </div>
 
         <div class="cards-grid">
-
             <!-- Card 6: Competitive & Market Intel — V2 -->
-            <a class="report-card" href="report-6-competitive-market-intel.html" style="opacity: 0.7;">
+            <div class="report-card" style="opacity: 0.7;">
                 <div class="card-thumb">
                     <div class="card-badge-v2">Coming in V2</div>
                     <div class="card-overlay-v2"></div>
@@ -631,13 +935,9 @@
                             <span class="card-tag">Shopify</span>
                             <span class="card-tag">3rd Party</span>
                         </div>
-                        <div class="card-frequency" style="color: #B8AFA6;">
-                            V2
-                        </div>
                     </div>
                 </div>
-            </a>
-
+            </div>
         </div>
 
         <!-- Footer -->
@@ -647,6 +947,198 @@
 
     </div>
 </div>
+
+
+<!-- ═══ Configuration Modal ═══ -->
+<div class="modal-overlay" id="configModal">
+    <div class="modal">
+        <div class="modal-header">
+            <div>
+                <h3 id="modalTitle">Configure Report</h3>
+                <p>Set frequency, delivery channels, and recipients</p>
+            </div>
+            <button class="modal-close" onclick="closeConfig()">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </button>
+        </div>
+        <div class="modal-body">
+
+            <!-- Frequency Multi-Select -->
+            <div class="modal-section">
+                <label class="modal-label">Frequency (select all that apply)</label>
+                <div class="freq-grid">
+                    <div class="freq-option" data-freq="daily" onclick="toggleFreq(this)">
+                        <div class="freq-check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5l2 2 4-4.5" stroke="#F5F0EB" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                        <div><div class="freq-text">Daily</div><div class="freq-sub">Every morning</div></div>
+                    </div>
+                    <div class="freq-option" data-freq="weekly" onclick="toggleFreq(this)">
+                        <div class="freq-check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5l2 2 4-4.5" stroke="#F5F0EB" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                        <div><div class="freq-text">Weekly</div><div class="freq-sub">Pick a day</div></div>
+                    </div>
+                    <div class="freq-option" data-freq="monthly" onclick="toggleFreq(this)">
+                        <div class="freq-check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5l2 2 4-4.5" stroke="#F5F0EB" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                        <div><div class="freq-text">Monthly</div><div class="freq-sub">1st of month</div></div>
+                    </div>
+                    <div class="freq-option" data-freq="quarterly" onclick="toggleFreq(this)">
+                        <div class="freq-check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5l2 2 4-4.5" stroke="#F5F0EB" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                        <div><div class="freq-text">Quarterly</div><div class="freq-sub">Start of quarter</div></div>
+                    </div>
+                    <div class="freq-option" data-freq="annually" onclick="toggleFreq(this)">
+                        <div class="freq-check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5.5l2 2 4-4.5" stroke="#F5F0EB" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                        <div><div class="freq-text">Annually</div><div class="freq-sub">Year-end review</div></div>
+                    </div>
+                </div>
+
+                <!-- Schedule details (appears for selected frequencies) -->
+                <div id="scheduleDetails">
+                    <div class="schedule-row" id="sched-daily" style="display:none;">
+                        <span class="freq-label">Daily</span>
+                        Deliver at <input type="time" value="07:00"> every day
+                    </div>
+                    <div class="schedule-row" id="sched-weekly" style="display:none;">
+                        <span class="freq-label">Weekly</span>
+                        Every <select><option>Monday</option><option>Tuesday</option><option>Wednesday</option><option>Thursday</option><option>Friday</option><option>Saturday</option><option>Sunday</option></select> at <input type="time" value="07:00">
+                    </div>
+                    <div class="schedule-row" id="sched-monthly" style="display:none;">
+                        <span class="freq-label">Monthly</span>
+                        <select><option>1st of month</option><option>Last day of month</option><option>First Monday</option></select> at <input type="time" value="07:00">
+                    </div>
+                    <div class="schedule-row" id="sched-quarterly" style="display:none;">
+                        <span class="freq-label">Quarterly</span>
+                        First week of quarter at <input type="time" value="07:00">
+                    </div>
+                    <div class="schedule-row" id="sched-annually" style="display:none;">
+                        <span class="freq-label">Annually</span>
+                        <select><option>January 1</option><option>Fiscal year start</option></select> at <input type="time" value="07:00">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Delivery Channels -->
+            <div class="modal-section">
+                <label class="modal-label">Delivery Channels</label>
+                <div class="delivery-grid">
+                    <div class="delivery-option selected" data-channel="email" onclick="toggleDelivery(this)">
+                        <div class="delivery-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="3" stroke="#41342A" stroke-width="1.5"/><path d="M2 7l10 6 10-6" stroke="#41342A" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+                        <div class="delivery-name">Email</div>
+                        <div class="delivery-desc">Inline HTML report</div>
+                    </div>
+                    <div class="delivery-option" data-channel="slack" onclick="toggleDelivery(this)">
+                        <div class="delivery-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M9 3a2 2 0 00-2 2v4h4a2 2 0 000-4H9zM5 9a2 2 0 100 4h4V9H5zM15 3a2 2 0 012 2v2h-4a2 2 0 010-4h2zM19 9a2 2 0 110 4h-4V9h4zM15 21a2 2 0 01-2-2v-2h4a2 2 0 010 4h-2zM5 15a2 2 0 100 4h2v-4H5zM9 21a2 2 0 002-2v-4H7a2 2 0 000 4h2zM19 15a2 2 0 110 4h-4v-4h4z" stroke="#41342A" stroke-width="1.3"/></svg></div>
+                        <div class="delivery-name">Slack</div>
+                        <div class="delivery-desc">Rich-formatted message</div>
+                    </div>
+                    <div class="delivery-option" data-channel="pdf" onclick="toggleDelivery(this)">
+                        <div class="delivery-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z" stroke="#41342A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v6h6M8 13h8M8 17h5" stroke="#41342A" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+                        <div class="delivery-name">PDF</div>
+                        <div class="delivery-desc">Download or attach</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recipients -->
+            <div class="modal-section">
+                <label class="modal-label">Recipients</label>
+                <input class="recipients-input" type="email" placeholder="Add email address and press Enter" onkeydown="if(event.key==='Enter'){addRecipient(this);event.preventDefault();}">
+                <div class="recipient-chips" id="recipientChips">
+                    <div class="recipient-chip">jessica@stelladot.com <span class="chip-remove" onclick="this.parentElement.remove()">x</span></div>
+                </div>
+            </div>
+
+            <!-- Slack Channel (conditional) -->
+            <div class="modal-section" id="slackSection" style="display:none;">
+                <label class="modal-label">Slack Channel</label>
+                <select style="width:100%;border:1.5px solid #EDE8E2;border-radius:10px;padding:10px 14px;font-size:13px;color:#41342A;font-family:'Inter',sans-serif;">
+                    <option>#marketing-reports</option>
+                    <option>#leadership</option>
+                    <option>#merchandising</option>
+                    <option>#general</option>
+                </select>
+            </div>
+
+            <!-- Settings -->
+            <div class="modal-section">
+                <label class="modal-label">Settings</label>
+                <div class="toggle-row">
+                    <div class="toggle-label">Include AI Insights<span>Narrative analysis + recommended actions</span></div>
+                    <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+                </div>
+                <div class="toggle-row" style="border-top: 1px solid #F0EBE5; padding-top: 12px;">
+                    <div class="toggle-label">Rolling Date Range<span>Automatically use the latest period each delivery</span></div>
+                    <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn-preview" onclick="closeConfig()">Send Preview Now</button>
+            <button class="btn-activate" onclick="closeConfig()">Save &amp; Activate</button>
+        </div>
+    </div>
+</div>
+
+<script>
+function openConfig(name, activeFreqs, activeChannels, isActive) {
+    document.getElementById('modalTitle').textContent = name;
+    document.getElementById('configModal').classList.add('open');
+
+    // Reset all freq options
+    document.querySelectorAll('.freq-option').forEach(el => {
+        el.classList.remove('selected');
+        document.getElementById('sched-' + el.dataset.freq).style.display = 'none';
+    });
+    // Set active frequencies
+    activeFreqs.forEach(f => {
+        const el = document.querySelector('.freq-option[data-freq="' + f + '"]');
+        if (el) { el.classList.add('selected'); document.getElementById('sched-' + f).style.display = 'flex'; }
+    });
+
+    // Reset delivery options
+    document.querySelectorAll('.delivery-option').forEach(el => el.classList.remove('selected'));
+    activeChannels.forEach(c => {
+        const el = document.querySelector('.delivery-option[data-channel="' + c + '"]');
+        if (el) el.classList.add('selected');
+    });
+    updateSlackVisibility();
+}
+
+function closeConfig() {
+    document.getElementById('configModal').classList.remove('open');
+}
+
+function toggleFreq(el) {
+    el.classList.toggle('selected');
+    const freq = el.dataset.freq;
+    const sched = document.getElementById('sched-' + freq);
+    sched.style.display = el.classList.contains('selected') ? 'flex' : 'none';
+}
+
+function toggleDelivery(el) {
+    el.classList.toggle('selected');
+    updateSlackVisibility();
+}
+
+function updateSlackVisibility() {
+    const slackSelected = document.querySelector('.delivery-option[data-channel="slack"]').classList.contains('selected');
+    document.getElementById('slackSection').style.display = slackSelected ? 'block' : 'none';
+}
+
+function addRecipient(input) {
+    const email = input.value.trim();
+    if (email && email.includes('@')) {
+        const chip = document.createElement('div');
+        chip.className = 'recipient-chip';
+        chip.innerHTML = email + ' <span class="chip-remove" onclick="this.parentElement.remove()">x</span>';
+        document.getElementById('recipientChips').appendChild(chip);
+        input.value = '';
+    }
+}
+
+// Close modal on overlay click
+document.getElementById('configModal').addEventListener('click', function(e) {
+    if (e.target === this) closeConfig();
+});
+</script>
 
 </body>
 </html>

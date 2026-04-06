@@ -435,84 +435,137 @@
 
         /* Campaign cards */
         .campaign-card {
-            background: #F6F5F3;
-            border-radius: 8px;
-            padding: 16px;
-            margin-bottom: 16px;
-            border-left: 4px solid #6B9C78;
-        }
-
-        .campaign-card.new {
-            border-left-color: #B0CEFF;
-        }
-
-        .campaign-card.discount {
-            border-left-color: #CFB4A4;
-        }
-
-        .campaign-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 12px;
-        }
-
-        .campaign-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: rgba(149,192,160,0.1);
-            color: #6B9C78;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 11px;
-            font-weight: 600;
-        }
-
-        .campaign-badge.new {
-            background: rgba(176,206,255,0.2);
-            color: #57719B;
-        }
-
-        .campaign-badge.discount {
-            background: rgba(207,180,164,0.2);
-            color: #41342A;
-        }
-
-        .campaign-name {
-            font-weight: 600;
-            font-size: 14px;
-            flex: 1;
-        }
-
-        .campaign-date {
-            font-size: 11px;
-            color: #83766B;
-        }
-
-        .campaign-metrics {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            font-size: 12px;
-        }
-
-        .campaign-metric {
             background: #FFFFFF;
-            padding: 12px;
-            border-radius: 4px;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            border: 1px solid #EDE8E2;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
         }
 
-        .campaign-metric-value {
+        .campaign-card-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+            position: relative;
+        }
+
+        .campaign-card-img-wrap {
+            position: relative;
+        }
+
+        .campaign-card-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(4px);
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 11px;
+            font-weight: 600;
+            color: #41342A;
+            border: 1px solid rgba(255,255,255,0.7);
+        }
+
+        .campaign-card-body {
+            padding: 16px;
+        }
+
+        .campaign-card-name {
             font-weight: 700;
             font-size: 16px;
             color: #41342A;
             margin-bottom: 4px;
         }
 
-        .campaign-metric-label {
+        .campaign-card-date {
+            font-size: 13px;
             color: #83766B;
+            margin-bottom: 10px;
+        }
+
+        .campaign-card-channels {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+
+        .campaign-channel-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: #F6F5F3;
+            border: 1px solid #EDE8E2;
+            padding: 3px 10px;
+            border-radius: 12px;
             font-size: 11px;
+            font-weight: 600;
+            color: #41342A;
+        }
+
+        .campaign-card-desc {
+            font-size: 13px;
+            color: #83766B;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .campaign-card-revenue-est {
+            font-size: 13px;
+            font-weight: 600;
+            color: #6B9C78;
+            margin-bottom: 16px;
+        }
+
+        .campaign-card-metrics {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            padding-top: 14px;
+            border-top: 1px solid #EDE8E2;
+        }
+
+        .campaign-card-metric {
+            text-align: center;
+        }
+
+        .campaign-card-metric-value {
+            font-weight: 700;
+            font-size: 15px;
+            color: #41342A;
+            margin-bottom: 2px;
+        }
+
+        .campaign-card-metric-label {
+            color: #83766B;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .campaign-card-actions {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 16px;
+            border-top: 1px solid #EDE8E2;
+        }
+
+        .campaign-card-action {
+            font-size: 13px;
+            font-weight: 600;
+            color: #83766B;
+            text-decoration: none;
+            padding: 6px 0;
+        }
+
+        .campaign-card-action.primary {
+            color: #41342A;
+            background: #F6F5F3;
+            border: 1px solid #EDE8E2;
+            border-radius: 8px;
+            padding: 6px 16px;
         }
 
         /* Calendar preview */
@@ -662,8 +715,8 @@
                 gap: 8px;
             }
 
-            .campaign-metrics {
-                grid-template-columns: 1fr;
+            .campaign-card-metrics {
+                grid-template-columns: repeat(2, 1fr);
             }
 
             .kpi-grid {
@@ -3431,152 +3484,6 @@
         </div>
       </div>
 
-
-      <!-- Channel Revenue Mix — Last 4 Weeks [NOTE: This chart may be consolidated with the revenue breakdown above] -->
-     <div>
-      <h3 style="margin-bottom: 16px;">
-       Channel Revenue Mix — Last 4 Weeks
-      </h3>
-      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;">
-       <!-- Week 1 -->
-       <div style="text-align: center;">
-        <div style="background: #F6F5F3; border-radius: 8px; padding: 12px 8px; height: 160px; display: flex; flex-direction: column; justify-content: flex-end;">
-         <div style="border-radius: 4px 4px 0 0; background: #6B9C78; height: 36%; margin-bottom: 1px;" title="Email 36%">
-         </div>
-         <div style="background: #57719B; height: 32%; margin-bottom: 1px;" title="Meta 32%">
-         </div>
-         <div style="background: #DED29D; height: 12%; margin-bottom: 1px;" title="Google 12%">
-         </div>
-         <div style="background: #95c0a0; height: 8%; margin-bottom: 1px;" title="Social 8%">
-         </div>
-         <div style="background: #F3D0EB; height: 6%; margin-bottom: 1px;" title="SMS 6%">
-         </div>
-         <div style="border-radius: 0 0 4px 4px; background: #CFB4A4; height: 6%;" title="Influencer 6%">
-         </div>
-        </div>
-        <div style="font-size: 12px; color: #83766B; margin-top: 8px;">
-         Mar 10
-        </div>
-        <div style="font-size: 11px; color: #83766B;">
-         $98K
-        </div>
-       </div>
-       <!-- Week 2 -->
-       <div style="text-align: center;">
-        <div style="background: #F6F5F3; border-radius: 8px; padding: 12px 8px; height: 160px; display: flex; flex-direction: column; justify-content: flex-end;">
-         <div style="border-radius: 4px 4px 0 0; background: #6B9C78; height: 38%; margin-bottom: 1px;" title="Email 38%">
-         </div>
-         <div style="background: #57719B; height: 30%; margin-bottom: 1px;" title="Meta 30%">
-         </div>
-         <div style="background: #DED29D; height: 13%; margin-bottom: 1px;" title="Google 13%">
-         </div>
-         <div style="background: #95c0a0; height: 8%; margin-bottom: 1px;" title="Social 8%">
-         </div>
-         <div style="background: #F3D0EB; height: 7%; margin-bottom: 1px;" title="SMS 7%">
-         </div>
-         <div style="border-radius: 0 0 4px 4px; background: #CFB4A4; height: 4%;" title="Influencer 4%">
-         </div>
-        </div>
-        <div style="font-size: 12px; color: #83766B; margin-top: 8px;">
-         Mar 17
-        </div>
-        <div style="font-size: 11px; color: #83766B;">
-         $108K
-        </div>
-       </div>
-       <!-- Week 3 -->
-       <div style="text-align: center;">
-        <div style="background: #F6F5F3; border-radius: 8px; padding: 12px 8px; height: 160px; display: flex; flex-direction: column; justify-content: flex-end;">
-         <div style="border-radius: 4px 4px 0 0; background: #6B9C78; height: 40%; margin-bottom: 1px;" title="Email 40%">
-         </div>
-         <div style="background: #57719B; height: 28%; margin-bottom: 1px;" title="Meta 28%">
-         </div>
-         <div style="background: #DED29D; height: 13%; margin-bottom: 1px;" title="Google 13%">
-         </div>
-         <div style="background: #95c0a0; height: 9%; margin-bottom: 1px;" title="Social 9%">
-         </div>
-         <div style="background: #F3D0EB; height: 6%; margin-bottom: 1px;" title="SMS 6%">
-         </div>
-         <div style="border-radius: 0 0 4px 4px; background: #CFB4A4; height: 4%;" title="Influencer 4%">
-         </div>
-        </div>
-        <div style="font-size: 12px; color: #83766B; margin-top: 8px;">
-         Mar 24
-        </div>
-        <div style="font-size: 11px; color: #83766B;">
-         $114K
-        </div>
-       </div>
-       <!-- This Week (highlighted) -->
-       <div style="text-align: center;">
-        <div style="background: rgba(149,192,160,0.1); border: 2px solid #6B9C78; border-radius: 8px; padding: 12px 8px; height: 160px; display: flex; flex-direction: column; justify-content: flex-end;">
-         <div style="border-radius: 4px 4px 0 0; background: #6B9C78; height: 42%; margin-bottom: 1px;" title="Email 42%">
-         </div>
-         <div style="background: #57719B; height: 28%; margin-bottom: 1px;" title="Meta 28%">
-         </div>
-         <div style="background: #DED29D; height: 12%; margin-bottom: 1px;" title="Google 12%">
-         </div>
-         <div style="background: #95c0a0; height: 8%; margin-bottom: 1px;" title="Social 8%">
-         </div>
-         <div style="background: #F3D0EB; height: 6%; margin-bottom: 1px;" title="SMS 6%">
-         </div>
-         <div style="border-radius: 0 0 4px 4px; background: #CFB4A4; height: 4%;" title="Influencer 4%">
-         </div>
-        </div>
-        <div style="font-size: 12px; font-weight: 600; color: #6B9C78; margin-top: 8px;">
-         This Week
-        </div>
-        <div style="font-size: 11px; font-weight: 600; color: #41342A;">
-         $127K
-        </div>
-       </div>
-      </div>
-      <!-- Legend row -->
-      <div style="display: flex; justify-content: center; gap: 16px; margin-top: 12px; flex-wrap: wrap;">
-       <div style="display: flex; align-items: center; gap: 4px;">
-        <div style="width: 10px; height: 10px; border-radius: 2px; background: #6B9C78;">
-        </div>
-        <span style="font-size: 11px; color: #83766B;">
-         Email
-        </span>
-       </div>
-       <div style="display: flex; align-items: center; gap: 4px;">
-        <div style="width: 10px; height: 10px; border-radius: 2px; background: #57719B;">
-        </div>
-        <span style="font-size: 11px; color: #83766B;">
-         Meta
-        </span>
-       </div>
-       <div style="display: flex; align-items: center; gap: 4px;">
-        <div style="width: 10px; height: 10px; border-radius: 2px; background: #DED29D;">
-        </div>
-        <span style="font-size: 11px; color: #83766B;">
-         Google
-        </span>
-       </div>
-       <div style="display: flex; align-items: center; gap: 4px;">
-        <div style="width: 10px; height: 10px; border-radius: 2px; background: #95c0a0;">
-        </div>
-        <span style="font-size: 11px; color: #83766B;">
-         Social
-        </span>
-       </div>
-       <div style="display: flex; align-items: center; gap: 4px;">
-        <div style="width: 10px; height: 10px; border-radius: 2px; background: #F3D0EB;">
-        </div>
-        <span style="font-size: 11px; color: #83766B;">
-         SMS
-        </span>
-       </div>
-       <div style="display: flex; align-items: center; gap: 4px;">
-        <div style="width: 10px; height: 10px; border-radius: 2px; background: #CFB4A4;">
-        </div>
-        <span style="font-size: 11px; color: #83766B;">
-         Influencer
-        </span>
-       </div>
-      </div>
-     </div>
     </div>
     <!-- Email & SMS Deep Dive -->
     <div class="deep-dive-card expanded" id="emailDeepDive">
@@ -4000,145 +3907,124 @@
        </p>
       </div>
      </div>
+     <!-- Campaign 1: Spring Collection Launch -->
      <div class="campaign-card">
-      <div class="campaign-header">
-       <span class="campaign-badge">
-        Core
-       </span>
-       <div class="campaign-name">
-        Spring Collection Launch
-       </div>
-       <div class="campaign-date">
-        Mar 24–30
-       </div>
+      <div class="campaign-card-img-wrap">
+       <img class="campaign-card-img" src="https://www.stelladot.com/cdn/shop/files/N3118G-LayeringNecklace-Gold-styled_1080x.jpg" alt="Spring Collection Launch">
+       <div class="campaign-card-badge">Core</div>
       </div>
-      <div class="campaign-metrics">
-       <div class="campaign-metric">
-        <div class="campaign-metric-value">
-         $58,230
-        </div>
-        <div class="campaign-metric-label">
-         Revenue
-        </div>
+      <div class="campaign-card-body">
+       <div class="campaign-card-name">Spring Collection Launch</div>
+       <div class="campaign-card-date">March 24–30, 2026</div>
+       <div class="campaign-card-channels">
+        <span class="campaign-channel-pill">✉ 3</span>
+        <span class="campaign-channel-pill">↗ 3</span>
+        <span class="campaign-channel-pill">$ 2</span>
        </div>
-       <div class="campaign-metric">
-        <div class="campaign-metric-value">
-         458
+       <div class="campaign-card-desc">Your strongest campaign this quarter — launched with a VIP early-access email, Meta prospecting push, and organic social. Drove 46% of total monthly revenue.</div>
+       <div class="campaign-card-revenue-est">$58,230 revenue · 3.4x ROAS</div>
+       <div class="campaign-card-metrics">
+        <div class="campaign-card-metric">
+         <div class="campaign-card-metric-value">458</div>
+         <div class="campaign-card-metric-label">Orders</div>
         </div>
-        <div class="campaign-metric-label">
-         Orders
+        <div class="campaign-card-metric">
+         <div class="campaign-card-metric-value">$127</div>
+         <div class="campaign-card-metric-label">AOV</div>
         </div>
-       </div>
-       <div class="campaign-metric">
-        <div class="campaign-metric-value">
-         $1,834
+        <div class="campaign-card-metric">
+         <div class="campaign-card-metric-value">$35,820</div>
+         <div class="campaign-card-metric-label">Gross Profit</div>
         </div>
-        <div class="campaign-metric-label">
-         Gross Profit
+        <div class="campaign-card-metric">
+         <div class="campaign-card-metric-value">61.5%</div>
+         <div class="campaign-card-metric-label">Gross Margin</div>
         </div>
        </div>
       </div>
-      <div style="display: flex; gap: 40px; margin-top: 12px; font-size: 12px; color: #83766B;">
-       <span>
-        45.6% of total revenue
-       </span>
-       <span>
-        ↗ +22% vs last year
-       </span>
+      <div class="campaign-card-actions">
+       <a href="#" class="campaign-card-action">View Campaign Analytics</a>
+       <a href="#" class="campaign-card-action primary">View &amp; Edit</a>
       </div>
      </div>
-     <div class="campaign-card new">
-      <div class="campaign-header">
-       <span class="campaign-badge new">
-        New
-       </span>
-       <div class="campaign-name">
-        Email Re-engagement Series
-       </div>
-       <div class="campaign-date">
-        Mar 25–30
-       </div>
+
+     <!-- Campaign 2: Email Re-engagement Series -->
+     <div class="campaign-card">
+      <div class="campaign-card-img-wrap">
+       <img class="campaign-card-img" src="https://www.stelladot.com/cdn/shop/files/B3066G-BeadStretchBracelet-Gold_1080x.jpg" alt="Email Re-engagement Series">
+       <div class="campaign-card-badge">New</div>
       </div>
-      <div class="campaign-metrics">
-       <div class="campaign-metric">
-        <div class="campaign-metric-value">
-         $18,450
-        </div>
-        <div class="campaign-metric-label">
-         Revenue
-        </div>
+      <div class="campaign-card-body">
+       <div class="campaign-card-name">Email Re-engagement Series</div>
+       <div class="campaign-card-date">March 25–30, 2026</div>
+       <div class="campaign-card-channels">
+        <span class="campaign-channel-pill">✉ 4</span>
        </div>
-       <div class="campaign-metric">
-        <div class="campaign-metric-value">
-         128
+       <div class="campaign-card-desc">Targeted lapsed customers (90+ days inactive) with a 3-email sequence. Strong RPR at $1.22 — above your campaign average of $0.94.</div>
+       <div class="campaign-card-revenue-est">$18,450 revenue · 2.8x ROAS</div>
+       <div class="campaign-card-metrics">
+        <div class="campaign-card-metric">
+         <div class="campaign-card-metric-value">128</div>
+         <div class="campaign-card-metric-label">Orders</div>
         </div>
-        <div class="campaign-metric-label">
-         Orders
+        <div class="campaign-card-metric">
+         <div class="campaign-card-metric-value">$144</div>
+         <div class="campaign-card-metric-label">AOV</div>
         </div>
-       </div>
-       <div class="campaign-metric">
-        <div class="campaign-metric-value">
-         $11,340
+        <div class="campaign-card-metric">
+         <div class="campaign-card-metric-value">$11,340</div>
+         <div class="campaign-card-metric-label">Gross Profit</div>
         </div>
-        <div class="campaign-metric-label">
-         Gross Profit
+        <div class="campaign-card-metric">
+         <div class="campaign-card-metric-value">61.5%</div>
+         <div class="campaign-card-metric-label">Gross Margin</div>
         </div>
        </div>
       </div>
-      <div style="display: flex; gap: 40px; margin-top: 12px; font-size: 12px; color: #83766B;">
-       <span>
-        14.5% of total revenue
-       </span>
-       <span>
-        New campaign (vs new avg +8%)
-       </span>
+      <div class="campaign-card-actions">
+       <a href="#" class="campaign-card-action">View Campaign Analytics</a>
+       <a href="#" class="campaign-card-action primary">View &amp; Edit</a>
       </div>
      </div>
-     <div class="campaign-card discount">
-      <div class="campaign-header">
-       <span class="campaign-badge discount">
-        Discount
-       </span>
-       <div class="campaign-name">
-        Flash Sale: 20% Off Pearls
-       </div>
-       <div class="campaign-date">
-        Mar 26–27
-       </div>
+
+     <!-- Campaign 3: Flash Sale: 20% Off Pearls -->
+     <div class="campaign-card">
+      <div class="campaign-card-img-wrap">
+       <img class="campaign-card-img" src="https://www.stelladot.com/cdn/shop/files/E2038-ChannelSetHuggieEarrings-Gold-99_1080x.jpg" alt="Flash Sale: 20% Off Pearls">
+       <div class="campaign-card-badge">Discount</div>
       </div>
-      <div class="campaign-metrics">
-       <div class="campaign-metric">
-        <div class="campaign-metric-value">
-         $32,100
-        </div>
-        <div class="campaign-metric-label">
-         Revenue
-        </div>
+      <div class="campaign-card-body">
+       <div class="campaign-card-name">Flash Sale: 20% Off Pearls</div>
+       <div class="campaign-card-date">March 26–27, 2026</div>
+       <div class="campaign-card-channels">
+        <span class="campaign-channel-pill">✉ 2</span>
+        <span class="campaign-channel-pill">↗ 2</span>
+        <span class="campaign-channel-pill">$ 1</span>
        </div>
-       <div class="campaign-metric">
-        <div class="campaign-metric-value">
-         287
+       <div class="campaign-card-desc">2-day flash sale drove high volume but lower margin. AOV dropped 12% vs. your monthly average — discount-driven orders tend to skew smaller basket size.</div>
+       <div class="campaign-card-revenue-est">$32,100 revenue · 2.1x ROAS</div>
+       <div class="campaign-card-metrics">
+        <div class="campaign-card-metric">
+         <div class="campaign-card-metric-value">287</div>
+         <div class="campaign-card-metric-label">Orders</div>
         </div>
-        <div class="campaign-metric-label">
-         Orders
+        <div class="campaign-card-metric">
+         <div class="campaign-card-metric-value">$112</div>
+         <div class="campaign-card-metric-label">AOV</div>
         </div>
-       </div>
-       <div class="campaign-metric">
-        <div class="campaign-metric-value">
-         $12,840
+        <div class="campaign-card-metric">
+         <div class="campaign-card-metric-value">$12,840</div>
+         <div class="campaign-card-metric-label">Gross Profit</div>
         </div>
-        <div class="campaign-metric-label">
-         Gross Profit
+        <div class="campaign-card-metric">
+         <div class="campaign-card-metric-value">40.0%</div>
+         <div class="campaign-card-metric-label">Gross Margin</div>
         </div>
        </div>
       </div>
-      <div style="display: flex; gap: 40px; margin-top: 12px; font-size: 12px; color: #83766B;">
-       <span>
-        25.2% of total revenue
-       </span>
-       <span>
-        Discount avg baseline (-15%)
-       </span>
+      <div class="campaign-card-actions">
+       <a href="#" class="campaign-card-action">View Discount Analytics</a>
+       <a href="#" class="campaign-card-action primary">View &amp; Edit</a>
       </div>
      </div>
     </div>

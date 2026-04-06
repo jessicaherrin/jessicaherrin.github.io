@@ -4,7 +4,7 @@
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
   <title>
-   Report #1: Weekly Marketing Summary — Marklo
+   Report #1: Monthly Marketing Summary — Marklo
   </title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Playfair+Display:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.2/html2pdf.bundle.min.js" async>
@@ -622,6 +622,23 @@
 
         .footer-cta:hover {
             background: #333;
+        }
+
+
+        /* Subscription metrics */
+        .subscription-metrics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 16px;
+        }
+        
+        .subscription-card {
+            background: #F6F5F3;
+            border-radius: 10px;
+            padding: 14px 12px;
+            text-align: center;
+            border-left: 3px solid #6B9C78;
         }
 
         .footer-info {
@@ -1310,7 +1327,7 @@
                     </svg>
                     <span style="font-size: 9px; font-weight: 600; letter-spacing: 2px; color: rgba(65,52,42,0.35); text-transform: uppercase;">Marklo</span>
                 </div>
-                <span style="font-size: 11px; color: rgba(65,52,42,0.4); letter-spacing: 0.5px;">Mar 24–30, 2026 · Weekly</span>
+                <span style="font-size: 11px; color: rgba(65,52,42,0.4); letter-spacing: 0.5px;">April 2026</span>
             </div>
 
             <!-- Hero Brand Logo — generous whitespace -->
@@ -1323,7 +1340,7 @@
             <!-- Report title + decorative divider -->
             <div style="text-align: center; padding: 0 44px 20px; position: relative; z-index: 1;">
                 <div style="width: 48px; height: 1px; background: linear-gradient(90deg, transparent, rgba(87,113,155,0.4), transparent); margin: 0 auto 16px;"></div>
-                <div style="font-size: 11px; font-weight: 500; color: rgba(65,52,42,0.45); text-transform: uppercase; letter-spacing: 3px;">Weekly Marketing Summary</div>
+                <div style="font-size: 11px; font-weight: 500; color: rgba(65,52,42,0.45); text-transform: uppercase; letter-spacing: 3px;">Monthly Marketing Summary</div>
             </div>
 
             <!-- TOC Navigation Strip -->
@@ -1350,7 +1367,7 @@
 
                 <!-- Key Metrics pills (consolidates old win-pills + achievements) -->
                 <div style="display: flex; gap: 7px; flex-wrap: wrap; margin-top: 18px;">
-                    <span style="background: rgba(149,192,160,0.2); border: 1px solid rgba(149,192,160,0.4); color: #4A7A56; padding: 5px 13px; border-radius: 20px; font-size: 11px; font-weight: 600;">🚀 Revenue +12% WoW</span>
+                    <span style="background: rgba(149,192,160,0.2); border: 1px solid rgba(149,192,160,0.4); color: #4A7A56; padding: 5px 13px; border-radius: 20px; font-size: 11px; font-weight: 600;">🚀 Revenue +12% vs. March</span>
                     <span style="background: rgba(176,206,255,0.25); border: 1px solid rgba(176,206,255,0.5); color: #57719B; padding: 5px 13px; border-radius: 20px; font-size: 11px; font-weight: 600;">🔥 4-Week Growth Streak</span>
                     <span style="background: rgba(208,201,164,0.25); border: 1px solid rgba(208,201,164,0.5); color: #7A7452; padding: 5px 13px; border-radius: 20px; font-size: 11px; font-weight: 600;">⭐ Record Tuesday Email $18.4K</span>
                     <span style="background: rgba(177,151,199,0.15); border: 1px solid rgba(177,151,199,0.35); color: #7A5F8A; padding: 5px 13px; border-radius: 20px; font-size: 11px; font-weight: 600;">🎯 3 Successful Launches This Quarter</span>
@@ -1363,9 +1380,9 @@
         <div class="ai-insight">
             <div class="ai-icon">✦</div>
             <div class="ai-content">
-                <div style="font-size: 11px; font-weight: 700; color: #57719B; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">AI Weekly Summary</div>
-                <p><strong>What a week!</strong> Revenue hit $127K — your best since January and up 12% WoW. The Spring Layering Collection launch absolutely crushed it, driving 35% of total revenue. Your Tuesday email was a home run at $18.4K from a single send (new record!). One thing to watch: paid ROAS dipped to 2.76x as your top Meta creative is showing fatigue — but Google PMax is quietly climbing.</p>
-                <a class="ai-cta" href="#">→ View Suggested Campaigns</a>
+                <div style="font-size: 11px; font-weight: 700; color: #57719B; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">AI Summary</div>
+                <p>April revenue was $127,450, up 12% from March and 18% ahead of April last year — your strongest month this quarter. The Spring Layering Collection drove $44K (35% of total revenue), with a VIP early-access email and Meta prospecting push running alongside the launch. Repeat purchase rate has declined for two consecutive months to 28% — if post-purchase flows or retention offers haven't changed, this is worth digging into.</p>
+                <a class="ai-cta" href="#">→ Ask Marklo for Campaign Suggestions</a>
             </div>
         </div>
    <!-- Headline KPIs -->
@@ -1389,7 +1406,7 @@
        $127,450
       </div>
       <div class="kpi-change positive">
-       ↗ +12% WoW
+       ↗ +12% MoM
       </div>
       <div style="margin-top: 6px; display: flex; gap: 6px; flex-wrap: wrap;">
        <span style="background: rgba(176,206,255,0.2); color: #57719B; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 600;">
@@ -1571,7 +1588,7 @@
        <strong>
         ⚡ Insight:
        </strong>
-       Tuesday drove 28% of weekly revenue, up from 18% last week — your email send on Tuesday morning likely caused the spike. Revenue is tracking +12% vs. last month and +34% vs. same week last year, indicating strong growth momentum beyond seasonal norms.
+       Week 2 drove 34% of monthly revenue ($43K) — the Spring Collection launch, a VIP early-access email, and a Meta prospecting push were all live during the peak. Revenue tracked above both last month and last April throughout, with the gap widening in the back half — momentum is building, not front-loaded.
       </p>
      </div>
     </div>
@@ -1659,7 +1676,7 @@
         <strong>
          ⚡ Insight:
         </strong>
-        New customer acquisition is up 22% vs. same week last year, driven primarily by paid social. Your new-to-returning customer ratio of 38:62 is healthy and improving. Cost per new customer dropped to $24.50 from $28.80 last month — Meta prospecting campaigns are getting more efficient.
+        You acquired 342 new customers this month, up 15% from March and 22% vs. April last year. Cost per new customer was $24.50, down from $28.80 last month — your most efficient acquisition month this quarter. New customers made up 39% of total orders, up from 34% in March. You ran a Meta prospecting campaign and a TikTok awareness test during the period.
        </p>
       </div>
      </div>
@@ -1672,7 +1689,7 @@
         342
        </div>
        <div class="kpi-change positive">
-        ↗ +15% WoW
+        ↗ +15% MoM
        </div>
       </div>
       <div class="kpi-card">
@@ -1849,7 +1866,7 @@
          $12K
         </div>
         <div style="font-size: 11px; color: #6B9C78; font-weight: 600;">
-         ↗ +23% WoW
+         ↗ +23% MoM
         </div>
         <div style="font-size: 10px; color: #83766B; margin-top: 2px;">
          Revenue
@@ -2864,7 +2881,7 @@
           <strong>
            ⚡ Insight:
           </strong>
-          Sapphire Necklace jumped +45% after being featured in Tuesday's email — proving the "hero product" email format works. Consider applying the same format to Crystal Drop Earrings and Bead Stretch Bracelet next week. → View Suggested Campaign
+          Sapphire Necklace jumped +45% after being featured in an email send on the 8th — your "hero product" email format continues to drive velocity spikes. Crystal Drop Earrings and Bead Stretch Bracelet haven't been featured yet this month. → View Product Analytics
          </p>
         </div>
        </div>
@@ -3209,17 +3226,20 @@
         <strong>
          ⚡ Insight:
         </strong>
-        Email is your strongest channel this week at 42% of total revenue — lean in with a second send. Paid Meta ROAS is in yellow territory at 2.89x — your top ad set shows fatigue with frequency at 3.2x. Consider shifting 15% of Meta budget to Google where ROAS is climbing. → View Suggested Budget Reallocation
+        Email drove 42% of revenue this month, up from 36% in March — your highest email share this quarter. You ran 6 email campaigns vs. 3 last month, including the Spring Collection launch which was email-exclusive for the first 48 hours. Paid Meta share has declined for three consecutive months (40% → 34% → 28%) — worth reviewing whether this is intentional rebalancing.
        </p>
       </div>
      </div>
      <!-- Channel table with inline bars -->
      <div style="margin-bottom: 28px;">
-      <div style="display: grid; grid-template-columns: 28px 100px 1fr 90px 50px 60px; gap: 0; align-items: center; padding: 12px 8px; border-bottom: 2px solid #EDE8E2; font-size: 12px; font-weight: 500; text-transform: none; color: #83766B; background: #F6F5F3; letter-spacing: normal;">
+      <div style="display: grid; grid-template-columns: 28px 100px 50px 1fr 90px 50px 60px; gap: 0; align-items: center; padding: 12px 8px; border-bottom: 2px solid #EDE8E2; font-size: 12px; font-weight: 500; text-transform: none; color: #83766B; background: #F6F5F3; letter-spacing: normal;">
        <div>
        </div>
        <div>
         Channel
+       </div>
+       <div style="text-align: center;">
+        #
        </div>
        <div>
         Revenue Share
@@ -3231,17 +3251,18 @@
         %
        </div>
        <div style="text-align: right;">
-        WoW
+        MoM
        </div>
       </div>
       <!-- Email -->
-      <div style="display: grid; grid-template-columns: 28px 100px 1fr 90px 50px 60px; gap: 0; align-items: center; padding: 12px 0; border-bottom: 1px solid #F0EBE5;">
+      <div style="display: grid; grid-template-columns: 28px 100px 50px 1fr 90px 50px 60px; gap: 0; align-items: center; padding: 12px 0; border-bottom: 1px solid #F0EBE5;">
        <span style="font-size: 14px;">
         🟢
        </span>
        <span style="font-weight: 600; font-size: 14px; color: #41342A;">
         Email
        </span>
+       <div style="text-align: center; font-size: 11px; color: #83766B;">6 sends</div>
        <div style="padding-right: 16px;">
         <div style="background: #EDE8E2; border-radius: 4px; height: 10px; overflow: hidden;">
          <div style="width: 42%; height: 100%; background: #6B9C78; border-radius: 4px;">
@@ -3259,13 +3280,14 @@
        </div>
       </div>
       <!-- Paid Meta -->
-      <div style="display: grid; grid-template-columns: 28px 100px 1fr 90px 50px 60px; gap: 0; align-items: center; padding: 12px 0; border-bottom: 1px solid #F0EBE5;">
+      <div style="display: grid; grid-template-columns: 28px 100px 50px 1fr 90px 50px 60px; gap: 0; align-items: center; padding: 12px 0; border-bottom: 1px solid #F0EBE5;">
        <span style="font-size: 14px;">
         🟡
        </span>
        <span style="font-weight: 600; font-size: 14px; color: #41342A;">
         Paid Meta
        </span>
+       <div style="text-align: center; font-size: 11px; color: #83766B;">3 campaigns</div>
        <div style="padding-right: 16px;">
         <div style="background: #EDE8E2; border-radius: 4px; height: 10px; overflow: hidden;">
          <div style="width: 28%; height: 100%; background: #57719B; border-radius: 4px;">
@@ -3283,13 +3305,14 @@
        </div>
       </div>
       <!-- Paid Google -->
-      <div style="display: grid; grid-template-columns: 28px 100px 1fr 90px 50px 60px; gap: 0; align-items: center; padding: 12px 0; border-bottom: 1px solid #F0EBE5;">
+      <div style="display: grid; grid-template-columns: 28px 100px 50px 1fr 90px 50px 60px; gap: 0; align-items: center; padding: 12px 0; border-bottom: 1px solid #F0EBE5;">
        <span style="font-size: 14px;">
         🟢
        </span>
        <span style="font-weight: 600; font-size: 14px; color: #41342A;">
         Paid Google
        </span>
+       <div style="text-align: center; font-size: 11px; color: #83766B;">2 campaigns</div>
        <div style="padding-right: 16px;">
         <div style="background: #EDE8E2; border-radius: 4px; height: 10px; overflow: hidden;">
          <div style="width: 12%; height: 100%; background: #DED29D; border-radius: 4px;">
@@ -3307,13 +3330,14 @@
        </div>
       </div>
       <!-- Social -->
-      <div style="display: grid; grid-template-columns: 28px 100px 1fr 90px 50px 60px; gap: 0; align-items: center; padding: 12px 0; border-bottom: 1px solid #F0EBE5;">
+      <div style="display: grid; grid-template-columns: 28px 100px 50px 1fr 90px 50px 60px; gap: 0; align-items: center; padding: 12px 0; border-bottom: 1px solid #F0EBE5;">
        <span style="font-size: 14px;">
         🟢
        </span>
        <span style="font-weight: 600; font-size: 14px; color: #41342A;">
         Social
        </span>
+       <div style="text-align: center; font-size: 11px; color: #83766B;">41 posts</div>
        <div style="padding-right: 16px;">
         <div style="background: #EDE8E2; border-radius: 4px; height: 10px; overflow: hidden;">
          <div style="width: 8%; height: 100%; background: #95c0a0; border-radius: 4px;">
@@ -3331,13 +3355,14 @@
        </div>
       </div>
       <!-- SMS -->
-      <div style="display: grid; grid-template-columns: 28px 100px 1fr 90px 50px 60px; gap: 0; align-items: center; padding: 12px 0; border-bottom: 1px solid #F0EBE5;">
+      <div style="display: grid; grid-template-columns: 28px 100px 50px 1fr 90px 50px 60px; gap: 0; align-items: center; padding: 12px 0; border-bottom: 1px solid #F0EBE5;">
        <span style="font-size: 14px;">
         🟢
        </span>
        <span style="font-weight: 600; font-size: 14px; color: #41342A;">
         SMS
        </span>
+       <div style="text-align: center; font-size: 11px; color: #83766B;">4 sends</div>
        <div style="padding-right: 16px;">
         <div style="background: #EDE8E2; border-radius: 4px; height: 10px; overflow: hidden;">
          <div style="width: 6%; height: 100%; background: #F3D0EB; border-radius: 4px;">
@@ -3355,13 +3380,14 @@
        </div>
       </div>
       <!-- Influencer -->
-      <div style="display: grid; grid-template-columns: 28px 100px 1fr 90px 50px 60px; gap: 0; align-items: center; padding: 12px 0;">
+      <div style="display: grid; grid-template-columns: 28px 100px 50px 1fr 90px 50px 60px; gap: 0; align-items: center; padding: 12px 0;">
        <span style="font-size: 14px;">
         🟢
        </span>
        <span style="font-weight: 600; font-size: 14px; color: #41342A;">
         Influencer
        </span>
+       <div style="text-align: center; font-size: 11px; color: #83766B;">2 activations</div>
        <div style="padding-right: 16px;">
         <div style="background: #EDE8E2; border-radius: 4px; height: 10px; overflow: hidden;">
          <div style="width: 4%; height: 100%; background: #CFB4A4; border-radius: 4px;">
@@ -3379,7 +3405,34 @@
        </div>
       </div>
      </div>
-     <!-- Channel Revenue Mix — Last 4 Weeks -->
+           
+      <!-- Subscription Metrics -->
+      <h3 style="margin-top: 24px; margin-bottom: 12px; color: #41342A; font-size: 14px;">Subscription Health</h3>
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="label">ACTIVE SUBSCRIBERS</div>
+          <div class="kpi-value">2,847</div>
+          <div class="kpi-change positive">↑ +143 MTD</div>
+        </div>
+        <div class="kpi-card">
+          <div class="label">NEW SUBSCRIPTIONS</div>
+          <div class="kpi-value">328</div>
+          <div class="kpi-change positive">↑ +12% vs LY</div>
+        </div>
+        <div class="kpi-card">
+          <div class="label">CHURN RATE</div>
+          <div class="kpi-value">2.4%</div>
+          <div class="kpi-change negative">↑ +0.3pp vs LY</div>
+        </div>
+        <div class="kpi-card">
+          <div class="label">SUBSCRIPTION REVENUE</div>
+          <div class="kpi-value">$28,470</div>
+          <div class="kpi-change positive">↑ +18% vs LY</div>
+        </div>
+      </div>
+
+
+      <!-- Channel Revenue Mix — Last 4 Weeks [NOTE: This chart may be consolidated with the revenue breakdown above] -->
      <div>
       <h3 style="margin-bottom: 16px;">
        Channel Revenue Mix — Last 4 Weeks
@@ -3533,7 +3586,7 @@
        <div class="deep-dive-title">Email &amp; SMS</div>
        <div class="deep-dive-summary-pills">
         <div class="deep-dive-pill"><div class="deep-dive-pill-value">$53,510</div><div class="deep-dive-pill-label">Revenue</div></div>
-        <div class="deep-dive-pill"><div class="deep-dive-pill-value" style="color:#6B9C78;">↗ +18%</div><div class="deep-dive-pill-label">WoW</div></div>
+        <div class="deep-dive-pill"><div class="deep-dive-pill-value" style="color:#6B9C78;">↗ +18%</div><div class="deep-dive-pill-label">MoM</div></div>
         <div class="deep-dive-pill"><div class="deep-dive-pill-value">53.7%</div><div class="deep-dive-pill-label">% of Total</div></div>
        </div>
       </div>
@@ -3550,12 +3603,35 @@
         <strong>
          ⚡ Insight:
         </strong>
-        Your Tuesday email outperformed Thursday by 2.3x in revenue per recipient. Subject lines featuring product names generated 18% higher open rates than promotional subject lines. The Spring Layering Collection email earned $1.48/recipient — your best-performing email in 6 weeks. → Schedule Similar Campaign
+        Your Spring Collection launch email generated $1.48/recipient — the highest RPR of any send this quarter. Tuesday sends averaged $1.32 RPR vs. $0.84 for Thursday. Subject lines leading with product names outperformed promotional lines by 22% in RPR. You sent 6 campaigns this month (up from 4) with stable unsub rates — room to increase frequency. → View Email Analytics
        </p>
       </div>
      </div>
-     <!-- Agency-Level KPIs (inspired by Klaviyo agency reports) -->
+     <!-- List Health & Send Volume -->
+     <div style="margin-bottom: 16px;">
+      <div style="font-size: 11px; font-weight: 700; color: #83766B; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px;">List Health & Send Volume</div>
+     </div>
      <div class="deep-dive-agency-kpis">
+      <div class="agency-kpi">
+       <div class="agency-kpi-label">New Subscribers</div>
+       <div class="agency-kpi-value">4,414</div>
+       <div class="agency-kpi-change positive">↗ +12% MoM</div>
+      </div>
+      <div class="agency-kpi">
+       <div class="agency-kpi-label">Unsubscribes</div>
+       <div class="agency-kpi-value">4,002</div>
+       <div class="agency-kpi-change negative">↘ incl. 228 list clean</div>
+      </div>
+      <div class="agency-kpi">
+       <div class="agency-kpi-label" style="font-weight: 700;">Net Change</div>
+       <div class="agency-kpi-value" style="color: #6B9C78;">+412</div>
+       <div class="agency-kpi-change positive">↗ Positive growth</div>
+      </div>
+      <div class="agency-kpi">
+       <div class="agency-kpi-label">Campaigns Sent</div>
+       <div class="agency-kpi-value">6</div>
+       <div class="agency-kpi-change positive">↗ +2 vs. last month</div>
+      </div>
       <div class="agency-kpi">
        <div class="agency-kpi-label">Campaigns vs Flows</div>
        <div class="agency-kpi-value">70 / 30%</div>
@@ -3566,16 +3642,6 @@
        <div class="agency-kpi-value">85/100</div>
        <div class="agency-kpi-change positive">↗ +5 pts</div>
        <div class="agency-kpi-prev">From 80/100</div>
-      </div>
-      <div class="agency-kpi">
-       <div class="agency-kpi-label">New Subscribers</div>
-       <div class="agency-kpi-value">4,414</div>
-       <div class="agency-kpi-change positive">↗ +12%</div>
-      </div>
-      <div class="agency-kpi">
-       <div class="agency-kpi-label">Unsubscribes</div>
-       <div class="agency-kpi-value">4,002</div>
-       <div class="agency-kpi-change negative">↘ incl. 228 list clean</div>
       </div>
       <div class="agency-kpi">
        <div class="agency-kpi-label">Spam Complaints</div>
@@ -3606,7 +3672,7 @@
         $53,510
        </div>
        <div class="kpi-change positive">
-        ↗ +18% WoW
+        ↗ +18% MoM
        </div>
       </div>
       <div class="kpi-card">
@@ -3671,1286 +3737,248 @@
       </div>
      </div>
      <div style="margin-bottom: 20px;">
-      <h3 style="margin-bottom: 0;">
-       Email Campaigns
-      </h3>
-      <div class="perf-tabs" data-group="email">
-       <button class="perf-tab active" onclick="switchPerfTab('email','top')"><span class="tab-icon">🏆</span> Top Performing</button>
-       <button class="perf-tab" onclick="switchPerfTab('email','bottom')"><span class="tab-icon">📉</span> Needs Attention</button>
+      <h3 style="margin-bottom: 16px; color: #41342A;">📧 Email Campaign Performance — April 2026</h3>
+      
+      <div style="overflow-x: auto; margin-bottom: 20px;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+          <thead>
+            <tr style="border-bottom: 2px solid #EDE8E2; background: #F6F5F3;">
+              <th style="padding: 12px; text-align: left; font-weight: 600; color: #41342A;">Campaign / Flow</th>
+              <th style="padding: 12px; text-align: right; font-weight: 600; color: #41342A;">Revenue</th>
+              <th style="padding: 12px; text-align: right; font-weight: 600; color: #41342A;">Orders</th>
+              <th style="padding: 12px; text-align: right; font-weight: 600; color: #41342A;">AOV</th>
+              <th style="padding: 12px; text-align: right; font-weight: 600; color: #41342A;">ROI</th>
+              <th style="padding: 12px; text-align: center; font-weight: 600; color: #41342A;">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid #F0EBE5;">
+              <td style="padding: 12px; font-weight: 600; color: #41342A;">Welcome Series</td>
+              <td style="padding: 12px; text-align: right; font-weight: 600;">$18,450</td>
+              <td style="padding: 12px; text-align: right;">234</td>
+              <td style="padding: 12px; text-align: right;">$78.85</td>
+              <td style="padding: 12px; text-align: right; color: #6B9C78; font-weight: 600;">3.2x</td>
+              <td style="padding: 12px; text-align: center; font-size: 16px;">✓</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #F0EBE5;">
+              <td style="padding: 12px; font-weight: 600; color: #41342A;">Cart Recovery</td>
+              <td style="padding: 12px; text-align: right; font-weight: 600;">$12,100</td>
+              <td style="padding: 12px; text-align: right;">156</td>
+              <td style="padding: 12px; text-align: right;">$77.56</td>
+              <td style="padding: 12px; text-align: right; color: #6B9C78; font-weight: 600;">4.1x</td>
+              <td style="padding: 12px; text-align: center; font-size: 16px;">✓</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #F0EBE5;">
+              <td style="padding: 12px; font-weight: 600; color: #41342A;">Post-Purchase Upsell</td>
+              <td style="padding: 12px; text-align: right; font-weight: 600;">$8,930</td>
+              <td style="padding: 12px; text-align: right;">210</td>
+              <td style="padding: 12px; text-align: right;">$42.52</td>
+              <td style="padding: 12px; text-align: right; color: #D4A574; font-weight: 600;">2.8x</td>
+              <td style="padding: 12px; text-align: center; font-size: 16px;">⚠</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #F0EBE5;">
+              <td style="padding: 12px; font-weight: 600; color: #41342A;">Weekly Newsletter</td>
+              <td style="padding: 12px; text-align: right; font-weight: 600;">$6,200</td>
+              <td style="padding: 12px; text-align: right;">145</td>
+              <td style="padding: 12px; text-align: right;">$42.76</td>
+              <td style="padding: 12px; text-align: right; color: #8B6EA3; font-weight: 600;">1.9x</td>
+              <td style="padding: 12px; text-align: center; font-size: 14px;">📉</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px; font-weight: 600; color: #41342A;">Re-engagement</td>
+              <td style="padding: 12px; text-align: right; font-weight: 600;">$3,480</td>
+              <td style="padding: 12px; text-align: right;">58</td>
+              <td style="padding: 12px; text-align: right;">$60.00</td>
+              <td style="padding: 12px; text-align: right; color: #8B6EA3; font-weight: 600;">1.4x</td>
+              <td style="padding: 12px; text-align: center; font-size: 14px;">📉</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      <div class="perf-tab-content active" data-group="email" data-tab="top">
-      <div class="grid-3col">
-       <div class="email-card">
-        <img alt="Email creative" class="email-image" src="https://www.stelladot.com/cdn/shop/files/Tatum_revised_1080x.jpg"/>
-        <div class="email-subject">
-         Spring Layering Collection Launch ✨
+      
+      <div class="ai-insight">
+        <div class="ai-icon">✨</div>
+        <div class="ai-content">
+          <p><strong>Email performance strong, room to increase frequency:</strong> Your Spring Collection launch email generated $1.48/recipient — the highest RPR of any send this quarter. Campaigns drove 70% of email revenue, up from 58% in March. Tuesday sends averaged $1.32 RPR vs. $0.84 for Thursday. You sent 6 campaigns this month, up from 4 — RPR held steady and unsub rate stayed at 0.3%, so you likely have room to increase frequency further.</p>
+          <a href="#" class="ai-cta">View Email Analytics →</a>
         </div>
-        <div class="email-date">
-         Sent: Mar 28 • 2pm EST
-        </div>
-        <div class="email-stats">
-         <div class="email-stat">
-          <div class="email-stat-value">
-           $18,450
-          </div>
-          <div class="email-stat-label">
-           Revenue
-          </div>
-         </div>
-         <div class="email-stat">
-          <div class="email-stat-value">
-           12,450
-          </div>
-          <div class="email-stat-label">
-           Recipients
-          </div>
-         </div>
-        </div>
-        <div class="email-stats">
-         <div class="email-stat">
-          <div class="email-stat-value">
-           234
-          </div>
-          <div class="email-stat-label">
-           Orders
-          </div>
-         </div>
-         <div class="email-stat">
-          <div class="email-stat-value">
-           4.2%
-          </div>
-          <div class="email-stat-label">
-           CTR
-          </div>
-         </div>
-        </div>
-        <span class="email-badge">
-         Top Performer
-        </span>
-       </div>
-       <div class="email-card">
-        <img alt="Email creative" class="email-image" src="https://www.stelladot.com/cdn/shop/files/Joie_Lime_Tight_1080x.png"/>
-        <div class="email-subject">
-         24-Hour Flash Sale: Pearl Collection
-        </div>
-        <div class="email-date">
-         Sent: Mar 26 • 10am EST
-        </div>
-        <div class="email-stats">
-         <div class="email-stat">
-          <div class="email-stat-value">
-           $14,230
-          </div>
-          <div class="email-stat-label">
-           Revenue
-          </div>
-         </div>
-         <div class="email-stat">
-          <div class="email-stat-value">
-           14,320
-          </div>
-          <div class="email-stat-label">
-           Recipients
-          </div>
-         </div>
-        </div>
-        <div class="email-stats">
-         <div class="email-stat">
-          <div class="email-stat-value">
-           187
-          </div>
-          <div class="email-stat-label">
-           Orders
-          </div>
-         </div>
-         <div class="email-stat">
-          <div class="email-stat-value">
-           3.8%
-          </div>
-          <div class="email-stat-label">
-           CTR
-          </div>
-         </div>
-        </div>
-        <span class="email-badge">
-         Strong
-        </span>
-       </div>
-       <div class="email-card">
-        <img alt="Email creative" class="email-image" src="https://www.stelladot.com/cdn/shop/files/Baby_Jane_tight_1080x.png"/>
-        <div class="email-subject">
-         Customer Feedback: Help Us Design Your Favorite
-        </div>
-        <div class="email-date">
-         Sent: Mar 24 • 6pm EST
-        </div>
-        <div class="email-stats">
-         <div class="email-stat">
-          <div class="email-stat-value">
-           $8,920
-          </div>
-          <div class="email-stat-label">
-           Revenue
-          </div>
-         </div>
-         <div class="email-stat">
-          <div class="email-stat-value">
-           18,430
-          </div>
-          <div class="email-stat-label">
-           Recipients
-          </div>
-         </div>
-        </div>
-        <div class="email-stats">
-         <div class="email-stat">
-          <div class="email-stat-value">
-           128
-          </div>
-          <div class="email-stat-label">
-           Orders
-          </div>
-         </div>
-         <div class="email-stat">
-          <div class="email-stat-value">
-           2.1%
-          </div>
-          <div class="email-stat-label">
-           CTR
-          </div>
-         </div>
-        </div>
-        <span class="email-badge" style="background: rgba(207,180,164,0.2); color: #41342A;">
-         Moderate
-        </span>
-       </div>
-      </div>
-      </div>
-      <div class="perf-tab-content" data-group="email" data-tab="bottom">
-      <div class="grid-3col">
-       <div class="email-card" style="border-color: rgba(139,110,163,0.3);">
-        <img alt="Email creative" class="email-image" src="https://www.stelladot.com/cdn/shop/files/BohobraceletStack_1080x.jpg"/>
-        <div class="email-subject">
-         Re-engagement: We Miss You!
-        </div>
-        <div class="email-date">
-         Sent: Mar 25 • 11am EST
-        </div>
-        <div class="email-stats">
-         <div class="email-stat">
-          <div class="email-stat-value">
-           $1,240
-          </div>
-          <div class="email-stat-label">
-           Revenue
-          </div>
-         </div>
-         <div class="email-stat">
-          <div class="email-stat-value">
-           8,920
-          </div>
-          <div class="email-stat-label">
-           Recipients
-          </div>
-         </div>
-        </div>
-        <div class="email-stats">
-         <div class="email-stat">
-          <div class="email-stat-value">
-           18
-          </div>
-          <div class="email-stat-label">
-           Orders
-          </div>
-         </div>
-         <div class="email-stat">
-          <div class="email-stat-value">
-           0.9%
-          </div>
-          <div class="email-stat-label">
-           CTR
-          </div>
-         </div>
-        </div>
-        <span class="email-badge" style="background: rgba(139,110,163,0.12); color: #8B6EA3;">
-         Low CTR
-        </span>
-        <div style="font-size: 11px; color: #83766B; margin-top: 8px; line-height: 1.4;">
-         ⚡ Generic subject line + no urgency. Try personalization with recently viewed products.
-        </div>
-       </div>
-       <div class="email-card" style="border-color: rgba(139,110,163,0.3);">
-        <img alt="Email creative" class="email-image" src="https://www.stelladot.com/cdn/shop/files/TributeBraceletsGrouping_321_R1_1080x.jpg"/>
-        <div class="email-subject">
-         New Arrivals This Week
-        </div>
-        <div class="email-date">
-         Sent: Mar 27 • 3pm EST
-        </div>
-        <div class="email-stats">
-         <div class="email-stat">
-          <div class="email-stat-value">
-           $3,180
-          </div>
-          <div class="email-stat-label">
-           Revenue
-          </div>
-         </div>
-         <div class="email-stat">
-          <div class="email-stat-value">
-           15,200
-          </div>
-          <div class="email-stat-label">
-           Recipients
-          </div>
-         </div>
-        </div>
-        <div class="email-stats">
-         <div class="email-stat">
-          <div class="email-stat-value">
-           42
-          </div>
-          <div class="email-stat-label">
-           Orders
-          </div>
-         </div>
-         <div class="email-stat">
-          <div class="email-stat-value">
-           1.4%
-          </div>
-          <div class="email-stat-label">
-           CTR
-          </div>
-         </div>
-        </div>
-        <span class="email-badge" style="background: rgba(139,110,163,0.12); color: #8B6EA3;">
-         Below Avg Revenue/Recipient
-        </span>
-        <div style="font-size: 11px; color: #83766B; margin-top: 8px; line-height: 1.4;">
-         ⚡ Sent at 3pm — historically your worst send time. Tuesday 10am has 2.1x higher open rates.
-        </div>
-       </div>
-       <div class="email-card" style="border-color: rgba(139,110,163,0.3);">
-        <img alt="Email creative" class="email-image" src="https://www.stelladot.com/cdn/shop/files/ChannelSetHuggieEarrings_1080x.jpg"/>
-        <div class="email-subject">
-         March Newsletter
-        </div>
-        <div class="email-date">
-         Sent: Mar 23 • 9am EST
-        </div>
-        <div class="email-stats">
-         <div class="email-stat">
-          <div class="email-stat-value">
-           $2,450
-          </div>
-          <div class="email-stat-label">
-           Revenue
-          </div>
-         </div>
-         <div class="email-stat">
-          <div class="email-stat-value">
-           22,100
-          </div>
-          <div class="email-stat-label">
-           Recipients
-          </div>
-         </div>
-        </div>
-        <div class="email-stats">
-         <div class="email-stat">
-          <div class="email-stat-value">
-           31
-          </div>
-          <div class="email-stat-label">
-           Orders
-          </div>
-         </div>
-         <div class="email-stat">
-          <div class="email-stat-value">
-           1.1%
-          </div>
-          <div class="email-stat-label">
-           CTR
-          </div>
-         </div>
-        </div>
-        <span class="email-badge" style="background: rgba(139,110,163,0.12); color: #8B6EA3;">
-         Low Conversion
-        </span>
-        <div style="font-size: 11px; color: #83766B; margin-top: 8px; line-height: 1.4;">
-         ⚡ Newsletter is too broad — segment by purchase history. Focused product emails convert 3x better.
-        </div>
-       </div>
-      </div>
       </div>
      </div>
+
+        <!-- Paid Ads Performance -->
+    <div class="card card-compact">
+      <div class="section-title-row">
+        <h2 class="section-title">📊 Paid Ads Performance</h2>
+        <a href="#" class="analytics-link">View Details →</a>
       </div>
-     </div>
+      
+      <div style="background: #F6F5F3; border-radius: 10px; padding: 20px; margin-bottom: 20px;">
+        <div class="kpi-grid">
+          <!-- Row 1: Revenue, ROAS, CAC -->
+          <div class="kpi-card">
+            <div class="label">REVENUE</div>
+            <div class="kpi-value">$1,333</div>
+            <div class="kpi-change positive">↑ +8.2% vs LY</div>
+          </div>
+          <div class="kpi-card">
+            <div class="label">ROAS</div>
+            <div class="kpi-value">7.4x</div>
+            <div class="kpi-change positive">↑ +0.8x vs LY</div>
+          </div>
+          <div class="kpi-card">
+            <div class="label">CAC</div>
+            <div class="kpi-value">$18</div>
+            <div class="kpi-change positive">↓ -$2 vs LY</div>
+          </div>
+        </div>
+        
+        <div class="kpi-grid" style="margin-top: 16px;">
+          <!-- Row 2: Spend, GmROAS, New Customers -->
+          <div class="kpi-card">
+            <div class="label">SPEND</div>
+            <div class="kpi-value">$123</div>
+            <div class="kpi-change positive">↑ +5.1% vs LY</div>
+          </div>
+          <div class="kpi-card">
+            <div class="label">GmROAS</div>
+            <div class="kpi-value">2.3x</div>
+            <div class="kpi-change positive">↑ +0.2x vs LY</div>
+          </div>
+          <div class="kpi-card">
+            <div class="label">NEW CUSTOMERS</div>
+            <div class="kpi-value">23</div>
+            <div class="kpi-change positive">↑ +3 vs LY</div>
+          </div>
+        </div>
+        
+        <div class="kpi-grid" style="margin-top: 16px;">
+          <!-- Row 3: CPC, CTR, NC CAC -->
+          <div class="kpi-card">
+            <div class="label">CPC</div>
+            <div class="kpi-value">$1.00</div>
+            <div class="kpi-change negative">→ Flat vs LY</div>
+          </div>
+          <div class="kpi-card">
+            <div class="label">CTR</div>
+            <div class="kpi-value">2.3%</div>
+            <div class="kpi-change negative">→ Flat vs LY</div>
+          </div>
+          <div class="kpi-card">
+            <div class="label">NC CAC</div>
+            <div class="kpi-value">$23</div>
+            <div class="kpi-change positive">↓ -$3 vs LY</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="ai-insight">
+        <div class="ai-icon">✨</div>
+        <div class="ai-content">
+          <p><strong>Paid efficiency improving across the board:</strong> ROAS improved to 7.4x (up 0.8x vs. last April) and CAC dropped to $18 — your most efficient paid month this quarter. Spend increased 5% YoY while revenue grew 8%, meaning each incremental dollar is returning more. You ran 3 paid campaigns: a Spring Collection prospecting push on Meta, a retargeting campaign on Google, and a TikTok awareness test.</p>
+          <a href="#" class="ai-cta">View Paid Ads Analytics →</a>
+        </div>
+      </div>
     </div>
-    <!-- Paid Ads Deep Dive -->
-    <div class="deep-dive-card" id="paidDeepDive">
-     <div class="deep-dive-header" onclick="toggleDeepDive('paidDeepDive')">
-      <div class="deep-dive-title-row">
-       <div class="deep-dive-icon" style="background: rgba(177,151,199,0.15);">📣</div>
-       <div class="deep-dive-title">Paid Ads</div>
-       <div class="deep-dive-summary-pills">
-        <div class="deep-dive-pill"><div class="deep-dive-pill-value">$50,980</div><div class="deep-dive-pill-label">Revenue</div></div>
-        <div class="deep-dive-pill"><div class="deep-dive-pill-value" style="color:#8B6EA3;">↘ -12%</div><div class="deep-dive-pill-label">WoW</div></div>
-        <div class="deep-dive-pill"><div class="deep-dive-pill-value">2.76x</div><div class="deep-dive-pill-label">ROAS</div></div>
-       </div>
+
+
+    <!-- Organic Social Performance -->
+    <div class="card card-compact">
+      <div class="section-title-row">
+        <h2 class="section-title">📱 Organic Social</h2>
+        <a href="#" class="analytics-link">View Social Analytics →</a>
       </div>
-      <svg class="deep-dive-chevron" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-     </div>
-     <div class="deep-dive-body">
-      <div class="deep-dive-body-inner">
-     <div class="ai-insight" style="margin-bottom: 20px;">
-      <div class="ai-icon">
-       ✨
+      
+      <div style="display: flex; flex-direction: column; gap: 24px;">
+        <!-- Instagram -->
+        <div style="border-left: 4px solid #6B9C78; padding-left: 16px;">
+          <h3 style="color: #41342A; margin-bottom: 12px;">Instagram</h3>
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div class="label">NET FOLLOWER CHANGE</div>
+              <div class="kpi-value" style="color: #6B9C78;">+342</div>
+              <div class="kpi-change positive">↑ Growth</div>
+            </div>
+            <div class="kpi-card">
+              <div class="label">NEW FOLLOWERS</div>
+              <div class="kpi-value">1,250</div>
+              <div class="kpi-change positive">Strong add rate</div>
+            </div>
+            <div class="kpi-card">
+              <div class="label">UNFOLLOWS</div>
+              <div class="kpi-value">908</div>
+              <div class="kpi-change negative">27% churn rate</div>
+            </div>
+            <div class="kpi-card">
+              <div class="label">POSTS PUBLISHED</div>
+              <div class="kpi-value">15</div>
+              <div class="kpi-change positive">↗ +4 vs. last month</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- TikTok -->
+        <div style="border-left: 4px solid #6B9C78; padding-left: 16px;">
+          <h3 style="color: #41342A; margin-bottom: 12px;">TikTok</h3>
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div class="label">NET FOLLOWER CHANGE</div>
+              <div class="kpi-value" style="color: #6B9C78;">+1,840</div>
+              <div class="kpi-change positive">↑↑ Momentum</div>
+            </div>
+            <div class="kpi-card">
+              <div class="label">NEW FOLLOWERS</div>
+              <div class="kpi-value">3,100</div>
+              <div class="kpi-change positive">Viral growth</div>
+            </div>
+            <div class="kpi-card">
+              <div class="label">UNFOLLOWS</div>
+              <div class="kpi-value">1,260</div>
+              <div class="kpi-change positive">41% churn rate</div>
+            </div>
+            <div class="kpi-card">
+              <div class="label">POSTS PUBLISHED</div>
+              <div class="kpi-value">22</div>
+              <div class="kpi-change positive">↗ +8 vs. last month</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Facebook -->
+        <div style="border-left: 4px solid #8B6EA3; padding-left: 16px;">
+          <h3 style="color: #41342A; margin-bottom: 12px;">Facebook</h3>
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div class="label">NET FOLLOWER CHANGE</div>
+              <div class="kpi-value" style="color: #8B6EA3;">-127</div>
+              <div class="kpi-change negative">↓ Declining</div>
+            </div>
+            <div class="kpi-card">
+              <div class="label">NEW FOLLOWERS</div>
+              <div class="kpi-value">420</div>
+              <div class="kpi-change negative">Lower adds</div>
+            </div>
+            <div class="kpi-card">
+              <div class="label">UNFOLLOWS</div>
+              <div class="kpi-value">547</div>
+              <div class="kpi-change negative">56% churn rate</div>
+            </div>
+            <div class="kpi-card">
+              <div class="label">POSTS PUBLISHED</div>
+              <div class="kpi-value">4</div>
+              <div class="kpi-change negative">↘ -3 vs. last month</div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div>
-       <p>
-        <strong>
-         ⚡ Insight:
-        </strong>
-        Your top Meta ad set has a 3.42x ROAS but frequency is climbing to 3.2x — fatigue risk is high. Google PMax is quietly outperforming at 2.50x ROAS with room to scale. The Layering Bundle Promo creative should be refreshed — CTR has declined 3 consecutive days. → View Suggested Creative Refresh
-       </p>
+      
+      <div class="ai-insight" style="margin-top: 20px;">
+        <div class="ai-icon">✨</div>
+        <div class="ai-content">
+          <p><strong>TikTok driving follower growth, volume gap explains the rest:</strong> TikTok added 1,840 net followers (3,100 new, 1,260 unfollows) — your fastest-growing platform. Instagram held steady at +342 net. Facebook lost 127 net. You published 22 TikToks, 15 Instagram posts, and 4 Facebook posts this month — the volume gap likely explains the growth gap.</p>
+        </div>
       </div>
-     </div>
-     <!-- Agency-Level WoW KPIs (inspired by CBI Digital reports) -->
-     <div class="deep-dive-agency-kpis">
-      <div class="agency-kpi">
-       <div class="agency-kpi-label">Ad Spend</div>
-       <div class="agency-kpi-value">$18,450</div>
-       <div class="agency-kpi-change positive">↗ +5% WoW</div>
-       <div class="agency-kpi-prev">From $17,571</div>
-      </div>
-      <div class="agency-kpi">
-       <div class="agency-kpi-label">Orders</div>
-       <div class="agency-kpi-value">334</div>
-       <div class="agency-kpi-change negative">↘ -8% WoW</div>
-       <div class="agency-kpi-prev">From 363</div>
-      </div>
-      <div class="agency-kpi">
-       <div class="agency-kpi-label">CPA</div>
-       <div class="agency-kpi-value">$55.24</div>
-       <div class="agency-kpi-change negative">↘ +14% WoW</div>
-       <div class="agency-kpi-prev">From $48.40</div>
-      </div>
-      <div class="agency-kpi">
-       <div class="agency-kpi-label">Impressions</div>
-       <div class="agency-kpi-value">402K</div>
-       <div class="agency-kpi-change positive">↗ +3% WoW</div>
-       <div class="agency-kpi-prev">From 390K</div>
-      </div>
-      <div class="agency-kpi">
-       <div class="agency-kpi-label">Conv. Rate</div>
-       <div class="agency-kpi-value">3.95%</div>
-       <div class="agency-kpi-change negative">↘ -0.4pp</div>
-       <div class="agency-kpi-prev">From 4.35%</div>
-      </div>
-     </div>
-     <!-- Campaign Objective Breakdown (CBI structure) -->
-     <div class="campaign-type-section">
-      <div class="campaign-type-label">🎯 Prospecting Campaigns</div>
-      <div class="campaign-type-stats">
-       Spend: <span>$8,420</span> · Revenue: <span>$18,520</span> · ROAS: <span>2.20x</span> · Orders: <span>128</span>
-      </div>
-     </div>
-     <div class="campaign-type-section" style="margin-top: 12px;">
-      <div class="campaign-type-label">🔁 Retargeting Campaigns</div>
-      <div class="campaign-type-stats">
-       Spend: <span>$3,920</span> · Revenue: <span>$8,640</span> · ROAS: <span>2.20x</span> · Orders: <span>62</span>
-      </div>
-     </div>
-     <div class="campaign-type-section" style="margin-top: 12px;">
-      <div class="campaign-type-label">💎 Retention Campaigns</div>
-      <div class="campaign-type-stats">
-       Spend: <span>$6,110</span> · Revenue: <span>$23,820</span> · ROAS: <span>3.90x</span> · Orders: <span>144</span>
-      </div>
-     </div>
-     <div class="kpi-grid" style="margin-bottom: 24px;">
-      <div class="kpi-card">
-       <div class="label">
-        Paid Media Revenue
-       </div>
-       <div class="kpi-value">
-        $50,980
-       </div>
-       <div class="kpi-change negative">
-        ↘ -12% WoW
-       </div>
-      </div>
-      <div class="kpi-card">
-       <div class="label">
-        Total Ad Spend
-       </div>
-       <div class="kpi-value">
-        $18,450
-       </div>
-       <div class="kpi-change positive">
-        ↗ +5%
-       </div>
-      </div>
-      <div class="kpi-card">
-       <div class="label">
-        Blended ROAS
-       </div>
-       <div class="kpi-value">
-        2.76x
-       </div>
-       <div class="kpi-change negative">
-        ↘ -18%
-       </div>
-      </div>
-      <div class="kpi-card">
-       <div class="label">
-        Total Clicks
-       </div>
-       <div class="kpi-value">
-        8,450
-       </div>
-       <div class="kpi-change positive">
-        ↗ +8%
-       </div>
-      </div>
-      <div class="kpi-card">
-       <div class="label">
-        CTR
-       </div>
-       <div class="kpi-value">
-        2.1%
-       </div>
-       <div class="kpi-change negative">
-        ↘ -0.3pp
-       </div>
-      </div>
-      <div class="kpi-card">
-       <div class="label">
-        CPC
-       </div>
-       <div class="kpi-value">
-        $2.18
-       </div>
-       <div class="kpi-change negative">
-        ↘ -4%
-       </div>
-      </div>
-     </div>
-     <div class="grid-2col" style="margin-bottom: 24px;">
-      <div class="card card-compact" style="background: #F6F5F3; border: 1px solid #EDE8E2;">
-       <h3 style="margin-bottom: 16px;">
-        Meta Ads
-       </h3>
-       <div style="font-size: 13px; line-height: 1.8;">
-        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-         <span style="color: #83766B;">
-          Spend:
-         </span>
-         <span style="font-weight: 600; color: #41342A;">
-          $12,340
-         </span>
-        </div>
-        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-         <span style="color: #83766B;">
-          Revenue:
-         </span>
-         <span style="font-weight: 600; color: #41342A;">
-          $35,686
-         </span>
-        </div>
-        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-         <span style="color: #83766B;">
-          ROAS:
-         </span>
-         <span style="font-weight: 600; color: #41342A;">
-          2.89x
-         </span>
-        </div>
-        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-         <span style="color: #83766B;">
-          Orders:
-         </span>
-         <span style="font-weight: 600; color: #41342A;">
-          245
-         </span>
-        </div>
-        <div style="display: flex; justify-content: space-between;">
-         <span style="color: #83766B;">
-          CPO:
-         </span>
-         <span style="font-weight: 600; color: #41342A;">
-          $50.36
-         </span>
-        </div>
-       </div>
-      </div>
-      <div class="card card-compact" style="background: #F6F5F3; border: 1px solid #EDE8E2;">
-       <h3 style="margin-bottom: 16px;">
-        Google Ads
-       </h3>
-       <div style="font-size: 13px; line-height: 1.8;">
-        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-         <span style="color: #83766B;">
-          Spend:
-         </span>
-         <span style="font-weight: 600; color: #41342A;">
-          $6,110
-         </span>
-        </div>
-        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-         <span style="color: #83766B;">
-          Revenue:
-         </span>
-         <span style="font-weight: 600; color: #41342A;">
-          $15,294
-         </span>
-        </div>
-        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-         <span style="color: #83766B;">
-          ROAS:
-         </span>
-         <span style="font-weight: 600; color: #41342A;">
-          2.50x
-         </span>
-        </div>
-        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-         <span style="color: #83766B;">
-          Orders:
-         </span>
-         <span style="font-weight: 600; color: #41342A;">
-          89
-         </span>
-        </div>
-        <div style="display: flex; justify-content: space-between;">
-         <span style="color: #83766B;">
-          CPO:
-         </span>
-         <span style="font-weight: 600; color: #41342A;">
-          $68.65
-         </span>
-        </div>
-       </div>
-      </div>
-     </div>
-     <div style="margin-bottom: 20px;">
-      <h3 style="margin-bottom: 0;">
-       Ad Creatives
-      </h3>
-      <div class="perf-tabs" data-group="ads">
-       <button class="perf-tab active" onclick="switchPerfTab('ads','top')"><span class="tab-icon">🏆</span> Top Performing</button>
-       <button class="perf-tab" onclick="switchPerfTab('ads','bottom')"><span class="tab-icon">📉</span> Needs Attention</button>
-      </div>
-      <div class="perf-tab-content active" data-group="ads" data-tab="top">
-      <div class="grid-3col">
-       <div class="ad-card">
-        <img alt="Ad creative" class="ad-image" src="https://www.stelladot.com/cdn/shop/files/Joie_necklaces_fish_stack_1080x.png"/>
-        <div class="ad-name">
-         Gold Necklace Spring Lifestyle
-        </div>
-        <div class="ad-stats">
-         <div class="ad-stat">
-          <div class="ad-stat-value">
-           3.42x
-          </div>
-          <div class="ad-stat-label">
-           ROAS
-          </div>
-         </div>
-         <div class="ad-stat">
-          <div class="ad-stat-value">
-           2.8%
-          </div>
-          <div class="ad-stat-label">
-           CTR
-          </div>
-         </div>
-        </div>
-        <div class="ad-stats">
-         <div class="ad-stat">
-          <div class="ad-stat-value">
-           1.2x
-          </div>
-          <div class="ad-stat-label">
-           Freq.
-          </div>
-         </div>
-         <div class="ad-stat">
-          <div class="ad-stat-value">
-           $18.4K
-          </div>
-          <div class="ad-stat-label">
-           Revenue
-          </div>
-         </div>
-        </div>
-       </div>
-       <div class="ad-card">
-        <img alt="Ad creative" class="ad-image" src="https://www.stelladot.com/cdn/shop/files/BohobraceletStack_1080x.jpg"/>
-        <div class="ad-name">
-         New Pearl Launch Carousel
-        </div>
-        <div class="ad-stats">
-         <div class="ad-stat">
-          <div class="ad-stat-value">
-           2.95x
-          </div>
-          <div class="ad-stat-label">
-           ROAS
-          </div>
-         </div>
-         <div class="ad-stat">
-          <div class="ad-stat-value">
-           2.3%
-          </div>
-          <div class="ad-stat-label">
-           CTR
-          </div>
-         </div>
-        </div>
-        <div class="ad-stats">
-         <div class="ad-stat">
-          <div class="ad-stat-value">
-           1.5x
-          </div>
-          <div class="ad-stat-label">
-           Freq.
-          </div>
-         </div>
-         <div class="ad-stat">
-          <div class="ad-stat-value">
-           $14.2K
-          </div>
-          <div class="ad-stat-label">
-           Revenue
-          </div>
-         </div>
-        </div>
-       </div>
-       <div class="ad-card">
-        <img alt="Ad creative" class="ad-image" src="https://www.stelladot.com/cdn/shop/files/TributeBraceletsGrouping_321_R1_1080x.jpg"/>
-        <div class="ad-name">
-         Layering Jewelry Bundle Promo
-        </div>
-        <div class="ad-stats">
-         <div class="ad-stat">
-          <div class="ad-stat-value">
-           2.12x
-          </div>
-          <div class="ad-stat-label">
-           ROAS
-          </div>
-         </div>
-         <div class="ad-stat">
-          <div class="ad-stat-value">
-           1.4%
-          </div>
-          <div class="ad-stat-label">
-           CTR
-          </div>
-         </div>
-        </div>
-        <div class="ad-stats">
-         <div class="ad-stat">
-          <div class="ad-stat-value">
-           3.2x
-          </div>
-          <div class="ad-stat-label">
-           Freq.
-          </div>
-         </div>
-         <div class="ad-stat">
-          <div class="ad-stat-value">
-           $9.1K
-          </div>
-          <div class="ad-stat-label">
-           Revenue
-          </div>
-         </div>
-        </div>
-        <div class="ad-alert">
-         ⚠️ Frequency Fatigue Detected
-        </div>
-       </div>
-      </div>
-      </div>
-      <div class="perf-tab-content" data-group="ads" data-tab="bottom">
-      <div class="grid-3col">
-       <div class="ad-card" style="border-color: rgba(139,110,163,0.3);">
-        <img alt="Ad creative" class="ad-image" src="https://www.stelladot.com/cdn/shop/files/Baby_Jane_tight_1080x.png"/>
-        <div class="ad-name">
-         Generic Bracelet Collection Static
-        </div>
-        <div class="ad-stats">
-         <div class="ad-stat">
-          <div class="ad-stat-value">
-           0.84x
-          </div>
-          <div class="ad-stat-label">
-           ROAS
-          </div>
-         </div>
-         <div class="ad-stat">
-          <div class="ad-stat-value">
-           0.6%
-          </div>
-          <div class="ad-stat-label">
-           CTR
-          </div>
-         </div>
-        </div>
-        <div class="ad-stats">
-         <div class="ad-stat">
-          <div class="ad-stat-value">
-           4.8x
-          </div>
-          <div class="ad-stat-label">
-           Freq.
-          </div>
-         </div>
-         <div class="ad-stat">
-          <div class="ad-stat-value">
-           $1.9K
-          </div>
-          <div class="ad-stat-label">
-           Revenue
-          </div>
-         </div>
-        </div>
-        <span style="display: inline-block; background: rgba(139,110,163,0.12); color: #8B6EA3; padding: 3px 8px; border-radius: 4px; font-size: 10px; font-weight: 600; margin-top: 4px;">
-         Negative ROAS
-        </span>
-        <div style="font-size: 11px; color: #83766B; margin-top: 8px; line-height: 1.4;">
-         ⚡ Frequency at 4.8x — severe fatigue. Static image format underperforming. Pause and refresh creative.
-        </div>
-       </div>
-       <div class="ad-card" style="border-color: rgba(139,110,163,0.3);">
-        <img alt="Ad creative" class="ad-image" src="https://www.stelladot.com/cdn/shop/files/N2071-KateGemstoneNecklace-Blue-154_1080x.jpg"/>
-        <div class="ad-name">
-         Retargeting: Cart Abandonment V2
-        </div>
-        <div class="ad-stats">
-         <div class="ad-stat">
-          <div class="ad-stat-value">
-           1.12x
-          </div>
-          <div class="ad-stat-label">
-           ROAS
-          </div>
-         </div>
-         <div class="ad-stat">
-          <div class="ad-stat-value">
-           0.9%
-          </div>
-          <div class="ad-stat-label">
-           CTR
-          </div>
-         </div>
-        </div>
-        <div class="ad-stats">
-         <div class="ad-stat">
-          <div class="ad-stat-value">
-           3.6x
-          </div>
-          <div class="ad-stat-label">
-           Freq.
-          </div>
-         </div>
-         <div class="ad-stat">
-          <div class="ad-stat-value">
-           $3.2K
-          </div>
-          <div class="ad-stat-label">
-           Revenue
-          </div>
-         </div>
-        </div>
-        <span style="display: inline-block; background: rgba(139,110,163,0.12); color: #8B6EA3; padding: 3px 8px; border-radius: 4px; font-size: 10px; font-weight: 600; margin-top: 4px;">
-         Underperforming
-        </span>
-        <div style="font-size: 11px; color: #83766B; margin-top: 8px; line-height: 1.4;">
-         ⚡ V1 of this retargeting ad had 2.8x ROAS. The new creative isn't resonating — revert or test V3.
-        </div>
-       </div>
-       <div class="ad-card" style="border-color: rgba(139,110,163,0.3);">
-        <img alt="Ad creative" class="ad-image" src="https://www.stelladot.com/cdn/shop/files/B2046-DotBracelet-Lapis-193_900x.jpg"/>
-        <div class="ad-name">
-         Broad Prospecting: Spring Sale 20% Off
-        </div>
-        <div class="ad-stats">
-         <div class="ad-stat">
-          <div class="ad-stat-value">
-           1.35x
-          </div>
-          <div class="ad-stat-label">
-           ROAS
-          </div>
-         </div>
-         <div class="ad-stat">
-          <div class="ad-stat-value">
-           0.7%
-          </div>
-          <div class="ad-stat-label">
-           CTR
-          </div>
-         </div>
-        </div>
-        <div class="ad-stats">
-         <div class="ad-stat">
-          <div class="ad-stat-value">
-           2.1x
-          </div>
-          <div class="ad-stat-label">
-           Freq.
-          </div>
-         </div>
-         <div class="ad-stat">
-          <div class="ad-stat-value">
-           $4.8K
-          </div>
-          <div class="ad-stat-label">
-           Revenue
-          </div>
-         </div>
-        </div>
-        <span style="display: inline-block; background: rgba(139,110,163,0.12); color: #8B6EA3; padding: 3px 8px; border-radius: 4px; font-size: 10px; font-weight: 600; margin-top: 4px;">
-         High CPA
-        </span>
-        <div style="font-size: 11px; color: #83766B; margin-top: 8px; line-height: 1.4;">
-         ⚡ CPA at $72 vs. $55 account avg. Discount-led creative attracts low-LTV customers. Try lifestyle imagery instead.
-        </div>
-       </div>
-      </div>
-      </div>
-     </div>
-      </div>
-     </div>
     </div>
-    <!-- Organic Social Deep Dive -->
-    <div class="deep-dive-card" id="socialDeepDive">
-     <div class="deep-dive-header" onclick="toggleDeepDive('socialDeepDive')">
-      <div class="deep-dive-title-row">
-       <div class="deep-dive-icon" style="background: rgba(208,201,164,0.2);">📱</div>
-       <div class="deep-dive-title">Organic Social</div>
-       <div class="deep-dive-summary-pills">
-        <div class="deep-dive-pill"><div class="deep-dive-pill-value">48.2K</div><div class="deep-dive-pill-label">Reach</div></div>
-        <div class="deep-dive-pill"><div class="deep-dive-pill-value" style="color:#6B9C78;">↗ +22%</div><div class="deep-dive-pill-label">WoW</div></div>
-        <div class="deep-dive-pill"><div class="deep-dive-pill-value">4.6%</div><div class="deep-dive-pill-label">Eng. Rate</div></div>
-       </div>
-      </div>
-      <svg class="deep-dive-chevron" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-     </div>
-     <div class="deep-dive-body">
-      <div class="deep-dive-body-inner">
-     <div class="ai-insight" style="margin-bottom: 20px;">
-      <div class="ai-icon">
-       ✨
-      </div>
-      <div>
-       <p>
-        <strong>
-         ⚡ Insight:
-        </strong>
-        Video content is outperforming static images by 2.4x in engagement rate. Your Reel featuring the Layering Necklace styling tutorial drove 3,200 saves — your best-performing organic content this month. Consider shifting to 60% video in your social calendar. Instagram Stories with product polls are generating 18% higher click-throughs than standard posts. → Plan Social Content Calendar
-       </p>
-      </div>
-     </div>
-     <!-- Agency-Level KPIs (organic social — best-practice structure) -->
-     <div class="deep-dive-agency-kpis">
-      <div class="agency-kpi">
-       <div class="agency-kpi-label">Impressions</div>
-       <div class="agency-kpi-value">124K</div>
-       <div class="agency-kpi-change positive">↗ +18% WoW</div>
-       <div class="agency-kpi-prev">From 105K</div>
-      </div>
-      <div class="agency-kpi">
-       <div class="agency-kpi-label">Profile Visits</div>
-       <div class="agency-kpi-value">3,820</div>
-       <div class="agency-kpi-change positive">↗ +24%</div>
-       <div class="agency-kpi-prev">From 3,081</div>
-      </div>
-      <div class="agency-kpi">
-       <div class="agency-kpi-label">Link Clicks</div>
-       <div class="agency-kpi-value">1,240</div>
-       <div class="agency-kpi-change positive">↗ +18%</div>
-       <div class="agency-kpi-prev">From 1,051</div>
-      </div>
-      <div class="agency-kpi">
-       <div class="agency-kpi-label">Saves</div>
-       <div class="agency-kpi-value">5,460</div>
-       <div class="agency-kpi-change positive">↗ +32%</div>
-       <div class="agency-kpi-prev">From 4,136</div>
-      </div>
-      <div class="agency-kpi">
-       <div class="agency-kpi-label">Shares</div>
-       <div class="agency-kpi-value">890</div>
-       <div class="agency-kpi-change positive">↗ +11%</div>
-       <div class="agency-kpi-prev">From 802</div>
-      </div>
-     </div>
-     <!-- Platform breakdown -->
-     <div class="campaign-type-section">
-      <div class="campaign-type-label">📸 Instagram</div>
-      <div class="campaign-type-stats">
-       Posts: <span>10</span> · Reach: <span>38.4K</span> · Eng Rate: <span>5.1%</span> · Top Format: <span>Reels (2.4x vs static)</span>
-      </div>
-     </div>
-     <div class="campaign-type-section" style="margin-top: 12px;">
-      <div class="campaign-type-label">🎵 TikTok</div>
-      <div class="campaign-type-stats">
-       Posts: <span>3</span> · Views: <span>8.2K</span> · Eng Rate: <span>3.8%</span> · Follower Growth: <span>+128</span>
-      </div>
-     </div>
-     <div class="campaign-type-section" style="margin-top: 12px;">
-      <div class="campaign-type-label">📌 Pinterest</div>
-      <div class="campaign-type-stats">
-       Pins: <span>4</span> · Impressions: <span>1.6K</span> · Saves: <span>240</span> · Click-through: <span>2.1%</span>
-      </div>
-     </div>
-     <div class="kpi-grid" style="margin-bottom: 24px;">
-      <div class="kpi-card">
-       <div class="label">
-        Posts Published
-       </div>
-       <div class="kpi-value">
-        14
-       </div>
-       <div class="kpi-change positive">
-        ↗ +2 vs LW
-       </div>
-      </div>
-      <div class="kpi-card">
-       <div class="label">
-        Total Reach
-       </div>
-       <div class="kpi-value">
-        48,200
-       </div>
-       <div class="kpi-change positive">
-        ↗ +22%
-       </div>
-      </div>
-      <div class="kpi-card">
-       <div class="label">
-        Engagement Rate
-       </div>
-       <div class="kpi-value">
-        4.6%
-       </div>
-       <div class="kpi-change positive">
-        ↗ +0.8pp
-       </div>
-      </div>
-      <div class="kpi-card">
-       <div class="label">
-        Click-throughs
-       </div>
-       <div class="kpi-value">
-        1,240
-       </div>
-       <div class="kpi-change positive">
-        ↗ +18%
-       </div>
-      </div>
-      <div class="kpi-card">
-       <div class="label">
-        Follower Growth
-       </div>
-       <div class="kpi-value">
-        +342
-       </div>
-       <div class="kpi-change positive">
-        ↗ +15%
-       </div>
-      </div>
-     </div>
-     <h3 style="margin-bottom: 0; display: flex; align-items: center; gap: 8px;">
-      Social Assets
-      <span style="font-size: 11px; font-weight: 400; color: #83766B;">Ranked by engagement</span>
-     </h3>
-     <div class="perf-tabs" data-group="social">
-      <button class="perf-tab active" onclick="switchPerfTab('social','top')"><span class="tab-icon">🏆</span> Top Performing</button>
-      <button class="perf-tab" onclick="switchPerfTab('social','bottom')"><span class="tab-icon">📉</span> Needs Attention</button>
-     </div>
-     <div class="perf-tab-content active" data-group="social" data-tab="top">
-     <div class="grid-3col">
-      <div style="background: #F6F5F3; border: 1px solid #EDE8E2; border-radius: 12px; overflow: hidden; position: relative;">
-       <div style="position: absolute; top: 10px; left: 10px; background: #41342A; color: #F5F0EB; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; z-index: 1;">1</div>
-       <img alt="Social post" src="https://www.stelladot.com/cdn/shop/files/N2070-KateGemstoneNecklace-Multi-152_1080x.jpg" style="width: 100%; height: 200px; object-fit: cover;"/>
-       <div style="padding: 12px;">
-        <div style="font-size: 12px; font-weight: 600; color: #41342A; margin-bottom: 4px;">
-         Reel: Layering Necklace Styling Tutorial
-        </div>
-        <div style="font-size: 11px; color: #83766B; margin-bottom: 8px;">
-         Instagram • Mar 27
-        </div>
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; font-size: 11px;">
-         <div>
-          <div style="font-weight: 600; color: #41342A;">
-           12.4K
-          </div>
-          <div style="color: #83766B; font-size: 10px;">
-           Reach
-          </div>
-         </div>
-         <div>
-          <div style="font-weight: 600; color: #41342A;">
-           6.2%
-          </div>
-          <div style="color: #83766B; font-size: 10px;">
-           Eng Rate
-          </div>
-         </div>
-         <div>
-          <div style="font-weight: 600; color: #41342A;">
-           3,200
-          </div>
-          <div style="color: #83766B; font-size: 10px;">
-           Saves
-          </div>
-         </div>
-        </div>
-        <span style="display: inline-block; background: rgba(149,192,160,0.1); color: #6B9C78; padding: 3px 8px; border-radius: 4px; font-size: 10px; font-weight: 600; margin-top: 8px;">
-         Top Performer
-        </span>
-       </div>
-      </div>
-      <div style="background: #F6F5F3; border: 1px solid #EDE8E2; border-radius: 12px; overflow: hidden; position: relative;">
-       <div style="position: absolute; top: 10px; left: 10px; background: #41342A; color: #F5F0EB; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; z-index: 1;">2</div>
-       <img alt="Social post" src="https://www.stelladot.com/cdn/shop/files/ChannelSetHuggieEarrings_1080x.jpg" style="width: 100%; height: 200px; object-fit: cover;"/>
-       <div style="padding: 12px;">
-        <div style="font-size: 12px; font-weight: 600; color: #41342A; margin-bottom: 4px;">
-         Carousel: Spring Collection Flat Lay
-        </div>
-        <div style="font-size: 11px; color: #83766B; margin-bottom: 8px;">
-         Instagram • Mar 25
-        </div>
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; font-size: 11px;">
-         <div>
-          <div style="font-weight: 600; color: #41342A;">
-           8.9K
-          </div>
-          <div style="color: #83766B; font-size: 10px;">
-           Reach
-          </div>
-         </div>
-         <div>
-          <div style="font-weight: 600; color: #41342A;">
-           5.1%
-          </div>
-          <div style="color: #83766B; font-size: 10px;">
-           Eng Rate
-          </div>
-         </div>
-         <div>
-          <div style="font-weight: 600; color: #41342A;">
-           1,840
-          </div>
-          <div style="color: #83766B; font-size: 10px;">
-           Saves
-          </div>
-         </div>
-        </div>
-        <span style="display: inline-block; background: rgba(149,192,160,0.1); color: #6B9C78; padding: 3px 8px; border-radius: 4px; font-size: 10px; font-weight: 600; margin-top: 8px;">
-         Strong
-        </span>
-       </div>
-      </div>
-      <div style="background: #F6F5F3; border: 1px solid #EDE8E2; border-radius: 12px; overflow: hidden; position: relative;">
-       <div style="position: absolute; top: 10px; left: 10px; background: #41342A; color: #F5F0EB; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; z-index: 1;">3</div>
-       <img alt="Social post" src="https://www.stelladot.com/cdn/shop/files/B2046-DotBracelet-Lapis-193_900x.jpg" style="width: 100%; height: 200px; object-fit: cover;"/>
-       <div style="padding: 12px;">
-        <div style="font-size: 12px; font-weight: 600; color: #41342A; margin-bottom: 4px;">
-         Story Poll: Which Earring Style?
-        </div>
-        <div style="font-size: 11px; color: #83766B; margin-bottom: 8px;">
-         Instagram Stories • Mar 26
-        </div>
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; font-size: 11px;">
-         <div>
-          <div style="font-weight: 600; color: #41342A;">
-           6.1K
-          </div>
-          <div style="color: #83766B; font-size: 10px;">
-           Reach
-          </div>
-         </div>
-         <div>
-          <div style="font-weight: 600; color: #41342A;">
-           8.4%
-          </div>
-          <div style="color: #83766B; font-size: 10px;">
-           Eng Rate
-          </div>
-         </div>
-         <div>
-          <div style="font-weight: 600; color: #41342A;">
-           420
-          </div>
-          <div style="color: #83766B; font-size: 10px;">
-           Link Clicks
-          </div>
-         </div>
-        </div>
-        <span style="display: inline-block; background: rgba(176,206,255,0.15); color: #57719B; padding: 3px 8px; border-radius: 4px; font-size: 10px; font-weight: 600; margin-top: 8px;">
-         High Engagement
-        </span>
-       </div>
-      </div>
-     </div>
-     </div>
-     <div class="perf-tab-content" data-group="social" data-tab="bottom">
-     <div class="grid-3col">
-      <div style="background: #F6F5F3; border: 1px solid rgba(139,110,163,0.3); border-radius: 12px; overflow: hidden; position: relative;">
-       <img alt="Social post" src="https://www.stelladot.com/cdn/shop/files/Joie_Lime_Tight_1080x.png" style="width: 100%; height: 200px; object-fit: cover;"/>
-       <div style="padding: 12px;">
-        <div style="font-size: 12px; font-weight: 600; color: #41342A; margin-bottom: 4px;">
-         Static: Spring Bracelet Flat Lay
-        </div>
-        <div style="font-size: 11px; color: #83766B; margin-bottom: 8px;">
-         Instagram • Mar 24
-        </div>
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; font-size: 11px;">
-         <div><div style="font-weight: 600; color: #41342A;">1.2K</div><div style="color: #83766B; font-size: 10px;">Reach</div></div>
-         <div><div style="font-weight: 600; color: #41342A;">1.1%</div><div style="color: #83766B; font-size: 10px;">Eng Rate</div></div>
-         <div><div style="font-weight: 600; color: #41342A;">42</div><div style="color: #83766B; font-size: 10px;">Saves</div></div>
-        </div>
-        <span style="display: inline-block; background: rgba(139,110,163,0.12); color: #8B6EA3; padding: 3px 8px; border-radius: 4px; font-size: 10px; font-weight: 600; margin-top: 8px;">Low Engagement</span>
-        <div style="font-size: 11px; color: #83766B; margin-top: 8px; line-height: 1.4;">
-         ⚡ Static flat lays get 2.4x lower engagement than Reels. Try a short styling video instead.
-        </div>
-       </div>
-      </div>
-      <div style="background: #F6F5F3; border: 1px solid rgba(139,110,163,0.3); border-radius: 12px; overflow: hidden; position: relative;">
-       <img alt="Social post" src="https://www.stelladot.com/cdn/shop/files/Tatum_revised_1080x.jpg" style="width: 100%; height: 200px; object-fit: cover;"/>
-       <div style="padding: 12px;">
-        <div style="font-size: 12px; font-weight: 600; color: #41342A; margin-bottom: 4px;">
-         Carousel: New Earring Collection
-        </div>
-        <div style="font-size: 11px; color: #83766B; margin-bottom: 8px;">
-         Instagram • Mar 28
-        </div>
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; font-size: 11px;">
-         <div><div style="font-weight: 600; color: #41342A;">2.8K</div><div style="color: #83766B; font-size: 10px;">Reach</div></div>
-         <div><div style="font-weight: 600; color: #41342A;">1.8%</div><div style="color: #83766B; font-size: 10px;">Eng Rate</div></div>
-         <div><div style="font-weight: 600; color: #41342A;">89</div><div style="color: #83766B; font-size: 10px;">Saves</div></div>
-        </div>
-        <span style="display: inline-block; background: rgba(139,110,163,0.12); color: #8B6EA3; padding: 3px 8px; border-radius: 4px; font-size: 10px; font-weight: 600; margin-top: 8px;">Below Average</span>
-        <div style="font-size: 11px; color: #83766B; margin-top: 8px; line-height: 1.4;">
-         ⚡ Posted Friday 5pm — lowest engagement window. Your best carousel times are Tue/Wed 11am–1pm.
-        </div>
-       </div>
-      </div>
-      <div style="background: #F6F5F3; border: 1px solid rgba(139,110,163,0.3); border-radius: 12px; overflow: hidden; position: relative;">
-       <img alt="Social post" src="https://www.stelladot.com/cdn/shop/files/B2046-DotBracelet-Lapis-193_900x.jpg" style="width: 100%; height: 200px; object-fit: cover;"/>
-       <div style="padding: 12px;">
-        <div style="font-size: 12px; font-weight: 600; color: #41342A; margin-bottom: 4px;">
-         TikTok: Unboxing Spring Box
-        </div>
-        <div style="font-size: 11px; color: #83766B; margin-bottom: 8px;">
-         TikTok • Mar 26
-        </div>
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; font-size: 11px;">
-         <div><div style="font-weight: 600; color: #41342A;">980</div><div style="color: #83766B; font-size: 10px;">Views</div></div>
-         <div><div style="font-weight: 600; color: #41342A;">0.8%</div><div style="color: #83766B; font-size: 10px;">Eng Rate</div></div>
-         <div><div style="font-weight: 600; color: #41342A;">12</div><div style="color: #83766B; font-size: 10px;">Shares</div></div>
-        </div>
-        <span style="display: inline-block; background: rgba(139,110,163,0.12); color: #8B6EA3; padding: 3px 8px; border-radius: 4px; font-size: 10px; font-weight: 600; margin-top: 8px;">Low Views</span>
-        <div style="font-size: 11px; color: #83766B; margin-top: 8px; line-height: 1.4;">
-         ⚡ Unboxing without a hook in first 2 seconds. Top TikToks lead with the product reveal — don't bury it.
-        </div>
-       </div>
-      </div>
-     </div>
-     </div>
-     <!-- Engagement Rate + Reach trailing chart -->
-     <div style="margin-top: 24px;">
-      <h3 style="margin-bottom: 16px;">
-       Engagement &amp; Reach — Trailing 4 Weeks
-      </h3>
-      <svg viewBox="0 0 800 200" xmlns="http://www.w3.org/2000/svg">
-       <line stroke="#EDE8E2" stroke-width="1" x1="60" x2="760" y1="170" y2="170">
-       </line>
-       <line stroke="#EDE8E2" stroke-width="1" x1="60" x2="760" y1="130" y2="130">
-       </line>
-       <line stroke="#EDE8E2" stroke-width="1" x1="60" x2="760" y1="90" y2="90">
-       </line>
-       <line stroke="#EDE8E2" stroke-width="1" x1="60" x2="760" y1="50" y2="50">
-       </line>
-       <!-- Reach bars -->
-       <rect fill="#95c0a0" fill-opacity="0.3" height="60" rx="4" width="80" x="120" y="110">
-       </rect>
-       <rect fill="#95c0a0" fill-opacity="0.3" height="75" rx="4" width="80" x="290" y="95">
-       </rect>
-       <rect fill="#95c0a0" fill-opacity="0.3" height="90" rx="4" width="80" x="460" y="80">
-       </rect>
-       <rect fill="#95c0a0" fill-opacity="0.5" height="110" rx="4" width="80" x="630" y="60">
-       </rect>
-       <!-- Engagement rate line -->
-       <polyline fill="none" points="160,120 330,108 500,95 670,78" stroke="#6B9C78" stroke-width="3">
-       </polyline>
-       <circle cx="160" cy="120" fill="#6B9C78" r="5">
-       </circle>
-       <circle cx="330" cy="108" fill="#6B9C78" r="5">
-       </circle>
-       <circle cx="500" cy="95" fill="#6B9C78" r="5">
-       </circle>
-       <circle cx="670" cy="78" fill="#6B9C78" r="5">
-       </circle>
-       <!-- Data labels on line -->
-       <text fill="#6B9C78" font-size="10" font-weight="600" text-anchor="middle" x="160" y="112">
-        3.2%
-       </text>
-       <text fill="#6B9C78" font-size="10" font-weight="600" text-anchor="middle" x="330" y="100">
-        3.8%
-       </text>
-       <text fill="#6B9C78" font-size="10" font-weight="600" text-anchor="middle" x="500" y="87">
-        4.1%
-       </text>
-       <text fill="#6B9C78" font-size="10" font-weight="600" text-anchor="middle" x="670" y="70">
-        4.6%
-       </text>
-       <!-- X labels -->
-       <text fill="#83766B" font-size="11" text-anchor="middle" x="160" y="190">
-        Mar 10
-       </text>
-       <text fill="#83766B" font-size="11" text-anchor="middle" x="330" y="190">
-        Mar 17
-       </text>
-       <text fill="#83766B" font-size="11" text-anchor="middle" x="500" y="190">
-        Mar 24
-       </text>
-       <text fill="#83766B" font-size="11" text-anchor="middle" x="670" y="190">
-        Mar 31
-       </text>
-       <!-- Y labels -->
-       <text fill="#83766B" font-size="10" text-anchor="end" x="50" y="174">
-        0
-       </text>
-       <text fill="#83766B" font-size="10" text-anchor="end" x="50" y="134">
-        20K
-       </text>
-       <text fill="#83766B" font-size="10" text-anchor="end" x="50" y="94">
-        40K
-       </text>
-       <text fill="#83766B" font-size="10" text-anchor="end" x="50" y="54">
-        60K
-       </text>
-       <!-- Legend -->
-       <rect fill="#95c0a0" fill-opacity="0.4" height="8" rx="1" width="8" x="250" y="196">
-       </rect>
-       <text fill="#83766B" font-size="10" x="262" y="204">
-        Reach
-       </text>
-       <line stroke="#6B9C78" stroke-width="3" x1="310" x2="330" y1="200" y2="200">
-       </line>
-       <text fill="#83766B" font-size="10" x="335" y="204">
-        Engagement Rate
-       </text>
-      </svg>
-     </div>
-      </div>
-     </div>
-    </div>
+
     <!-- Campaign Performance Rollup -->
     <div class="card">
      <div class="section-title-row">
@@ -4968,7 +3996,7 @@
         <strong>
          ⚡ Insight:
         </strong>
-        Your campaign mix is 46% Core, 25% Discount, 15% New — close to your target of 50/20/30. You're slightly over-indexing on Discount campaigns. The Spring Collection Launch is your top performer at 45.6% of revenue — a strong signal to keep running Core product campaigns. → Plan Next Core Campaign
+        Your campaign mix was 46% Core, 25% Discount, 15% New — close to your 50/20/30 target, with Discount running 5 points above plan. Spring Collection Launch drove $58,230 (46% of total campaign revenue) at 3.4x ROAS. You have 2 campaigns scheduled for next month: a Memorial Day promo (Discount) and Summer Preview (Core).
        </p>
       </div>
      </div>
@@ -5131,7 +4159,7 @@
         <strong>
          ⚡ Insight:
         </strong>
-        Organic search sessions are up 14% WoW — your recent blog post is driving qualified traffic. But organic conversion rate at 1.2% lags email's 3.2% significantly. Consider adding product recommendations to high-traffic blog pages to bridge the gap. Email traffic is up 22% and converts at 3.2% — your most efficient channel. → View SEO Opportunities
+        Organic search sessions are up 14% this month — your recent blog posts are driving qualified traffic. You published 4 blog posts this month vs. 1 last month. Organic conversion rate (1.2%) still lags email (3.2%), which remains your highest-converting source. Email traffic is up 22%, with 6 campaign sends driving the increase.
        </p>
       </div>
      </div>
@@ -5144,7 +4172,7 @@
         31,856
        </div>
        <div class="kpi-change positive">
-        ↗ +9% WoW
+        ↗ +9% MoM
        </div>
       </div>
       <div class="kpi-card">
@@ -5485,7 +4513,7 @@
         <strong>
          ⚡ Insight:
         </strong>
-        You have 3 campaigns planned for next week but no Core Product campaign in the mix. Based on the March Layering Necklace momentum (+45% velocity), consider adding a dedicated feature email. There's a 3-day gap Apr 8-10 with nothing scheduled — fill it or risk a revenue dip. → Create Suggested Campaign
+        You have 3 campaigns planned for next week but no Core Product campaign in the mix. Your Spring Layering Necklace is still your top seller with strong velocity. There's a 3-day gap Apr 8–10 with nothing scheduled — your calendar is lighter than usual for this time of year. → Ask Marklo for Campaign Suggestions
        </p>
       </div>
      </div>
@@ -5597,7 +4625,7 @@
 
             const opt = {
                 margin:       [10, 8, 10, 8],
-                filename:     'Marklo-Weekly-Marketing-Summary-Mar24-30-2026.pdf',
+                filename:     'Marklo-Monthly-Marketing-Summary-April-2026.pdf',
                 image:        { type: 'jpeg', quality: 0.95 },
                 html2canvas:  {
                     scale: 2,

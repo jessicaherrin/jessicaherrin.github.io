@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Report #3: Campaign & Promotion Deep Dive — Marklo</title>
+    <title>Report #3: Campaign Performance Snapshot — Marklo</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.2/html2pdf.bundle.min.js"></script>
     <style>
@@ -891,6 +891,159 @@
         .action-btn-filled:hover { background: #5A4F44; border-color: #5A4F44; }
         .action-btn svg { flex-shrink: 0; }
 
+        /* ═══ DISCOUNT DEEP DIVE SECTIONS (aligned with Dashboard) ═══ */
+        .section-divider {
+            display: flex; align-items: center; gap: 12px;
+            margin: 40px 0 24px; padding-bottom: 8px;
+            border-bottom: 2px solid #41342A;
+        }
+        .section-divider-label {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 20px; font-weight: 500; color: #41342A;
+        }
+        .section-divider-badge {
+            font-size: 10px; font-weight: 700; padding: 3px 10px;
+            border-radius: 10px; background: #41342A; color: #F5F0EB;
+        }
+
+        /* Discount KPI grid */
+        .disc-kpi-grid {
+            display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin-bottom: 20px;
+        }
+        .disc-kpi {
+            background: #FAFAFA; border-radius: 8px; padding: 12px 10px; text-align: center;
+        }
+        .disc-kpi.alert { border: 1.5px solid rgba(139,110,163,0.3); }
+        .disc-kpi.good { border: 1.5px solid rgba(107,156,120,0.3); }
+        .disc-kpi-val {
+            font-size: 22px; font-weight: 800; color: #41342A; margin: 4px 0 2px;
+        }
+        .disc-kpi-val.warn { color: #8B6EA3; }
+        .disc-kpi-val.pos { color: #6B9C78; }
+        .disc-kpi-delta { font-size: 11px; font-weight: 600; }
+        .disc-kpi-delta.neg { color: #8B6EA3; }
+        .disc-kpi-delta.pos { color: #6B9C78; }
+
+        /* Callout bars */
+        .disc-callout {
+            padding: 10px 14px; border-radius: 0 8px 8px 0;
+            margin: 12px 0; font-size: 12px; line-height: 1.5;
+        }
+        .disc-callout.warn { background: rgba(139,110,163,0.06); border-left: 3px solid #b197c7; color: #8B6EA3; }
+        .disc-callout.good { background: rgba(107,156,120,0.08); border-left: 3px solid #6B9C78; color: #4A7A56; }
+
+        /* Stacked bars (report version) */
+        .rpt-chart-area { background: #FAFAFA; border-radius: 10px; padding: 16px; }
+        .rpt-stacked-bars { display: flex; align-items: flex-end; gap: 4px; height: 150px; }
+        .rpt-bar-group { flex: 1; display: flex; flex-direction: column; align-items: center; }
+        .rpt-bar-stack { width: 100%; display: flex; flex-direction: column-reverse; }
+        .rpt-bar-seg { width: 100%; min-height: 2px; }
+        .rpt-bar-seg.fp { background: #95c0a0; }
+        .rpt-bar-seg.disc { background: #b197c7; }
+        .rpt-bar-seg:first-child { border-radius: 0 0 3px 3px; }
+        .rpt-bar-seg:last-child { border-radius: 3px 3px 0 0; }
+        .rpt-bar-x { font-size: 9px; color: #83766B; margin-top: 4px; text-align: center; }
+        .rpt-legend { display: flex; gap: 16px; margin-top: 10px; }
+        .rpt-legend-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: #83766B; }
+        .rpt-legend-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
+
+        /* Histogram */
+        .rpt-histogram { display: flex; align-items: flex-end; gap: 10px; height: 130px; }
+        .rpt-hist-col { flex: 1; display: flex; flex-direction: column; align-items: center; }
+        .rpt-hist-bar { width: 100%; border-radius: 5px 5px 0 0; }
+        .rpt-hist-val { font-size: 10px; font-weight: 700; color: #41342A; text-align: center; margin-bottom: 2px; }
+        .rpt-hist-x { font-size: 10px; color: #83766B; margin-top: 5px; text-align: center; }
+        .rpt-hist-aov { font-size: 10px; font-weight: 700; color: #57719B; text-align: center; margin-top: 1px; }
+
+        /* Compare cards */
+        .rpt-compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .rpt-compare-card { background: #FAFAFA; border-radius: 10px; padding: 16px; border: 2px solid #EDE8E2; }
+        .rpt-compare-card.warn { border-color: rgba(139,110,163,0.35); }
+        .rpt-compare-card.good { border-color: rgba(107,156,120,0.35); }
+        .rpt-compare-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; color: #41342A; }
+        .rpt-compare-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(0,0,0,0.04); font-size: 12px; }
+        .rpt-compare-row:last-child { border-bottom: none; }
+        .rpt-compare-label { color: #83766B; }
+        .rpt-compare-val { font-weight: 700; }
+
+        /* Matrix table */
+        .rpt-matrix { width: 100%; border-collapse: collapse; font-size: 12px; }
+        .rpt-matrix th { padding: 8px 10px; text-align: left; font-weight: 500; color: #83766B; font-size: 11px; background: #F6F5F3; border-bottom: 1px solid #E5DDD5; }
+        .rpt-matrix th.right { text-align: right; }
+        .rpt-matrix td { padding: 10px 10px; border-bottom: 1px solid #F0EBE5; }
+        .rpt-matrix td.right { text-align: right; }
+        .rpt-matrix td.bold { font-weight: 700; }
+        .rpt-matrix tbody tr:hover { background: rgba(176,206,255,0.05); }
+        .rpt-flag { font-size: 10px; font-weight: 700; display: flex; align-items: center; gap: 4px; }
+        .rpt-flag.yes { color: #6B9C78; }
+        .rpt-flag.no { color: #8B6EA3; }
+        .rpt-flag.caution { color: #B8860B; }
+
+        /* Incrementality */
+        .rpt-incr-grid { display: grid; grid-template-columns: 1.4fr 0.6fr; gap: 16px; }
+        .rpt-seg-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+        .rpt-seg-table th { padding: 8px 8px; text-align: left; font-weight: 500; color: #83766B; font-size: 11px; background: #F6F5F3; border-bottom: 1px solid #E5DDD5; }
+        .rpt-seg-table td { padding: 10px 8px; border-bottom: 1px solid #F0EBE5; font-size: 12px; }
+        .rpt-seg-table td.right { text-align: right; }
+        .rpt-summary-panel { background: #fff; border: 1px solid #EDE8E2; border-radius: 10px; padding: 16px; }
+        .rpt-summary-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #F5F0EB; }
+        .rpt-summary-row:last-child { border-bottom: none; }
+        .rpt-summary-label { font-size: 12px; color: #83766B; }
+        .rpt-summary-val { font-size: 14px; font-weight: 700; }
+
+        /* ═══ DECISION FRAMEWORK (Report version) ═══ */
+        .rpt-type-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+        .rpt-type-card { background: #FAFAFA; border-radius: 10px; padding: 14px; text-align: center; border: 2px solid #EDE8E2; position: relative; }
+        .rpt-type-card.best { border-color: #6B9C78; background: rgba(107,156,120,0.04); }
+        .rpt-type-card.worst { border-color: rgba(139,110,163,0.35); }
+        .rpt-type-name { font-size: 12px; font-weight: 700; color: #41342A; margin-bottom: 2px; }
+        .rpt-type-grade { font-size: 26px; font-weight: 800; margin: 6px 0; }
+        .rpt-type-row { display: flex; justify-content: space-between; padding: 4px 0; font-size: 10px; border-bottom: 1px solid rgba(0,0,0,0.04); }
+        .rpt-type-row:last-child { border-bottom: none; }
+        .rpt-type-label { color: #83766B; }
+        .rpt-type-val { font-weight: 700; color: #41342A; }
+        .rpt-ribbon { position: absolute; top: -1px; right: 12px; font-size: 9px; font-weight: 700; padding: 3px 8px; border-radius: 0 0 6px 6px; color: white; }
+
+        .rpt-verdict-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+        .rpt-verdict-card { background: #FAFAFA; border-radius: 10px; padding: 16px; border: 2px solid #EDE8E2; }
+        .rpt-verdict-card.run { border-color: #6B9C78; }
+        .rpt-verdict-card.tweak { border-color: #B8860B; }
+        .rpt-verdict-card.pause { border-color: #8B6EA3; }
+        .rpt-verdict-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+        .rpt-verdict-code { font-size: 14px; font-weight: 800; color: #41342A; }
+        .rpt-verdict-badge { font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 8px; }
+        .rpt-verdict-badge.run { background: rgba(107,156,120,0.15); color: #6B9C78; }
+        .rpt-verdict-badge.tweak { background: rgba(184,134,11,0.12); color: #B8860B; }
+        .rpt-verdict-badge.pause { background: rgba(139,110,163,0.12); color: #8B6EA3; }
+        .rpt-verdict-score { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+        .rpt-verdict-bar { flex: 1; height: 8px; background: #EDE8E2; border-radius: 4px; overflow: hidden; }
+        .rpt-verdict-fill { height: 100%; border-radius: 4px; }
+        .rpt-verdict-num { font-size: 14px; font-weight: 800; min-width: 32px; }
+        .rpt-verdict-metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 10px; }
+        .rpt-vmetric { text-align: center; }
+        .rpt-vmetric-val { font-size: 13px; font-weight: 700; color: #41342A; }
+        .rpt-vmetric-label { font-size: 9px; color: #83766B; }
+        .rpt-verdict-rec { font-size: 11px; line-height: 1.5; color: #41342A; padding: 8px 10px; background: rgba(176,206,255,0.08); border-radius: 6px; }
+
+        .rpt-timing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .rpt-dur-bars { display: flex; align-items: flex-end; gap: 12px; height: 110px; }
+        .rpt-dur-col { flex: 1; display: flex; flex-direction: column; align-items: center; }
+        .rpt-dur-bar { width: 100%; border-radius: 6px 6px 0 0; }
+        .rpt-dur-val { font-size: 11px; font-weight: 700; text-align: center; margin-bottom: 3px; }
+        .rpt-dur-label { font-size: 10px; color: #83766B; margin-top: 5px; text-align: center; font-weight: 600; }
+        .rpt-day-heat { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+        .rpt-day-cell { border-radius: 6px; padding: 8px 4px; text-align: center; }
+        .rpt-day-name { font-size: 10px; font-weight: 600; color: #41342A; margin-bottom: 3px; }
+        .rpt-day-val { font-size: 13px; font-weight: 800; }
+        .rpt-day-sub { font-size: 9px; color: #83766B; margin-top: 2px; }
+
+        @media (max-width: 768px) {
+            .disc-kpi-grid { grid-template-columns: repeat(3, 1fr); }
+            .rpt-compare-grid, .rpt-incr-grid { grid-template-columns: 1fr; }
+            .rpt-type-grid { grid-template-columns: repeat(2, 1fr); }
+            .rpt-verdict-grid, .rpt-timing-grid { grid-template-columns: 1fr; }
+        }
+
    </style>
 </head>
 <body>
@@ -901,7 +1054,7 @@
             <div class="action-bar-left">
                 <a href="index.html">Reports Library</a>
                 <span class="sep">/</span>
-                <a href="#" style="color:#41342A;font-weight:500;">Campaign & Promo Deep Dive</a>
+                <a href="#" style="color:#41342A;font-weight:500;">Campaign Performance Snapshot</a>
             </div>
             <div class="action-bar-right">
                 <button class="action-btn action-btn-outline"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 3h8M2 6h8M2 9h5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>Customize</button>
@@ -924,13 +1077,14 @@
             🎯 Your Campaigns Are Crushing Goals — Let's Dig In!
         </div>
         <div class="card" style="border-radius: 0 0 12px 12px; margin-top: 0;">
-            <h1>Campaign & Promotion Deep Dive</h1>
+            <h1>Campaign Performance Snapshot</h1>
             <p class="meta-info">📊 Report #3 • Mar 24 – Mar 30, 2026</p>
             <p class="meta-info" style="color: #999; font-size: 13px;">Jewelry DTC Brand Dashboard</p>
             <div class="win-pills">
                 <span class="win-pill">🎯 7 Active Campaigns</span>
                 <span class="win-pill record">⭐ Spring Collection: $47.2K Revenue</span>
-                <span class="win-pill streak">💰 Avg ROAS: 4.2x (Best in 6 months)</span>
+                <span class="win-pill streak">💰 Campaign Revenue: $120.3K (+18% WoW)</span>
+                <span class="win-pill" style="background:rgba(139,110,163,0.1);border-color:#b197c7;color:#8B6EA3;">⚠️ Discount Rate: 38% (+5pp)</span>
             </div>
             <div class="header-badge">✨ Powered by Marklo</div>
         </div>
@@ -939,7 +1093,7 @@
         <div class="ai-insight">
             <div class="ai-icon">✨</div>
             <div class="ai-content">
-                <p><strong>AI Insight:</strong> Your campaigns are firing on all cylinders this week! The Spring Collection email campaign is your star performer with 4.8x ROAS and 52% of campaign revenue. SMS is punching above its weight at 3.9x ROAS despite smaller spend. Three key insights: (1) Your influencer partnerships are driving 23% of new customer acquisition at excellent margins; (2) Flash Sale promos are performing 18% better than regular discounts — consider running 2-3 per month; (3) Your winning ad creative (Summer Vibes Golden Hoops) is showing signs of saturation at day 12 — time to rotate in fresh assets. Overall, this is peak campaign performance for your brand.</p>
+                <p><strong>AI Insight:</strong> Your campaigns are firing on all cylinders this week — but your discount strategy needs attention. The Spring Collection email is your star performer at <strong>$2.14 rev/recipient</strong> and 52% of campaign revenue. SMS is punching above its weight at <strong>$0.98 rev/message</strong>. On the paid side, @MilanJewels influencer delivers 5.2x ROAS and Summer Vibes Meta holds at 3.4x. Three key wins: (1) Influencer partnerships drive 23% of new customer acquisition at excellent margins; (2) Flash Sales perform 18% better than standard discounts; (3) GWP outperforms straight discounts on margin return. <strong style="color:#8B6EA3;">However:</strong> discount revenue hit 38% of total (up from 32%), 58% is cannibalized, and margin erosion widened to -16pp. See the new Discount Deep Dive section below for the full analysis.</p>
                 <a href="#" class="ai-cta">→ View Next Week's Recommendations</a>
             </div>
         </div>
@@ -961,7 +1115,7 @@
                     <div class="achievement-tag">NEW</div>
                     <div class="achievement-emoji">💌</div>
                     <div class="achievement-title">Email Master</div>
-                    <div class="achievement-desc">5 consecutive emails with 4x+ ROAS</div>
+                    <div class="achievement-desc">5 consecutive emails with $2+ rev/recipient</div>
                 </div>
                 <div class="achievement-badge unlocked">
                     <div class="achievement-emoji">⚡</div>
@@ -998,8 +1152,8 @@
                 <span class="marklo-logo">MARKLO</span>
             </div>
             <h3>This Week's Campaign Victory</h3>
-            <div class="shareable-stat">4.8x ROAS</div>
-            <p class="shareable-subtext">Average across all active campaigns — your best performance in 6 months</p>
+            <div class="shareable-stat">$120.3K Revenue</div>
+            <p class="shareable-subtext">Total campaign revenue this week — up 18% WoW with 289 new customers</p>
             <div class="button-row">
                 <button class="share-btn">📋 Copy as Image</button>
                 <button class="share-btn">📤 Share to Slack</button>
@@ -1014,7 +1168,7 @@
             <div class="ai-insight">
                 <div class="ai-icon">💡</div>
                 <div class="ai-content">
-                    <p><strong>Quick Insight:</strong> All 7 active campaigns are performing above average, with 5 delivering 3x+ ROAS. Your email campaigns are particularly strong this week, suggesting good list hygiene and timely content.</p>
+                    <p><strong>Quick Insight:</strong> All 7 active campaigns are performing above average. Your email campaigns are particularly strong this week ($2.14 rev/recipient on Spring Collection), and paid channels hold strong (3.4x–5.2x ROAS). Good list hygiene and timely content are driving owned channel results.</p>
                 </div>
             </div>
             <div class="table-container">
@@ -1025,9 +1179,9 @@
                             <th>Type</th>
                             <th>Status</th>
                             <th>Revenue</th>
-                            <th>ROAS/ROI</th>
+                            <th>Efficiency</th>
                             <th>Conversion</th>
-                            <th>Spend</th>
+                            <th>Reach / Spend</th>
                             <th>CPA</th>
                             <th>New Customers</th>
                         </tr>
@@ -1038,10 +1192,10 @@
                             <td><span class="type-badge email">Email</span></td>
                             <td><span class="status-badge active">Active</span></td>
                             <td class="metric-value">$47,240</td>
-                            <td class="metric-value metric-positive">4.8x</td>
+                            <td class="metric-value metric-positive">$2.14/recip</td>
                             <td class="metric-value">6.2%</td>
-                            <td>$9,850</td>
-                            <td class="metric-value">$34.05</td>
+                            <td>22.1K sent</td>
+                            <td class="metric-value" style="color:#83766B;">—</td>
                             <td class="metric-value">87</td>
                         </tr>
                         <tr>
@@ -1082,10 +1236,10 @@
                             <td><span class="type-badge sms">SMS</span></td>
                             <td><span class="status-badge active">Active</span></td>
                             <td class="metric-value">$8,120</td>
-                            <td class="metric-value metric-positive">3.9x</td>
+                            <td class="metric-value metric-positive">$0.98/msg</td>
                             <td class="metric-value">3.2%</td>
-                            <td>$2,080</td>
-                            <td class="metric-value">$24.35</td>
+                            <td>8.3K sent</td>
+                            <td class="metric-value" style="color:#83766B;">—</td>
                             <td class="metric-value">28</td>
                         </tr>
                         <tr>
@@ -1093,10 +1247,10 @@
                             <td><span class="type-badge email">Email</span></td>
                             <td><span class="status-badge active">Active</span></td>
                             <td class="metric-value">$3,850</td>
-                            <td class="metric-value metric-positive">2.1x</td>
+                            <td class="metric-value metric-positive">$0.96/recip</td>
                             <td class="metric-value">1.8%</td>
-                            <td>$1,820</td>
-                            <td class="metric-value">$45.25</td>
+                            <td>4.0K sent</td>
+                            <td class="metric-value" style="color:#83766B;">—</td>
                             <td class="metric-value">12</td>
                         </tr>
                         <tr>
@@ -1124,7 +1278,7 @@
             <div class="ai-insight">
                 <div class="ai-icon">🔍</div>
                 <div class="ai-content">
-                    <p><strong>Deep Dive:</strong> Your email and influencer channels are outperforming paid ads by 40% in ROAS. This suggests your audience is highly engaged with owned channels. Consider shifting 15% of paid budget to influencer partnerships next month.</p>
+                    <p><strong>Deep Dive:</strong> Your owned channels (email at $2.14/recip, SMS at $0.98/msg) are driving more revenue per dollar of effort than paid ads. Influencer at 5.2x ROAS outpaces Meta at 3.4x. Consider shifting 15% of paid budget to influencer partnerships next month.</p>
                 </div>
             </div>
             <div class="comparison-grid">
@@ -1134,8 +1288,8 @@
                         <span class="winner-badge">🏆 Winner</span>
                     </h4>
                     <div class="comparison-stat">
-                        <div class="stat-label">ROAS</div>
-                        <div class="stat-value">4.8x</div>
+                        <div class="stat-label">Rev/Recipient</div>
+                        <div class="stat-value">$2.14</div>
                     </div>
                     <div class="comparison-stat">
                         <div class="stat-label">Revenue</div>
@@ -1217,7 +1371,7 @@
             <div class="ai-insight">
                 <div class="ai-icon">🎁</div>
                 <div class="ai-content">
-                    <p><strong>Smart Insight:</strong> Flash sales are your high-performing promotion type (avg 4.1x ROAS), while bundle deals slightly underperform (2.8x). Your BESTFRIEND code is driving significant volume but with thinner margins — consider reducing frequency to maintain brand perception.</p>
+                    <p><strong>Smart Insight:</strong> Flash sales are your high-performing promotion type (avg 4.1x margin return), while bundle deals slightly underperform (2.8x). Your BESTFRIEND code is driving significant volume but with thinner margins — consider reducing frequency to maintain brand perception.</p>
                 </div>
             </div>
 
@@ -1338,10 +1492,515 @@
                 <h3 style="margin-bottom: 16px;">Key Findings</h3>
                 <ul style="list-style: none; font-size: 13px; line-height: 1.8; color: #666;">
                     <li>✅ <strong style="color: #6B9C78;">SPRING20</strong> continues to be your volume driver with 562 redemptions and $34.6K revenue</li>
-                    <li>✅ <strong style="color: #6B9C78;">Flash sales</strong> deliver 47% higher ROAS than standard discounts — run 2-3 monthly</li>
+                    <li>✅ <strong style="color: #6B9C78;">Flash sales</strong> deliver 47% higher margin return than standard discounts — run 2-3 monthly</li>
                     <li>⚠️ <strong style="color: #8B6EA3;">BESTFRIEND referral</strong> code eroding margins at 12.8% — consider raising threshold to 2+ referrals</li>
                     <li>📊 <strong>BUNDLE2BUY</strong> has good margin protection but low adoption — test in email segment</li>
                 </ul>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- DISCOUNT & PROMOTION DEEP DIVE (aligned with Dashboard)       -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <div class="section-divider">
+            <span style="font-size:18px;">📊</span>
+            <span class="section-divider-label">Discount & Promotion Deep Dive</span>
+            <span class="section-divider-badge">NEW</span>
+        </div>
+
+        <!-- DD-1: Discount Health Overview KPIs -->
+        <div class="card">
+            <h2 class="section-title">Discount Health Overview</h2>
+            <div class="ai-insight">
+                <div class="ai-icon">🧠</div>
+                <div class="ai-content">
+                    <p><strong>AI Insight:</strong> Discount revenue reached <strong style="color:#57719B;">$38,400</strong> in March (38% of total) across <strong>22 active promo days</strong>. That's up from 32% last month. Your maintained margin dropped to 52% vs. 55% — <strong style="color:#8B6EA3;">discount depth is creeping up</strong> and conditioning risk is elevated.</p>
+                </div>
+            </div>
+            <div class="disc-kpi-grid">
+                <div class="disc-kpi alert">
+                    <div class="label">Discount Rate</div>
+                    <div class="disc-kpi-val warn">38%</div>
+                    <div class="disc-kpi-delta neg">↑ +5pp vs Feb</div>
+                </div>
+                <div class="disc-kpi">
+                    <div class="label">Avg Depth</div>
+                    <div class="disc-kpi-val">22%</div>
+                    <div class="disc-kpi-delta neg">↑ +2pp vs Feb</div>
+                </div>
+                <div class="disc-kpi good">
+                    <div class="label">Sweet Spot</div>
+                    <div class="disc-kpi-val pos">15%</div>
+                    <div class="disc-kpi-delta pos">Best AOV bracket</div>
+                </div>
+                <div class="disc-kpi alert">
+                    <div class="label">Days on Promo</div>
+                    <div class="disc-kpi-val warn">22 / 31</div>
+                    <div class="disc-kpi-delta neg">71% of month</div>
+                </div>
+                <div class="disc-kpi alert">
+                    <div class="label">Margin Erosion</div>
+                    <div class="disc-kpi-val warn">-16pp</div>
+                    <div class="disc-kpi-delta neg">68% → 52%</div>
+                </div>
+                <div class="disc-kpi alert">
+                    <div class="label">Only Buy w/ Disc</div>
+                    <div class="disc-kpi-val warn">28%</div>
+                    <div class="disc-kpi-delta neg">🔴 >25% threshold</div>
+                </div>
+            </div>
+            <div class="disc-callout warn">
+                <strong>⚠️ Conditioning Alert:</strong> 28% of customers now only purchase with a discount code, and you're running promos 71% of days. Your audience is learning to wait for discounts — full-price revenue drops 22% during promo windows.
+            </div>
+        </div>
+
+        <!-- DD-2: Price Waterfall & Margin Erosion Trend -->
+        <div class="card">
+            <h2 class="section-title">Price Waterfall & Margin Erosion Trend</h2>
+            <p style="font-size:13px;color:#83766B;line-height:1.5;margin-bottom:16px;">The price waterfall shows the step-down from List Price through Discount to Net Price, then the costs (COGS) and final Gross Margin. Red represents value destruction; green represents value retained. This is the single most important metric for understanding if your discount strategy is structurally healthy.</p>
+            <div class="ai-insight">
+                <div class="ai-icon">📊</div>
+                <div class="ai-content">
+                    <p><strong>Margin Structure Alert:</strong> Your price waterfall shows healthy unit-level structure (65% margin on full-price), but discount penetration is compressing overall margin to 52%. The waterfall below shows March data at $100 list price. Trend: Over 13 weeks, your maintained margin (margin % on discounted orders) declined from 68% → 52%, indicating <strong style="color:#8B6EA3;">discount depth is creeping upward</strong> faster than revenue growth can compensate.</p>
+                </div>
+            </div>
+            <div class="rpt-chart-area">
+                <div style="display:flex;align-items:flex-end;justify-content:space-around;height:280px;gap:8px;padding:20px 0;position:relative;">
+                    <!-- List Price -->
+                    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+                        <div style="width:50px;height:220px;background:#6B9C78;border-radius:2px;display:flex;align-items:flex-end;justify-content:center;color:white;font-weight:600;font-size:11px;padding-bottom:8px;">100.00</div>
+                        <div style="font-size:11px;font-weight:600;color:#41342A;">List Price</div>
+                    </div>
+                    <!-- Discount (red bar showing reduction) -->
+                    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+                        <div style="width:50px;height:44px;background:#C85A5F;border-radius:2px;display:flex;align-items:flex-end;justify-content:center;color:white;font-weight:600;font-size:11px;padding-bottom:4px;">-22%</div>
+                        <div style="font-size:11px;font-weight:600;color:#41342A;">Discount</div>
+                    </div>
+                    <!-- Net Price -->
+                    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+                        <div style="width:50px;height:176px;background:#95C0A0;border-radius:2px;display:flex;align-items:flex-end;justify-content:center;color:white;font-weight:600;font-size:11px;padding-bottom:8px;">78.00</div>
+                        <div style="font-size:11px;font-weight:600;color:#41342A;">Net Price</div>
+                    </div>
+                    <!-- COGS (red bar) -->
+                    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+                        <div style="width:50px;height:88px;background:#C85A5F;border-radius:2px;display:flex;align-items:flex-end;justify-content:center;color:white;font-weight:600;font-size:11px;padding-bottom:4px;">-27.30</div>
+                        <div style="font-size:11px;font-weight:600;color:#41342A;">COGS (35%)</div>
+                    </div>
+                    <!-- Gross Margin (green) -->
+                    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+                        <div style="width:50px;height:88px;background:#6B9C78;border-radius:2px;display:flex;align-items:flex-end;justify-content:center;color:white;font-weight:600;font-size:11px;padding-bottom:4px;">50.70</div>
+                        <div style="font-size:11px;font-weight:600;color:#41342A;">Gross Margin</div>
+                    </div>
+                </div>
+                <div style="font-size:12px;color:#83766B;text-align:center;margin-top:16px;padding:12px;background:#F6F5F3;border-radius:6px;">
+                    <strong>Full-Price Waterfall (65% margin):</strong> $100 → $100 (no discount) → -$35 COGS = <strong style="color:#6B9C78;">$65 margin</strong> |
+                    <strong>Discounted Waterfall (52% margin):</strong> $100 → $78 (22% off) → -$27.30 COGS = <strong style="color:#8B6EA3;">$50.70 margin</strong>
+                </div>
+            </div>
+            <div class="disc-callout warn" style="margin-top:12px;">
+                <strong>⚠️ Trend Deteriorating:</strong> Your 13-week maintained margin trend shows a steady decline: W1 (68%) → W7 (58%) → W13 (52%). At this rate, your margin structure will drop below 50% by Q2, triggering accelerating margin erosion. Each additional 2pp discount depth costs ~$760/month in gross margin dollars.
+            </div>
+        </div>
+
+        <!-- DD-3: Discount vs Full-Price Revenue Trend (13-week) -->
+        <div class="card">
+            <h2 class="section-title">Discount vs. Full-Price Revenue Trend</h2>
+            <div class="ai-insight">
+                <div class="ai-icon">📉</div>
+                <div class="ai-content">
+                    <p><strong>Trend Alert:</strong> Over 13 weeks, discount revenue grew from 22% → 38% of total while full-price revenue declined. The crossover trajectory suggests discount-dependency will become structural if not corrected by Q3.</p>
+                </div>
+            </div>
+            <div class="rpt-chart-area">
+                <div class="rpt-stacked-bars">
+                    <div class="rpt-bar-group"><div class="rpt-bar-stack"><div class="rpt-bar-seg fp" style="height:110px;"></div><div class="rpt-bar-seg disc" style="height:24px;border-radius:3px 3px 0 0;"></div></div><div class="rpt-bar-x">W1</div></div>
+                    <div class="rpt-bar-group"><div class="rpt-bar-stack"><div class="rpt-bar-seg fp" style="height:105px;"></div><div class="rpt-bar-seg disc" style="height:28px;border-radius:3px 3px 0 0;"></div></div><div class="rpt-bar-x">W2</div></div>
+                    <div class="rpt-bar-group"><div class="rpt-bar-stack"><div class="rpt-bar-seg fp" style="height:108px;"></div><div class="rpt-bar-seg disc" style="height:32px;border-radius:3px 3px 0 0;"></div></div><div class="rpt-bar-x">W3</div></div>
+                    <div class="rpt-bar-group"><div class="rpt-bar-stack"><div class="rpt-bar-seg fp" style="height:100px;"></div><div class="rpt-bar-seg disc" style="height:36px;border-radius:3px 3px 0 0;"></div></div><div class="rpt-bar-x">W4</div></div>
+                    <div class="rpt-bar-group"><div class="rpt-bar-stack"><div class="rpt-bar-seg fp" style="height:96px;"></div><div class="rpt-bar-seg disc" style="height:40px;border-radius:3px 3px 0 0;"></div></div><div class="rpt-bar-x">W5</div></div>
+                    <div class="rpt-bar-group"><div class="rpt-bar-stack"><div class="rpt-bar-seg fp" style="height:98px;"></div><div class="rpt-bar-seg disc" style="height:42px;border-radius:3px 3px 0 0;"></div></div><div class="rpt-bar-x">W6</div></div>
+                    <div class="rpt-bar-group"><div class="rpt-bar-stack"><div class="rpt-bar-seg fp" style="height:102px;"></div><div class="rpt-bar-seg disc" style="height:38px;border-radius:3px 3px 0 0;"></div></div><div class="rpt-bar-x">W7</div></div>
+                    <div class="rpt-bar-group"><div class="rpt-bar-stack"><div class="rpt-bar-seg fp" style="height:92px;"></div><div class="rpt-bar-seg disc" style="height:46px;border-radius:3px 3px 0 0;"></div></div><div class="rpt-bar-x">W8</div></div>
+                    <div class="rpt-bar-group"><div class="rpt-bar-stack"><div class="rpt-bar-seg fp" style="height:90px;"></div><div class="rpt-bar-seg disc" style="height:50px;border-radius:3px 3px 0 0;"></div></div><div class="rpt-bar-x">W9</div></div>
+                    <div class="rpt-bar-group"><div class="rpt-bar-stack"><div class="rpt-bar-seg fp" style="height:88px;"></div><div class="rpt-bar-seg disc" style="height:54px;border-radius:3px 3px 0 0;"></div></div><div class="rpt-bar-x">W10</div></div>
+                    <div class="rpt-bar-group"><div class="rpt-bar-stack"><div class="rpt-bar-seg fp" style="height:85px;"></div><div class="rpt-bar-seg disc" style="height:56px;border-radius:3px 3px 0 0;"></div></div><div class="rpt-bar-x">W11</div></div>
+                    <div class="rpt-bar-group"><div class="rpt-bar-stack"><div class="rpt-bar-seg fp" style="height:86px;"></div><div class="rpt-bar-seg disc" style="height:60px;border-radius:3px 3px 0 0;"></div></div><div class="rpt-bar-x">W12</div></div>
+                    <div class="rpt-bar-group"><div class="rpt-bar-stack"><div class="rpt-bar-seg fp" style="height:82px;"></div><div class="rpt-bar-seg disc" style="height:64px;border-radius:3px 3px 0 0;"></div></div><div class="rpt-bar-x">W13</div></div>
+                </div>
+                <div class="rpt-legend">
+                    <div class="rpt-legend-item"><div class="rpt-legend-dot" style="background:#95c0a0;"></div> Full-Price Revenue</div>
+                    <div class="rpt-legend-item"><div class="rpt-legend-dot" style="background:#b197c7;"></div> Discount Revenue</div>
+                </div>
+            </div>
+            <div class="disc-callout warn" style="margin-top:12px;">
+                <strong>⚠️ Trajectory:</strong> Discount share grew from 18% (W1) to 44% (W13). At this pace, discount revenue will exceed full-price by mid-Q3. Recommend a 2-week promo blackout in April to reset customer expectations.
+            </div>
+        </div>
+
+        <!-- DD-4: Discount Depth Distribution -->
+        <div class="card">
+            <h2 class="section-title">Discount Depth Distribution</h2>
+            <p style="font-size:13px;color:#83766B;line-height:1.5;margin-bottom:16px;">How big are the discounts you're actually giving? Each bar shows how many orders landed in that discount range. The <span style="color:#57719B;font-weight:600;">blue number</span> below each bar is the average order value at that depth. Bigger discounts don't mean bigger orders — find the "sweet spot" that maximizes order value without giving away too much.</p>
+            <div class="ai-insight">
+                <div class="ai-icon">📊</div>
+                <div class="ai-content">
+                    <p><strong>Depth Analysis:</strong> The 11–15% bracket delivers your highest AOV ($92) and preserves 85% of full-price margin. Over 26% of discounted orders exceed 20% — that's pure margin erosion with no AOV benefit.</p>
+                </div>
+            </div>
+            <div class="rpt-chart-area" style="margin-bottom:12px;">
+                <div class="rpt-histogram">
+                    <div class="rpt-hist-col"><div class="rpt-hist-val">82</div><div class="rpt-hist-bar" style="height:30px;background:#95c0a0;"></div><div class="rpt-hist-x">0–10%</div><div class="rpt-hist-aov">$88</div></div>
+                    <div class="rpt-hist-col"><div class="rpt-hist-val">248</div><div class="rpt-hist-bar" style="height:80px;background:#95c0a0;border:2px solid #4A7A56;"></div><div class="rpt-hist-x">11–15%</div><div class="rpt-hist-aov">$92 ⭐</div></div>
+                    <div class="rpt-hist-col"><div class="rpt-hist-val">312</div><div class="rpt-hist-bar" style="height:100px;background:#d0c9a4;"></div><div class="rpt-hist-x">16–20%</div><div class="rpt-hist-aov">$78</div></div>
+                    <div class="rpt-hist-col"><div class="rpt-hist-val">156</div><div class="rpt-hist-bar" style="height:60px;background:#b197c7;"></div><div class="rpt-hist-x">21–25%</div><div class="rpt-hist-aov">$65</div></div>
+                    <div class="rpt-hist-col"><div class="rpt-hist-val">64</div><div class="rpt-hist-bar" style="height:32px;background:#b197c7;"></div><div class="rpt-hist-x">26–30%</div><div class="rpt-hist-aov">$58</div></div>
+                    <div class="rpt-hist-col"><div class="rpt-hist-val">28</div><div class="rpt-hist-bar" style="height:18px;background:#8B6EA3;"></div><div class="rpt-hist-x">31%+</div><div class="rpt-hist-aov">$42</div></div>
+                </div>
+                <div class="rpt-legend">
+                    <div class="rpt-legend-item"><div class="rpt-legend-dot" style="background:#95c0a0;"></div> Healthy</div>
+                    <div class="rpt-legend-item"><div class="rpt-legend-dot" style="background:#d0c9a4;"></div> Moderate</div>
+                    <div class="rpt-legend-item"><div class="rpt-legend-dot" style="background:#b197c7;"></div> Deep (margin risk)</div>
+                    <div class="rpt-legend-item" style="font-weight:600;color:#57719B;">AOV per bracket</div>
+                </div>
+            </div>
+            <div class="disc-callout good">
+                <strong>⭐ Sweet Spot at 15%:</strong> The 11–15% bracket has the highest AOV ($92) and preserves 85% of full-price margin. Cap future promos at 15% unless clearing dead stock.
+            </div>
+        </div>
+
+        <!-- DD-5: Full-Price vs Discount Customer Profile -->
+        <div class="card">
+            <h2 class="section-title">Full-Price vs. Discount-Acquired Customer Profile</h2>
+            <div class="ai-insight">
+                <div class="ai-icon">👥</div>
+                <div class="ai-content">
+                    <p><strong>Customer Intelligence:</strong> Discount-acquired customers generate <strong style="color:#8B6EA3;">$52 in lifetime gross margin vs. $203</strong> for full-price buyers — a <strong>4× gap</strong>. Revenue LTV ($124 vs $312) understates the damage because discount buyers also purchase at lower margin (42% vs 65%). Over-discounting is eroding long-term customer value.</p>
+                </div>
+            </div>
+            <!-- Segment Definitions -->
+            <div style="background:#F6F5F3;border-radius:8px;padding:12px 16px;margin-bottom:16px;border:1px solid #E5E7EB;">
+                <div style="font-size:12px;font-weight:700;color:#41342A;margin-bottom:8px;">How These Segments Are Defined</div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                    <div>
+                        <div style="font-size:11px;font-weight:700;color:#6B9C78;margin-bottom:3px;">Full-Price Acquired</div>
+                        <div style="font-size:12px;color:#41342A;line-height:1.5;">Customer's <strong>first order</strong> had no discount code applied. Markdown pricing (compare_at_price) is OK — those are merchandising decisions, not promotional.</div>
+                    </div>
+                    <div>
+                        <div style="font-size:11px;font-weight:700;color:#8B6EA3;margin-bottom:3px;">Discount-Acquired</div>
+                        <div style="font-size:12px;color:#41342A;line-height:1.5;">Customer's <strong>first order</strong> used a discount code (any type: % off, $ off, free shipping code, GWP code). Automatic Shopify discounts also count.</div>
+                    </div>
+                </div>
+                <div style="margin-top:8px;padding-top:8px;border-top:1px solid #E5E7EB;">
+                    <div style="font-size:11px;font-weight:700;color:#B8860B;margin-bottom:3px;">Behavioral Overlays (tracked separately)</div>
+                    <div style="font-size:12px;color:#41342A;line-height:1.5;"><strong>Discount-Dependent:</strong> 75%+ of orders in last 90 days used a code. <strong>Conditioning Risk:</strong> Was full-price acquired but last 3 consecutive orders all used a code.</div>
+                </div>
+            </div>
+            <div class="rpt-compare-grid">
+                <div class="rpt-compare-card good">
+                    <div class="rpt-compare-title" style="color:#6B9C78;">✅ Full-Price Customers</div>
+                    <div class="rpt-compare-row"><span class="rpt-compare-label">AOV</span><span class="rpt-compare-val">$74</span></div>
+                    <div class="rpt-compare-row"><span class="rpt-compare-label">90-Day Repeat Rate</span><span class="rpt-compare-val" style="color:#6B9C78;">38%</span></div>
+                    <div class="rpt-compare-row"><span class="rpt-compare-label">12-Mo LTV (Revenue)</span><span class="rpt-compare-val" style="color:#6B9C78;">$312</span></div>
+                    <div class="rpt-compare-row" style="background:rgba(107,156,120,0.05);border-radius:4px;padding:6px 0;"><span class="rpt-compare-label" style="font-weight:600;">12-Mo LTV (Gross Margin $)</span><span class="rpt-compare-val" style="color:#6B9C78;">$203</span></div>
+                    <div class="rpt-compare-row"><span class="rpt-compare-label">Avg GM%</span><span class="rpt-compare-val" style="color:#6B9C78;">65%</span></div>
+                    <div class="rpt-compare-row"><span class="rpt-compare-label">% of Customer Base</span><span class="rpt-compare-val">62%</span></div>
+                </div>
+                <div class="rpt-compare-card warn">
+                    <div class="rpt-compare-title" style="color:#8B6EA3;">⚠️ Discount-Acquired Customers</div>
+                    <div class="rpt-compare-row"><span class="rpt-compare-label">AOV</span><span class="rpt-compare-val">$48</span></div>
+                    <div class="rpt-compare-row"><span class="rpt-compare-label">90-Day Repeat Rate</span><span class="rpt-compare-val" style="color:#8B6EA3;">18%</span></div>
+                    <div class="rpt-compare-row"><span class="rpt-compare-label">12-Mo LTV (Revenue)</span><span class="rpt-compare-val" style="color:#8B6EA3;">$124</span></div>
+                    <div class="rpt-compare-row" style="background:rgba(139,110,163,0.05);border-radius:4px;padding:6px 0;"><span class="rpt-compare-label" style="font-weight:600;">12-Mo LTV (Gross Margin $)</span><span class="rpt-compare-val" style="color:#8B6EA3;">$52</span></div>
+                    <div class="rpt-compare-row"><span class="rpt-compare-label">Avg GM%</span><span class="rpt-compare-val" style="color:#8B6EA3;">42%</span></div>
+                    <div class="rpt-compare-row"><span class="rpt-compare-label">% of Customer Base</span><span class="rpt-compare-val">38%</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DD-6: Discount by Product State -->
+        <div class="card">
+            <h2 class="section-title">Discount by Product State</h2>
+            <div class="ai-insight">
+                <div class="ai-icon">🔍</div>
+                <div class="ai-content">
+                    <p><strong>Misallocation Alert:</strong> 32% of discount revenue came from <strong>Core</strong> products — pure margin destruction at -$2,458. Meanwhile, Slowing inventory (where discounts are strategic) only got 18%. Flip the ratio to optimize margin.</p>
+                </div>
+            </div>
+            <div style="overflow-x:auto;">
+                <table class="rpt-matrix">
+                    <thead>
+                        <tr><th>Product State</th><th class="right">Disc. Revenue</th><th class="right">% of State Total</th><th class="right">Orders</th><th class="right">Avg Depth</th><th class="right">Margin Impact</th><th>Should Discount?</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background:rgba(139,110,163,0.03);">
+                            <td class="bold">New</td><td class="right">$2,880</td><td class="right" style="color:#8B6EA3;font-weight:600;">18%</td><td class="right">48</td><td class="right">15%</td><td class="right" style="color:#8B6EA3;">-$432</td>
+                            <td><span class="rpt-flag no">❌ No — protect launch margins</span></td>
+                        </tr>
+                        <tr style="background:rgba(139,110,163,0.05);">
+                            <td class="bold">Core</td><td class="right" style="color:#8B6EA3;font-weight:700;">$12,288</td><td class="right" style="color:#8B6EA3;font-weight:700;">32%</td><td class="right">214</td><td class="right">20%</td><td class="right" style="color:#8B6EA3;font-weight:700;">-$2,458</td>
+                            <td><span class="rpt-flag caution">⚠️ Rarely — volume drives only</span></td>
+                        </tr>
+                        <tr>
+                            <td class="bold">Slowing</td><td class="right">$6,912</td><td class="right" style="color:#B8860B;">18%</td><td class="right">142</td><td class="right">22%</td><td class="right" style="color:#8B6EA3;">-$864</td>
+                            <td><span class="rpt-flag yes">✅ Yes — accelerate sell-through</span></td>
+                        </tr>
+                        <tr>
+                            <td class="bold">Dead Stock</td><td class="right">$4,608</td><td class="right" style="color:#6B9C78;">42%</td><td class="right">98</td><td class="right">30%</td><td class="right" style="color:#8B6EA3;">-$384</td>
+                            <td><span class="rpt-flag yes">✅ Yes — clear at any margin</span></td>
+                        </tr>
+                        <tr>
+                            <td class="bold">Markdown</td><td class="right">$11,712</td><td class="right" style="color:#6B9C78;">65%</td><td class="right">248</td><td class="right">35%</td><td class="right" style="color:#8B6EA3;">-$62</td>
+                            <td><span class="rpt-flag yes">✅ Yes — expected</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="disc-callout warn" style="margin-top:12px;">
+                <strong>🚨 Action Required:</strong> Exclude New and Core products from your next promo code. Create separate "Clearance" codes targeting only Slowing + Dead Stock. This alone would save ~$2,890 in margin erosion per month.
+            </div>
+        </div>
+
+        <!-- DD-7: Cannibalization & Incrementality -->
+        <div class="card">
+            <h2 class="section-title">Cannibalization & Incrementality Analysis</h2>
+            <div class="ai-insight">
+                <div class="ai-icon">🧪</div>
+                <div class="ai-content">
+                    <p><strong>Incrementality:</strong> Only <strong style="color:#6B9C78;">42%</strong> of discount revenue ($16,128) is truly incremental. The remaining 58% ($22,272) is cannibalized — orders that would have happened at full price. Your <strong style="color:#8B6EA3;">promo margin return is 1.8x</strong> vs. paid media ROAS at 2.5x.</p>
+                </div>
+            </div>
+            <div class="rpt-incr-grid">
+                <div>
+                    <table class="rpt-seg-table">
+                        <thead>
+                            <tr><th>Customer Segment</th><th class="right" style="text-align:right;">Orders</th><th class="right" style="text-align:right;">Revenue</th><th>Incremental?</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>New customers (first purchase)</td><td class="right">175</td><td class="right">$8,225</td><td><span class="rpt-flag yes">✅ High</span></td></tr>
+                            <tr><td>Lapsed (90+ days inactive)</td><td class="right">98</td><td class="right">$5,684</td><td><span class="rpt-flag yes">✅ Medium</span></td></tr>
+                            <tr><td>Active (purchased last 30 days)</td><td class="right">312</td><td class="right">$18,408</td><td><span class="rpt-flag no">❌ Low</span></td></tr>
+                            <tr><td>Repeat discount users (3+)</td><td class="right">165</td><td class="right">$6,083</td><td><span class="rpt-flag no">❌ Very low</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="rpt-summary-panel">
+                    <div style="font-size:12px;font-weight:700;color:#41342A;margin-bottom:12px;">Summary</div>
+                    <div class="rpt-summary-row"><span class="rpt-summary-label">Total Disc. Rev</span><span class="rpt-summary-val">$38,400</span></div>
+                    <div class="rpt-summary-row"><span class="rpt-summary-label">Incremental</span><span class="rpt-summary-val" style="color:#6B9C78;">$16,128 (42%)</span></div>
+                    <div class="rpt-summary-row"><span class="rpt-summary-label">Cannibalized</span><span class="rpt-summary-val" style="color:#8B6EA3;">$22,272 (58%)</span></div>
+                    <div class="rpt-summary-row"><span class="rpt-summary-label">Net Margin Impact</span><span class="rpt-summary-val" style="color:#8B6EA3;">-$4,200</span></div>
+                    <div class="rpt-summary-row" style="background:rgba(139,110,163,0.05);border-radius:6px;padding:8px;">
+                        <span class="rpt-summary-label" style="font-weight:600;">Margin Return</span><span class="rpt-summary-val" style="color:#8B6EA3;">1.8x</span>
+                    </div>
+                    <div style="font-size:10px;color:#83766B;margin-top:6px;">vs. Paid Media 2.5x</div>
+                </div>
+            </div>
+            <div class="disc-callout warn" style="margin-top:12px;">
+                <strong>💡 Strategic Insight:</strong> Your paid media (2.5x ROAS) is more capital-efficient than discounting (1.8x margin return). Consider reallocating $5K of monthly discount investment to paid acquisition — expected lift: +$3,500 net margin per month.
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <!-- DECISION FRAMEWORK — Answers: What type? When? Run again?     -->
+        <!-- ═══════════════════════════════════════════════════════════════ -->
+        <div class="section-divider">
+            <span style="font-size:18px;">🎯</span>
+            <span class="section-divider-label">Decision Framework</span>
+            <span class="section-divider-badge">NEW</span>
+        </div>
+
+        <!-- DF-1: Promo Type Scorecard -->
+        <div class="card">
+            <h2 class="section-title">Promo Type Scorecard — Which Type Works Best?</h2>
+            <p style="font-size:13px;color:#83766B;line-height:1.5;margin-bottom:16px;">Each card aggregates all promos of that type, normalized to <strong style="color:#41342A;">revenue per promo day</strong> and <strong style="color:#41342A;">gross margin $ per day</strong> so short and long promos are compared fairly. Letter grades weigh margin return, margin preservation, new customer acquisition, and incrementality.</p>
+            <div class="rpt-type-grid">
+                <!-- GWP -->
+                <div class="rpt-type-card best">
+                    <div class="rpt-ribbon" style="background:#6B9C78;">BEST</div>
+                    <div style="font-size:18px;margin-bottom:4px;">🎁</div>
+                    <div class="rpt-type-name">Gift With Purchase</div>
+                    <div class="rpt-type-grade" style="color:#6B9C78;">A</div>
+                    <div class="rpt-type-row"><span class="rpt-type-label">Rev/Day</span><span class="rpt-type-val" style="color:#6B9C78;">$904</span></div>
+                    <div class="rpt-type-row"><span class="rpt-type-label">GM$/Day</span><span class="rpt-type-val" style="color:#6B9C78;">$693</span></div>
+                    <div class="rpt-type-row"><span class="rpt-type-label">Margin Return</span><span class="rpt-type-val" style="color:#6B9C78;">3.2x</span></div>
+                    <div class="rpt-type-row"><span class="rpt-type-label">Margin Kept</span><span class="rpt-type-val" style="color:#6B9C78;">88%</span></div>
+                    <div class="rpt-type-row"><span class="rpt-type-label">New Cust %</span><span class="rpt-type-val">25%</span></div>
+                    <div class="rpt-type-row"><span class="rpt-type-label">Cannib.</span><span class="rpt-type-val" style="color:#6B9C78;">Low</span></div>
+                </div>
+                <!-- Free Ship -->
+                <div class="rpt-type-card">
+                    <div style="font-size:18px;margin-bottom:4px;">📦</div>
+                    <div class="rpt-type-name">Free Shipping</div>
+                    <div class="rpt-type-grade" style="color:#57719B;">B+</div>
+                    <div class="rpt-type-row"><span class="rpt-type-label">Rev/Day</span><span class="rpt-type-val">$316</span></div>
+                    <div class="rpt-type-row"><span class="rpt-type-label">GM$/Day</span><span class="rpt-type-val">$262</span></div>
+                    <div class="rpt-type-row"><span class="rpt-type-label">Margin Return</span><span class="rpt-type-val">2.8x</span></div>
+                    <div class="rpt-type-row"><span class="rpt-type-label">Margin Kept</span><span class="rpt-type-val" style="color:#6B9C78;">95%</span></div>
+                    <div class="rpt-type-row"><span class="rpt-type-label">New Cust %</span><span class="rpt-type-val" style="color:#6B9C78;">34%</span></div>
+                    <div class="rpt-type-row"><span class="rpt-type-label">Cannib.</span><span class="rpt-type-val" style="color:#6B9C78;">Low</span></div>
+                </div>
+                <!-- % Off shallow -->
+                <div class="rpt-type-card">
+                    <div style="font-size:18px;margin-bottom:4px;">🏷️</div>
+                    <div class="rpt-type-name">% Off (≤15%)</div>
+                    <div class="rpt-type-grade" style="color:#57719B;">B</div>
+                    <div class="rpt-type-row"><span class="rpt-type-label">Rev/Day</span><span class="rpt-type-val">$1,053</span></div>
+                    <div class="rpt-type-row"><span class="rpt-type-label">GM$/Day</span><span class="rpt-type-val">$818</span></div>
+                    <div class="rpt-type-row"><span class="rpt-type-label">Margin Return</span><span class="rpt-type-val">2.2x</span></div>
+                    <div class="rpt-type-row"><span class="rpt-type-label">Margin Kept</span><span class="rpt-type-val">78%</span></div>
+                    <div class="rpt-type-row"><span class="rpt-type-label">New Cust %</span><span class="rpt-type-val">24%</span></div>
+                    <div class="rpt-type-row"><span class="rpt-type-label">Cannib.</span><span class="rpt-type-val" style="color:#B8860B;">Med</span></div>
+                </div>
+                <!-- % Off deep -->
+                <div class="rpt-type-card worst">
+                    <div class="rpt-ribbon" style="background:#8B6EA3;">CAUTION</div>
+                    <div style="font-size:18px;margin-bottom:4px;">🔥</div>
+                    <div class="rpt-type-name">% Off (20%+)</div>
+                    <div class="rpt-type-grade" style="color:#8B6EA3;">C-</div>
+                    <div class="rpt-type-row"><span class="rpt-type-label">Rev/Day</span><span class="rpt-type-val">$860</span></div>
+                    <div class="rpt-type-row"><span class="rpt-type-label">GM$/Day</span><span class="rpt-type-val" style="color:#8B6EA3;">$477</span></div>
+                    <div class="rpt-type-row"><span class="rpt-type-label">Margin Return</span><span class="rpt-type-val" style="color:#8B6EA3;">1.4x</span></div>
+                    <div class="rpt-type-row"><span class="rpt-type-label">Margin Kept</span><span class="rpt-type-val" style="color:#8B6EA3;">55%</span></div>
+                    <div class="rpt-type-row"><span class="rpt-type-label">New Cust %</span><span class="rpt-type-val">15%</span></div>
+                    <div class="rpt-type-row"><span class="rpt-type-label">Cannib.</span><span class="rpt-type-val" style="color:#8B6EA3;">High</span></div>
+                </div>
+            </div>
+            <div class="ai-insight" style="margin-top:16px;">
+                <div class="ai-icon">🎯</div>
+                <div class="ai-content">
+                    <p><strong>AI Recommendation:</strong> Lead with GWP ($693 GM/day, 88% margin kept). Use free shipping for new customer acquisition (34% new). Reserve % off ≤15% for Slowing inventory only. <strong style="color:#8B6EA3;">Eliminate deep 20%+ discounts</strong> — they deliver lower GM/day than GWP despite appearing to drive more revenue.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- DF-2: Timing & Duration Optimizer -->
+        <div class="card">
+            <h2 class="section-title">Timing & Duration Optimizer — When & How Long?</h2>
+            <p style="font-size:13px;color:#83766B;line-height:1.5;margin-bottom:16px;">All metrics are <strong style="color:#41342A;">per-day normalized</strong> so a 3-day flash sale and a 14-day extended promo are compared on equal footing. Shorter promos create urgency; longer promos train customers to wait.</p>
+            <div class="rpt-timing-grid">
+                <!-- Duration bars -->
+                <div>
+                    <div style="font-size:12px;font-weight:700;color:#41342A;margin-bottom:12px;">Revenue per Day by Promo Duration</div>
+                    <div class="rpt-dur-bars">
+                        <div class="rpt-dur-col">
+                            <div class="rpt-dur-val" style="color:#6B9C78;">$1,420</div>
+                            <div class="rpt-dur-bar" style="height:110px;background:linear-gradient(180deg,#6B9C78,#95c0a0);"></div>
+                            <div class="rpt-dur-label">1–3 days</div>
+                        </div>
+                        <div class="rpt-dur-col">
+                            <div class="rpt-dur-val" style="color:#57719B;">$1,053</div>
+                            <div class="rpt-dur-bar" style="height:82px;background:linear-gradient(180deg,#57719B,#B0CEFF);"></div>
+                            <div class="rpt-dur-label">4–7 days</div>
+                        </div>
+                        <div class="rpt-dur-col">
+                            <div class="rpt-dur-val" style="color:#B8860B;">$860</div>
+                            <div class="rpt-dur-bar" style="height:66px;background:linear-gradient(180deg,#B8860B,#d0c9a4);"></div>
+                            <div class="rpt-dur-label">8–14 days</div>
+                        </div>
+                        <div class="rpt-dur-col">
+                            <div class="rpt-dur-val" style="color:#8B6EA3;">$316</div>
+                            <div class="rpt-dur-bar" style="height:24px;background:linear-gradient(180deg,#8B6EA3,#b197c7);"></div>
+                            <div class="rpt-dur-label">15+ days</div>
+                        </div>
+                    </div>
+                    <div style="margin-top:10px;font-size:10px;color:#83766B;text-align:center;">Short promos drive 4.5× more revenue per day. Urgency converts.</div>
+                </div>
+                <!-- Day of week heatmap -->
+                <div>
+                    <div style="font-size:12px;font-weight:700;color:#41342A;margin-bottom:12px;">Best Launch Day (Rev/Day by Start Day)</div>
+                    <div class="rpt-day-heat">
+                        <div class="rpt-day-cell" style="background:rgba(107,156,120,0.06);"><div class="rpt-day-name">Mon</div><div class="rpt-day-val" style="color:#41342A;">$980</div></div>
+                        <div class="rpt-day-cell" style="background:rgba(107,156,120,0.06);"><div class="rpt-day-name">Tue</div><div class="rpt-day-val" style="color:#41342A;">$1,020</div></div>
+                        <div class="rpt-day-cell" style="background:rgba(107,156,120,0.06);"><div class="rpt-day-name">Wed</div><div class="rpt-day-val" style="color:#41342A;">$890</div></div>
+                        <div class="rpt-day-cell" style="background:rgba(107,156,120,0.18);border:2px solid #6B9C78;"><div class="rpt-day-name">Thu</div><div class="rpt-day-val" style="color:#6B9C78;">$1,420</div><div class="rpt-day-sub">⭐ Best</div></div>
+                        <div class="rpt-day-cell" style="background:rgba(107,156,120,0.12);"><div class="rpt-day-name">Fri</div><div class="rpt-day-val" style="color:#6B9C78;">$1,280</div></div>
+                        <div class="rpt-day-cell" style="background:rgba(139,110,163,0.06);"><div class="rpt-day-name">Sat</div><div class="rpt-day-val" style="color:#83766B;">$640</div></div>
+                        <div class="rpt-day-cell" style="background:rgba(139,110,163,0.06);"><div class="rpt-day-name">Sun</div><div class="rpt-day-val" style="color:#83766B;">$580</div></div>
+                    </div>
+                    <div style="margin-top:10px;font-size:10px;color:#83766B;text-align:center;">Thursday launches generate 2.4× the rev/day vs. weekends.</div>
+                </div>
+            </div>
+            <div class="ai-insight" style="margin-top:16px;">
+                <div class="ai-icon">⏱️</div>
+                <div class="ai-content">
+                    <p><strong>AI Recommendation:</strong> Run <strong>3-day flash promos launching Thursday</strong>. This maximizes urgency (4.5× rev/day vs. always-on) and hits peak shopping behavior (Thu–Sat window). Space promos at least 14 days apart. Drop from 22 promo days/month to ≤10.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- DF-3: "Run Again?" Verdicts -->
+        <div class="card">
+            <h2 class="section-title">Promo Verdicts — Run Again?</h2>
+            <p style="font-size:13px;color:#83766B;line-height:1.5;margin-bottom:16px;">Each promo gets a <strong style="color:#41342A;">composite score (0–100)</strong> weighing margin return, GM$/day, new customer %, incrementality, and AOV impact. Scores ≥70 = Run Again, 50–69 = Tweak, &lt;50 = Pause.</p>
+            <div class="rpt-verdict-grid">
+                <!-- SPRING-GWP -->
+                <div class="rpt-verdict-card run">
+                    <div class="rpt-verdict-header">
+                        <div class="rpt-verdict-code">🎁 SPRING-GWP</div>
+                        <div class="rpt-verdict-badge run">✅ Run Again</div>
+                    </div>
+                    <div class="rpt-verdict-score">
+                        <div class="rpt-verdict-bar"><div class="rpt-verdict-fill" style="width:86%;background:#6B9C78;"></div></div>
+                        <div class="rpt-verdict-num" style="color:#6B9C78;">86</div>
+                    </div>
+                    <div class="rpt-verdict-metrics">
+                        <div class="rpt-vmetric"><div class="rpt-vmetric-val" style="color:#6B9C78;">$904</div><div class="rpt-vmetric-label">Rev/Day</div></div>
+                        <div class="rpt-vmetric"><div class="rpt-vmetric-val" style="color:#6B9C78;">$693</div><div class="rpt-vmetric-label">GM$/Day</div></div>
+                        <div class="rpt-vmetric"><div class="rpt-vmetric-val" style="color:#6B9C78;">3.2x</div><div class="rpt-vmetric-label">Margin Return</div></div>
+                    </div>
+                    <div class="rpt-verdict-rec"><strong>→ Next run:</strong> GWP earrings at $125 threshold (up from $100). Launch Thu May 1 for 3 days. Test with Mother's Day messaging.</div>
+                </div>
+                <!-- FREESHIP -->
+                <div class="rpt-verdict-card run">
+                    <div class="rpt-verdict-header">
+                        <div class="rpt-verdict-code">📦 FREESHIP</div>
+                        <div class="rpt-verdict-badge run">✅ Run Again</div>
+                    </div>
+                    <div class="rpt-verdict-score">
+                        <div class="rpt-verdict-bar"><div class="rpt-verdict-fill" style="width:74%;background:#6B9C78;"></div></div>
+                        <div class="rpt-verdict-num" style="color:#6B9C78;">74</div>
+                    </div>
+                    <div class="rpt-verdict-metrics">
+                        <div class="rpt-vmetric"><div class="rpt-vmetric-val">$316</div><div class="rpt-vmetric-label">Rev/Day</div></div>
+                        <div class="rpt-vmetric"><div class="rpt-vmetric-val">$262</div><div class="rpt-vmetric-label">GM$/Day</div></div>
+                        <div class="rpt-vmetric"><div class="rpt-vmetric-val">2.8x</div><div class="rpt-vmetric-label">Margin Return</div></div>
+                    </div>
+                    <div class="rpt-verdict-rec"><strong>→ Tweak:</strong> Switch from always-on to 5-day bursts around product launches. Rev/day is depressed by 31-day duration — urgency is gone.</div>
+                </div>
+                <!-- BLOOM15 -->
+                <div class="rpt-verdict-card tweak">
+                    <div class="rpt-verdict-header">
+                        <div class="rpt-verdict-code">🏷️ BLOOM15</div>
+                        <div class="rpt-verdict-badge tweak">🔄 Tweak</div>
+                    </div>
+                    <div class="rpt-verdict-score">
+                        <div class="rpt-verdict-bar"><div class="rpt-verdict-fill" style="width:62%;background:#B8860B;"></div></div>
+                        <div class="rpt-verdict-num" style="color:#B8860B;">62</div>
+                    </div>
+                    <div class="rpt-verdict-metrics">
+                        <div class="rpt-vmetric"><div class="rpt-vmetric-val">$1,053</div><div class="rpt-vmetric-label">Rev/Day</div></div>
+                        <div class="rpt-vmetric"><div class="rpt-vmetric-val">$818</div><div class="rpt-vmetric-label">GM$/Day</div></div>
+                        <div class="rpt-vmetric"><div class="rpt-vmetric-val">2.2x</div><div class="rpt-vmetric-label">Margin Return</div></div>
+                    </div>
+                    <div class="rpt-verdict-rec"><strong>→ Tweak:</strong> Good rev/day but medium cannibalization. Restrict to Slowing + Dead Stock only. Shorten 8 → 3 days. Expected margin return lift: 2.2x → 2.8x.</div>
+                </div>
+                <!-- SPRING20 -->
+                <div class="rpt-verdict-card pause">
+                    <div class="rpt-verdict-header">
+                        <div class="rpt-verdict-code">🔥 SPRING20</div>
+                        <div class="rpt-verdict-badge pause">⏸ Pause</div>
+                    </div>
+                    <div class="rpt-verdict-score">
+                        <div class="rpt-verdict-bar"><div class="rpt-verdict-fill" style="width:38%;background:#8B6EA3;"></div></div>
+                        <div class="rpt-verdict-num" style="color:#8B6EA3;">38</div>
+                    </div>
+                    <div class="rpt-verdict-metrics">
+                        <div class="rpt-vmetric"><div class="rpt-vmetric-val">$860</div><div class="rpt-vmetric-label">Rev/Day</div></div>
+                        <div class="rpt-vmetric"><div class="rpt-vmetric-val" style="color:#8B6EA3;">$477</div><div class="rpt-vmetric-label">GM$/Day</div></div>
+                        <div class="rpt-vmetric"><div class="rpt-vmetric-val" style="color:#8B6EA3;">1.4x</div><div class="rpt-vmetric-label">Margin Return</div></div>
+                    </div>
+                    <div class="rpt-verdict-rec"><strong>→ Do not repeat.</strong> 20% sitewide drove volume but at devastating margin cost — $3,200 erosion, 58% cannibalized. Switch to GWP (same traffic, 88% margin kept) or category-specific 15% off on Slowing inventory.</div>
+                </div>
             </div>
         </div>
 
@@ -1569,7 +2228,7 @@
             <div class="ai-insight">
                 <div class="ai-icon">🎯</div>
                 <div class="ai-content">
-                    <p><strong>What's Next:</strong> Based on your performance patterns, we recommend launching 3 new campaigns next week targeting different segments. All recommended campaigns are designed to maintain your current 4x+ ROAS while expanding reach.</p>
+                    <p><strong>What's Next:</strong> Based on your performance patterns, we recommend launching 3 new campaigns next week targeting different segments. All recommended campaigns are designed to maintain your current strong performance while expanding reach.</p>
                 </div>
             </div>
 
@@ -1583,16 +2242,16 @@
                 </div>
                 <div style="display: flex; gap: 24px; margin-bottom: 16px;">
                     <div>
-                        <div style="font-size: 11px; color: #999; font-weight: 600; margin-bottom: 4px;">Estimated ROAS</div>
-                        <div style="font-size: 18px; font-weight: 800; color: #6B9C78;">3.2x</div>
+                        <div style="font-size: 11px; color: #999; font-weight: 600; margin-bottom: 4px;">Est. Rev/Recipient</div>
+                        <div style="font-size: 18px; font-weight: 800; color: #6B9C78;">$1.85</div>
                     </div>
                     <div>
                         <div style="font-size: 11px; color: #999; font-weight: 600; margin-bottom: 4px;">Best Time to Launch</div>
                         <div style="font-size: 14px; font-weight: 600; color: #41342A;">Monday, Apr 7</div>
                     </div>
                     <div>
-                        <div style="font-size: 11px; color: #999; font-weight: 600; margin-bottom: 4px;">Recommended Budget</div>
-                        <div style="font-size: 14px; font-weight: 600; color: #41342A;">$6,500</div>
+                        <div style="font-size: 11px; color: #999; font-weight: 600; margin-bottom: 4px;">Target Audience</div>
+                        <div style="font-size: 14px; font-weight: 600; color: #41342A;">3,500 past buyers</div>
                     </div>
                 </div>
                 <div class="recommendation-confidence">
@@ -1610,7 +2269,7 @@
                     <span class="recommendation-title">New Influencer Partnerships Outreach</span>
                 </div>
                 <div class="recommendation-desc">
-                    Your @MilanJewels influencer campaign is crushing it (5.2x ROAS). Identify and outreach 5 similar micro-influencers (50K-200K followers) in jewelry/fashion space. Estimate 3 partnerships for next month.
+                    Your @MilanJewels influencer partnership is crushing it (5.2x ROAS on $5.5K spend). Identify and outreach 5 similar micro-influencers (50K-200K followers) in jewelry/fashion space. Estimate 3 partnerships for next month.
                 </div>
                 <div style="display: flex; gap: 24px; margin-bottom: 16px;">
                     <div>
@@ -1752,15 +2411,15 @@
             <div class="ai-insight">
                 <div class="ai-icon">🌟</div>
                 <div class="ai-content">
-                    <p><strong>Benchmarking:</strong> Your campaigns are in the top 8% of Shopify jewelry brands for ROAS. Email campaigns specifically are in the top 5% for open and click rates. Influencer ROAS (5.2x) exceeds industry average by 156%.</p>
+                    <p><strong>Benchmarking:</strong> Your paid campaigns are in the top 8% of Shopify jewelry brands for ROAS. Email campaigns are in the top 5% for open rate, click rate, and rev/recipient. Influencer ROAS (5.2x) exceeds industry average by 156%.</p>
                 </div>
             </div>
 
             <div class="grid-2col">
                 <div style="background: linear-gradient(135deg, rgba(107,156,120,0.08) 0%, rgba(176,206,255,0.08) 100%); border-radius: 12px; padding: 20px; text-align: center; border: 2px solid #6B9C78;">
-                    <div style="font-size: 14px; color: #999; font-weight: 600; margin-bottom: 8px;">Campaign ROAS</div>
+                    <div style="font-size: 14px; color: #999; font-weight: 600; margin-bottom: 8px;">Paid Campaign ROAS</div>
                     <div style="font-size: 28px; font-weight: 800; color: #6B9C78; margin-bottom: 12px;">Top 8%</div>
-                    <div style="font-size: 12px; color: #666;">Among Shopify jewelry DTC brands | Your 4.2x avg vs. 2.1x median</div>
+                    <div style="font-size: 12px; color: #666;">Among Shopify jewelry DTC brands | Your 3.9x avg vs. 2.1x median</div>
                 </div>
 
                 <div style="background: linear-gradient(135deg, rgba(149,178,154,0.12) 0%, rgba(207,180,164,0.12) 100%); border-radius: 12px; padding: 20px; text-align: center; border: 2px solid #95B29A;">
@@ -1793,7 +2452,7 @@
         <div class="footer">
             <button class="footer-cta">📧 Get This Report Emailed Weekly</button>
             <div class="footer-info">
-                <p><strong>Report #3 • Campaign & Promotion Deep Dive</strong></p>
+                <p><strong>Report #3 • Campaign Performance Snapshot + Discount Deep Dive</strong></p>
                 <p>Generated for your Jewelry DTC brand • Mar 24 – Mar 30, 2026</p>
                 <p style="margin-top: 12px;"><span class="marklo-logo">MARKLO</span> — AI Marketing Intelligence for Shopify</p>
                 <p style="margin-top: 8px; font-size: 11px;">Have questions? <a href="#" style="color: #6B9C78; text-decoration: none;">Contact support</a> | <a href="#" style="color: #6B9C78; text-decoration: none;">View all reports</a></p>

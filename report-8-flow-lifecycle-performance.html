@@ -1,0 +1,1382 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Report #8: Flow Revenue & Health Report — Stella & Dot | Marklo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Playfair+Display:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <style>
+   * { margin: 0; padding: 0; box-sizing: border-box; }
+   body {
+     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+     background: #F5F0EB; color: #41342A; padding: 40px 20px; line-height: 1.6;
+   }
+   .container { max-width: 900px; margin: 0 auto; }
+   .card { background: #FFFFFF; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); padding: 32px; margin-bottom: 24px; }
+   .card-compact { padding: 24px; }
+   h1 { font-family: 'Playfair Display', Georgia, serif; font-size: 32px; font-weight: 400; margin-bottom: 8px; color: #41342A; }
+   h2 { font-family: 'Playfair Display', Georgia, serif; font-size: 24px; font-weight: 400; margin-bottom: 16px; color: #41342A; }
+   h3 { font-size: 16px; font-weight: 600; margin-bottom: 12px; color: #41342A; }
+   .label { font-size: 11px; font-weight: 500; color: #83766B; letter-spacing: 0.3px; }
+   .meta-info { font-size: 14px; color: #83766B; margin-bottom: 12px; }
+
+   /* AI Insight */
+   .ai-insight { background: linear-gradient(135deg, rgba(176,206,255,0.12) 0%, rgba(246,245,243,0.8) 100%); border: 1px solid rgba(176,206,255,0.4); border-radius: 12px; padding: 24px; margin-bottom: 24px; display: flex; gap: 16px; }
+   .ai-icon { font-size: 24px; flex-shrink: 0; }
+   .ai-content p { font-size: 14px; line-height: 1.6; color: #41342A; margin-bottom: 12px; }
+   .ai-cta { color: #6B9C78; text-decoration: none; font-weight: 600; font-size: 14px; cursor: pointer; }
+   .ai-cta:hover { text-decoration: underline; }
+
+   /* KPI Grid */
+   .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 24px; }
+   .kpi-card { background: #F6F5F3; border-radius: 10px; padding: 14px 12px; text-align: center; }
+   .kpi-value { font-size: 28px; font-weight: 800; color: #41342A; margin: 6px 0; }
+   .kpi-change { font-size: 13px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 4px; }
+   .kpi-change.positive { color: #6B9C78; }
+   .kpi-change.negative { color: #8B6EA3; }
+   .kpi-change.warn { color: #C4A843; }
+
+   /* Section header */
+   .section-title-row { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 16px; }
+   .section-title { font-family: 'Playfair Display', Georgia, serif; font-size: 22px; font-weight: 400; color: #41342A; margin: 0; }
+   .analytics-link { font-size: 13px; color: #57719B; text-decoration: none; font-weight: 500; }
+   .analytics-link:hover { text-decoration: underline; }
+
+   /* Flow Scorecard Table */
+   .flow-table { width: 100%; border-collapse: collapse; margin-bottom: 8px; }
+   .flow-table th { font-size: 10px; font-weight: 600; color: #83766B; text-transform: uppercase; letter-spacing: 0.5px; text-align: left; padding: 8px 10px; border-bottom: 2px solid #EDE8E2; }
+   .flow-table th:not(:first-child) { text-align: right; }
+   .flow-table td { font-size: 13px; padding: 10px; border-bottom: 1px solid #F0EBE5; }
+   .flow-table td:not(:first-child) { text-align: right; font-weight: 600; }
+   .flow-table tr:last-child td { border-bottom: none; }
+   .flow-name-cell { display: flex; align-items: center; gap: 8px; }
+   .flow-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+   .flow-dot.active { background: #6B9C78; }
+   .flow-dot.stale { background: #C4A843; }
+   .flow-dot.off { background: #8B6EA3; }
+   .flow-rank { font-size: 10px; color: #83766B; font-weight: 500; }
+   .val-green { color: #6B9C78; }
+   .val-amber { color: #C4A843; }
+   .val-purple { color: #8B6EA3; }
+
+   /* ── Flow Sequence Section ── */
+   .flow-deep-dive { background: #FFFFFF; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); margin-bottom: 24px; overflow: hidden; }
+   .flow-deep-header { padding: 24px 28px 16px; display: flex; align-items: center; justify-content: space-between; }
+   .flow-deep-title { display: flex; align-items: center; gap: 12px; }
+   .flow-deep-icon { width: 48px; height: 48px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+   .flow-deep-name { font-size: 18px; font-weight: 700; color: #41342A; }
+   .flow-deep-status { font-size: 12px; font-weight: 600; margin-top: 2px; }
+   .flow-deep-actions { display: flex; gap: 8px; }
+   .btn-klaviyo { font-size: 11px; color: #57719B; text-decoration: none; border: 1px solid #57719B; padding: 5px 12px; border-radius: 6px; font-weight: 500; }
+   .btn-klaviyo:hover { background: rgba(87,113,155,0.08); }
+
+   /* Flow KPI strip */
+   .flow-kpi-strip { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; padding: 0 28px 20px; }
+   .flow-kpi { text-align: center; background: #F6F5F3; border-radius: 8px; padding: 12px 8px; }
+   .flow-kpi-val { font-size: 20px; font-weight: 800; color: #41342A; }
+   .flow-kpi-label { font-size: 10px; color: #83766B; margin-top: 2px; }
+   .flow-kpi-change { font-size: 10px; font-weight: 600; margin-top: 2px; }
+
+   /* Visual Sequence */
+   .flow-sequence { padding: 0 28px 24px; }
+   .sequence-label { font-size: 11px; font-weight: 600; color: #83766B; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; }
+   .sequence-steps { display: flex; align-items: flex-start; gap: 0; overflow-x: auto; padding-bottom: 8px; }
+   .seq-step { flex-shrink: 0; display: flex; flex-direction: column; align-items: center; width: 160px; }
+   .seq-card { width: 140px; background: #F6F5F3; border-radius: 10px; overflow: hidden; border: 1px solid #EDE8E2; transition: all 0.15s; }
+   .seq-card:hover { border-color: #B0CEFF; box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+   .seq-card.best { border-color: #6B9C78; border-width: 2px; }
+   .seq-card.worst { border-color: #8B6EA3; border-width: 2px; }
+   .seq-thumb { width: 100%; height: 90px; background: linear-gradient(135deg, #E8E2DC, #DDD6CE); display: flex; align-items: center; justify-content: center; position: relative; }
+   .seq-thumb-badge { position: absolute; top: 6px; right: 6px; font-size: 9px; font-weight: 600; padding: 2px 6px; border-radius: 4px; }
+   .seq-thumb-badge.best { background: rgba(107,156,120,0.15); color: #6B9C78; }
+   .seq-thumb-badge.worst { background: rgba(139,110,163,0.15); color: #8B6EA3; }
+   .seq-thumb-placeholder { font-size: 28px; opacity: 0.5; }
+   .seq-body { padding: 10px; }
+   .seq-step-num { font-size: 9px; font-weight: 700; color: #83766B; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+   .seq-subject { font-size: 11px; font-weight: 600; color: #41342A; line-height: 1.3; margin-bottom: 6px; min-height: 28px; }
+   .seq-delay { font-size: 10px; color: #83766B; margin-bottom: 6px; }
+   .seq-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+   .seq-metric { text-align: center; }
+   .seq-metric-val { font-size: 12px; font-weight: 700; color: #41342A; }
+   .seq-metric-label { font-size: 8px; color: #83766B; }
+
+   /* Arrow between steps */
+   .seq-arrow { display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 32px; padding-top: 50px; }
+   .seq-arrow-line { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+   .seq-arrow-pct { font-size: 9px; font-weight: 600; color: #83766B; }
+   .seq-arrow-icon { color: #C4B8AB; font-size: 14px; }
+
+   /* Drop-off funnel bar */
+   .funnel-bar-row { display: flex; align-items: center; gap: 12px; padding: 0 28px 20px; }
+   .funnel-label { font-size: 10px; color: #83766B; min-width: 55px; text-align: right; }
+   .funnel-bar-container { flex: 1; height: 24px; background: #EDE8E2; border-radius: 6px; overflow: hidden; position: relative; }
+   .funnel-bar-fill { height: 100%; border-radius: 6px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; font-size: 10px; font-weight: 600; color: #fff; transition: width 0.5s; }
+   .funnel-bar-value { font-size: 12px; font-weight: 700; min-width: 50px; text-align: left; margin-left: 8px; }
+
+   /* AI insight per-flow */
+   .flow-insight { margin: 0 28px 24px; background: linear-gradient(135deg, rgba(176,206,255,0.08) 0%, rgba(246,245,243,0.6) 100%); border: 1px solid rgba(176,206,255,0.3); border-radius: 10px; padding: 16px 20px; display: flex; gap: 12px; }
+   .flow-insight p { font-size: 13px; line-height: 1.5; color: #41342A; margin: 0; }
+
+   /* Footer */
+   .report-footer { text-align: center; padding: 24px 0 16px; font-size: 11px; color: #B8AFA6; }
+
+   /* Responsive */
+   @media (max-width: 700px) {
+     .flow-kpi-strip { grid-template-columns: repeat(3, 1fr); }
+     .sequence-steps { flex-wrap: nowrap; }
+   }
+  </style>
+ </head>
+ <body>
+  <div class="container">
+
+   <!-- ═══ Report Header ═══ -->
+   <div class="card">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
+     <div style="font-size:24px;">🔄</div>
+     <h1>Flow Revenue & Health Report</h1>
+    </div>
+    <div class="meta-info">Stella & Dot · Generated by Marklo</div>
+    <div class="meta-info" style="margin-bottom:0;">Reporting period: Jan 6 – Apr 5, 2026 · 90-day rolling window</div>
+
+    <!-- Win Pills -->
+    <div style="display: flex; gap: 7px; flex-wrap: wrap; margin-top: 18px;">
+     <span style="background: rgba(149,192,160,0.2); border: 1px solid rgba(149,192,160,0.4); color: #4A7A56; padding: 5px 13px; border-radius: 20px; font-size: 11px; font-weight: 600;">🚀 $63.5K Flow Revenue (90d)</span>
+     <span style="background: rgba(176,206,255,0.25); border: 1px solid rgba(176,206,255,0.5); color: #57719B; padding: 5px 13px; border-radius: 20px; font-size: 11px; font-weight: 600;">💰 Abandoned Checkout $3.39 RPR — Portfolio Best</span>
+     <span style="background: rgba(177,151,199,0.15); border: 1px solid rgba(177,151,199,0.35); color: #7A5F8A; padding: 5px 13px; border-radius: 20px; font-size: 11px; font-weight: 600;">📱 SMS Driving 9.2% Conv on Cart Recovery</span>
+     <span style="background: rgba(208,201,164,0.25); border: 1px solid rgba(208,201,164,0.5); color: #7A7452; padding: 5px 13px; border-radius: 20px; font-size: 11px; font-weight: 600;">🔙 Winback Up +1.8pp to 5.2% Recovery</span>
+     <span style="background: rgba(149,192,160,0.15); border: 1px solid rgba(149,192,160,0.35); color: #4A7A56; padding: 5px 13px; border-radius: 20px; font-size: 11px; font-weight: 600;">🎂 Birthday Flow 1.5% Conv, +12% Trend</span>
+    </div>
+   </div>
+
+   <!-- ═══ Executive AI Insight ═══ -->
+   <div class="ai-insight">
+    <div class="ai-icon">✦</div>
+    <div class="ai-content">
+     <div style="font-size: 11px; font-weight: 700; color: #57719B; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">AI Summary</div>
+     <p><strong>Your flows generated $63,520 over the last 90 days — Abandoned Checkout alone is a $21.8K machine at $3.39 RPR, and your SMS-first cart recovery strategy is converting at 9.2%.</strong> Win-Back is trending up with a 5.2% recovery rate (+1.8pp), and the Birthday flow is quietly delivering $0.71 RPR on a small but growing audience. Two areas worth attention: Welcome Series steps 3–4 are underperforming (0.2% conversion vs 8.4% on Step 1), and the Cold Subscribers flow has elevated unsubscribe rates. Refreshing creative in those two flows and expanding SMS to the main Abandoned Checkout flow could unlock an additional $3K–5K/month.</p>
+     <a href="#recommendations" class="ai-cta">→ Jump to Recommendations</a>
+    </div>
+   </div>
+
+   <!-- ═══ Flow Health Scorecard ═══ -->
+   <div class="card card-compact">
+    <div class="section-title-row">
+     <h2>📋 Flow Health Scorecard</h2>
+     <span style="font-size:13px;color:#83766B;">11 flows · $63,520 total revenue</span>
+    </div>
+
+    <!-- Aggregate KPIs -->
+    <div class="kpi-grid" style="margin-bottom:20px;">
+     <div class="kpi-card">
+      <div class="label">TOTAL FLOW REVENUE</div>
+      <div class="kpi-value">$63,520</div>
+      <div class="kpi-change positive">↑ +12% vs prev 90d</div>
+     </div>
+     <div class="kpi-card">
+      <div class="label">AVG FLOW RPR</div>
+      <div class="kpi-value">$1.84</div>
+      <div class="kpi-change warn">↔ Slight decline</div>
+     </div>
+     <div class="kpi-card">
+      <div class="label">FLOW % OF EMAIL REV</div>
+      <div class="kpi-value">42%</div>
+      <div class="kpi-change positive">↑ +6pp</div>
+     </div>
+     <div class="kpi-card">
+      <div class="label">ACTIVE FLOWS</div>
+      <div class="kpi-value">11</div>
+      <div class="kpi-change positive">All active · 2 need refresh</div>
+     </div>
+    </div>
+
+    <!-- Ranked Table -->
+    <table class="flow-table">
+     <thead>
+      <tr>
+       <th>Flow</th>
+       <th>Revenue</th>
+       <th>RPR</th>
+       <th>Entered</th>
+       <th>Conv %</th>
+       <th>Trend</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr>
+       <td>
+        <div class="flow-name-cell">
+         <span class="flow-dot active"></span>
+         <span>Abandoned Checkout</span>
+         <span class="flow-rank">#1</span>
+        </div>
+       </td>
+       <td>$21,820</td>
+       <td class="val-green">$3.39</td>
+       <td>6,432</td>
+       <td>14.2%</td>
+       <td class="val-green">↑ +11%</td>
+      </tr>
+      <tr>
+       <td>
+        <div class="flow-name-cell">
+         <span class="flow-dot active"></span>
+         <span>Abandoned Cart</span>
+         <span class="flow-rank">#2</span>
+        </div>
+       </td>
+       <td>$12,657</td>
+       <td class="val-green">$0.88</td>
+       <td>14,371</td>
+       <td>7.8%</td>
+       <td class="val-green">↑ +4%</td>
+      </tr>
+      <tr>
+       <td>
+        <div class="flow-name-cell">
+         <span class="flow-dot active"></span>
+         <span>Winback</span>
+         <span class="flow-rank">#3</span>
+        </div>
+       </td>
+       <td>$8,343</td>
+       <td class="val-green">$1.34</td>
+       <td>6,218</td>
+       <td>5.2%</td>
+       <td class="val-amber">↓ -7%</td>
+      </tr>
+      <tr>
+       <td>
+        <div class="flow-name-cell">
+         <span class="flow-dot active"></span>
+         <span>Abandoned Cart Retention</span>
+         <span class="flow-rank">#4</span>
+        </div>
+       </td>
+       <td>$5,728</td>
+       <td class="val-green">$0.93</td>
+       <td>6,154</td>
+       <td>6.3%</td>
+       <td class="val-amber">↓ -9%</td>
+      </tr>
+      <tr>
+       <td>
+        <div class="flow-name-cell">
+         <span class="flow-dot active"></span>
+         <span>Abandoned Checkout Retention</span>
+         <span class="flow-rank">#5</span>
+        </div>
+       </td>
+       <td>$3,544</td>
+       <td class="val-green">$0.87</td>
+       <td>4,074</td>
+       <td>5.8%</td>
+       <td class="val-green">↑ +6%</td>
+      </tr>
+      <tr>
+       <td>
+        <div class="flow-name-cell">
+         <span class="flow-dot active"></span>
+         <span>Welcome Series 2026</span>
+         <span class="flow-rank">#6</span>
+        </div>
+       </td>
+       <td>$3,073</td>
+       <td class="val-amber">$0.52</td>
+       <td>5,895</td>
+       <td>3.1%</td>
+       <td class="val-amber">↓ -14%</td>
+      </tr>
+      <tr>
+       <td>
+        <div class="flow-name-cell">
+         <span class="flow-dot active"></span>
+         <span>EVESTAR Post-Purchase Followup</span>
+         <span class="flow-rank">#7</span>
+        </div>
+       </td>
+       <td>$2,803</td>
+       <td class="val-green">$0.68</td>
+       <td>4,122</td>
+       <td>4.1%</td>
+       <td class="val-green">↑ +3%</td>
+      </tr>
+      <tr>
+       <td>
+        <div class="flow-name-cell">
+         <span class="flow-dot active"></span>
+         <span>Cold Subscribers - 1 Year</span>
+         <span class="flow-rank">#8</span>
+        </div>
+       </td>
+       <td>$2,616</td>
+       <td class="val-amber">$0.44</td>
+       <td>5,945</td>
+       <td>2.4%</td>
+       <td class="val-amber">↓ -8%</td>
+      </tr>
+      <tr>
+       <td>
+        <div class="flow-name-cell">
+         <span class="flow-dot active"></span>
+         <span>Browse Abandonment Retention</span>
+         <span class="flow-rank">#9</span>
+        </div>
+       </td>
+       <td>$1,576</td>
+       <td class="val-amber">$0.32</td>
+       <td>4,925</td>
+       <td>2.2%</td>
+       <td class="val-green">↑ +4%</td>
+      </tr>
+      <tr>
+       <td>
+        <div class="flow-name-cell">
+         <span class="flow-dot active"></span>
+         <span>Happy Birthday</span>
+         <span class="flow-rank">#10</span>
+        </div>
+       </td>
+       <td>$887</td>
+       <td class="val-green">$0.71</td>
+       <td>1,249</td>
+       <td>1.5%</td>
+       <td class="val-green">↑ +12%</td>
+      </tr>
+      <tr>
+       <td>
+        <div class="flow-name-cell">
+         <span class="flow-dot active"></span>
+         <span>Browse Abandonment</span>
+         <span class="flow-rank">#11</span>
+        </div>
+       </td>
+       <td>$514</td>
+       <td class="val-amber">$0.18</td>
+       <td>2,856</td>
+       <td>0.9%</td>
+       <td class="val-amber">↓ -5%</td>
+      </tr>
+     </tbody>
+    </table>
+   </div>
+
+   <!-- ═══════════════════════════════════════════ -->
+   <!-- FLOW #1: ABANDONED CHECKOUT — DEEP DIVE    -->
+   <!-- ═══════════════════════════════════════════ -->
+   <div class="flow-deep-dive">
+    <div class="flow-deep-header">
+     <div class="flow-deep-title">
+      <div class="flow-deep-icon" style="background:linear-gradient(135deg,#E8D8C8,#DCC8B8);">🛒</div>
+      <div>
+       <div class="flow-deep-name">Abandoned Checkout</div>
+       <div class="flow-deep-status" style="color:#6B9C78;">● Active · 4 emails + 2 SMS · Updated 8 days ago</div>
+      </div>
+     </div>
+     <div class="flow-deep-actions">
+      <a href="https://www.klaviyo.com/flow/sd-ac-001/editor" class="btn-klaviyo">Edit in Klaviyo →</a>
+     </div>
+    </div>
+
+    <!-- KPI Strip -->
+    <div class="flow-kpi-strip">
+     <div class="flow-kpi">
+      <div class="flow-kpi-val">$21,820</div>
+      <div class="flow-kpi-label">Revenue</div>
+      <div class="flow-kpi-change" style="color:#6B9C78;">↑ +11% YoY</div>
+     </div>
+     <div class="flow-kpi">
+      <div class="flow-kpi-val">$3.39</div>
+      <div class="flow-kpi-label">RPR</div>
+      <div class="flow-kpi-change" style="color:#6B9C78;">↑ +$0.34</div>
+     </div>
+     <div class="flow-kpi">
+      <div class="flow-kpi-val">6,432</div>
+      <div class="flow-kpi-label">Abandoned</div>
+      <div class="flow-kpi-change" style="color:#6B9C78;">↑ +8%</div>
+     </div>
+     <div class="flow-kpi">
+      <div class="flow-kpi-val">14.2%</div>
+      <div class="flow-kpi-label">Recovery Rate</div>
+      <div class="flow-kpi-change" style="color:#6B9C78;">↑ +2.1pp</div>
+     </div>
+     <div class="flow-kpi">
+      <div class="flow-kpi-val">$338</div>
+      <div class="flow-kpi-label">Avg Cart Val</div>
+      <div class="flow-kpi-change" style="color:#83766B;">↔ +$18</div>
+     </div>
+    </div>
+
+    <!-- Visual Sequence -->
+    <div class="flow-sequence">
+     <div class="sequence-label">Email Sequence</div>
+     <div class="sequence-steps">
+      <!-- Step 1 -->
+      <div class="seq-step">
+       <div class="seq-card best">
+        <div class="seq-thumb" style="background:linear-gradient(135deg,#E8E0D8,#DCD4CC);">
+         <div class="seq-thumb-badge best">★ Best RPR</div>
+         <div class="seq-thumb-placeholder">📧</div>
+        </div>
+        <div class="seq-body">
+         <div class="seq-step-num">Step 1 · Immediate</div>
+         <div class="seq-subject">"Welcome! Here's 15% off your first order"</div>
+         <div class="seq-metrics">
+          <div class="seq-metric"><div class="seq-metric-val" style="color:#6B9C78;">72%</div><div class="seq-metric-label">Opened</div></div>
+          <div class="seq-metric"><div class="seq-metric-val">32%</div><div class="seq-metric-label">Clicked</div></div>
+          <div class="seq-metric"><div class="seq-metric-val" style="color:#6B9C78;">$0.94</div><div class="seq-metric-label">RPR</div></div>
+          <div class="seq-metric"><div class="seq-metric-val">6.1%</div><div class="seq-metric-label">Converted</div></div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="seq-arrow"><div class="seq-arrow-line"><div class="seq-arrow-pct">-28%</div><div class="seq-arrow-icon">→</div></div></div>
+
+      <!-- Step 2 -->
+      <div class="seq-step">
+       <div class="seq-card">
+        <div class="seq-thumb" style="background:linear-gradient(135deg,#E0E4E8,#D4D8DC);">
+         <div class="seq-thumb-placeholder">📧</div>
+        </div>
+        <div class="seq-body">
+         <div class="seq-step-num">Step 2 · Day 2</div>
+         <div class="seq-subject">"Our Story: Why We Started Stella & Dot"</div>
+         <div class="seq-metrics">
+          <div class="seq-metric"><div class="seq-metric-val">58%</div><div class="seq-metric-label">Opened</div></div>
+          <div class="seq-metric"><div class="seq-metric-val">14%</div><div class="seq-metric-label">Clicked</div></div>
+          <div class="seq-metric"><div class="seq-metric-val">$0.38</div><div class="seq-metric-label">RPR</div></div>
+          <div class="seq-metric"><div class="seq-metric-val">1.8%</div><div class="seq-metric-label">Converted</div></div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="seq-arrow"><div class="seq-arrow-line"><div class="seq-arrow-pct">-18%</div><div class="seq-arrow-icon">→</div></div></div>
+
+      <!-- Step 3 -->
+      <div class="seq-step">
+       <div class="seq-card">
+        <div class="seq-thumb" style="background:linear-gradient(135deg,#E4E0E8,#D8D4DC);">
+         <div class="seq-thumb-placeholder">📧</div>
+        </div>
+        <div class="seq-body">
+         <div class="seq-step-num">Step 3 · Day 5</div>
+         <div class="seq-subject">"Bestsellers your friends are wearing"</div>
+         <div class="seq-metrics">
+          <div class="seq-metric"><div class="seq-metric-val">44%</div><div class="seq-metric-label">Opened</div></div>
+          <div class="seq-metric"><div class="seq-metric-val">18%</div><div class="seq-metric-label">Clicked</div></div>
+          <div class="seq-metric"><div class="seq-metric-val">$0.52</div><div class="seq-metric-label">RPR</div></div>
+          <div class="seq-metric"><div class="seq-metric-val">2.2%</div><div class="seq-metric-label">Converted</div></div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="seq-arrow"><div class="seq-arrow-line"><div class="seq-arrow-pct">-12%</div><div class="seq-arrow-icon">→</div></div></div>
+
+      <!-- Step 4 -->
+      <div class="seq-step">
+       <div class="seq-card worst">
+        <div class="seq-thumb" style="background:linear-gradient(135deg,#E8E0E4,#DCD4D8);">
+         <div class="seq-thumb-badge worst">↓ Weakest</div>
+         <div class="seq-thumb-placeholder">📧</div>
+        </div>
+        <div class="seq-body">
+         <div class="seq-step-num">Step 4 · Day 8</div>
+         <div class="seq-subject">"Still thinking? Your 15% off expires soon"</div>
+         <div class="seq-metrics">
+          <div class="seq-metric"><div class="seq-metric-val" style="color:#8B6EA3;">31%</div><div class="seq-metric-label">Opened</div></div>
+          <div class="seq-metric"><div class="seq-metric-val" style="color:#8B6EA3;">6%</div><div class="seq-metric-label">Clicked</div></div>
+          <div class="seq-metric"><div class="seq-metric-val" style="color:#8B6EA3;">$0.18</div><div class="seq-metric-label">RPR</div></div>
+          <div class="seq-metric"><div class="seq-metric-val" style="color:#8B6EA3;">0.6%</div><div class="seq-metric-label">Converted</div></div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="seq-arrow"><div class="seq-arrow-line"><div class="seq-arrow-pct">-8%</div><div class="seq-arrow-icon">→</div></div></div>
+
+      <!-- Step 5 -->
+      <div class="seq-step">
+       <div class="seq-card">
+        <div class="seq-thumb" style="background:linear-gradient(135deg,#E0E8E4,#D4DCD8);">
+         <div class="seq-thumb-placeholder">📧</div>
+        </div>
+        <div class="seq-body">
+         <div class="seq-step-num">Step 5 · Day 14</div>
+         <div class="seq-subject">"New arrivals picked for you"</div>
+         <div class="seq-metrics">
+          <div class="seq-metric"><div class="seq-metric-val">36%</div><div class="seq-metric-label">Opened</div></div>
+          <div class="seq-metric"><div class="seq-metric-val">9%</div><div class="seq-metric-label">Clicked</div></div>
+          <div class="seq-metric"><div class="seq-metric-val">$0.16</div><div class="seq-metric-label">RPR</div></div>
+          <div class="seq-metric"><div class="seq-metric-val">0.4%</div><div class="seq-metric-label">Converted</div></div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div><!-- /sequence-steps -->
+    </div><!-- /flow-sequence -->
+
+    <!-- Funnel Drop-off Bars -->
+    <div style="padding:0 28px 16px;">
+     <div class="sequence-label">Conversion Funnel</div>
+    </div>
+    <div class="funnel-bar-row">
+     <div class="funnel-label">Entered</div>
+     <div class="funnel-bar-container"><div class="funnel-bar-fill" style="width:100%;background:linear-gradient(90deg,#57719B,#7B9BC4);"><span style="opacity:0.9;">2,860</span></div></div>
+     <div class="funnel-bar-value">100%</div>
+    </div>
+    <div class="funnel-bar-row">
+     <div class="funnel-label">Opened</div>
+     <div class="funnel-bar-container"><div class="funnel-bar-fill" style="width:68%;background:linear-gradient(90deg,#6B9C78,#95C0A0);">1,945</div></div>
+     <div class="funnel-bar-value">68%</div>
+    </div>
+    <div class="funnel-bar-row">
+     <div class="funnel-label">Clicked</div>
+     <div class="funnel-bar-container"><div class="funnel-bar-fill" style="width:24%;background:linear-gradient(90deg,#6B9C78,#95C0A0);">686</div></div>
+     <div class="funnel-bar-value">24%</div>
+    </div>
+    <div class="funnel-bar-row">
+     <div class="funnel-label">Converted</div>
+     <div class="funnel-bar-container"><div class="funnel-bar-fill" style="width:10.9%;background:linear-gradient(90deg,#6B9C78,#95C0A0);">312</div></div>
+     <div class="funnel-bar-value">10.9%</div>
+    </div>
+
+    <!-- Per-flow AI insight -->
+    <div class="flow-insight">
+     <div style="font-size:16px;flex-shrink:0;">✨</div>
+     <p><strong>Your top revenue flow at $21.8K with a portfolio-leading $3.39 RPR — up 11% year-over-year.</strong> Recovery rate is climbing at 14.2%. One area to watch: Email #1 has an elevated bounce rate (21.7% vs your 8% benchmark), which may indicate deliverability issues worth investigating. Fixing this could unlock even more revenue from an already strong flow. SMS steps are also showing promise — consider adding SMS for non-email-openers.</p>
+    </div>
+   </div>
+
+   <!-- ═══════════════════════════════════════════ -->
+   <!-- FLOW #2: ABANDONED CART — DEEP DIVE         -->
+   <!-- ═══════════════════════════════════════════ -->
+   <div class="flow-deep-dive">
+    <div class="flow-deep-header">
+     <div class="flow-deep-title">
+      <div class="flow-deep-icon" style="background:linear-gradient(135deg,#E8D8C8,#DCC8B8);">🛍️</div>
+      <div>
+       <div class="flow-deep-name">Abandoned Cart</div>
+       <div class="flow-deep-status" style="color:#6B9C78;">● Active · 5 emails · Updated 42 days ago</div>
+      </div>
+     </div>
+     <div class="flow-deep-actions">
+      <a href="https://www.klaviyo.com/flow/sd-ac-002/editor" class="btn-klaviyo">Edit in Klaviyo →</a>
+     </div>
+    </div>
+
+    <div class="flow-kpi-strip">
+     <div class="flow-kpi">
+      <div class="flow-kpi-val">$12,657</div>
+      <div class="flow-kpi-label">Revenue</div>
+      <div class="flow-kpi-change" style="color:#6B9C78;">↑ +4% YoY</div>
+     </div>
+     <div class="flow-kpi">
+      <div class="flow-kpi-val">$0.88</div>
+      <div class="flow-kpi-label">RPR</div>
+      <div class="flow-kpi-change" style="color:#83766B;">↔ Flat vs Feb</div>
+     </div>
+     <div class="flow-kpi">
+      <div class="flow-kpi-val">14,371</div>
+      <div class="flow-kpi-label">Abandoned</div>
+      <div class="flow-kpi-change" style="color:#6B9C78;">↑ +12%</div>
+     </div>
+     <div class="flow-kpi">
+      <div class="flow-kpi-val">7.8%</div>
+      <div class="flow-kpi-label">Recovery Rate</div>
+      <div class="flow-kpi-change" style="color:#8B6EA3;">↓ -1.2pp</div>
+     </div>
+     <div class="flow-kpi">
+      <div class="flow-kpi-val">$95</div>
+      <div class="flow-kpi-label">Recovered AOV</div>
+      <div class="flow-kpi-change" style="color:#83766B;">↔ -$2</div>
+     </div>
+    </div>
+
+    <div class="flow-sequence">
+     <div class="sequence-label">Email Sequence</div>
+     <div class="sequence-steps">
+      <!-- Step 1 -->
+      <div class="seq-step">
+       <div class="seq-card best">
+        <div class="seq-thumb" style="background:linear-gradient(135deg,#E8E0D8,#DCD4CC);">
+         <div class="seq-thumb-badge best">★ Top converter</div>
+         <div class="seq-thumb-placeholder">🛒</div>
+        </div>
+        <div class="seq-body">
+         <div class="seq-step-num">Step 1 · 1 hour</div>
+         <div class="seq-subject">"You left something behind..."</div>
+         <div class="seq-metrics">
+          <div class="seq-metric"><div class="seq-metric-val" style="color:#6B9C78;">62%</div><div class="seq-metric-label">Opened</div></div>
+          <div class="seq-metric"><div class="seq-metric-val" style="color:#6B9C78;">28%</div><div class="seq-metric-label">Clicked</div></div>
+          <div class="seq-metric"><div class="seq-metric-val" style="color:#6B9C78;">$2.14</div><div class="seq-metric-label">RPR</div></div>
+          <div class="seq-metric"><div class="seq-metric-val" style="color:#6B9C78;">8.2%</div><div class="seq-metric-label">Recovered</div></div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="seq-arrow"><div class="seq-arrow-line"><div class="seq-arrow-pct">-34%</div><div class="seq-arrow-icon">→</div></div></div>
+
+      <!-- Step 2 -->
+      <div class="seq-step">
+       <div class="seq-card">
+        <div class="seq-thumb" style="background:linear-gradient(135deg,#E0E4E8,#D4D8DC);">
+         <div class="seq-thumb-placeholder">🛒</div>
+        </div>
+        <div class="seq-body">
+         <div class="seq-step-num">Step 2 · Day 1</div>
+         <div class="seq-subject">"Your cart is selling out — 3 left"</div>
+         <div class="seq-metrics">
+          <div class="seq-metric"><div class="seq-metric-val">44%</div><div class="seq-metric-label">Opened</div></div>
+          <div class="seq-metric"><div class="seq-metric-val">16%</div><div class="seq-metric-label">Clicked</div></div>
+          <div class="seq-metric"><div class="seq-metric-val">$0.88</div><div class="seq-metric-label">RPR</div></div>
+          <div class="seq-metric"><div class="seq-metric-val">3.1%</div><div class="seq-metric-label">Recovered</div></div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="seq-arrow"><div class="seq-arrow-line"><div class="seq-arrow-pct">-20%</div><div class="seq-arrow-icon">→</div></div></div>
+
+      <!-- Step 3 -->
+      <div class="seq-step">
+       <div class="seq-card">
+        <div class="seq-thumb" style="background:linear-gradient(135deg,#E4E0E8,#D8D4DC);">
+         <div class="seq-thumb-placeholder">🛒</div>
+        </div>
+        <div class="seq-body">
+         <div class="seq-step-num">Step 3 · Day 3</div>
+         <div class="seq-subject">"Last chance + free shipping"</div>
+         <div class="seq-metrics">
+          <div class="seq-metric"><div class="seq-metric-val">38%</div><div class="seq-metric-label">Opened</div></div>
+          <div class="seq-metric"><div class="seq-metric-val">12%</div><div class="seq-metric-label">Clicked</div></div>
+          <div class="seq-metric"><div class="seq-metric-val">$0.40</div><div class="seq-metric-label">RPR</div></div>
+          <div class="seq-metric"><div class="seq-metric-val">1.4%</div><div class="seq-metric-label">Recovered</div></div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+
+    <!-- Funnel -->
+    <div style="padding:0 28px 16px;"><div class="sequence-label">Recovery Funnel</div></div>
+    <div class="funnel-bar-row">
+     <div class="funnel-label">Abandoned</div>
+     <div class="funnel-bar-container"><div class="funnel-bar-fill" style="width:100%;background:linear-gradient(90deg,#57719B,#7B9BC4);">1,722</div></div>
+     <div class="funnel-bar-value">100%</div>
+    </div>
+    <div class="funnel-bar-row">
+     <div class="funnel-label">Opened</div>
+     <div class="funnel-bar-container"><div class="funnel-bar-fill" style="width:52%;background:linear-gradient(90deg,#6B9C78,#95C0A0);">895</div></div>
+     <div class="funnel-bar-value">52%</div>
+    </div>
+    <div class="funnel-bar-row">
+     <div class="funnel-label">Clicked</div>
+     <div class="funnel-bar-container"><div class="funnel-bar-fill" style="width:18%;background:linear-gradient(90deg,#6B9C78,#95C0A0);">310</div></div>
+     <div class="funnel-bar-value">18%</div>
+    </div>
+    <div class="funnel-bar-row">
+     <div class="funnel-label">Recovered</div>
+     <div class="funnel-bar-container"><div class="funnel-bar-fill" style="width:12.7%;background:linear-gradient(90deg,#6B9C78,#95C0A0);">219</div></div>
+     <div class="funnel-bar-value">12.7%</div>
+    </div>
+
+    <div class="flow-insight">
+     <div style="font-size:16px;flex-shrink:0;">✨</div>
+     <p><strong>Second-highest revenue flow at $12.7K with strong 8.2% recovery on Step 1.</strong> The 1-hour timing on the first email is driving most conversions — well-tuned for urgency. This flow is email-only today. Given your SMS success in Cart Retention (9.2% conversion), adding an SMS touchpoint for non-openers could lift this flow's revenue significantly.</p>
+    </div>
+   </div>
+
+   <!-- ═══════════════════════════════════════════ -->
+   <!-- FLOW #3: POST-PURCHASE — DEEP DIVE (STALE)  -->
+   <!-- ═══════════════════════════════════════════ -->
+   <div class="flow-deep-dive">
+    <div class="flow-deep-header">
+     <div class="flow-deep-title">
+      <div class="flow-deep-icon" style="background:linear-gradient(135deg,#E8E0D0,#DCD0C0);">📦</div>
+      <div>
+       <div class="flow-deep-name">EVESTAR Post-Purchase Followup</div>
+       <div class="flow-deep-status" style="color:#6B9C78;">● Active · 4 emails · Updated 32 days ago</div>
+      </div>
+     </div>
+     <div class="flow-deep-actions">
+      <a href="https://www.klaviyo.com/flow/ghi789/editor" class="btn-klaviyo">Edit in Klaviyo →</a>
+     </div>
+    </div>
+
+    <div class="flow-kpi-strip">
+     <div class="flow-kpi">
+      <div class="flow-kpi-val">$2,803</div>
+      <div class="flow-kpi-label">Revenue</div>
+      <div class="flow-kpi-change" style="color:#6B9C78;">↑ +3% vs Feb</div>
+     </div>
+     <div class="flow-kpi">
+      <div class="flow-kpi-val">$0.68</div>
+      <div class="flow-kpi-label">RPR</div>
+      <div class="flow-kpi-change" style="color:#83766B;">↔ Stable</div>
+     </div>
+     <div class="flow-kpi">
+      <div class="flow-kpi-val">4,122</div>
+      <div class="flow-kpi-label">Entered</div>
+      <div class="flow-kpi-change" style="color:#6B9C78;">↑ +5%</div>
+     </div>
+     <div class="flow-kpi">
+      <div class="flow-kpi-val">4.1%</div>
+      <div class="flow-kpi-label">Rebought</div>
+      <div class="flow-kpi-change" style="color:#83766B;">↔ Stable</div>
+     </div>
+     <div class="flow-kpi">
+      <div class="flow-kpi-val">$58</div>
+      <div class="flow-kpi-label">Repeat AOV</div>
+      <div class="flow-kpi-change" style="color:#6B9C78;">↑ +$4</div>
+     </div>
+    </div>
+
+    <div class="flow-sequence">
+     <div class="sequence-label">Email Sequence</div>
+     <div class="sequence-steps">
+      <div class="seq-step">
+       <div class="seq-card">
+        <div class="seq-thumb" style="background:linear-gradient(135deg,#E8E0D8,#DCD4CC);">
+         <div class="seq-thumb-placeholder">📦</div>
+        </div>
+        <div class="seq-body">
+         <div class="seq-step-num">Step 1 · Immediate</div>
+         <div class="seq-subject">"Thanks for your order! Here's what's next"</div>
+         <div class="seq-metrics">
+          <div class="seq-metric"><div class="seq-metric-val">56%</div><div class="seq-metric-label">Opened</div></div>
+          <div class="seq-metric"><div class="seq-metric-val">12%</div><div class="seq-metric-label">Clicked</div></div>
+          <div class="seq-metric"><div class="seq-metric-val">$0.22</div><div class="seq-metric-label">RPR</div></div>
+          <div class="seq-metric"><div class="seq-metric-val">1.8%</div><div class="seq-metric-label">Rebought</div></div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="seq-arrow"><div class="seq-arrow-line"><div class="seq-arrow-pct">-22%</div><div class="seq-arrow-icon">→</div></div></div>
+
+      <div class="seq-step">
+       <div class="seq-card">
+        <div class="seq-thumb" style="background:linear-gradient(135deg,#E0E4E8,#D4D8DC);">
+         <div class="seq-thumb-placeholder">📦</div>
+        </div>
+        <div class="seq-body">
+         <div class="seq-step-num">Step 2 · Day 3</div>
+         <div class="seq-subject">"How to style your new pieces"</div>
+         <div class="seq-metrics">
+          <div class="seq-metric"><div class="seq-metric-val">42%</div><div class="seq-metric-label">Opened</div></div>
+          <div class="seq-metric"><div class="seq-metric-val">8%</div><div class="seq-metric-label">Clicked</div></div>
+          <div class="seq-metric"><div class="seq-metric-val">$0.18</div><div class="seq-metric-label">RPR</div></div>
+          <div class="seq-metric"><div class="seq-metric-val">1.4%</div><div class="seq-metric-label">Rebought</div></div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="seq-arrow"><div class="seq-arrow-line"><div class="seq-arrow-pct">-16%</div><div class="seq-arrow-icon">→</div></div></div>
+
+      <div class="seq-step">
+       <div class="seq-card worst">
+        <div class="seq-thumb" style="background:linear-gradient(135deg,#E4E0E8,#D8D4DC);">
+         <div class="seq-thumb-badge worst">↓ Weakest</div>
+         <div class="seq-thumb-placeholder">📦</div>
+        </div>
+        <div class="seq-body">
+         <div class="seq-step-num">Step 3 · Day 14</div>
+         <div class="seq-subject">"Leave a review, get 10% off"</div>
+         <div class="seq-metrics">
+          <div class="seq-metric"><div class="seq-metric-val" style="color:#8B6EA3;">28%</div><div class="seq-metric-label">Opened</div></div>
+          <div class="seq-metric"><div class="seq-metric-val" style="color:#8B6EA3;">4%</div><div class="seq-metric-label">Clicked</div></div>
+          <div class="seq-metric"><div class="seq-metric-val" style="color:#8B6EA3;">$0.12</div><div class="seq-metric-label">RPR</div></div>
+          <div class="seq-metric"><div class="seq-metric-val" style="color:#8B6EA3;">1.1%</div><div class="seq-metric-label">Rebought</div></div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="seq-arrow"><div class="seq-arrow-line"><div class="seq-arrow-pct">-10%</div><div class="seq-arrow-icon">→</div></div></div>
+
+      <div class="seq-step">
+       <div class="seq-card">
+        <div class="seq-thumb" style="background:linear-gradient(135deg,#E0E8E4,#D4DCD8);">
+         <div class="seq-thumb-placeholder">📦</div>
+        </div>
+        <div class="seq-body">
+         <div class="seq-step-num">Step 4 · Day 30</div>
+         <div class="seq-subject">"New arrivals you'll love"</div>
+         <div class="seq-metrics">
+          <div class="seq-metric"><div class="seq-metric-val">32%</div><div class="seq-metric-label">Opened</div></div>
+          <div class="seq-metric"><div class="seq-metric-val">6%</div><div class="seq-metric-label">Clicked</div></div>
+          <div class="seq-metric"><div class="seq-metric-val">$0.10</div><div class="seq-metric-label">RPR</div></div>
+          <div class="seq-metric"><div class="seq-metric-val">1.1%</div><div class="seq-metric-label">Rebought</div></div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+
+    <!-- Funnel -->
+    <div style="padding:0 28px 16px;"><div class="sequence-label">Repeat Purchase Funnel</div></div>
+    <div class="funnel-bar-row">
+     <div class="funnel-label">Purchased</div>
+     <div class="funnel-bar-container"><div class="funnel-bar-fill" style="width:100%;background:linear-gradient(90deg,#57719B,#7B9BC4);">892</div></div>
+     <div class="funnel-bar-value">100%</div>
+    </div>
+    <div class="funnel-bar-row">
+     <div class="funnel-label">Opened</div>
+     <div class="funnel-bar-container"><div class="funnel-bar-fill" style="width:41%;background:linear-gradient(90deg,#C4A843,#D4BE6C);">366</div></div>
+     <div class="funnel-bar-value">41%</div>
+    </div>
+    <div class="funnel-bar-row">
+     <div class="funnel-label">Clicked</div>
+     <div class="funnel-bar-container"><div class="funnel-bar-fill" style="width:8%;background:linear-gradient(90deg,#C4A843,#D4BE6C);">71</div></div>
+     <div class="funnel-bar-value">8%</div>
+    </div>
+    <div class="funnel-bar-row">
+     <div class="funnel-label">Rebought</div>
+     <div class="funnel-bar-container"><div class="funnel-bar-fill" style="width:5.4%;background:linear-gradient(90deg,#C4A843,#D4BE6C);">48</div></div>
+     <div class="funnel-bar-value">5.4%</div>
+    </div>
+
+    <div class="flow-insight">
+     <div style="font-size:16px;flex-shrink:0;">✨</div>
+     <p><strong>EVESTAR Post-Purchase is generating $2,803 — solid for a nurture flow.</strong> Step 1 has strong open rates (56%), showing good post-purchase engagement. Steps 3 and 4 have room to grow (4–6% click rates) — refreshing with seasonal product recommendations or personalizing based on purchase category could lift repeat purchase rates. Consider adding a review-request incentive to boost UGC while driving additional revenue.</p>
+    </div>
+   </div>
+
+   <!-- ═══════════════════════════════════════════ -->
+   <!-- FLOW #3: WIN-BACK — DEEP DIVE                -->
+   <!-- ═══════════════════════════════════════════ -->
+   <div class="flow-deep-dive" style="border-left:3px solid #6B9C78;">
+    <div class="flow-deep-header">
+     <div class="flow-deep-title">
+      <div class="flow-deep-icon" style="background:linear-gradient(135deg,#E0D8E8,#D4C8DC);">🔙</div>
+      <div>
+       <div class="flow-deep-name">Win-Back (90-day)</div>
+       <div class="flow-deep-status" style="color:#6B9C78;">● Active · 3 emails · Updated 18 days ago</div>
+      </div>
+     </div>
+     <div class="flow-deep-actions">
+      <a href="https://www.klaviyo.com/flow/sd-wb-003/editor" class="btn-klaviyo">Edit in Klaviyo →</a>
+     </div>
+    </div>
+
+    <div class="flow-kpi-strip">
+     <div class="flow-kpi">
+      <div class="flow-kpi-val">$8,343</div>
+      <div class="flow-kpi-label">Revenue</div>
+      <div class="flow-kpi-change" style="color:#6B9C78;">↑ +12% YoY</div>
+     </div>
+     <div class="flow-kpi">
+      <div class="flow-kpi-val">$1.34</div>
+      <div class="flow-kpi-label">RPR</div>
+      <div class="flow-kpi-change" style="color:#6B9C78;">↑ +7.2% QoQ</div>
+     </div>
+     <div class="flow-kpi">
+      <div class="flow-kpi-val">6,218</div>
+      <div class="flow-kpi-label">Entered</div>
+      <div class="flow-kpi-change" style="color:#6B9C78;">↑ +8%</div>
+     </div>
+     <div class="flow-kpi">
+      <div class="flow-kpi-val">5.2%</div>
+      <div class="flow-kpi-label">Win-Back Rate</div>
+      <div class="flow-kpi-change" style="color:#6B9C78;">↑ +1.8pp</div>
+     </div>
+     <div class="flow-kpi">
+      <div class="flow-kpi-val">$156</div>
+      <div class="flow-kpi-label">Repurchase AOV</div>
+      <div class="flow-kpi-change" style="color:#6B9C78;">↑ +$12</div>
+     </div>
+    </div>
+
+    <div class="flow-sequence">
+     <div class="sequence-label">Email Sequence</div>
+     <div class="sequence-steps">
+      <div class="seq-step">
+       <div class="seq-card best">
+        <div class="seq-thumb" style="background:linear-gradient(135deg,#E8E0D8,#DCD4CC);">
+         <div class="seq-thumb-badge best">★ Best Response</div>
+         <div class="seq-thumb-placeholder">🔙</div>
+        </div>
+        <div class="seq-body">
+         <div class="seq-step-num">Step 1 · Day 90</div>
+         <div class="seq-subject">"We miss you — come back for 20% off"</div>
+         <div class="seq-metrics">
+          <div class="seq-metric"><div class="seq-metric-val" style="color:#6B9C78;">58%</div><div class="seq-metric-label">Opened</div></div>
+          <div class="seq-metric"><div class="seq-metric-val" style="color:#6B9C78;">26%</div><div class="seq-metric-label">Clicked</div></div>
+          <div class="seq-metric"><div class="seq-metric-val" style="color:#6B9C78;">$2.08</div><div class="seq-metric-label">RPR</div></div>
+          <div class="seq-metric"><div class="seq-metric-val" style="color:#6B9C78;">7.1%</div><div class="seq-metric-label">Recovered</div></div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="seq-arrow"><div class="seq-arrow-line"><div class="seq-arrow-pct">-26%</div><div class="seq-arrow-icon">→</div></div></div>
+
+      <div class="seq-step">
+       <div class="seq-card">
+        <div class="seq-thumb" style="background:linear-gradient(135deg,#E0E4E8,#D4D8DC);">
+         <div class="seq-thumb-placeholder">🔙</div>
+        </div>
+        <div class="seq-body">
+         <div class="seq-step-num">Step 2 · Day 97</div>
+         <div class="seq-subject">"New spring collection just arrived"</div>
+         <div class="seq-metrics">
+          <div class="seq-metric"><div class="seq-metric-val">43%</div><div class="seq-metric-label">Opened</div></div>
+          <div class="seq-metric"><div class="seq-metric-val">14%</div><div class="seq-metric-label">Clicked</div></div>
+          <div class="seq-metric"><div class="seq-metric-val">$0.64</div><div class="seq-metric-label">RPR</div></div>
+          <div class="seq-metric"><div class="seq-metric-val">2.8%</div><div class="seq-metric-label">Recovered</div></div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="seq-arrow"><div class="seq-arrow-line"><div class="seq-arrow-pct">-18%</div><div class="seq-arrow-icon">→</div></div></div>
+
+      <div class="seq-step">
+       <div class="seq-card">
+        <div class="seq-thumb" style="background:linear-gradient(135deg,#E4E0E8,#D8D4DC);">
+         <div class="seq-thumb-placeholder">🔙</div>
+        </div>
+        <div class="seq-body">
+         <div class="seq-step-num">Step 3 · Day 104</div>
+         <div class="seq-subject">"Last chance: Discount expires in 48 hours"</div>
+         <div class="seq-metrics">
+          <div class="seq-metric"><div class="seq-metric-val">31%</div><div class="seq-metric-label">Opened</div></div>
+          <div class="seq-metric"><div class="seq-metric-val">8%</div><div class="seq-metric-label">Clicked</div></div>
+          <div class="seq-metric"><div class="seq-metric-val">$0.28</div><div class="seq-metric-label">RPR</div></div>
+          <div class="seq-metric"><div class="seq-metric-val">1.2%</div><div class="seq-metric-label">Recovered</div></div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+
+    <div class="flow-insight">
+     <div style="font-size:16px;flex-shrink:0;">✨</div>
+     <p><strong>Strong performer — 5.2% win-back rate, up 1.8pp since February.</strong> Step 1 driving most conversions (7.1%) with the 20% discount hook. Seasonal creative in Step 2 ("New Spring Collection") shows promise at 2.8% conversion. Repurchase AOV grew +$12 to $156, suggesting better customer quality. Continue refreshing creative seasonally and consider testing SMS as a retargeting channel for non-openers.</p>
+    </div>
+   </div>
+
+   <!-- ═══════════════════════════════════════════ -->
+   <!-- FLOW #4: ABANDONED CART RETENTION — DEEP DIVE -->
+   <!-- ═══════════════════════════════════════════ -->
+   <div class="flow-deep-dive">
+    <div class="flow-deep-header">
+     <div class="flow-deep-title">
+      <div class="flow-deep-icon" style="background:linear-gradient(135deg,#E8D8E8,#DCC8DC);">🛍️</div>
+      <div>
+       <div class="flow-deep-name">Abandoned Cart Retention</div>
+       <div class="flow-deep-status" style="color:#6B9C78;">● Active · 4 SMS + Email · Updated 8 days ago</div>
+      </div>
+     </div>
+     <div class="flow-deep-actions">
+      <a href="https://www.klaviyo.com/flow/sd-acr-004/editor" class="btn-klaviyo">Edit in Klaviyo →</a>
+     </div>
+    </div>
+
+    <div class="flow-kpi-strip">
+     <div class="flow-kpi">
+      <div class="flow-kpi-val">$5,728</div>
+      <div class="flow-kpi-label">Revenue</div>
+      <div class="flow-kpi-change" style="color:#6B9C78;">↑ +6% vs Feb</div>
+     </div>
+     <div class="flow-kpi">
+      <div class="flow-kpi-val">$0.93</div>
+      <div class="flow-kpi-label">RPR</div>
+      <div class="flow-kpi-change" style="color:#6B9C78;">↑ +3.3% QoQ</div>
+     </div>
+     <div class="flow-kpi">
+      <div class="flow-kpi-val">6,154</div>
+      <div class="flow-kpi-label">Abandoned</div>
+      <div class="flow-kpi-change" style="color:#6B9C78;">↑ +5%</div>
+     </div>
+     <div class="flow-kpi">
+      <div class="flow-kpi-val">6.3%</div>
+      <div class="flow-kpi-label">Recovery Rate</div>
+      <div class="flow-kpi-change" style="color:#6B9C78;">↑ +0.4pp</div>
+     </div>
+     <div class="flow-kpi">
+      <div class="flow-kpi-val">$147</div>
+      <div class="flow-kpi-label">Avg Cart Value</div>
+      <div class="flow-kpi-change" style="color:#6B9C78;">↑ +$6</div>
+     </div>
+    </div>
+
+    <div class="flow-sequence">
+     <div class="sequence-label">SMS + Email Sequence</div>
+     <div class="sequence-steps">
+      <div class="seq-step">
+       <div class="seq-card best">
+        <div class="seq-thumb" style="background:linear-gradient(135deg,#E0D8E8,#D4C8DC);">
+         <div class="seq-thumb-badge best">⭐ Highest Conv</div>
+         <div class="seq-thumb-placeholder">📱</div>
+        </div>
+        <div class="seq-body">
+         <div class="seq-step-num">Step 1 · 30 min (SMS)</div>
+         <div class="seq-subject">"Cart almost gone! Tap to buy."</div>
+         <div class="seq-metrics">
+          <div class="seq-metric"><div class="seq-metric-val" style="color:#6B9C78;">68%</div><div class="seq-metric-label">Delivered</div></div>
+          <div class="seq-metric"><div class="seq-metric-val" style="color:#6B9C78;">22%</div><div class="seq-metric-label">Clicked</div></div>
+          <div class="seq-metric"><div class="seq-metric-val" style="color:#6B9C78;">$1.84</div><div class="seq-metric-label">RPR</div></div>
+          <div class="seq-metric"><div class="seq-metric-val" style="color:#6B9C78;">9.2%</div><div class="seq-metric-label">Converted</div></div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="seq-arrow"><div class="seq-arrow-line"><div class="seq-arrow-pct">-22%</div><div class="seq-arrow-icon">→</div></div></div>
+
+      <div class="seq-step">
+       <div class="seq-card">
+        <div class="seq-thumb" style="background:linear-gradient(135deg,#E8E0D8,#DCD4CC);">
+         <div class="seq-thumb-placeholder">📧</div>
+        </div>
+        <div class="seq-body">
+         <div class="seq-step-num">Step 2 · 2 hours (Email)</div>
+         <div class="seq-subject">"You left $147 worth of favorites"</div>
+         <div class="seq-metrics">
+          <div class="seq-metric"><div class="seq-metric-val">52%</div><div class="seq-metric-label">Opened</div></div>
+          <div class="seq-metric"><div class="seq-metric-val">18%</div><div class="seq-metric-label">Clicked</div></div>
+          <div class="seq-metric"><div class="seq-metric-val">$0.48</div><div class="seq-metric-label">RPR</div></div>
+          <div class="seq-metric"><div class="seq-metric-val">2.1%</div><div class="seq-metric-label">Converted</div></div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="seq-arrow"><div class="seq-arrow-line"><div class="seq-arrow-pct">-16%</div><div class="seq-arrow-icon">→</div></div></div>
+
+      <div class="seq-step">
+       <div class="seq-card">
+        <div class="seq-thumb" style="background:linear-gradient(135deg,#E0D8E8,#D4C8DC);">
+         <div class="seq-thumb-placeholder">📱</div>
+        </div>
+        <div class="seq-body">
+         <div class="seq-step-num">Step 3 · Day 1 (SMS)</div>
+         <div class="seq-subject">"Free 2-day shipping if you buy now →"</div>
+         <div class="seq-metrics">
+          <div class="seq-metric"><div class="seq-metric-val">62%</div><div class="seq-metric-label">Delivered</div></div>
+          <div class="seq-metric"><div class="seq-metric-val">14%</div><div class="seq-metric-label">Clicked</div></div>
+          <div class="seq-metric"><div class="seq-metric-val">$0.32</div><div class="seq-metric-label">RPR</div></div>
+          <div class="seq-metric"><div class="seq-metric-val">1.8%</div><div class="seq-metric-label">Converted</div></div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="seq-arrow"><div class="seq-arrow-line"><div class="seq-arrow-pct">-12%</div><div class="seq-arrow-icon">→</div></div></div>
+
+      <div class="seq-step">
+       <div class="seq-card worst">
+        <div class="seq-thumb" style="background:linear-gradient(135deg,#E4E0E8,#D8D4DC);">
+         <div class="seq-thumb-badge worst">↓ Weakest</div>
+         <div class="seq-thumb-placeholder">📧</div>
+        </div>
+        <div class="seq-body">
+         <div class="seq-step-num">Step 4 · Day 3 (Email)</div>
+         <div class="seq-subject">"Last chance: Stock running low"</div>
+         <div class="seq-metrics">
+          <div class="seq-metric"><div class="seq-metric-val" style="color:#8B6EA3;">34%</div><div class="seq-metric-label">Opened</div></div>
+          <div class="seq-metric"><div class="seq-metric-val" style="color:#8B6EA3;">8%</div><div class="seq-metric-label">Clicked</div></div>
+          <div class="seq-metric"><div class="seq-metric-val" style="color:#8B6EA3;">$0.12</div><div class="seq-metric-label">RPR</div></div>
+          <div class="seq-metric"><div class="seq-metric-val" style="color:#8B6EA3;">0.4%</div><div class="seq-metric-label">Converted</div></div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+
+    <div style="padding:0 28px 16px;"><div class="sequence-label">Recovery Funnel</div></div>
+    <div class="funnel-bar-row">
+     <div class="funnel-label">Abandoned</div>
+     <div class="funnel-bar-container"><div class="funnel-bar-fill" style="width:100%;background:linear-gradient(90deg,#57719B,#7B9BC4);">1,632</div></div>
+     <div class="funnel-bar-value">100%</div>
+    </div>
+    <div class="funnel-bar-row">
+     <div class="funnel-label">SMS Clicked</div>
+     <div class="funnel-bar-container"><div class="funnel-bar-fill" style="width:28%;background:linear-gradient(90deg,#8B6EA3,#A088B4);">457</div></div>
+     <div class="funnel-bar-value">28%</div>
+    </div>
+    <div class="funnel-bar-row">
+     <div class="funnel-label">Email Opened</div>
+     <div class="funnel-bar-container"><div class="funnel-bar-fill" style="width:16%;background:linear-gradient(90deg,#6B9C78,#95C0A0);">261</div></div>
+     <div class="funnel-bar-value">16%</div>
+    </div>
+    <div class="funnel-bar-row">
+     <div class="funnel-label">Recovered</div>
+     <div class="funnel-bar-container"><div class="funnel-bar-fill" style="width:10.3%;background:linear-gradient(90deg,#6B9C78,#95C0A0);">168</div></div>
+     <div class="funnel-bar-value">10.3%</div>
+    </div>
+
+    <div class="flow-insight">
+     <div style="font-size:16px;flex-shrink:0;">✨</div>
+     <p><strong>SMS-first hybrid strategy is working — 9.2% conversion on Step 1 (SMS).</strong> SMS is outperforming email by 4x on the critical first touch. The Email → SMS → Email cadence prevents fatigue while maintaining urgency. Step 4 (final email) is weakest — consider replacing with an SMS win-back or freebies offer instead of pure urgency. Estimated upside: $300–500/month by optimizing Step 4.</p>
+    </div>
+   </div>
+
+   <!-- ═══════════════════════════════════════════ -->
+   <!-- FLOW #5: WELCOME SERIES 2026 — DEEP DIVE      -->
+   <!-- ═══════════════════════════════════════════ -->
+   <div class="flow-deep-dive">
+    <div class="flow-deep-header">
+     <div class="flow-deep-title">
+      <div class="flow-deep-icon" style="background:linear-gradient(135deg,#E0E8E8,#D4DCD8);">👋</div>
+      <div>
+       <div class="flow-deep-name">Welcome Series 2026</div>
+       <div class="flow-deep-status" style="color:#6B9C78;">● Active · 6 emails · Updated 42 days ago</div>
+      </div>
+     </div>
+     <div class="flow-deep-actions">
+      <a href="https://www.klaviyo.com/flow/sd-ws-005/editor" class="btn-klaviyo">Edit in Klaviyo →</a>
+     </div>
+    </div>
+
+    <div class="flow-kpi-strip">
+     <div class="flow-kpi">
+      <div class="flow-kpi-val">$3,073</div>
+      <div class="flow-kpi-label">Revenue</div>
+      <div class="flow-kpi-change" style="color:#83766B;">↔ Flat vs Feb</div>
+     </div>
+     <div class="flow-kpi">
+      <div class="flow-kpi-val">$0.52</div>
+      <div class="flow-kpi-label">RPR</div>
+      <div class="flow-kpi-change" style="color:#8B6EA3;">↓ -8% QoQ</div>
+     </div>
+     <div class="flow-kpi">
+      <div class="flow-kpi-val">5,895</div>
+      <div class="flow-kpi-label">Subscribers</div>
+      <div class="flow-kpi-change" style="color:#6B9C78;">↑ +14%</div>
+     </div>
+     <div class="flow-kpi">
+      <div class="flow-kpi-val">3.1%</div>
+      <div class="flow-kpi-label">First-Order Conv</div>
+      <div class="flow-kpi-change" style="color:#8B6EA3;">↓ -0.6pp</div>
+     </div>
+     <div class="flow-kpi">
+      <div class="flow-kpi-val">$87</div>
+      <div class="flow-kpi-label">First AOV</div>
+      <div class="flow-kpi-change" style="color:#6B9C78;">↑ +$8</div>
+     </div>
+    </div>
+
+    <div class="flow-sequence">
+     <div class="sequence-label">Email Sequence</div>
+     <div class="sequence-steps">
+      <div class="seq-step">
+       <div class="seq-card best">
+        <div class="seq-thumb" style="background:linear-gradient(135deg,#E8E0D8,#DCD4CC);">
+         <div class="seq-thumb-badge best">★ Welcome</div>
+         <div class="seq-thumb-placeholder">👋</div>
+        </div>
+        <div class="seq-body">
+         <div class="seq-step-num">Step 1 · Immediate</div>
+         <div class="seq-subject">"Join the Stella & Dot community — 15% off inside"</div>
+         <div class="seq-metrics">
+          <div class="seq-metric"><div class="seq-metric-val" style="color:#6B9C78;">74%</div><div class="seq-metric-label">Opened</div></div>
+          <div class="seq-metric"><div class="seq-metric-val" style="color:#6B9C78;">36%</div><div class="seq-metric-label">Clicked</div></div>
+          <div class="seq-metric"><div class="seq-metric-val" style="color:#6B9C78;">$1.28</div><div class="seq-metric-label">RPR</div></div>
+          <div class="seq-metric"><div class="seq-metric-val" style="color:#6B9C78;">8.4%</div><div class="seq-metric-label">Converted</div></div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="seq-arrow"><div class="seq-arrow-line"><div class="seq-arrow-pct">-32%</div><div class="seq-arrow-icon">→</div></div></div>
+
+      <div class="seq-step">
+       <div class="seq-card">
+        <div class="seq-thumb" style="background:linear-gradient(135deg,#E0E4E8,#D4D8DC);">
+         <div class="seq-thumb-placeholder">👋</div>
+        </div>
+        <div class="seq-body">
+         <div class="seq-step-num">Step 2 · Day 2</div>
+         <div class="seq-subject">"Our Story: Founded by women, for women"</div>
+         <div class="seq-metrics">
+          <div class="seq-metric"><div class="seq-metric-val">54%</div><div class="seq-metric-label">Opened</div></div>
+          <div class="seq-metric"><div class="seq-metric-val">16%</div><div class="seq-metric-label">Clicked</div></div>
+          <div class="seq-metric"><div class="seq-metric-val">$0.22</div><div class="seq-metric-label">RPR</div></div>
+          <div class="seq-metric"><div class="seq-metric-val">1.2%</div><div class="seq-metric-label">Converted</div></div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="seq-arrow"><div class="seq-arrow-line"><div class="seq-arrow-pct">-24%</div><div class="seq-arrow-icon">→</div></div></div>
+
+      <div class="seq-step">
+       <div class="seq-card worst">
+        <div class="seq-thumb" style="background:linear-gradient(135deg,#E4E0E8,#D8D4DC);">
+         <div class="seq-thumb-badge worst">↓ Lowest Conv</div>
+         <div class="seq-thumb-placeholder">👋</div>
+        </div>
+        <div class="seq-body">
+         <div class="seq-step-num">Step 3 · Day 4</div>
+         <div class="seq-subject">"Top seller: This bracelet was worn by…"</div>
+         <div class="seq-metrics">
+          <div class="seq-metric"><div class="seq-metric-val" style="color:#8B6EA3;">38%</div><div class="seq-metric-label">Opened</div></div>
+          <div class="seq-metric"><div class="seq-metric-val" style="color:#8B6EA3;">8%</div><div class="seq-metric-label">Clicked</div></div>
+          <div class="seq-metric"><div class="seq-metric-val" style="color:#8B6EA3;">$0.08</div><div class="seq-metric-label">RPR</div></div>
+          <div class="seq-metric"><div class="seq-metric-val" style="color:#8B6EA3;">0.2%</div><div class="seq-metric-label">Converted</div></div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+
+    <div style="padding:0 28px 16px;"><div class="sequence-label">First-Purchase Funnel</div></div>
+    <div class="funnel-bar-row">
+     <div class="funnel-label">Subscribed</div>
+     <div class="funnel-bar-container"><div class="funnel-bar-fill" style="width:100%;background:linear-gradient(90deg,#57719B,#7B9BC4);">1,826</div></div>
+     <div class="funnel-bar-value">100%</div>
+    </div>
+    <div class="funnel-bar-row">
+     <div class="funnel-label">Opened</div>
+     <div class="funnel-bar-container"><div class="funnel-bar-fill" style="width:66%;background:linear-gradient(90deg,#6B9C78,#95C0A0);">1,205</div></div>
+     <div class="funnel-bar-value">66%</div>
+    </div>
+    <div class="funnel-bar-row">
+     <div class="funnel-label">Clicked</div>
+     <div class="funnel-bar-container"><div class="funnel-bar-fill" style="width:21%;background:linear-gradient(90deg,#6B9C78,#95C0A0);">384</div></div>
+     <div class="funnel-bar-value">21%</div>
+    </div>
+    <div class="funnel-bar-row">
+     <div class="funnel-label">Converted</div>
+     <div class="funnel-bar-container"><div class="funnel-bar-fill" style="width:5.7%;background:linear-gradient(90deg,#6B9C78,#95C0A0);">104</div></div>
+     <div class="funnel-bar-value">5.7%</div>
+    </div>
+
+    <div class="flow-insight">
+     <div style="font-size:16px;flex-shrink:0;">⚠️</div>
+     <p><strong>Welcome sequence is declining — 3.1% conversion, down 0.6pp QoQ.</strong> Step 1 carries the load (8.4% conversion) while Steps 2–3 add minimal value. Step 3 (social proof/influencer angle) has 0.2% conversion — this creative is not resonating. Test replacing Step 3 with product education or a "bestsellers" angle instead. Subscriber growth is up 14%, so focus on improving conversion rather than acquisition to capture higher initial value.</p>
+    </div>
+   </div>
+
+   <!-- ═══ Cross-Flow Comparison ═══ -->
+   <div class="card card-compact">
+    <div class="section-title-row">
+     <h2>📊 Cross-Flow Comparison</h2>
+     <span style="font-size:13px;color:#83766B;">Revenue contribution by flow (11 active flows)</span>
+    </div>
+
+    <!-- Stacked bar visual -->
+    <div style="margin-bottom:20px;">
+     <div class="sequence-label">Revenue Contribution (90 days)</div>
+     <div style="display:flex;border-radius:8px;overflow:hidden;height:36px;margin-bottom:12px;">
+      <div style="width:34.4%;background:linear-gradient(90deg,#6B9C78,#7DAF8A);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:#fff;">Abandoned Checkout $21.8K</div>
+      <div style="width:20%;background:linear-gradient(90deg,#57719B,#6D87AF);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:#fff;">Abandoned Cart $12.7K</div>
+      <div style="width:13.2%;background:linear-gradient(90deg,#C4A843,#D4BE6C);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:#fff;">Winback $8.3K</div>
+      <div style="width:9%;background:linear-gradient(90deg,#8B6EA3,#A088B4);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:#fff;">Cart Ret. $5.7K</div>
+      <div style="width:5.6%;background:linear-gradient(90deg,#7B9BC4,#8FA8CF);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:600;color:#fff;">AC Ret. $3.5K</div>
+      <div style="width:4.8%;background:linear-gradient(90deg,#95A5A6,#A8B4B0);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:600;color:#fff;">Welcome $3.1K</div>
+      <div style="width:9.5%;background:linear-gradient(90deg,#9BC4A0,#A8CFA8);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:600;color:#fff;">Other 5 flows $8.4K</div>
+     </div>
+    </div>
+
+    <!-- RPR comparison -->
+    <div style="margin-bottom:20px;">
+     <div class="sequence-label">RPR by Flow — Revenue Per Recipient (Top Performers)</div>
+     <div style="display:flex;flex-direction:column;gap:8px;">
+      <div style="display:flex;align-items:center;gap:12px;">
+       <div style="font-size:12px;min-width:140px;color:#41342A;font-weight:500;">Abandoned Checkout</div>
+       <div style="flex:1;height:20px;background:#EDE8E2;border-radius:4px;overflow:hidden;"><div style="width:100%;height:100%;background:linear-gradient(90deg,#6B9C78,#95C0A0);border-radius:4px;"></div></div>
+       <div style="font-size:13px;font-weight:700;min-width:50px;color:#6B9C78;">$3.39</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;">
+       <div style="font-size:12px;min-width:140px;color:#41342A;font-weight:500;">Abandoned Cart</div>
+       <div style="flex:1;height:20px;background:#EDE8E2;border-radius:4px;overflow:hidden;"><div style="width:26%;height:100%;background:linear-gradient(90deg,#6B9C78,#95C0A0);border-radius:4px;"></div></div>
+       <div style="font-size:13px;font-weight:700;min-width:50px;color:#6B9C78;">$0.88</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;">
+       <div style="font-size:12px;min-width:140px;color:#41342A;font-weight:500;">Win-Back (90-day)</div>
+       <div style="flex:1;height:20px;background:#EDE8E2;border-radius:4px;overflow:hidden;"><div style="width:39.5%;height:100%;background:linear-gradient(90deg,#6B9C78,#95C0A0);border-radius:4px;"></div></div>
+       <div style="font-size:13px;font-weight:700;min-width:50px;color:#6B9C78;">$1.34</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;">
+       <div style="font-size:12px;min-width:140px;color:#41342A;font-weight:500;">Cart Retention</div>
+       <div style="flex:1;height:20px;background:#EDE8E2;border-radius:4px;overflow:hidden;"><div style="width:27.4%;height:100%;background:linear-gradient(90deg,#6B9C78,#95C0A0);border-radius:4px;"></div></div>
+       <div style="font-size:13px;font-weight:700;min-width:50px;color:#6B9C78;">$0.93</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;">
+       <div style="font-size:12px;min-width:140px;color:#41342A;font-weight:500;">Welcome Series</div>
+       <div style="flex:1;height:20px;background:#EDE8E2;border-radius:4px;overflow:hidden;"><div style="width:15.3%;height:100%;background:linear-gradient(90deg,#C4A843,#D4BE6C);border-radius:4px;"></div></div>
+       <div style="font-size:13px;font-weight:700;min-width:50px;color:#C4A843;">$0.52</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;">
+       <div style="font-size:12px;min-width:140px;color:#41342A;font-weight:500;">Happy Birthday</div>
+       <div style="flex:1;height:20px;background:#EDE8E2;border-radius:4px;overflow:hidden;"><div style="width:20.9%;height:100%;background:linear-gradient(90deg,#6B9C78,#95C0A0);border-radius:4px;"></div></div>
+       <div style="font-size:13px;font-weight:700;min-width:50px;color:#6B9C78;">$0.71</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;">
+       <div style="font-size:12px;min-width:140px;color:#41342A;font-weight:500;">Post-Purchase</div>
+       <div style="flex:1;height:20px;background:#EDE8E2;border-radius:4px;overflow:hidden;"><div style="width:20.1%;height:100%;background:linear-gradient(90deg,#6B9C78,#95C0A0);border-radius:4px;"></div></div>
+       <div style="font-size:13px;font-weight:700;min-width:50px;color:#6B9C78;">$0.68</div>
+      </div>
+     </div>
+    </div>
+
+    <!-- Channel Breakdown -->
+    <div style="margin-top:20px;">
+     <div class="sequence-label">Revenue by Channel (90 days)</div>
+     <div style="display:flex;flex-direction:column;gap:8px;">
+      <div style="display:flex;align-items:center;gap:12px;">
+       <div style="font-size:12px;min-width:80px;color:#41342A;font-weight:500;">Email</div>
+       <div style="flex:1;height:20px;background:#EDE8E2;border-radius:4px;overflow:hidden;"><div style="width:42%;height:100%;background:linear-gradient(90deg,#57719B,#6D87AF);border-radius:4px;"></div></div>
+       <div style="font-size:13px;font-weight:700;min-width:60px;color:#57719B;">$26.6K (42%)</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;">
+       <div style="font-size:12px;min-width:80px;color:#41342A;font-weight:500;">SMS</div>
+       <div style="flex:1;height:20px;background:#EDE8E2;border-radius:4px;overflow:hidden;"><div style="width:58%;height:100%;background:linear-gradient(90deg,#8B6EA3,#A088B4);border-radius:4px;"></div></div>
+       <div style="font-size:13px;font-weight:700;min-width:60px;color:#8B6EA3;">$36.9K (58%)</div>
+      </div>
+     </div>
+    </div>
+   </div>
+
+   <!-- ═══ Recommendations ═══ -->
+   <div class="card card-compact" id="recommendations">
+    <div class="section-title-row">
+     <h2>🎯 AI Recommendations</h2>
+     <span style="font-size:13px;color:#83766B;">Priority-ranked actions to unlock additional revenue</span>
+    </div>
+
+    <!-- Priority 1 -->
+    <div style="background:#F6F5F3;border-radius:10px;padding:16px 20px;margin-bottom:12px;border-left:3px solid #8B6EA3;">
+     <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+      <span style="font-size:10px;font-weight:700;color:#fff;background:#8B6EA3;padding:2px 8px;border-radius:4px;">P0 — IMMEDIATE</span>
+      <span style="font-size:14px;font-weight:600;color:#41342A;">Tune Abandoned Checkout Deliverability to Unlock More Revenue</span>
+     </div>
+     <p style="font-size:13px;color:#5A4F44;line-height:1.5;margin-bottom:8px;">This flow already generates $21.8K — your best performer. Email #1 has an elevated 21.7% bounce rate (vs 8% benchmark), which means some recipients aren't even seeing the message. Audit SPF/DKIM authentication and review sender reputation. Improving deliverability here has outsized impact since it's already your highest-RPR flow.</p>
+     <a href="https://www.klaviyo.com/flow/sd-ac-001/editor" class="btn-klaviyo" style="display:inline-flex;">Open in Klaviyo →</a>
+    </div>
+
+    <!-- Priority 2 -->
+    <div style="background:#F6F5F3;border-radius:10px;padding:16px 20px;margin-bottom:12px;border-left:3px solid #C4A843;">
+     <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+      <span style="font-size:10px;font-weight:700;color:#fff;background:#C4A843;padding:2px 8px;border-radius:4px;">P1 — THIS WEEK</span>
+      <span style="font-size:14px;font-weight:600;color:#41342A;">Expand SMS in Abandoned Checkout Flow</span>
+     </div>
+     <p style="font-size:13px;color:#5A4F44;line-height:1.5;margin-bottom:8px;">Your Cart Retention SMS (Step 1) converts at 9.2% — 4x better than email. Test adding SMS follow-ups to the Abandoned Checkout flow for non-email-openers. Based on 6,432 abandoned carts and your SMS conversion rates, adding 1–2 SMS steps could generate an additional $2,500–$3,500/month.</p>
+     <a href="https://www.klaviyo.com/flow/sd-ac-001/editor" class="btn-klaviyo" style="display:inline-flex;">Open in Klaviyo →</a>
+    </div>
+
+    <!-- Priority 3 -->
+    <div style="background:#F6F5F3;border-radius:10px;padding:16px 20px;margin-bottom:12px;border-left:3px solid #6B9C78;">
+     <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+      <span style="font-size:10px;font-weight:700;color:#fff;background:#6B9C78;padding:2px 8px;border-radius:4px;">P2 — THIS MONTH</span>
+      <span style="font-size:14px;font-weight:600;color:#41342A;">Refresh Welcome Series Step 3 Creative</span>
+     </div>
+     <p style="font-size:13px;color:#5A4F44;line-height:1.5;margin-bottom:8px;">Step 1 converts at 8.4% but Step 3 is at 0.2% — a 40x drop-off. Replace the influencer/social-proof angle with educational content (e.g., "How to layer delicate jewelry") or product education. If you can lift Step 3 to just 1% conversion, you'll add ~$600–$800/month in first-purchase revenue.</p>
+     <a href="https://www.klaviyo.com/flow/sd-ws-005/editor" class="btn-klaviyo" style="display:inline-flex;">Open in Klaviyo →</a>
+    </div>
+
+    <!-- Priority 4 -->
+    <div style="background:#F6F5F3;border-radius:10px;padding:16px 20px;border-left:3px solid #95A5A6;">
+     <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+      <span style="font-size:10px;font-weight:700;color:#fff;background:#95A5A6;padding:2px 8px;border-radius:4px;">P3 — NEXT QUARTER</span>
+      <span style="font-size:14px;font-weight:600;color:#41342A;">Evolve Cold Subscribers - 1 Year Into a Nurture Sequence</span>
+     </div>
+     <p style="font-size:13px;color:#5A4F44;line-height:1.5;">This flow is generating $2,616 from a large audience — there's upside here. The current approach may be driving higher-than-ideal unsubscribe rates. Consider shifting to a lower-frequency, higher-relevance cadence (e.g., community stories, behind-the-scenes content) to warm subscribers before the sales push. Focus on engagement over conversion initially.</p>
+    </div>
+   </div>
+
+   <!-- Footer -->
+   <div class="report-footer">
+    Marklo · Flow Revenue & Health Report · Stella & Dot · April 2026
+   </div>
+
+  </div><!-- /container -->
+ </body>
+</html>

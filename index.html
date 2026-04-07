@@ -331,6 +331,7 @@
         /* ── Scorecard card thumb ── */
         .thumb-scorecard { background: linear-gradient(145deg, #e0ddd4 0%, #d6d2c7 50%, #cdc9be 100%); }
         .thumb-flow { background: linear-gradient(145deg, #e2dce8 0%, #d8d0e0 50%, #cec6d8 100%); }
+        .thumb-social { background: linear-gradient(145deg, #d8e2e8 0%, #c5d5dd 50%, #becdd6 100%); }
         /* ── Report Archive Panel ── */
         .archive-section {
             background: #fff; border-radius: 14px; border: 1px solid #EDE8E2;
@@ -610,7 +611,7 @@
             <a class="sidebar-item active" href="#">
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="1" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="8" y="1" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="1" y="8" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="8" y="8" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.5"/></svg>
                 All Reports
-                <span class="sidebar-count">7</span>
+                <span class="sidebar-count">8</span>
             </a>
             <a class="sidebar-item" href="#">
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1l1.8 3.6L13 5.3l-3 2.9.7 4.1L7 10.3 3.3 12.3l.7-4.1-3-2.9 4.2-.7L7 1z" stroke="currentColor" stroke-width="1.3" fill="none"/></svg>
@@ -641,6 +642,11 @@
             <a class="sidebar-item" href="#">
                 <span class="dot" style="background: #b4d2d6;"></span>
                 Customer & Retention
+                <span class="sidebar-count">1</span>
+            </a>
+            <a class="sidebar-item" href="#">
+                <span class="dot" style="background: #57719B;"></span>
+                Social & Content
                 <span class="sidebar-count">1</span>
             </a>
         </div>
@@ -766,7 +772,7 @@
         </div>
         <!-- ── Active Reports ── -->
         <div class="section-header">
-            <h3>Active Reports <span class="count">5</span></h3>
+            <h3>Active Reports <span class="count">6</span></h3>
         </div>
         <div class="cards-grid">
             <!-- Card 1: Marketing Summary -->
@@ -1096,6 +1102,67 @@
                     </div>
                     <div style="display:flex;gap:6px;align-items:center;">
                         <button class="btn-configure" onclick="openConfig('Flow Revenue & Health Report', ['monthly'], ['email','slack'], true)">
+                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v2M6 9v2M1 6h2M9 6h2M2.1 2.1l1.4 1.4M8.5 8.5l1.4 1.4M2.1 9.9l1.4-1.4M8.5 3.5l1.4-1.4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+                            Configure
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 9: Social Media Analytics -->
+            <div class="report-card" data-report="social-media">
+                <a href="analytics-social-media.html" style="text-decoration:none;color:inherit;">
+                <div class="card-thumb">
+                    <div class="card-thumb-inner thumb-social">
+                        <div class="mini-chart">
+                            <div class="mini-chart-title">Social Performance</div>
+                            <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                                <svg width="48" height="48" viewBox="0 0 48 48">
+                                    <circle cx="24" cy="24" r="16" fill="none" stroke="#57719B" stroke-width="6" stroke-dasharray="50.3 100.5" stroke-dashoffset="0" transform="rotate(-90 24 24)"/>
+                                    <circle cx="24" cy="24" r="16" fill="none" stroke="#8B6EA3" stroke-width="6" stroke-dasharray="30.2 100.5" stroke-dashoffset="-50.3" transform="rotate(-90 24 24)"/>
+                                    <circle cx="24" cy="24" r="16" fill="none" stroke="#41342A" stroke-width="6" stroke-dasharray="20.1 100.5" stroke-dashoffset="-80.5" transform="rotate(-90 24 24)"/>
+                                    <circle cx="24" cy="24" r="11" fill="white"/>
+                                </svg>
+                                <div class="mini-legend">
+                                    <div class="mini-legend-item"><span class="mini-legend-dot" style="background:#57719B;"></span>Instagram</div>
+                                    <div class="mini-legend-item"><span class="mini-legend-dot" style="background:#8B6EA3;"></span>Facebook</div>
+                                    <div class="mini-legend-item"><span class="mini-legend-dot" style="background:#41342A;"></span>TikTok</div>
+                                </div>
+                            </div>
+                            <div class="mini-kpis">
+                                <div class="mini-kpi"><div class="val">484K</div><div class="lbl">Reach</div></div>
+                                <div class="mini-kpi"><div class="val">7.8%</div><div class="lbl">Eng Rate</div></div>
+                                <div class="mini-kpi"><div class="val">$8.4K</div><div class="lbl">Revenue</div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card-title">Social Media Analytics</div>
+                    <div class="card-desc">Cross-platform performance across Instagram, Facebook &amp; TikTok. Top/bottom posts with images, format analysis, audience growth, and Social → Revenue attribution.</div>
+                    <div class="card-footer">
+                        <div class="card-tags">
+                            <span class="card-tag meta">Meta</span>
+                            <span class="card-tag" style="background:rgba(65,52,42,0.1);color:#41342A;">TikTok</span>
+                            <span class="card-tag shopify">Shopify</span>
+                        </div>
+                        <div class="card-formats">
+                            <span class="card-fmt">Email</span>
+                            <span class="card-fmt">Slack</span>
+                        </div>
+                    </div>
+                </div>
+                </a>
+                <div class="card-activation">
+                    <div class="card-status">
+                        <span class="status-dot active"></span>
+                        <span style="color:#6B9C78;">Active</span>
+                        <div class="card-freq-pills">
+                            <span class="card-freq-pill">W</span>
+                            <span class="card-freq-pill">M</span>
+                        </div>
+                    </div>
+                    <div style="display:flex;gap:6px;align-items:center;">
+                        <button class="btn-configure" onclick="openConfig('Social Media Analytics', ['weekly','monthly'], ['email','slack'], true)">
                             <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v2M6 9v2M1 6h2M9 6h2M2.1 2.1l1.4 1.4M8.5 8.5l1.4 1.4M2.1 9.9l1.4-1.4M8.5 3.5l1.4-1.4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
                             Configure
                         </button>

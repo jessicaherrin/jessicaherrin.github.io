@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Analytics — Marklo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, sans-serif; background: #FFFFFF; color: #41342A; min-height: 100vh; }
+
+        /* ── Page Layout ── */
+        .page { display: flex; min-height: 100vh; }
+
+        /* ── Sidebar ── */
+        .sidebar {
+            width: 220px; padding: 28px 20px; border-right: 1px solid #EDE8E2;
+            background: #fff; flex-shrink: 0; position: sticky; top: 0; height: 100vh; overflow-y: auto;
+        }
+        .sidebar-logo {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 22px; font-weight: 600; color: #41342A;
+            margin-bottom: 28px; letter-spacing: -0.3px;
+        }
+        .sidebar-section { margin-bottom: 24px; }
+        .sidebar-label {
+            font-size: 10px; font-weight: 600; color: #83766B;
+            letter-spacing: 0.5px; margin-bottom: 10px; text-transform: uppercase;
+        }
+        .sidebar-item {
+            display: flex; align-items: center; gap: 8px;
+            font-size: 13px; color: #83766B; padding: 7px 10px;
+            border-radius: 8px; cursor: pointer; transition: all 0.15s;
+            text-decoration: none;
+        }
+        .sidebar-item:hover { background: #F6F5F3; color: #41342A; }
+        .sidebar-item.active { background: #F6F5F3; color: #41342A; font-weight: 600; }
+        .sidebar-icon { width: 16px; text-align: center; font-size: 14px; }
+
+        /* ── Main Content ── */
+        .main { flex: 1; padding: 28px 36px; overflow-y: auto; background: #FAFAF8; }
+
+        /* ── Page Header ── */
+        .page-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+        .page-header h1 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 26px; font-weight: 500; color: #41342A;
+        }
+        .header-controls { display: flex; align-items: center; gap: 12px; }
+        .date-picker {
+            display: flex; align-items: center; gap: 8px;
+            background: #fff; border: 1px solid #EDE8E2; border-radius: 10px;
+            padding: 8px 14px; font-size: 13px; color: #41342A; font-weight: 500;
+            cursor: pointer;
+        }
+        .date-picker:hover { border-color: #B0CEFF; }
+        .comparison-toggle {
+            display: flex; align-items: center; gap: 6px;
+            font-size: 12px; color: #83766B; background: #fff;
+            border: 1px solid #EDE8E2; border-radius: 10px; padding: 8px 12px;
+        }
+        .comparison-toggle select {
+            border: none; background: transparent; font-size: 12px;
+            color: #41342A; font-weight: 600; font-family: 'Inter', sans-serif;
+            cursor: pointer; outline: none;
+        }
+
+        /* ── Channel Tabs ── */
+        .channel-tabs {
+            display: flex; gap: 4px; margin-bottom: 24px; background: #fff;
+            border: 1px solid #EDE8E2; border-radius: 12px; padding: 4px;
+            width: fit-content;
+        }
+        .channel-tab {
+            display: flex; align-items: center; gap: 6px;
+            padding: 8px 16px; border-radius: 8px; font-size: 13px;
+            font-weight: 500; color: #83766B; cursor: pointer;
+            transition: all 0.15s; border: none; background: transparent;
+        }
+        .channel-tab:hover { background: #F6F5F3; color: #41342A; }
+        .channel-tab.active {
+            background: #41342A; color: #F5F0EB; font-weight: 600;
+        }
+        .channel-tab img, .channel-tab .tab-icon {
+            width: 16px; height: 16px; border-radius: 4px;
+        }
+
+        /* ── Cards ── */
+        .card {
+            background: #FFFFFF; border-radius: 12px;
+            border: 1px solid #EDE8E2; padding: 24px; margin-bottom: 20px;
+        }
+        .card-header {
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 16px;
+        }
+        .card-title {
+            font-size: 16px; font-weight: 600; color: #41342A;
+        }
+        .card-subtitle {
+            font-size: 12px; color: #83766B; margin-top: 2px;
+        }
+
+        /* ── KPI Grid ── */
+        .kpi-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px; margin-bottom: 20px;
+        }
+        .kpi-card {
+            background: #F6F5F3; border-radius: 10px; padding: 14px 12px;
+            text-align: center;
+        }
+        .kpi-label {
+            font-size: 11px; font-weight: 500; color: #83766B;
+            letter-spacing: 0.3px; margin-bottom: 6px;
+        }
+        .kpi-value {
+            font-size: 28px; font-weight: 800; color: #41342A; line-height: 1.1;
+        }
+        .kpi-change {
+            font-size: 12px; font-weight: 600; margin-top: 4px;
+            display: flex; align-items: center; justify-content: center; gap: 3px;
+        }
+        .kpi-change.positive { color: #6B9C78; }
+        .kpi-change.negative { color: #8B6EA3; }
+        .kpi-change.neutral { color: #83766B; }
+        .kpi-source {
+            font-size: 9px; color: #B8AFA6; margin-top: 4px;
+        }
+
+        /* ── AI Insight ── */
+        .ai-insight {
+            background: linear-gradient(135deg, rgba(176,206,255,0.08) 0%, rgba(246,245,243,0.6) 100%);
+            border: 1px solid rgba(176,206,255,0.3); border-radius: 12px;
+            padding: 20px; margin-bottom: 20px; display: flex; gap: 14px;
+        }
+        .ai-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+        .ai-content { flex: 1; }
+        .ai-content p {
+            font-size: 13px; line-height: 1.6; color: #41342A; margin-bottom: 8px;
+        }
+        .ai-content p:last-child { margin-bottom: 0; }
+        .ai-tag {
+            display: inline-block; font-size: 9px; font-weight: 700;
+            letter-spacing: 0.5px; text-transform: uppercase;
+            padding: 2px 8px; border-radius: 4px; margin-bottom: 8px;
+        }
+        .ai-tag.executive { background: rgba(65,52,42,0.08); color: #41342A; }
+        .ai-tag.opportunity { background: rgba(107,156,120,0.12); color: #6B9C78; }
+        .ai-tag.warning { background: rgba(139,110,163,0.12); color: #8B6EA3; }
+        .ai-tag.correlation { background: rgba(176,206,255,0.2); color: #57719B; }
+        .ai-cta {
+            color: #6B9C78; text-decoration: none; font-weight: 600;
+            font-size: 13px; display: inline-block; margin-top: 6px;
+        }
+        .ai-cta:hover { text-decoration: underline; }
+
+        /* ── Post Cards ── */
+        .post-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px; margin-bottom: 20px;
+        }
+        .post-card {
+            background: #fff; border: 1px solid #EDE8E2; border-radius: 12px;
+            overflow: hidden; transition: all 0.15s;
+        }
+        .post-card:hover { border-color: #B0CEFF; box-shadow: 0 4px 16px rgba(65,52,42,0.06); }
+        .post-card-image {
+            width: 100%; height: 200px; object-fit: cover;
+            background: linear-gradient(135deg, #F5F0EB, #E4E2DF);
+        }
+        .post-card-body { padding: 14px; }
+        .post-card-header {
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        .post-card-platform {
+            display: flex; align-items: center; gap: 6px;
+            font-size: 11px; font-weight: 600; color: #83766B;
+        }
+        .post-card-platform .platform-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+        }
+        .post-card-percentile {
+            font-size: 10px; font-weight: 700; padding: 3px 8px;
+            border-radius: 10px;
+        }
+        .percentile-top { background: rgba(107,156,120,0.12); color: #6B9C78; }
+        .percentile-mid { background: rgba(176,206,255,0.2); color: #57719B; }
+        .percentile-low { background: rgba(139,110,163,0.12); color: #8B6EA3; }
+        .post-card-caption {
+            font-size: 12px; color: #41342A; line-height: 1.5;
+            margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical; overflow: hidden;
+        }
+        .post-card-format {
+            font-size: 10px; font-weight: 600; color: #83766B;
+            margin-bottom: 10px; display: flex; align-items: center; gap: 4px;
+        }
+        .post-card-metrics {
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            gap: 8px; padding-top: 10px; border-top: 1px solid #F0EBE5;
+        }
+        .post-metric {
+            text-align: center;
+        }
+        .post-metric-value {
+            font-size: 14px; font-weight: 700; color: #41342A;
+        }
+        .post-metric-label {
+            font-size: 9px; color: #83766B; margin-top: 2px;
+        }
+
+        /* ── Format Breakdown ── */
+        .format-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+        }
+        .format-card {
+            background: #F6F5F3; border-radius: 10px; padding: 16px;
+            text-align: center; border: 1px solid transparent;
+            transition: all 0.15s;
+        }
+        .format-card:hover { border-color: #EDE8E2; }
+        .format-card.best { border-color: #6B9C78; background: rgba(107,156,120,0.04); }
+        .format-icon { font-size: 24px; margin-bottom: 8px; }
+        .format-name { font-size: 12px; font-weight: 600; color: #41342A; margin-bottom: 4px; }
+        .format-value { font-size: 20px; font-weight: 800; color: #41342A; }
+        .format-sub { font-size: 11px; color: #83766B; margin-top: 2px; }
+        .format-badge {
+            display: inline-block; font-size: 9px; font-weight: 700;
+            padding: 2px 8px; border-radius: 10px; margin-top: 6px;
+            background: rgba(107,156,120,0.12); color: #6B9C78;
+        }
+
+        /* ── Progress bar ── */
+        .progress-group { margin-bottom: 14px; }
+        .progress-label {
+            display: flex; justify-content: space-between; margin-bottom: 6px;
+            font-size: 12px; color: #41342A;
+        }
+        .progress-bar {
+            width: 100%; height: 8px; background: #EDE8E2; border-radius: 4px; overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%; border-radius: 4px;
+        }
+
+        /* ── Section titles ── */
+        .section-title {
+            font-size: 14px; font-weight: 700; color: #41342A;
+            margin-bottom: 14px; display: flex; align-items: center; gap: 6px;
+        }
+        .section-badge {
+            font-size: 9px; font-weight: 700; padding: 2px 8px;
+            border-radius: 10px; background: #F6F5F3; color: #83766B;
+        }
+
+        /* ── Two column ── */
+        .grid-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+        /* ── Donut chart containers ── */
+        .donut-row {
+            display: flex; gap: 32px; justify-content: center; align-items: center;
+            margin-bottom: 20px;
+        }
+        .donut-block { text-align: center; }
+        .donut-label { font-size: 12px; font-weight: 600; color: #83766B; margin-top: 8px; }
+
+        /* ── Legend ── */
+        .legend {
+            display: flex; gap: 16px; justify-content: center;
+            flex-wrap: wrap; margin-top: 12px;
+        }
+        .legend-item {
+            display: flex; align-items: center; gap: 6px; font-size: 11px; color: #83766B;
+        }
+        .legend-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+        }
+
+        /* ── Table styles ── */
+        .data-table {
+            width: 100%; border-collapse: collapse; font-size: 13px;
+        }
+        .data-table th {
+            text-align: left; padding: 10px 12px; color: #83766B;
+            font-weight: 600; font-size: 11px; border-bottom: 2px solid #EDE8E2;
+        }
+        .data-table td {
+            padding: 10px 12px; border-bottom: 1px solid #F0EBE5;
+        }
+        .data-table tr:last-child td { border-bottom: none; }
+
+        /* ── Responsive ── */
+        @media (max-width: 1100px) {
+            .grid-2col { grid-template-columns: 1fr; }
+            .post-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 768px) {
+            .sidebar { display: none; }
+            .main { padding: 20px; }
+            .post-grid { grid-template-columns: 1fr; }
+            .kpi-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="sidebar-logo">Marklo</div>
+            <div class="sidebar-section">
+                <div class="sidebar-label">Analytics</div>
+                <a class="sidebar-item" href="#"><span class="sidebar-icon">📊</span> Key Metrics</a>
+                <a class="sidebar-item" href="#"><span class="sidebar-icon">🛍️</span> Products</a>
+                <a class="sidebar-item" href="#"><span class="sidebar-icon">📣</span> Campaigns</a>
+                <a class="sidebar-item" href="#"><span class="sidebar-icon">🏷️</span> Discounts</a>
+                <a class="sidebar-item active" href="#"><span class="sidebar-icon">📱</span> Social Media</a>
+                <a class="sidebar-item" href="#"><span class="sidebar-icon">📬</span> Email & SMS</a>
+                <a class="sidebar-item" href="#"><span class="sidebar-icon">💰</span> Paid Ads</a>
+                <a class="sidebar-item" href="#"><span class="sidebar-icon">👥</span> Customers</a>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-label">Reports</div>
+                <a class="sidebar-item" href="index.html"><span class="sidebar-icon">📑</span> Report Library</a>
+            </div>
+            <div class="sidebar-section">
+                <div class="sidebar-label">Store</div>
+                <div style="display: flex; align-items: center; gap: 8px; padding: 7px 10px;">
+                    <div style="width: 24px; height: 24px; border-radius: 6px; background: #F6F5F3; display: flex; align-items: center; justify-content: center; font-size: 11px;">S</div>
+                    <span style="font-size: 13px; font-weight: 600; color: #41342A;">Stella & Dot</span>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div>
+                    <h1>📱 Social Media</h1>
+                    <p style="font-size: 13px; color: #83766B; margin-top: 4px;">Cross-channel social performance with AI insights</p>
+                </div>
+                <div class="header-controls">
+                    <div class="comparison-toggle">
+                        <span>vs</span>
+                        <select>
+                            <option>Prior Period</option>
+                            <option>Last Year</option>
+                            <option>Custom</option>
+                        </select>
+                    </div>
+                    <div class="date-picker">
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="2" width="12" height="11" rx="2" stroke="#83766B" stroke-width="1.2"/><path d="M1 5.5h12M4 1v2M10 1v2" stroke="#83766B" stroke-width="1.2" stroke-linecap="round"/></svg>
+                        Mar 1 – Mar 31, 2026
+                        <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="#83766B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Channel Tabs -->
+            <div class="channel-tabs">
+                <button class="channel-tab active">
+                    <span class="tab-icon">🌐</span> Overview
+                </button>
+                <button class="channel-tab">
+                    <span class="tab-icon">📸</span> Instagram
+                </button>
+                <button class="channel-tab">
+                    <span class="tab-icon">📘</span> Facebook
+                </button>
+                <button class="channel-tab">
+                    <span class="tab-icon">🎵</span> TikTok
+                </button>
+            </div>
+
+            <!-- ═══════════════════════════════════════ -->
+            <!-- AI EXECUTIVE SUMMARY                     -->
+            <!-- ═══════════════════════════════════════ -->
+            <div class="ai-insight" style="border-left: 4px solid #41342A;">
+                <div class="ai-icon">✨</div>
+                <div class="ai-content">
+                    <div class="ai-tag executive">Executive Summary</div>
+                    <p><strong>Your social channels reached 484K people in March, up 52% vs. February — but only 0.9% of social visitors converted to a purchase.</strong> That's a massive top-of-funnel win with a conversion bottleneck. Instagram is your strongest engagement channel (7.8% rate, 92nd percentile for Shopify jewelry) and drove $5,304 in attributed revenue. TikTok audience grew 18% but engagement is declining for the 2nd straight month. Facebook views surged 300% thanks to 3 viral Reels, yet organic reach per post actually dropped 12% — the algorithm rewarded video, not your feed strategy.</p>
+                    <p><strong>The "so what":</strong> You're building audience fast but leaving revenue on the table. The gap between reach and revenue is your biggest social opportunity right now. Two things to do this week: (1) add shoppable product tags to your top 5 Instagram posts — your tagged posts convert 3.2x higher than untagged. (2) Create a retargeting audience from your 111K Instagram reach to run a Meta conversion campaign.</p>
+                    <a href="#" class="ai-cta">→ Create Social Retargeting Campaign in Marklo</a>
+                </div>
+            </div>
+
+            <!-- ═══════════════════════════════════════ -->
+            <!-- CHANNEL OVERVIEW                         -->
+            <!-- ═══════════════════════════════════════ -->
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">Channel Overview</div>
+                        <div class="card-subtitle">Revenue and traffic attributed to social — March 2026</div>
+                    </div>
+                    <a href="#" style="font-size: 12px; color: #57719B; font-weight: 500; text-decoration: none;">Key Metrics →</a>
+                </div>
+
+                <!-- Donut Charts Row -->
+                <div class="donut-row">
+                    <div class="donut-block">
+                        <svg width="180" height="180" viewBox="0 0 180 180">
+                            <circle cx="90" cy="90" r="70" fill="none" stroke="#EDE8E2" stroke-width="20"/>
+                            <!-- Instagram: 56% = 201.6° -->
+                            <circle cx="90" cy="90" r="70" fill="none" stroke="#6B9C78" stroke-width="20"
+                                    stroke-dasharray="246 194" stroke-dashoffset="110" stroke-linecap="round"/>
+                            <!-- Facebook: 28% = 100.8° -->
+                            <circle cx="90" cy="90" r="70" fill="none" stroke="#57719B" stroke-width="20"
+                                    stroke-dasharray="123 317" stroke-dashoffset="-136" stroke-linecap="round"/>
+                            <!-- TikTok: 16% = 57.6° -->
+                            <circle cx="90" cy="90" r="70" fill="none" stroke="#8B6EA3" stroke-width="20"
+                                    stroke-dasharray="70 370" stroke-dashoffset="-259" stroke-linecap="round"/>
+                            <text x="90" y="82" text-anchor="middle" font-size="22" font-weight="800" fill="#41342A">$8.4K</text>
+                            <text x="90" y="100" text-anchor="middle" font-size="11" fill="#83766B">Total</text>
+                        </svg>
+                        <div class="donut-label">Revenue by Channel</div>
+                        <div style="font-size: 11px; color: #6B9C78; font-weight: 600;">↗ +34% vs Feb</div>
+                    </div>
+                    <div class="donut-block">
+                        <svg width="180" height="180" viewBox="0 0 180 180">
+                            <circle cx="90" cy="90" r="70" fill="none" stroke="#EDE8E2" stroke-width="20"/>
+                            <circle cx="90" cy="90" r="70" fill="none" stroke="#6B9C78" stroke-width="20"
+                                    stroke-dasharray="194 246" stroke-dashoffset="110" stroke-linecap="round"/>
+                            <circle cx="90" cy="90" r="70" fill="none" stroke="#57719B" stroke-width="20"
+                                    stroke-dasharray="158 282" stroke-dashoffset="-84" stroke-linecap="round"/>
+                            <circle cx="90" cy="90" r="70" fill="none" stroke="#8B6EA3" stroke-width="20"
+                                    stroke-dasharray="88 352" stroke-dashoffset="-242" stroke-linecap="round"/>
+                            <text x="90" y="82" text-anchor="middle" font-size="22" font-weight="800" fill="#41342A">484K</text>
+                            <text x="90" y="100" text-anchor="middle" font-size="11" fill="#83766B">Reach</text>
+                        </svg>
+                        <div class="donut-label">Reach by Channel</div>
+                        <div style="font-size: 11px; color: #6B9C78; font-weight: 600;">↗ +52% vs Feb</div>
+                    </div>
+                </div>
+                <div class="legend">
+                    <div class="legend-item"><div class="legend-dot" style="background: #6B9C78;"></div> Instagram</div>
+                    <div class="legend-item"><div class="legend-dot" style="background: #57719B;"></div> Facebook</div>
+                    <div class="legend-item"><div class="legend-dot" style="background: #8B6EA3;"></div> TikTok</div>
+                </div>
+            </div>
+
+            <!-- ═══════════════════════════════════════ -->
+            <!-- CROSS-CHANNEL KPIs                       -->
+            <!-- ═══════════════════════════════════════ -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Performance Summary</div>
+                </div>
+                <div class="kpi-grid" style="grid-template-columns: repeat(6, 1fr);">
+                    <div class="kpi-card">
+                        <div class="kpi-label">Total Reach</div>
+                        <div class="kpi-value" style="font-size: 24px;">484K</div>
+                        <div class="kpi-change positive">↗ +52%</div>
+                        <div class="kpi-source">Instagram + Facebook + TikTok</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Engagements</div>
+                        <div class="kpi-value" style="font-size: 24px;">18.7K</div>
+                        <div class="kpi-change positive">↗ +28%</div>
+                        <div class="kpi-source">Likes, comments, shares, saves</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Avg Engagement Rate</div>
+                        <div class="kpi-value" style="font-size: 24px;">5.2%</div>
+                        <div class="kpi-change negative">↘ -0.8pp</div>
+                        <div class="kpi-source">Weighted across channels</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Attributed Revenue</div>
+                        <div class="kpi-value" style="font-size: 24px;">$8.4K</div>
+                        <div class="kpi-change positive">↗ +34%</div>
+                        <div class="kpi-source">Shopify UTM + last-click</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Audience Growth</div>
+                        <div class="kpi-value" style="font-size: 24px;">+2,847</div>
+                        <div class="kpi-change positive">↗ +14%</div>
+                        <div class="kpi-source">Net new followers, all platforms</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Posts Published</div>
+                        <div class="kpi-value" style="font-size: 24px;">47</div>
+                        <div class="kpi-change positive">↗ +12</div>
+                        <div class="kpi-source">vs 35 prior period</div>
+                    </div>
+                </div>
+
+                <!-- Channel Comparison Table -->
+                <table class="data-table" style="margin-top: 8px;">
+                    <thead>
+                        <tr>
+                            <th>Channel</th>
+                            <th style="text-align: right;">Reach</th>
+                            <th style="text-align: right;">Engagements</th>
+                            <th style="text-align: right;">Eng. Rate</th>
+                            <th style="text-align: right;">Revenue</th>
+                            <th style="text-align: right;">Link Clicks</th>
+                            <th style="text-align: right;">Followers</th>
+                            <th style="text-align: right;">Posts</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="font-weight: 600;">📸 Instagram</td>
+                            <td style="text-align: right;">111.2K <span style="color: #6B9C78; font-size: 11px;">↗ +88%</span></td>
+                            <td style="text-align: right;">8,674</td>
+                            <td style="text-align: right;"><strong>7.8%</strong> <span style="font-size: 9px; background: rgba(107,156,120,0.12); color: #6B9C78; padding: 1px 6px; border-radius: 8px; font-weight: 600;">92nd %</span></td>
+                            <td style="text-align: right; font-weight: 600;">$5,304</td>
+                            <td style="text-align: right;">1,842</td>
+                            <td style="text-align: right;">48.2K <span style="color: #6B9C78; font-size: 11px;">+812</span></td>
+                            <td style="text-align: right;">22</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600;">📘 Facebook</td>
+                            <td style="text-align: right;">373.3K <span style="color: #6B9C78; font-size: 11px;">↗ +300%</span></td>
+                            <td style="text-align: right;">6,624</td>
+                            <td style="text-align: right;">1.8%</td>
+                            <td style="text-align: right; font-weight: 600;">$2,156</td>
+                            <td style="text-align: right;">687</td>
+                            <td style="text-align: right;">12.4K <span style="color: #6B9C78; font-size: 11px;">+234</span></td>
+                            <td style="text-align: right;">18</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600;">🎵 TikTok</td>
+                            <td style="text-align: right;">—</td>
+                            <td style="text-align: right;">3,412</td>
+                            <td style="text-align: right;">4.1% <span style="color: #8B6EA3; font-size: 11px;">↘ -1.2pp</span></td>
+                            <td style="text-align: right; font-weight: 600;">$940</td>
+                            <td style="text-align: right;">412</td>
+                            <td style="text-align: right;">1.1K <span style="color: #6B9C78; font-size: 11px;">+1,801</span></td>
+                            <td style="text-align: right;">7</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="font-size: 10px; color: #B8AFA6; margin-top: 10px;">📊 Reach from Meta Graph API + Instagram Graph API. Revenue from Shopify UTM attribution. TikTok reach not available via API — use TikTok views as proxy.</div>
+            </div>
+
+            <!-- ═══════════════════════════════════════ -->
+            <!-- CONTENT FORMAT BREAKDOWN                 -->
+            <!-- ═══════════════════════════════════════ -->
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">Content Format Performance</div>
+                        <div class="card-subtitle">Which formats drive the most engagement and revenue — across all channels</div>
+                    </div>
+                </div>
+                <div class="format-grid" style="margin-bottom: 20px;">
+                    <div class="format-card best">
+                        <div class="format-icon">🎬</div>
+                        <div class="format-name">Reels</div>
+                        <div class="format-value">9.4%</div>
+                        <div class="format-sub">Avg engagement rate</div>
+                        <div class="format-badge">Best Performer</div>
+                        <div style="margin-top: 8px; font-size: 11px; color: #83766B;">14 posts · 68K reach · $3.1K rev</div>
+                    </div>
+                    <div class="format-card">
+                        <div class="format-icon">🎵</div>
+                        <div class="format-name">TikTok Videos</div>
+                        <div class="format-value">4.1%</div>
+                        <div class="format-sub">Avg engagement rate</div>
+                        <div style="margin-top: 8px; font-size: 11px; color: #83766B;">7 posts · 82K views · $940 rev</div>
+                    </div>
+                    <div class="format-card">
+                        <div class="format-icon">🖼️</div>
+                        <div class="format-name">Carousel</div>
+                        <div class="format-value">6.2%</div>
+                        <div class="format-sub">Avg engagement rate</div>
+                        <div style="margin-top: 8px; font-size: 11px; color: #83766B;">8 posts · 24K reach · $1.8K rev</div>
+                    </div>
+                    <div class="format-card">
+                        <div class="format-icon">📷</div>
+                        <div class="format-name">Static Posts</div>
+                        <div class="format-value">3.1%</div>
+                        <div class="format-sub">Avg engagement rate</div>
+                        <div style="margin-top: 8px; font-size: 11px; color: #83766B;">11 posts · 18K reach · $1.6K rev</div>
+                    </div>
+                    <div class="format-card">
+                        <div class="format-icon">📖</div>
+                        <div class="format-name">Stories</div>
+                        <div class="format-value">2.4%</div>
+                        <div class="format-sub">Avg tap-forward rate</div>
+                        <div style="margin-top: 8px; font-size: 11px; color: #83766B;">7 posts · 8K views · $420 rev</div>
+                    </div>
+                </div>
+
+                <div class="ai-insight" style="margin-bottom: 0;">
+                    <div class="ai-icon">💡</div>
+                    <div class="ai-content">
+                        <div class="ai-tag opportunity">Format Strategy</div>
+                        <p><strong>Reels are your highest-performing format at 9.4% engagement — 3x higher than static posts.</strong> They also drove $3.1K in revenue from just 14 posts (37% of your social revenue from 30% of your posts). Your static posts account for 23% of posts but only 19% of revenue — they're your least efficient format. Shift 2-3 static posts per week to Reels or Carousels. Carousels at 6.2% engagement are your second-best format and tend to get saved more (which boosts algorithmic reach).</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══════════════════════════════════════ -->
+            <!-- TOP PERFORMING POSTS                     -->
+            <!-- ═══════════════════════════════════════ -->
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">🏆 Top Performing Posts</div>
+                        <div class="card-subtitle">Ranked by engagement rate — showing your best content this period</div>
+                    </div>
+                    <div style="display: flex; gap: 8px;">
+                        <select style="border: 1px solid #EDE8E2; border-radius: 8px; padding: 6px 10px; font-size: 11px; font-family: 'Inter', sans-serif; color: #41342A; background: #fff;">
+                            <option>All Channels</option>
+                            <option>Instagram</option>
+                            <option>Facebook</option>
+                            <option>TikTok</option>
+                        </select>
+                        <select style="border: 1px solid #EDE8E2; border-radius: 8px; padding: 6px 10px; font-size: 11px; font-family: 'Inter', sans-serif; color: #41342A; background: #fff;">
+                            <option>By Engagement Rate</option>
+                            <option>By Revenue</option>
+                            <option>By Reach</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="post-grid">
+                    <!-- Post 1 -->
+                    <div class="post-card">
+                        <img class="post-card-image" src="https://www.stelladot.com/cdn/shop/files/Tatum_revised_1080x.jpg" alt="Bezel Necklace styling" onerror="this.style.background='linear-gradient(135deg, #E7EBF1, #D8DFEB)'; this.style.display='flex'; this.innerHTML='<div style=&quot;display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-size:40px;&quot;>📸</div>'">
+                        <div class="post-card-body">
+                            <div class="post-card-header">
+                                <div class="post-card-platform">
+                                    <div class="platform-dot" style="background: #6B9C78;"></div>
+                                    Instagram
+                                </div>
+                                <span class="post-card-percentile percentile-top">92nd %</span>
+                            </div>
+                            <div class="post-card-format">🎬 Reel · Mar 12, 2026</div>
+                            <div class="post-card-caption">Not just a summer fling. So what say you? Do you wear turquoise in the fall? Swipe right to see how we do.</div>
+                            <div class="post-card-metrics">
+                                <div class="post-metric">
+                                    <div class="post-metric-value">7,428</div>
+                                    <div class="post-metric-label">Views</div>
+                                </div>
+                                <div class="post-metric">
+                                    <div class="post-metric-value">4.8%</div>
+                                    <div class="post-metric-label">Engagement</div>
+                                </div>
+                                <div class="post-metric">
+                                    <div class="post-metric-value">1,233</div>
+                                    <div class="post-metric-label">Interactions</div>
+                                </div>
+                                <div class="post-metric">
+                                    <div class="post-metric-value">5%</div>
+                                    <div class="post-metric-label">Non-followers</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Post 2 -->
+                    <div class="post-card">
+                        <img class="post-card-image" src="https://www.stelladot.com/cdn/shop/files/SD_March_2025_Luxe_Layering_Look_4131_1080x.jpg" alt="Gold layering set" onerror="this.style.background='linear-gradient(135deg, #F0E8E2, #E4DCD6)'; this.innerHTML='<div style=&quot;display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-size:40px;&quot;>📸</div>'">
+                        <div class="post-card-body">
+                            <div class="post-card-header">
+                                <div class="post-card-platform">
+                                    <div class="platform-dot" style="background: #57719B;"></div>
+                                    Facebook
+                                </div>
+                                <span class="post-card-percentile percentile-top">88th %</span>
+                            </div>
+                            <div class="post-card-format">🎬 Reel · Mar 18, 2026</div>
+                            <div class="post-card-caption">The gold layering look that started it all. 3 necklaces, infinite combinations. Which stack is yours?</div>
+                            <div class="post-card-metrics">
+                                <div class="post-metric">
+                                    <div class="post-metric-value">124K</div>
+                                    <div class="post-metric-label">Views</div>
+                                </div>
+                                <div class="post-metric">
+                                    <div class="post-metric-value">3.2%</div>
+                                    <div class="post-metric-label">Engagement</div>
+                                </div>
+                                <div class="post-metric">
+                                    <div class="post-metric-value">3,968</div>
+                                    <div class="post-metric-label">Interactions</div>
+                                </div>
+                                <div class="post-metric">
+                                    <div class="post-metric-value">82%</div>
+                                    <div class="post-metric-label">Non-followers</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Post 3 -->
+                    <div class="post-card">
+                        <img class="post-card-image" src="https://www.stelladot.com/cdn/shop/files/SD_March_2025_Model_Shoot-001-31_2_1080x.jpg" alt="Spring collection" onerror="this.style.background='linear-gradient(135deg, #E8EDE9, #D8E0DA)'; this.innerHTML='<div style=&quot;display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-size:40px;&quot;>📸</div>'">
+                        <div class="post-card-body">
+                            <div class="post-card-header">
+                                <div class="post-card-platform">
+                                    <div class="platform-dot" style="background: #6B9C78;"></div>
+                                    Instagram
+                                </div>
+                                <span class="post-card-percentile percentile-top">85th %</span>
+                            </div>
+                            <div class="post-card-format">🖼️ Carousel · Mar 22, 2026</div>
+                            <div class="post-card-caption">Spring collection drop. 12 new pieces, all under $150. Save this post for your next girls' night outfit inspo.</div>
+                            <div class="post-card-metrics">
+                                <div class="post-metric">
+                                    <div class="post-metric-value">5,033</div>
+                                    <div class="post-metric-label">Views</div>
+                                </div>
+                                <div class="post-metric">
+                                    <div class="post-metric-value">7.8%</div>
+                                    <div class="post-metric-label">Engagement</div>
+                                </div>
+                                <div class="post-metric">
+                                    <div class="post-metric-value">892</div>
+                                    <div class="post-metric-label">Interactions</div>
+                                </div>
+                                <div class="post-metric">
+                                    <div class="post-metric-value">5%</div>
+                                    <div class="post-metric-label">Non-followers</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ai-insight" style="margin-bottom: 0;">
+                    <div class="ai-icon">🔍</div>
+                    <div class="ai-content">
+                        <div class="ai-tag correlation">Pattern</div>
+                        <p><strong>Your top 3 posts all feature product-on-body styling, not flat-lays.</strong> Lifestyle imagery with the product being worn outperforms studio shots by 2.4x on engagement and 1.8x on saves. The Facebook Reel (#2) hit 82% non-follower reach — it went beyond your existing audience. Reels that ask a question in the caption ("Which stack is yours?") average 40% more comments than statement captions.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══════════════════════════════════════ -->
+            <!-- BOTTOM PERFORMING POSTS                  -->
+            <!-- ═══════════════════════════════════════ -->
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">📉 Lowest Performing Posts</div>
+                        <div class="card-subtitle">Posts that underperformed your average — learn what to avoid</div>
+                    </div>
+                </div>
+                <div class="post-grid">
+                    <!-- Low Post 1 -->
+                    <div class="post-card">
+                        <div class="post-card-image" style="background: linear-gradient(135deg, #F0EBE5, #E4E0DA); display: flex; align-items: center; justify-content: center;">
+                            <div style="text-align: center;">
+                                <div style="font-size: 40px;">📷</div>
+                                <div style="font-size: 11px; color: #B8AFA6; margin-top: 4px;">Flat-lay product shot</div>
+                            </div>
+                        </div>
+                        <div class="post-card-body">
+                            <div class="post-card-header">
+                                <div class="post-card-platform">
+                                    <div class="platform-dot" style="background: #6B9C78;"></div>
+                                    Instagram
+                                </div>
+                                <span class="post-card-percentile percentile-low">12th %</span>
+                            </div>
+                            <div class="post-card-format">📷 Static Post · Mar 5, 2026</div>
+                            <div class="post-card-caption">New arrivals just dropped! Shop the Celestial Collection now. Link in bio.</div>
+                            <div class="post-card-metrics">
+                                <div class="post-metric">
+                                    <div class="post-metric-value">1,204</div>
+                                    <div class="post-metric-label">Views</div>
+                                </div>
+                                <div class="post-metric">
+                                    <div class="post-metric-value">1.1%</div>
+                                    <div class="post-metric-label">Engagement</div>
+                                </div>
+                                <div class="post-metric">
+                                    <div class="post-metric-value">42</div>
+                                    <div class="post-metric-label">Interactions</div>
+                                </div>
+                                <div class="post-metric">
+                                    <div class="post-metric-value">2%</div>
+                                    <div class="post-metric-label">Non-followers</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Low Post 2 -->
+                    <div class="post-card">
+                        <div class="post-card-image" style="background: linear-gradient(135deg, #EDE8E2, #DDD8D2); display: flex; align-items: center; justify-content: center;">
+                            <div style="text-align: center;">
+                                <div style="font-size: 40px;">🎵</div>
+                                <div style="font-size: 11px; color: #B8AFA6; margin-top: 4px;">Unboxing video</div>
+                            </div>
+                        </div>
+                        <div class="post-card-body">
+                            <div class="post-card-header">
+                                <div class="post-card-platform">
+                                    <div class="platform-dot" style="background: #8B6EA3;"></div>
+                                    TikTok
+                                </div>
+                                <span class="post-card-percentile percentile-low">18th %</span>
+                            </div>
+                            <div class="post-card-format">🎵 TikTok · Mar 8, 2026</div>
+                            <div class="post-card-caption">Unboxing our newest spring pieces ✨ #jewelry #unboxing #stelladot</div>
+                            <div class="post-card-metrics">
+                                <div class="post-metric">
+                                    <div class="post-metric-value">2,340</div>
+                                    <div class="post-metric-label">Views</div>
+                                </div>
+                                <div class="post-metric">
+                                    <div class="post-metric-value">1.4%</div>
+                                    <div class="post-metric-label">Engagement</div>
+                                </div>
+                                <div class="post-metric">
+                                    <div class="post-metric-value">33</div>
+                                    <div class="post-metric-label">Interactions</div>
+                                </div>
+                                <div class="post-metric">
+                                    <div class="post-metric-value">8%</div>
+                                    <div class="post-metric-label">Non-followers</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Low Post 3 -->
+                    <div class="post-card">
+                        <div class="post-card-image" style="background: linear-gradient(135deg, #E8E4E0, #DBD7D3); display: flex; align-items: center; justify-content: center;">
+                            <div style="text-align: center;">
+                                <div style="font-size: 40px;">📘</div>
+                                <div style="font-size: 11px; color: #B8AFA6; margin-top: 4px;">Text graphic</div>
+                            </div>
+                        </div>
+                        <div class="post-card-body">
+                            <div class="post-card-header">
+                                <div class="post-card-platform">
+                                    <div class="platform-dot" style="background: #57719B;"></div>
+                                    Facebook
+                                </div>
+                                <span class="post-card-percentile percentile-low">8th %</span>
+                            </div>
+                            <div class="post-card-format">📷 Static Post · Mar 14, 2026</div>
+                            <div class="post-card-caption">Happy Pi Day! 🥧 What's your favorite way to celebrate? Drop a 🥧 below!</div>
+                            <div class="post-card-metrics">
+                                <div class="post-metric">
+                                    <div class="post-metric-value">890</div>
+                                    <div class="post-metric-label">Views</div>
+                                </div>
+                                <div class="post-metric">
+                                    <div class="post-metric-value">0.6%</div>
+                                    <div class="post-metric-label">Engagement</div>
+                                </div>
+                                <div class="post-metric">
+                                    <div class="post-metric-value">5</div>
+                                    <div class="post-metric-label">Interactions</div>
+                                </div>
+                                <div class="post-metric">
+                                    <div class="post-metric-value">1%</div>
+                                    <div class="post-metric-label">Non-followers</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ai-insight" style="margin-bottom: 0;">
+                    <div class="ai-icon">⚠️</div>
+                    <div class="ai-content">
+                        <div class="ai-tag warning">What's Not Working</div>
+                        <p><strong>Three patterns in your underperformers:</strong> (1) Static flat-lay product shots with "link in bio" CTAs — these are getting suppressed by the algorithm and reached only 2% non-followers. (2) Generic unboxing content on TikTok without a hook in the first 2 seconds — your TikTok retention drops 60% after second 3 on this format. (3) Off-brand "holiday" posts (Pi Day) that don't connect to your products — 0.6% engagement, your worst post this month. Takeaway: every post should feature your product being worn by a real person, and every caption should ask a question or tell a story.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══════════════════════════════════════ -->
+            <!-- CHANNEL DEEP DIVE: INSTAGRAM             -->
+            <!-- ═══════════════════════════════════════ -->
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">📸 Instagram Deep Dive</div>
+                        <div class="card-subtitle">Your primary social revenue driver — 63% of social revenue</div>
+                    </div>
+                    <a href="#" style="font-size: 12px; color: #57719B; font-weight: 500; text-decoration: none;">View All Posts →</a>
+                </div>
+
+                <div class="kpi-grid" style="grid-template-columns: repeat(5, 1fr); margin-bottom: 20px;">
+                    <div class="kpi-card">
+                        <div class="kpi-label">Reach</div>
+                        <div class="kpi-value" style="font-size: 22px;">111.2K</div>
+                        <div class="kpi-change positive">↗ +87.5%</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Engagement Rate</div>
+                        <div class="kpi-value" style="font-size: 22px;">7.8%</div>
+                        <div class="kpi-change positive">↗ +0.4pp</div>
+                        <div style="margin-top: 4px;">
+                            <span style="background: rgba(107,156,120,0.12); color: #6B9C78; padding: 2px 8px; border-radius: 10px; font-size: 9px; font-weight: 600;">92nd percentile</span>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Profile Visits</div>
+                        <div class="kpi-value" style="font-size: 22px;">4,218</div>
+                        <div class="kpi-change positive">↗ +22%</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Saves</div>
+                        <div class="kpi-value" style="font-size: 22px;">876</div>
+                        <div class="kpi-change positive">↗ +193%</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Attributed Revenue</div>
+                        <div class="kpi-value" style="font-size: 22px;">$5,304</div>
+                        <div class="kpi-change positive">↗ +41%</div>
+                    </div>
+                </div>
+
+                <!-- Instagram Format Breakdown -->
+                <div class="section-title">Format Performance <span class="section-badge">Instagram</span></div>
+                <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px;">
+                    <div style="display: grid; grid-template-columns: 80px 1fr 70px 70px 70px 60px; align-items: center; gap: 8px; font-size: 11px; color: #83766B; font-weight: 600; padding-bottom: 6px; border-bottom: 1px solid #EDE8E2;">
+                        <div>Format</div><div>Posts</div><div style="text-align: right;">Eng. Rate</div><div style="text-align: right;">Reach</div><div style="text-align: right;">Saves</div><div style="text-align: right;">Revenue</div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 80px 1fr 70px 70px 70px 60px; align-items: center; gap: 8px; font-size: 13px;">
+                        <div style="font-weight: 600;">🎬 Reels</div>
+                        <div style="position: relative; height: 22px; background: #F5F0EB; border-radius: 4px; overflow: hidden;">
+                            <div style="width: 100%; height: 100%; background: linear-gradient(90deg, #6B9C78, #95c0a0); border-radius: 4px; display: flex; align-items: center; padding-left: 8px;">
+                                <span style="color: white; font-size: 10px; font-weight: 600;">10 posts</span>
+                            </div>
+                        </div>
+                        <div style="text-align: right; font-weight: 700; color: #6B9C78;">9.4%</div>
+                        <div style="text-align: right;">62K</div>
+                        <div style="text-align: right;">612</div>
+                        <div style="text-align: right; font-weight: 600;">$2.8K</div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 80px 1fr 70px 70px 70px 60px; align-items: center; gap: 8px; font-size: 13px;">
+                        <div style="font-weight: 600;">🖼️ Carousel</div>
+                        <div style="position: relative; height: 22px; background: #F5F0EB; border-radius: 4px; overflow: hidden;">
+                            <div style="width: 64%; height: 100%; background: linear-gradient(90deg, #57719B, #B0CEFF); border-radius: 4px; display: flex; align-items: center; padding-left: 8px;">
+                                <span style="color: white; font-size: 10px; font-weight: 600;">6 posts</span>
+                            </div>
+                        </div>
+                        <div style="text-align: right; font-weight: 700;">6.2%</div>
+                        <div style="text-align: right;">24K</div>
+                        <div style="text-align: right;">198</div>
+                        <div style="text-align: right; font-weight: 600;">$1.6K</div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 80px 1fr 70px 70px 70px 60px; align-items: center; gap: 8px; font-size: 13px;">
+                        <div style="font-weight: 600;">📷 Static</div>
+                        <div style="position: relative; height: 22px; background: #F5F0EB; border-radius: 4px; overflow: hidden;">
+                            <div style="width: 48%; height: 100%; background: linear-gradient(90deg, #CFB4A4, #E4D5CA); border-radius: 4px; display: flex; align-items: center; padding-left: 8px;">
+                                <span style="color: #83766B; font-size: 10px; font-weight: 600;">4 posts</span>
+                            </div>
+                        </div>
+                        <div style="text-align: right; font-weight: 700; color: #8B6EA3;">2.8%</div>
+                        <div style="text-align: right;">12K</div>
+                        <div style="text-align: right;">44</div>
+                        <div style="text-align: right; font-weight: 600;">$640</div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 80px 1fr 70px 70px 70px 60px; align-items: center; gap: 8px; font-size: 13px;">
+                        <div style="font-weight: 600;">📖 Stories</div>
+                        <div style="position: relative; height: 22px; background: #F5F0EB; border-radius: 4px; overflow: hidden;">
+                            <div style="width: 30%; height: 100%; background: linear-gradient(90deg, #DED29D, #FFE6D8); border-radius: 4px; display: flex; align-items: center; padding-left: 8px;">
+                                <span style="color: #83766B; font-size: 10px; font-weight: 600;">2 posts</span>
+                            </div>
+                        </div>
+                        <div style="text-align: right; font-weight: 700;">2.4%</div>
+                        <div style="text-align: right;">8K</div>
+                        <div style="text-align: right;">22</div>
+                        <div style="text-align: right; font-weight: 600;">$264</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══════════════════════════════════════ -->
+            <!-- AUDIENCE GROWTH                          -->
+            <!-- ═══════════════════════════════════════ -->
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">Audience Growth</div>
+                        <div class="card-subtitle">Net follower change across all platforms — March 2026</div>
+                    </div>
+                </div>
+                <div class="kpi-grid" style="grid-template-columns: repeat(4, 1fr); margin-bottom: 20px;">
+                    <div class="kpi-card">
+                        <div class="kpi-label">📸 Instagram Followers</div>
+                        <div class="kpi-value" style="font-size: 22px;">48,212</div>
+                        <div class="kpi-change positive">↗ +812 (+1.7%)</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">📘 Facebook Followers</div>
+                        <div class="kpi-value" style="font-size: 22px;">12,434</div>
+                        <div class="kpi-change positive">↗ +234 (+1.9%)</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">🎵 TikTok Followers</div>
+                        <div class="kpi-value" style="font-size: 22px;">1,101</div>
+                        <div class="kpi-change positive">↗ +1,801 (new)</div>
+                        <div style="margin-top: 4px;">
+                            <span style="background: rgba(107,156,120,0.12); color: #6B9C78; padding: 2px 8px; border-radius: 10px; font-size: 9px; font-weight: 600;">Fastest growing</span>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Total Social Audience</div>
+                        <div class="kpi-value" style="font-size: 22px;">61,747</div>
+                        <div class="kpi-change positive">↗ +2,847 (+4.8%)</div>
+                    </div>
+                </div>
+
+                <!-- Follower trend chart -->
+                <div style="display: flex; justify-content: center;">
+                    <svg viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg" style="width: 100%; max-width: 700px;">
+                        <!-- Grid -->
+                        <line x1="50" y1="40" x2="680" y2="40" stroke="#EDE8E2" stroke-width="1" stroke-dasharray="3,3"/>
+                        <line x1="50" y1="80" x2="680" y2="80" stroke="#EDE8E2" stroke-width="1" stroke-dasharray="3,3"/>
+                        <line x1="50" y1="120" x2="680" y2="120" stroke="#EDE8E2" stroke-width="1" stroke-dasharray="3,3"/>
+                        <line x1="50" y1="160" x2="680" y2="160" stroke="#EDE8E2" stroke-width="1" stroke-dasharray="3,3"/>
+                        <!-- Axis -->
+                        <line x1="50" y1="30" x2="50" y2="170" stroke="#D1D5DB" stroke-width="1"/>
+                        <line x1="50" y1="170" x2="680" y2="170" stroke="#D1D5DB" stroke-width="1"/>
+                        <!-- Instagram line -->
+                        <polyline points="80,125 185,118 290,112 395,108 500,100 605,92 660,82" fill="none" stroke="#6B9C78" stroke-width="2.5"/>
+                        <!-- Facebook line -->
+                        <polyline points="80,148 185,147 290,146 395,145 500,144 605,143 660,142" fill="none" stroke="#57719B" stroke-width="2.5"/>
+                        <!-- TikTok line (started late, growing fast) -->
+                        <polyline points="500,168 605,160 660,150" fill="none" stroke="#8B6EA3" stroke-width="2.5"/>
+                        <!-- Month labels -->
+                        <text x="80" y="188" font-size="10" fill="#83766B" text-anchor="middle">Sep</text>
+                        <text x="185" y="188" font-size="10" fill="#83766B" text-anchor="middle">Oct</text>
+                        <text x="290" y="188" font-size="10" fill="#83766B" text-anchor="middle">Nov</text>
+                        <text x="395" y="188" font-size="10" fill="#83766B" text-anchor="middle">Dec</text>
+                        <text x="500" y="188" font-size="10" fill="#83766B" text-anchor="middle">Jan</text>
+                        <text x="605" y="188" font-size="10" fill="#83766B" text-anchor="middle">Feb</text>
+                        <text x="660" y="188" font-size="10" fill="#6B9C78" text-anchor="middle" font-weight="600">Mar</text>
+                        <!-- Y labels -->
+                        <text x="45" y="44" font-size="9" fill="#B8AFA6" text-anchor="end">50K</text>
+                        <text x="45" y="84" font-size="9" fill="#B8AFA6" text-anchor="end">40K</text>
+                        <text x="45" y="124" font-size="9" fill="#B8AFA6" text-anchor="end">30K</text>
+                        <text x="45" y="164" font-size="9" fill="#B8AFA6" text-anchor="end">20K</text>
+                        <!-- Legend -->
+                        <line x1="200" y1="14" x2="220" y2="14" stroke="#6B9C78" stroke-width="2.5"/>
+                        <text x="225" y="18" font-size="10" fill="#83766B">Instagram</text>
+                        <line x1="310" y1="14" x2="330" y2="14" stroke="#57719B" stroke-width="2.5"/>
+                        <text x="335" y="18" font-size="10" fill="#83766B">Facebook</text>
+                        <line x1="410" y1="14" x2="430" y2="14" stroke="#8B6EA3" stroke-width="2.5"/>
+                        <text x="435" y="18" font-size="10" fill="#83766B">TikTok</text>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- ═══════════════════════════════════════ -->
+            <!-- POSTING CADENCE & BEST TIMES             -->
+            <!-- ═══════════════════════════════════════ -->
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">Best Posting Times</div>
+                        <div class="card-subtitle">When your audience is most engaged — based on your last 90 days of data</div>
+                    </div>
+                </div>
+                <div class="grid-2col">
+                    <div>
+                        <div class="section-title">📸 Instagram</div>
+                        <div style="display: flex; flex-direction: column; gap: 8px;">
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <div style="font-size: 12px; font-weight: 600; color: #41342A; width: 100px;">Tue 10–11am</div>
+                                <div style="flex: 1; height: 20px; background: #F5F0EB; border-radius: 4px; overflow: hidden;">
+                                    <div style="width: 92%; height: 100%; background: #6B9C78; border-radius: 4px;"></div>
+                                </div>
+                                <div style="font-size: 11px; font-weight: 600; color: #6B9C78; width: 50px; text-align: right;">9.2%</div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <div style="font-size: 12px; font-weight: 600; color: #41342A; width: 100px;">Thu 7–8pm</div>
+                                <div style="flex: 1; height: 20px; background: #F5F0EB; border-radius: 4px; overflow: hidden;">
+                                    <div style="width: 84%; height: 100%; background: #95c0a0; border-radius: 4px;"></div>
+                                </div>
+                                <div style="font-size: 11px; font-weight: 600; color: #6B9C78; width: 50px; text-align: right;">8.4%</div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <div style="font-size: 12px; font-weight: 600; color: #41342A; width: 100px;">Sun 9–10am</div>
+                                <div style="flex: 1; height: 20px; background: #F5F0EB; border-radius: 4px; overflow: hidden;">
+                                    <div style="width: 76%; height: 100%; background: #B5C9CB; border-radius: 4px;"></div>
+                                </div>
+                                <div style="font-size: 11px; font-weight: 600; width: 50px; text-align: right;">7.6%</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="section-title">🎵 TikTok</div>
+                        <div style="display: flex; flex-direction: column; gap: 8px;">
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <div style="font-size: 12px; font-weight: 600; color: #41342A; width: 100px;">Wed 6–7pm</div>
+                                <div style="flex: 1; height: 20px; background: #F5F0EB; border-radius: 4px; overflow: hidden;">
+                                    <div style="width: 88%; height: 100%; background: #8B6EA3; border-radius: 4px;"></div>
+                                </div>
+                                <div style="font-size: 11px; font-weight: 600; color: #8B6EA3; width: 50px; text-align: right;">5.8%</div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <div style="font-size: 12px; font-weight: 600; color: #41342A; width: 100px;">Fri 12–1pm</div>
+                                <div style="flex: 1; height: 20px; background: #F5F0EB; border-radius: 4px; overflow: hidden;">
+                                    <div style="width: 72%; height: 100%; background: #b197c7; border-radius: 4px;"></div>
+                                </div>
+                                <div style="font-size: 11px; font-weight: 600; width: 50px; text-align: right;">4.8%</div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <div style="font-size: 12px; font-weight: 600; color: #41342A; width: 100px;">Sat 8–9pm</div>
+                                <div style="flex: 1; height: 20px; background: #F5F0EB; border-radius: 4px; overflow: hidden;">
+                                    <div style="width: 64%; height: 100%; background: #d4c0e0; border-radius: 4px;"></div>
+                                </div>
+                                <div style="font-size: 11px; font-weight: 600; width: 50px; text-align: right;">4.2%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="font-size: 10px; color: #B8AFA6; margin-top: 14px;">📊 Based on engagement rate of posts published in the last 90 days, bucketed by day + hour. Minimum 2 posts per time slot to qualify.</div>
+            </div>
+
+            <!-- ═══════════════════════════════════════ -->
+            <!-- SOCIAL → REVENUE ATTRIBUTION             -->
+            <!-- ═══════════════════════════════════════ -->
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">Social → Revenue</div>
+                        <div class="card-subtitle">How social traffic converts to Shopify orders — closing the loop</div>
+                    </div>
+                </div>
+                <div class="kpi-grid" style="grid-template-columns: repeat(5, 1fr); margin-bottom: 20px;">
+                    <div class="kpi-card">
+                        <div class="kpi-label">Social Sessions</div>
+                        <div class="kpi-value" style="font-size: 22px;">5,640</div>
+                        <div class="kpi-change positive">↗ +31%</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Social Conv. Rate</div>
+                        <div class="kpi-value" style="font-size: 22px;">0.9%</div>
+                        <div class="kpi-change negative">↘ -0.2pp</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Social Revenue</div>
+                        <div class="kpi-value" style="font-size: 22px;">$8,400</div>
+                        <div class="kpi-change positive">↗ +34%</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Social AOV</div>
+                        <div class="kpi-value" style="font-size: 22px;">$68</div>
+                        <div class="kpi-change negative">↘ -$4</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">% of Store Revenue</div>
+                        <div class="kpi-value" style="font-size: 22px;">6.6%</div>
+                        <div class="kpi-change positive">↗ +0.8pp</div>
+                    </div>
+                </div>
+
+                <div class="ai-insight" style="margin-bottom: 0;">
+                    <div class="ai-icon">💰</div>
+                    <div class="ai-content">
+                        <div class="ai-tag warning">Conversion Gap</div>
+                        <p><strong>Social traffic is up 31% but your conversion rate dropped to 0.9% — the lowest of any channel.</strong> For context, your email converts at 3.2% and paid at 2.1%. The issue isn't traffic quality — your social visitors browse 3.4 pages/session (above average). They're browsing but not buying. Two likely causes: (1) your social landing experience sends visitors to the homepage instead of the product featured in the post, and (2) only 4 of your 22 Instagram posts have shoppable product tags. Posts with tags convert 3.2x higher.</p>
+                        <p><strong>What to do:</strong> Tag every post with products. Use UTM links that deep-link to the featured product page, not your homepage. If you're running a retargeting campaign from social visitors, make sure the ad shows the exact product they viewed — not a generic brand ad.</p>
+                        <a href="#" class="ai-cta">→ Create Social Retargeting Campaign in Marklo</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══════════════════════════════════════ -->
+            <!-- AI RECOMMENDED ACTIONS                   -->
+            <!-- ═══════════════════════════════════════ -->
+            <div class="card" style="border-left: 4px solid #6B9C78;">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">🎯 What To Do This Week</div>
+                        <div class="card-subtitle">AI-generated actions ranked by estimated impact — based on your March data</div>
+                    </div>
+                </div>
+                <div style="display: grid; gap: 12px;">
+                    <div style="display: flex; gap: 14px; align-items: flex-start; padding: 16px; background: #F6F5F3; border-radius: 10px;">
+                        <div style="background: #6B9C78; color: white; font-weight: 800; font-size: 13px; width: 28px; height: 28px; min-width: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center;">1</div>
+                        <div>
+                            <div style="font-weight: 600; font-size: 14px; color: #41342A; margin-bottom: 4px;">Add shoppable product tags to your top 10 Instagram posts</div>
+                            <div style="font-size: 12px; color: #83766B; line-height: 1.5;">Only 4 of 22 posts are tagged. Tagged posts convert 3.2x higher. Your top posts reached 111K people — that's a massive untapped revenue pool. Estimated impact: $1,200–2,400/month in incremental revenue.</div>
+                            <a href="#" style="font-size: 12px; color: #6B9C78; font-weight: 600; text-decoration: none; margin-top: 6px; display: inline-block;">→ View Untagged Posts</a>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 14px; align-items: flex-start; padding: 16px; background: #F6F5F3; border-radius: 10px;">
+                        <div style="background: #57719B; color: white; font-weight: 800; font-size: 13px; width: 28px; height: 28px; min-width: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center;">2</div>
+                        <div>
+                            <div style="font-weight: 600; font-size: 14px; color: #41342A; margin-bottom: 4px;">Shift 3 static posts/week to Reels</div>
+                            <div style="font-size: 12px; color: #83766B; line-height: 1.5;">Your Reels engage at 9.4% vs. 2.8% for static posts. Reels also reach 5.2x more non-followers, which drives audience growth. You're currently posting 4 static posts/week — cut to 1 and redirect creative effort to short-form video.</div>
+                            <a href="#" style="font-size: 12px; color: #57719B; font-weight: 600; text-decoration: none; margin-top: 6px; display: inline-block;">→ Create Reel Campaign in Marklo</a>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 14px; align-items: flex-start; padding: 16px; background: #F6F5F3; border-radius: 10px;">
+                        <div style="background: #8B6EA3; color: white; font-weight: 800; font-size: 13px; width: 28px; height: 28px; min-width: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center;">3</div>
+                        <div>
+                            <div style="font-weight: 600; font-size: 14px; color: #41342A; margin-bottom: 4px;">Create a retargeting audience from your 111K Instagram reach</div>
+                            <div style="font-size: 12px; color: #83766B; line-height: 1.5;">Your social-to-purchase conversion is 0.9%. A Meta retargeting campaign targeting social engagers with the exact product they viewed typically converts at 2.5–4x the rate of cold audiences. Your March reach is large enough to build a meaningful lookalike.</div>
+                            <a href="#" style="font-size: 12px; color: #8B6EA3; font-weight: 600; text-decoration: none; margin-top: 6px; display: inline-block;">→ Create Retargeting Campaign in Marklo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══════════════════════════════════════ -->
+            <!-- DATA SOURCES                             -->
+            <!-- ═══════════════════════════════════════ -->
+            <div style="padding: 16px 20px; background: #F6F5F3; border-radius: 10px; margin-bottom: 20px;">
+                <div style="font-size: 11px; font-weight: 600; color: #83766B; margin-bottom: 8px;">📊 Data Sources & Notes</div>
+                <div style="font-size: 11px; color: #83766B; line-height: 1.6;">
+                    <strong>Instagram:</strong> Reach, impressions, engagement, saves, profile visits from Instagram Graph API. Revenue attribution via Shopify UTM tracking (last-click). Percentile benchmarks from Shopify industry data (Jewelry vertical).<br>
+                    <strong>Facebook:</strong> Views, engagement, follower growth from Meta Graph API. Revenue via Shopify UTM.<br>
+                    <strong>TikTok:</strong> Views and engagement from TikTok API. Reach is not available via TikTok API — views used as proxy. Revenue via Shopify UTM. Follower count from TikTok profile API.<br>
+                    <strong>Engagement Rate Calculation:</strong> (Likes + Comments + Shares + Saves) / Reach × 100. Weighted average across channels uses reach as weight.<br>
+                    <strong>Revenue Attribution:</strong> Shopify UTM last-click. Social orders identified by utm_source containing "instagram", "facebook", or "tiktok". Does not include view-through or multi-touch attribution.
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div style="text-align: center; padding: 24px; color: #B8AFA6; font-size: 12px;">
+                <div style="font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 500; color: #41342A; margin-bottom: 6px;">MARKLO</div>
+                Social Media Analytics · Data through Mar 31, 2026
+            </div>
+        </main>
+    </div>
+</body>
+</html>

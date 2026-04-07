@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Report #4: Customer & Retention Insights — Marklo</title>
+    <title>Report #4: Customer Intelligence Report — Marklo</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.2/html2pdf.bundle.min.js"></script>
     <!-- Note: In production, replace Playfair Display with actual Kalice Regular font file -->
@@ -726,12 +726,16 @@
             🎯 Your Repeat Customers Are Your Rockstars!
         </div>
         <div class="card" style="border-radius: 0 0 12px 12px; margin-top: 0;">
-            <h1>Customer & Retention Insights</h1>
+            <h1>Customer Intelligence Report</h1>
             <p class="meta-info">👥 Report #4 • Mar 1 – Mar 31, 2026</p>
-            <p class="meta-info" style="color: #999; font-size: 13px;">Jewelry DTC Brand Dashboard</p>
+            <div style="display: flex; align-items: center; gap: 8px; margin-top: 4px;">
+                <img src="https://images.squarespace-cdn.com/content/v1/530e4e29e4b0ac922e4820d1/1630515338785-HMYXAMW5N0WGN6R6FZQX/Stella+%26+Dot+logo.png" alt="Stella & Dot" style="height: 20px; opacity: 0.6;" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                <span style="color: #999; font-size: 13px; font-weight: 500;">Stella & Dot</span>
+            </div>
             <div class="win-pills">
                 <span class="win-pill">🔄 42% Repeat Rate (↑6% YoY)</span>
                 <span class="win-pill streak">💎 $892 Avg LTV</span>
+                <span class="win-pill">📈 $22.40 CAC (↓12% MoM)</span>
                 <span class="win-pill record">⭐ 78% Month 1 Retention</span>
             </div>
             <div class="header-badge">✨ Powered by Marklo</div>
@@ -741,7 +745,7 @@
         <div class="ai-insight">
             <div class="ai-icon">✨</div>
             <div class="ai-content">
-                <p><strong>AI Insight:</strong> Your repeat customer strategy is working beautifully. 42% of March orders came from repeat buyers—that's 6 points higher than last year—and they're spending 2.3x more than new customers on average. Your March 2025 cohort just hit 78% retention at month 1, which is phenomenal. Champions (your top spenders) are worth $2,847 in LTV, while your At-Risk segment needs some love—win-back campaigns recovered $8,300 this month. One thing to watch: churn ticked up slightly to 5.2% (from 4.8%), but re-engagement campaigns are already bridging the gap.</p>
+                <p><strong>AI Insight:</strong> Your repeat customer strategy is working — 42% repeat rate, up 6pp YoY — and your new customer acquisition is accelerating too. You added 2,138 new customers in March at a $22.40 blended CAC (down 12% MoM), putting you on pace to beat 2025's 20,785 total by 22%. Email is your most efficient channel at $4.20 CAC with 28.5x LTV:CAC — there's headroom to scale it. March 2026 cohort hit 78% M1 retention — your best ever. One thing to watch: churn ticked to 5.2% and organic social converts at only 0.9% despite +31% traffic growth. The biggest growth lever right now is converting more of your social and organic traffic into first-time buyers.</p>
                 <a href="#" class="ai-cta">→ Launch Retention Campaign</a>
             </div>
         </div>
@@ -818,7 +822,7 @@
                     <div class="kpi-value">42%</div>
                     <div class="kpi-change positive">↗ +6pp YoY</div>
                     <div style="margin-top: 6px;">
-                        <span class="percentile-badge">📊 Top 20% of jewelry DTC</span>
+                        <span style="background: rgba(107,156,120,0.12); color: #6B9C78; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 600;">vs. 36% last year</span>
                     </div>
                 </div>
                 <div class="kpi-card">
@@ -831,6 +835,381 @@
                     <div class="kpi-value">5.2%</div>
                     <div class="kpi-change negative">↘ +0.4pp</div>
                 </div>
+            </div>
+        </div>
+
+        <!-- YTD Customer Acquisition: 2026 vs 2025 -->
+        <div class="card">
+            <h2 class="section-title">Customer Acquisition: 2026 vs 2025</h2>
+            <p class="meta-info">12-month view — new customers by month. The 2026 line fills in as each month closes.</p>
+
+            <!-- Summary KPI pills -->
+            <div style="display: flex; gap: 16px; margin-bottom: 28px; flex-wrap: wrap;">
+                <div style="background: rgba(107,156,120,0.1); border: 1px solid rgba(107,156,120,0.3); border-radius: 10px; padding: 14px 22px; text-align: center; min-width: 140px;">
+                    <div style="font-size: 11px; color: #666; font-weight: 600; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.03em;">YTD 2026</div>
+                    <div style="font-size: 26px; font-weight: 800; color: #6B9C78; line-height: 1.1;">5,616</div>
+                    <div style="font-size: 11px; color: #6B9C78; font-weight: 600; margin-top: 3px;">Jan – Mar</div>
+                </div>
+                <div style="background: rgba(87,113,155,0.07); border: 1px solid rgba(87,113,155,0.2); border-radius: 10px; padding: 14px 22px; text-align: center; min-width: 140px;">
+                    <div style="font-size: 11px; color: #666; font-weight: 600; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.03em;">Same Period 2025</div>
+                    <div style="font-size: 26px; font-weight: 800; color: #57719B; line-height: 1.1;">4,574</div>
+                    <div style="font-size: 11px; color: #57719B; font-weight: 600; margin-top: 3px;">Jan – Mar</div>
+                </div>
+                <div style="background: rgba(176,206,255,0.12); border: 1px solid rgba(176,206,255,0.45); border-radius: 10px; padding: 14px 22px; text-align: center; min-width: 140px;">
+                    <div style="font-size: 11px; color: #666; font-weight: 600; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.03em;">YoY Growth</div>
+                    <div style="font-size: 26px; font-weight: 800; color: #41342A; line-height: 1.1;">+22.6%</div>
+                    <div style="font-size: 11px; color: #6B9C78; font-weight: 600; margin-top: 3px;">ahead of pace</div>
+                </div>
+                <div style="background: #FAFAFA; border: 1px solid #E5E7EB; border-radius: 10px; padding: 14px 22px; text-align: center; min-width: 140px;">
+                    <div style="font-size: 11px; color: #666; font-weight: 600; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.03em;">2025 Full Year</div>
+                    <div style="font-size: 26px; font-weight: 800; color: #1A1A1A; line-height: 1.1;">20,785</div>
+                    <div style="font-size: 11px; color: #999; font-weight: 600; margin-top: 3px;">target to beat</div>
+                </div>
+            </div>
+
+            <!-- 12-month trend line chart -->
+            <div class="chart-container" style="overflow: visible; margin: 0 0 8px 0;">
+                <svg viewBox="0 0 700 275" xmlns="http://www.w3.org/2000/svg" style="width: 100%; max-width: 700px;">
+
+                    <!-- "Months ahead" shaded region (Apr–Dec) -->
+                    <rect x="166" y="30" width="499" height="190" fill="#F5F0EB" opacity="0.55" rx="2"/>
+                    <text x="413" y="136" font-size="10" fill="#C8C0BB" text-anchor="middle">months ahead</text>
+
+                    <!-- Horizontal grid lines -->
+                    <line x1="55" y1="182" x2="665" y2="182" stroke="#E5E7EB" stroke-width="1" stroke-dasharray="3,3"/>
+                    <line x1="55" y1="144" x2="665" y2="144" stroke="#E5E7EB" stroke-width="1" stroke-dasharray="3,3"/>
+                    <line x1="55" y1="106" x2="665" y2="106" stroke="#E5E7EB" stroke-width="1" stroke-dasharray="3,3"/>
+                    <line x1="55" y1="68"  x2="665" y2="68"  stroke="#E5E7EB" stroke-width="1" stroke-dasharray="3,3"/>
+                    <line x1="55" y1="30"  x2="665" y2="30"  stroke="#E5E7EB" stroke-width="1" stroke-dasharray="3,3"/>
+
+                    <!-- Axes -->
+                    <line x1="55" y1="20"  x2="55"  y2="228" stroke="#D1D5DB" stroke-width="1.5"/>
+                    <line x1="55" y1="220" x2="670" y2="220" stroke="#D1D5DB" stroke-width="1.5"/>
+
+                    <!-- Y-axis labels (scale 0–2,500) -->
+                    <text x="50" y="185" font-size="10" fill="#aaa" text-anchor="end">0.5k</text>
+                    <text x="50" y="147" font-size="10" fill="#aaa" text-anchor="end">1k</text>
+                    <text x="50" y="109" font-size="10" fill="#aaa" text-anchor="end">1.5k</text>
+                    <text x="50" y="71"  font-size="10" fill="#aaa" text-anchor="end">2k</text>
+                    <text x="50" y="33"  font-size="10" fill="#aaa" text-anchor="end">2.5k</text>
+
+                    <!-- 2025 area fill (all 12 months) -->
+                    <polygon points="55,121 110,104 165,87 220,80 275,56 330,96 385,107 440,104 495,93 550,87 605,73 660,52 660,220 55,220"
+                             fill="#B0CEFF" fill-opacity="0.1"/>
+
+                    <!-- 2025 trend line (all 12 months) -->
+                    <polyline points="55,121 110,104 165,87 220,80 275,56 330,96 385,107 440,104 495,93 550,87 605,73 660,52"
+                              fill="none" stroke="#B0CEFF" stroke-width="2.5" opacity="0.95"/>
+
+                    <!-- 2025 data point dots -->
+                    <circle cx="55"  cy="121" r="3.5" fill="#B0CEFF" stroke="white" stroke-width="1"/>
+                    <circle cx="110" cy="104" r="3.5" fill="#B0CEFF" stroke="white" stroke-width="1"/>
+                    <circle cx="165" cy="87"  r="3.5" fill="#B0CEFF" stroke="white" stroke-width="1"/>
+                    <circle cx="220" cy="80"  r="3.5" fill="#B0CEFF" stroke="white" stroke-width="1"/>
+                    <circle cx="275" cy="56"  r="3.5" fill="#B0CEFF" stroke="white" stroke-width="1"/>
+                    <circle cx="330" cy="96"  r="3.5" fill="#B0CEFF" stroke="white" stroke-width="1"/>
+                    <circle cx="385" cy="107" r="3.5" fill="#B0CEFF" stroke="white" stroke-width="1"/>
+                    <circle cx="440" cy="104" r="3.5" fill="#B0CEFF" stroke="white" stroke-width="1"/>
+                    <circle cx="495" cy="93"  r="3.5" fill="#B0CEFF" stroke="white" stroke-width="1"/>
+                    <circle cx="550" cy="87"  r="3.5" fill="#B0CEFF" stroke="white" stroke-width="1"/>
+                    <circle cx="605" cy="73"  r="3.5" fill="#B0CEFF" stroke="white" stroke-width="1"/>
+                    <circle cx="660" cy="52"  r="3.5" fill="#B0CEFF" stroke="white" stroke-width="1"/>
+
+                    <!-- 2026 YTD area fill (Jan–Mar) -->
+                    <polygon points="55,98 110,77 165,58 165,220 55,220"
+                             fill="#6B9C78" fill-opacity="0.13"/>
+
+                    <!-- 2026 YTD trend line (Jan–Mar, solid) -->
+                    <polyline points="55,98 110,77 165,58"
+                              fill="none" stroke="#6B9C78" stroke-width="3"/>
+
+                    <!-- Current month marker (end of YTD) -->
+                    <line x1="165" y1="30" x2="165" y2="220" stroke="#6B9C78" stroke-width="1.5" stroke-dasharray="5,3" opacity="0.55"/>
+                    <text x="165" y="24" font-size="9" fill="#6B9C78" text-anchor="middle" font-weight="700">Mar '26</text>
+
+                    <!-- 2026 data point dots (larger, prominent) -->
+                    <circle cx="55"  cy="98" r="5.5" fill="#6B9C78" stroke="white" stroke-width="2"/>
+                    <circle cx="110" cy="77" r="5.5" fill="#6B9C78" stroke="white" stroke-width="2"/>
+                    <circle cx="165" cy="58" r="5.5" fill="#6B9C78" stroke="white" stroke-width="2"/>
+
+                    <!-- 2026 value labels -->
+                    <text x="55"  y="90"  font-size="9.5" fill="#41342A" text-anchor="middle" font-weight="700">1,602</text>
+                    <text x="110" y="69"  font-size="9.5" fill="#41342A" text-anchor="middle" font-weight="700">1,876</text>
+                    <text x="170" y="51"  font-size="9.5" fill="#41342A" text-anchor="start"  font-weight="700">2,138</text>
+
+                    <!-- Month labels: green for reported, muted for future -->
+                    <text x="55"  y="237" font-size="10" fill="#888" text-anchor="middle">Jan</text>
+                    <text x="110" y="237" font-size="10" fill="#888" text-anchor="middle">Feb</text>
+                    <text x="165" y="237" font-size="10" fill="#6B9C78" text-anchor="middle" font-weight="600">Mar</text>
+                    <text x="220" y="237" font-size="10" fill="#C0BAB6" text-anchor="middle">Apr</text>
+                    <text x="275" y="237" font-size="10" fill="#C0BAB6" text-anchor="middle">May</text>
+                    <text x="330" y="237" font-size="10" fill="#C0BAB6" text-anchor="middle">Jun</text>
+                    <text x="385" y="237" font-size="10" fill="#C0BAB6" text-anchor="middle">Jul</text>
+                    <text x="440" y="237" font-size="10" fill="#C0BAB6" text-anchor="middle">Aug</text>
+                    <text x="495" y="237" font-size="10" fill="#C0BAB6" text-anchor="middle">Sep</text>
+                    <text x="550" y="237" font-size="10" fill="#C0BAB6" text-anchor="middle">Oct</text>
+                    <text x="605" y="237" font-size="10" fill="#C0BAB6" text-anchor="middle">Nov</text>
+                    <text x="660" y="237" font-size="10" fill="#C0BAB6" text-anchor="middle">Dec</text>
+
+                    <!-- Legend -->
+                    <line x1="210" y1="257" x2="232" y2="257" stroke="#B0CEFF" stroke-width="2.5"/>
+                    <circle cx="221" cy="257" r="3.5" fill="#B0CEFF"/>
+                    <text x="236" y="261" font-size="10.5" fill="#666">2025 (full year)</text>
+                    <line x1="335" y1="257" x2="357" y2="257" stroke="#6B9C78" stroke-width="3"/>
+                    <circle cx="346" cy="257" r="5" fill="#6B9C78" stroke="white" stroke-width="1.5"/>
+                    <text x="361" y="261" font-size="10.5" fill="#666">2026 (YTD through Mar)</text>
+                </svg>
+            </div>
+
+            <!-- YTD monthly detail table -->
+            <div style="overflow-x: auto; margin-top: 4px;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+                    <thead>
+                        <tr style="border-bottom: 2px solid #E5E7EB;">
+                            <th style="text-align: left;  padding: 9px 12px; color: #666; font-weight: 600; font-size: 11px;">Month</th>
+                            <th style="text-align: right; padding: 9px 12px; color: #57719B; font-weight: 600; font-size: 11px;">2025</th>
+                            <th style="text-align: right; padding: 9px 12px; color: #6B9C78; font-weight: 600; font-size: 11px;">2026</th>
+                            <th style="text-align: right; padding: 9px 12px; color: #666; font-weight: 600; font-size: 11px;">YoY</th>
+                            <th style="text-align: right; padding: 9px 12px; color: #666; font-weight: 600; font-size: 11px;">Cumul. 2026</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid #F0F0F0;">
+                            <td style="padding: 10px 12px; font-weight: 600;">January</td>
+                            <td style="padding: 10px 12px; text-align: right; color: #57719B; font-weight: 600;">1,298</td>
+                            <td style="padding: 10px 12px; text-align: right; color: #6B9C78; font-weight: 700;">1,602</td>
+                            <td style="padding: 10px 12px; text-align: right;"><span style="background: rgba(107,156,120,0.1); color: #6B9C78; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 700;">&#x2197; +23%</span></td>
+                            <td style="padding: 10px 12px; text-align: right; font-weight: 600; color: #1A1A1A;">1,602</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #F0F0F0;">
+                            <td style="padding: 10px 12px; font-weight: 600;">February</td>
+                            <td style="padding: 10px 12px; text-align: right; color: #57719B; font-weight: 600;">1,524</td>
+                            <td style="padding: 10px 12px; text-align: right; color: #6B9C78; font-weight: 700;">1,876</td>
+                            <td style="padding: 10px 12px; text-align: right;"><span style="background: rgba(107,156,120,0.1); color: #6B9C78; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 700;">&#x2197; +23%</span></td>
+                            <td style="padding: 10px 12px; text-align: right; font-weight: 600; color: #1A1A1A;">3,478</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px 12px; font-weight: 600;">March</td>
+                            <td style="padding: 10px 12px; text-align: right; color: #57719B; font-weight: 600;">1,752</td>
+                            <td style="padding: 10px 12px; text-align: right; color: #6B9C78; font-weight: 700;">2,138</td>
+                            <td style="padding: 10px 12px; text-align: right;"><span style="background: rgba(107,156,120,0.1); color: #6B9C78; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 700;">&#x2197; +22%</span></td>
+                            <td style="padding: 10px 12px; text-align: right; font-weight: 700; color: #6B9C78;">5,616</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr style="border-top: 2px solid #E5E7EB; background: #FAFAFA;">
+                            <td style="padding: 10px 12px; font-weight: 700; color: #41342A;">YTD Total</td>
+                            <td style="padding: 10px 12px; text-align: right; color: #57719B; font-weight: 700;">4,574</td>
+                            <td style="padding: 10px 12px; text-align: right; color: #6B9C78; font-weight: 800; font-size: 15px;">5,616</td>
+                            <td style="padding: 10px 12px; text-align: right;"><span style="background: rgba(107,156,120,0.15); color: #6B9C78; padding: 4px 10px; border-radius: 10px; font-size: 12px; font-weight: 800;">&#x2197; +22.6%</span></td>
+                            <td style="padding: 10px 12px; text-align: right; font-weight: 800; color: #6B9C78; font-size: 15px;">5,616</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <p class="meta-info" style="margin-top: 16px; font-size: 12px;">&#x1F4A1; <strong>Insight:</strong> The green line is tracking above 2025 in every reported month. The full blue line shows the shape of last year — note the May spike (Mother's Day) and the Q4 holiday ramp. 2025 closed at 20,785 new customers; at the current +22.6% pace, 2026 is on track for ~25,400.</p>
+        </div>
+
+        <!-- New Customer Acquisition by Source -->
+        <div class="card">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+                <h2 class="section-title" style="margin-bottom: 0;">New Customer Acquisition by Source</h2>
+                <a href="#" style="font-size: 12px; color: #57719B; font-weight: 500; text-decoration: none; display: flex; align-items: center; gap: 4px;"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 9l2.5-3L6 8l4-6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>View in Analytics →</a>
+            </div>
+            <p class="meta-info" style="margin-bottom: 20px;">March 2026 — where your 2,138 new customers came from and what each one cost</p>
+
+            <!-- Acquisition KPI pills -->
+            <div class="kpi-grid" style="grid-template-columns: repeat(5, 1fr); margin-bottom: 28px;">
+                <div class="kpi-card">
+                    <div class="label">Blended CAC</div>
+                    <div class="kpi-value" style="font-size: 26px;">$22.40</div>
+                    <div class="kpi-change positive">↗ -12% MoM</div>
+                    <div style="margin-top: 4px; font-size: 10px; color: #999;">Shopify + ad platforms</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="label">Paid NC CAC</div>
+                    <div class="kpi-value" style="font-size: 26px;">$31.20</div>
+                    <div class="kpi-change positive">↗ -8% MoM</div>
+                    <div style="margin-top: 4px; font-size: 10px; color: #999;">Meta + Google only</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="label">New Cust. Revenue</div>
+                    <div class="kpi-value" style="font-size: 26px;">$48.7K</div>
+                    <div class="kpi-change positive">↗ +28% MoM</div>
+                    <div style="margin-top: 4px; font-size: 10px; color: #999;">38% of total revenue</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="label">New Cust. AOV</div>
+                    <div class="kpi-value" style="font-size: 26px;">$62</div>
+                    <div class="kpi-change negative">↘ -$4 vs returning</div>
+                    <div style="margin-top: 4px; font-size: 10px; color: #999;">Returning AOV: $66</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="label">LTV:CAC Ratio</div>
+                    <div class="kpi-value" style="font-size: 26px;">3.8x</div>
+                    <div class="kpi-change positive">↗ +0.4x MoM</div>
+                    <div style="margin-top: 4px;">
+                        <span style="background: rgba(107,156,120,0.12); color: #6B9C78; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 600;">Healthy (>3x target)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Source breakdown table with horizontal bars -->
+            <h3 style="margin-bottom: 16px;">Acquisition Source Breakdown</h3>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px;">
+                <!-- Column headers -->
+                <div style="display: grid; grid-template-columns: 120px 1fr 80px 80px 80px 80px 60px; align-items: center; gap: 8px; font-size: 11px; color: #999; font-weight: 600; padding-bottom: 6px; border-bottom: 1px solid #E5E7EB;">
+                    <div>Source</div>
+                    <div>New Customers</div>
+                    <div style="text-align: right;">Share</div>
+                    <div style="text-align: right;">CAC</div>
+                    <div style="text-align: right;">Revenue</div>
+                    <div style="text-align: right;">Conv %</div>
+                    <div style="text-align: right;">MoM</div>
+                </div>
+                <!-- Organic Search -->
+                <div style="display: grid; grid-template-columns: 120px 1fr 80px 80px 80px 80px 60px; align-items: center; gap: 8px; font-size: 13px;">
+                    <div style="font-weight: 600; color: #41342A;">Organic</div>
+                    <div style="position: relative; height: 24px; background: #F5F0EB; border-radius: 4px; overflow: hidden;">
+                        <div style="width: 100%; height: 100%; background: linear-gradient(90deg, #6B9C78, #95c0a0); border-radius: 4px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px;">
+                            <span style="color: white; font-size: 11px; font-weight: 600;">684</span>
+                        </div>
+                    </div>
+                    <div style="text-align: right; color: #83766B;">32.0%</div>
+                    <div style="text-align: right; font-weight: 600; color: #6B9C78;">$0</div>
+                    <div style="text-align: right; font-weight: 600;">$15.2K</div>
+                    <div style="text-align: right; color: #83766B;">1.4%</div>
+                    <div style="text-align: right; color: #6B9C78; font-weight: 500;">↗ +18%</div>
+                </div>
+                <!-- Meta Ads -->
+                <div style="display: grid; grid-template-columns: 120px 1fr 80px 80px 80px 80px 60px; align-items: center; gap: 8px; font-size: 13px;">
+                    <div style="font-weight: 600; color: #41342A;">Meta Ads</div>
+                    <div style="position: relative; height: 24px; background: #F5F0EB; border-radius: 4px; overflow: hidden;">
+                        <div style="width: 65%; height: 100%; background: linear-gradient(90deg, #57719B, #B0CEFF); border-radius: 4px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px;">
+                            <span style="color: white; font-size: 11px; font-weight: 600;">449</span>
+                        </div>
+                    </div>
+                    <div style="text-align: right; color: #83766B;">21.0%</div>
+                    <div style="text-align: right; font-weight: 600; color: #41342A;">$28.40</div>
+                    <div style="text-align: right; font-weight: 600;">$10.8K</div>
+                    <div style="text-align: right; color: #83766B;">2.1%</div>
+                    <div style="text-align: right; color: #6B9C78; font-weight: 500;">↗ +12%</div>
+                </div>
+                <!-- Google Ads -->
+                <div style="display: grid; grid-template-columns: 120px 1fr 80px 80px 80px 80px 60px; align-items: center; gap: 8px; font-size: 13px;">
+                    <div style="font-weight: 600; color: #41342A;">Google Ads</div>
+                    <div style="position: relative; height: 24px; background: #F5F0EB; border-radius: 4px; overflow: hidden;">
+                        <div style="width: 53%; height: 100%; background: linear-gradient(90deg, #95c0a0, #B5C9CB); border-radius: 4px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px;">
+                            <span style="color: white; font-size: 11px; font-weight: 600;">364</span>
+                        </div>
+                    </div>
+                    <div style="text-align: right; color: #83766B;">17.0%</div>
+                    <div style="text-align: right; font-weight: 600; color: #41342A;">$34.80</div>
+                    <div style="text-align: right; font-weight: 600;">$9.1K</div>
+                    <div style="text-align: right; color: #83766B;">2.6%</div>
+                    <div style="text-align: right; color: #6B9C78; font-weight: 500;">↗ +8%</div>
+                </div>
+                <!-- Email/Klaviyo -->
+                <div style="display: grid; grid-template-columns: 120px 1fr 80px 80px 80px 80px 60px; align-items: center; gap: 8px; font-size: 13px;">
+                    <div style="font-weight: 600; color: #41342A;">Email</div>
+                    <div style="position: relative; height: 24px; background: #F5F0EB; border-radius: 4px; overflow: hidden;">
+                        <div style="width: 36%; height: 100%; background: linear-gradient(90deg, #DED29D, #FFE6D8); border-radius: 4px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px;">
+                            <span style="color: #83766B; font-size: 11px; font-weight: 600;">256</span>
+                        </div>
+                    </div>
+                    <div style="text-align: right; color: #83766B;">12.0%</div>
+                    <div style="text-align: right; font-weight: 600; color: #6B9C78;">$4.20</div>
+                    <div style="text-align: right; font-weight: 600;">$7.4K</div>
+                    <div style="text-align: right; color: #83766B;">3.8%</div>
+                    <div style="text-align: right; color: #6B9C78; font-weight: 500;">↗ +24%</div>
+                </div>
+                <!-- Social (Organic) -->
+                <div style="display: grid; grid-template-columns: 120px 1fr 80px 80px 80px 80px 60px; align-items: center; gap: 8px; font-size: 13px;">
+                    <div style="font-weight: 600; color: #41342A;">Social</div>
+                    <div style="position: relative; height: 24px; background: #F5F0EB; border-radius: 4px; overflow: hidden;">
+                        <div style="width: 29%; height: 100%; background: linear-gradient(90deg, #8B6EA3, #b197c7); border-radius: 4px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px;">
+                            <span style="color: white; font-size: 11px; font-weight: 600;">214</span>
+                        </div>
+                    </div>
+                    <div style="text-align: right; color: #83766B;">10.0%</div>
+                    <div style="text-align: right; font-weight: 600; color: #6B9C78;">$0</div>
+                    <div style="text-align: right; font-weight: 600;">$3.4K</div>
+                    <div style="text-align: right; color: #83766B;">0.9%</div>
+                    <div style="text-align: right; color: #6B9C78; font-weight: 500;">↗ +31%</div>
+                </div>
+                <!-- Direct / Other -->
+                <div style="display: grid; grid-template-columns: 120px 1fr 80px 80px 80px 80px 60px; align-items: center; gap: 8px; font-size: 13px;">
+                    <div style="font-weight: 600; color: #41342A;">Direct</div>
+                    <div style="position: relative; height: 24px; background: #F5F0EB; border-radius: 4px; overflow: hidden;">
+                        <div style="width: 25%; height: 100%; background: linear-gradient(90deg, #CFB4A4, #E4D5CA); border-radius: 4px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px;">
+                            <span style="color: #83766B; font-size: 11px; font-weight: 600;">171</span>
+                        </div>
+                    </div>
+                    <div style="text-align: right; color: #83766B;">8.0%</div>
+                    <div style="text-align: right; font-weight: 600; color: #83766B;">—</div>
+                    <div style="text-align: right; font-weight: 600;">$2.8K</div>
+                    <div style="text-align: right; color: #83766B;">2.2%</div>
+                    <div style="text-align: right; color: #83766B; font-weight: 500;">→ flat</div>
+                </div>
+            </div>
+
+            <!-- CAC Efficiency by Channel: visual comparison -->
+            <h3 style="margin-bottom: 16px;">CAC Efficiency by Paid Channel</h3>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px;">
+                <div style="background: #F6F5F3; border-radius: 10px; padding: 16px; text-align: center;">
+                    <div style="font-size: 11px; color: #83766B; font-weight: 600; margin-bottom: 8px;">META ADS</div>
+                    <div style="font-size: 28px; font-weight: 800; color: #41342A;">$28.40</div>
+                    <div style="font-size: 11px; color: #6B9C78; font-weight: 600; margin: 4px 0;">↗ -$3.60 vs Feb</div>
+                    <div style="margin-top: 10px; display: flex; justify-content: center; gap: 16px; font-size: 11px;">
+                        <div><span style="font-weight: 700; color: #41342A;">449</span> <span style="color: #83766B;">new cust</span></div>
+                        <div><span style="font-weight: 700; color: #41342A;">$12.7K</span> <span style="color: #83766B;">spend</span></div>
+                    </div>
+                    <div style="margin-top: 8px;">
+                        <span style="background: rgba(107,156,120,0.12); color: #6B9C78; padding: 3px 10px; border-radius: 10px; font-size: 10px; font-weight: 600;">LTV:CAC 4.2x</span>
+                    </div>
+                </div>
+                <div style="background: #F6F5F3; border-radius: 10px; padding: 16px; text-align: center;">
+                    <div style="font-size: 11px; color: #83766B; font-weight: 600; margin-bottom: 8px;">GOOGLE ADS</div>
+                    <div style="font-size: 28px; font-weight: 800; color: #41342A;">$34.80</div>
+                    <div style="font-size: 11px; color: #6B9C78; font-weight: 600; margin: 4px 0;">↗ -$2.10 vs Feb</div>
+                    <div style="margin-top: 10px; display: flex; justify-content: center; gap: 16px; font-size: 11px;">
+                        <div><span style="font-weight: 700; color: #41342A;">364</span> <span style="color: #83766B;">new cust</span></div>
+                        <div><span style="font-weight: 700; color: #41342A;">$12.7K</span> <span style="color: #83766B;">spend</span></div>
+                    </div>
+                    <div style="margin-top: 8px;">
+                        <span style="background: rgba(176,206,255,0.2); color: #57719B; padding: 3px 10px; border-radius: 10px; font-size: 10px; font-weight: 600;">LTV:CAC 3.1x</span>
+                    </div>
+                </div>
+                <div style="background: #F6F5F3; border-radius: 10px; padding: 16px; text-align: center;">
+                    <div style="font-size: 11px; color: #83766B; font-weight: 600; margin-bottom: 8px;">EMAIL (KLAVIYO)</div>
+                    <div style="font-size: 28px; font-weight: 800; color: #41342A;">$4.20</div>
+                    <div style="font-size: 11px; color: #6B9C78; font-weight: 600; margin: 4px 0;">↗ -$0.80 vs Feb</div>
+                    <div style="margin-top: 10px; display: flex; justify-content: center; gap: 16px; font-size: 11px;">
+                        <div><span style="font-weight: 700; color: #41342A;">256</span> <span style="color: #83766B;">new cust</span></div>
+                        <div><span style="font-weight: 700; color: #41342A;">$1.1K</span> <span style="color: #83766B;">spend</span></div>
+                    </div>
+                    <div style="margin-top: 8px;">
+                        <span style="background: rgba(107,156,120,0.12); color: #6B9C78; padding: 3px 10px; border-radius: 10px; font-size: 10px; font-weight: 600;">LTV:CAC 28.5x ⭐</span>
+                    </div>
+                </div>
+            </div>
+
+            <div style="font-size: 10px; color: #BBB; margin-bottom: 8px;">
+                📊 <strong>Data sources:</strong> New customer count from Shopify (first-order flag). Ad spend & attribution from Meta Ads Manager and Google Ads. Email attribution from Klaviyo. Blended CAC = total marketing spend / new customers.
+            </div>
+        </div>
+
+        <!-- AI Insight: How to Grow New Customer Acquisition -->
+        <div class="ai-insight">
+            <div class="ai-icon">🚀</div>
+            <div class="ai-content">
+                <p><strong>Growth Playbook — How to Amp Up New Customer Acquisition:</strong></p>
+                <p>You acquired 2,138 new customers in March at a $22.40 blended CAC — that's efficient and trending in the right direction (-12% MoM). Here's where the biggest growth levers are:</p>
+                <p><strong>1. Double down on Email acquisition ($4.20 CAC, 28.5x LTV:CAC).</strong> Email is your cheapest and highest-LTV source. You only drove 256 new customers via email — that's just 12% of total. Grow your subscriber list with a pop-up offering 10% off first order, then automate a Welcome Series targeting non-buyers. Klaviyo shows your current Welcome flow converts at 3.8% — if you grew the top of that funnel by 40%, that's ~100 more new customers/month at almost no marginal cost.</p>
+                <p><strong>2. Scale Meta prospecting with lookalike audiences.</strong> At $28.40 NC CAC and 4.2x LTV:CAC, Meta is profitable. Build a lookalike of your Champions segment (412 customers, $2,847 LTV) — they'll attract similar high-value buyers. Increasing Meta new-customer spend by 20% could add ~90 new customers/month while keeping CAC under $32.</p>
+                <p><strong>3. Fix the Social-to-purchase gap.</strong> Organic social is surging (+31% MoM) but conversion is just 0.9% — the lowest of any channel. Your social audience is engaged but not buying. Add shoppable product tags, link-in-bio with a first-purchase incentive, and retarget social visitors who didn't convert with a Meta dynamic product ad.</p>
+                <p><strong>4. Google is your most expensive channel ($34.80) — optimize before scaling.</strong> Review your Google PMax asset groups. Your branded search converts at 4.1% but non-branded at only 1.2%. Shift 15% of non-brand budget to brand + competitor terms where intent is higher.</p>
+                <a href="#" class="ai-cta">→ Create New Customer Acquisition Campaign in Marklo</a>
             </div>
         </div>
 
@@ -942,9 +1321,11 @@
                 <div class="rfm-card">
                     <div class="rfm-title">Champions 👑</div>
                     <div class="rfm-count">412</div>
-                    <div class="rfm-revenue">$2,847 avg LTV</div>
-                    <p style="font-size: 12px; color: #666; margin-bottom: 8px;">Your best customers. High frequency, high spend, recent activity.</p>
-                    <div style="font-size: 11px; color: #6B9C78; font-weight: 600;">→ VIP loyalty program</div>
+                    <div class="rfm-revenue">$2,847 avg LTV • 9.6% of customers • 62% of revenue</div>
+                    <div style="background: rgba(107,156,120,0.08); border-radius: 8px; padding: 10px 12px; margin: 10px 0 8px;">
+                        <div style="font-size: 11px; color: #41342A; line-height: 1.5;"><strong>✨ AI:</strong> These 412 customers drove $1.17M in LTV. They buy 4.2x/year and spend 3.2x more than average. Give them early access to your next collection — they'll be the first to buy and share.</div>
+                    </div>
+                    <a href="#" style="font-size: 12px; color: #6B9C78; font-weight: 600; text-decoration: none;">→ Create VIP Early Access Campaign</a>
                     <div class="rfm-bar">
                         <div class="rfm-bar-fill" style="width: 100%;"></div>
                     </div>
@@ -952,9 +1333,11 @@
                 <div class="rfm-card loyal">
                     <div class="rfm-title">Loyal Customers 🤝</div>
                     <div class="rfm-count">628</div>
-                    <div class="rfm-revenue">$1,204 avg LTV</div>
-                    <p style="font-size: 12px; color: #666; margin-bottom: 8px;">Steady repeat purchasers. Good frequency & spend, engaged.</p>
-                    <div style="font-size: 11px; color: #57719B; font-weight: 600;">→ Retention emails</div>
+                    <div class="rfm-revenue">$1,204 avg LTV • 14.7% of customers • 25% of revenue</div>
+                    <div style="background: rgba(176,206,255,0.1); border-radius: 8px; padding: 10px 12px; margin: 10px 0 8px;">
+                        <div style="font-size: 11px; color: #41342A; line-height: 1.5;"><strong>✨ AI:</strong> 628 steady repeaters — but their avg order value is 18% below Champions. A tiered loyalty program that rewards the next purchase threshold could move 15–20% of this group up.</div>
+                    </div>
+                    <a href="#" style="font-size: 12px; color: #57719B; font-weight: 600; text-decoration: none;">→ Create Loyalty Tier-Up Campaign</a>
                     <div class="rfm-bar">
                         <div class="rfm-bar-fill" style="width: 85%; background: #B0CEFF;"></div>
                     </div>
@@ -962,9 +1345,11 @@
                 <div class="rfm-card at-risk">
                     <div class="rfm-title">At Risk ⚠️</div>
                     <div class="rfm-count">389</div>
-                    <div class="rfm-revenue">$634 avg LTV</div>
-                    <p style="font-size: 12px; color: #666; margin-bottom: 8px;">Used to buy, but haven't in 60+ days. Declining engagement.</p>
-                    <div style="font-size: 11px; color: #FF9800; font-weight: 600;">→ Win-back campaign</div>
+                    <div class="rfm-revenue">$634 avg LTV • 9.1% of customers • $247K total LTV at risk</div>
+                    <div style="background: rgba(255,152,0,0.06); border-radius: 8px; padding: 10px 12px; margin: 10px 0 8px;">
+                        <div style="font-size: 11px; color: #41342A; line-height: 1.5;"><strong>✨ AI:</strong> These 389 customers haven't bought in 60+ days but used to be repeaters. A "we miss you" flow with their last-browsed category + a 15% incentive could recover $37K–49K in revenue.</div>
+                    </div>
+                    <a href="#" style="font-size: 12px; color: #FF9800; font-weight: 600; text-decoration: none;">→ Launch Win-Back Flow</a>
                     <div class="rfm-bar">
                         <div class="rfm-bar-fill" style="width: 55%; background: #FFE6D8;"></div>
                     </div>
@@ -972,9 +1357,11 @@
                 <div class="rfm-card lost">
                     <div class="rfm-title">Lost Customers 📉</div>
                     <div class="rfm-count">1,858</div>
-                    <div class="rfm-revenue">$284 avg LTV</div>
-                    <p style="font-size: 12px; color: #666; margin-bottom: 8px;">Haven't purchased in 180+ days. Low lifetime value or churned.</p>
-                    <div style="font-size: 11px; color: #8B6EA3; font-weight: 600;">→ Re-engagement</div>
+                    <div class="rfm-revenue">$284 avg LTV • 43.4% of customers • 5% of revenue</div>
+                    <div style="background: rgba(139,110,163,0.06); border-radius: 8px; padding: 10px 12px; margin: 10px 0 8px;">
+                        <div style="font-size: 11px; color: #41342A; line-height: 1.5;"><strong>✨ AI:</strong> 1,858 customers dormant 180+ days. Send one final bold win-back with free shipping — if no response within 14 days, suppress from paid audiences to save ad spend and improve ROAS.</div>
+                    </div>
+                    <a href="#" style="font-size: 12px; color: #8B6EA3; font-weight: 600; text-decoration: none;">→ Create Last-Chance Campaign</a>
                     <div class="rfm-bar">
                         <div class="rfm-bar-fill" style="width: 30%; background: #8B6EA3;"></div>
                     </div>
@@ -1183,31 +1570,56 @@
                 <div>
                     <h3>Top Repurchase Products</h3>
                     <div class="product-grid" style="grid-template-columns: 1fr;">
-                        <div class="product-item">
-                            <div class="product-name">Gold Layering Chain</div>
-                            <div class="product-metric">Repeat rate</div>
-                            <div class="product-value">68%</div>
-                            <div class="product-metric" style="margin-top: 4px; font-size: 10px;">542 repeat purchases</div>
+                        <div class="product-item" style="display: flex; align-items: center; gap: 14px; text-align: left; padding: 12px 14px;">
+                            <div style="width: 52px; height: 52px; min-width: 52px; border-radius: 8px; background: linear-gradient(135deg, #F5F0EB 0%, #E4E2DF 100%); display: flex; align-items: center; justify-content: center; font-size: 11px; color: #999; border: 1px solid #EDE8E2; overflow: hidden;">
+                                <img src="" alt="" style="width: 100%; height: 100%; object-fit: cover; display: none;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><span style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; font-size: 20px;">📿</span>
+                            </div>
+                            <div style="flex: 1;">
+                                <div class="product-name" style="font-size: 13px;">Gold Layering Chain</div>
+                                <div style="display: flex; gap: 12px; align-items: baseline; margin-top: 3px;">
+                                    <div class="product-value" style="font-size: 16px;">68%</div>
+                                    <div class="product-metric" style="font-size: 10px;">repeat rate • 542 purchases</div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="product-item">
-                            <div class="product-name">Dainty Beaded Bracelet</div>
-                            <div class="product-metric">Repeat rate</div>
-                            <div class="product-value">61%</div>
-                            <div class="product-metric" style="margin-top: 4px; font-size: 10px;">438 repeat purchases</div>
+                        <div class="product-item" style="display: flex; align-items: center; gap: 14px; text-align: left; padding: 12px 14px;">
+                            <div style="width: 52px; height: 52px; min-width: 52px; border-radius: 8px; background: linear-gradient(135deg, #F5F0EB 0%, #E4E2DF 100%); display: flex; align-items: center; justify-content: center; font-size: 11px; color: #999; border: 1px solid #EDE8E2; overflow: hidden;">
+                                <img src="" alt="" style="width: 100%; height: 100%; object-fit: cover; display: none;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><span style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; font-size: 20px;">📿</span>
+                            </div>
+                            <div style="flex: 1;">
+                                <div class="product-name" style="font-size: 13px;">Dainty Beaded Bracelet</div>
+                                <div style="display: flex; gap: 12px; align-items: baseline; margin-top: 3px;">
+                                    <div class="product-value" style="font-size: 16px;">61%</div>
+                                    <div class="product-metric" style="font-size: 10px;">repeat rate • 438 purchases</div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="product-item">
-                            <div class="product-name">Pearl Drop Earrings</div>
-                            <div class="product-metric">Repeat rate</div>
-                            <div class="product-value">58%</div>
-                            <div class="product-metric" style="margin-top: 4px; font-size: 10px;">384 repeat purchases</div>
+                        <div class="product-item" style="display: flex; align-items: center; gap: 14px; text-align: left; padding: 12px 14px;">
+                            <div style="width: 52px; height: 52px; min-width: 52px; border-radius: 8px; background: linear-gradient(135deg, #F5F0EB 0%, #E4E2DF 100%); display: flex; align-items: center; justify-content: center; font-size: 11px; color: #999; border: 1px solid #EDE8E2; overflow: hidden;">
+                                <img src="" alt="" style="width: 100%; height: 100%; object-fit: cover; display: none;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><span style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; font-size: 20px;">💎</span>
+                            </div>
+                            <div style="flex: 1;">
+                                <div class="product-name" style="font-size: 13px;">Pearl Drop Earrings</div>
+                                <div style="display: flex; gap: 12px; align-items: baseline; margin-top: 3px;">
+                                    <div class="product-value" style="font-size: 16px;">58%</div>
+                                    <div class="product-metric" style="font-size: 10px;">repeat rate • 384 purchases</div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="product-item">
-                            <div class="product-name">Personalized Name Ring</div>
-                            <div class="product-metric">Repeat rate</div>
-                            <div class="product-value">52%</div>
-                            <div class="product-metric" style="margin-top: 4px; font-size: 10px;">291 repeat purchases</div>
+                        <div class="product-item" style="display: flex; align-items: center; gap: 14px; text-align: left; padding: 12px 14px;">
+                            <div style="width: 52px; height: 52px; min-width: 52px; border-radius: 8px; background: linear-gradient(135deg, #F5F0EB 0%, #E4E2DF 100%); display: flex; align-items: center; justify-content: center; font-size: 11px; color: #999; border: 1px solid #EDE8E2; overflow: hidden;">
+                                <img src="" alt="" style="width: 100%; height: 100%; object-fit: cover; display: none;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><span style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; font-size: 20px;">💍</span>
+                            </div>
+                            <div style="flex: 1;">
+                                <div class="product-name" style="font-size: 13px;">Personalized Name Ring</div>
+                                <div style="display: flex; gap: 12px; align-items: baseline; margin-top: 3px;">
+                                    <div class="product-value" style="font-size: 16px;">52%</div>
+                                    <div class="product-metric" style="font-size: 10px;">repeat rate • 291 purchases</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <p style="font-size: 10px; color: #BBB; margin-top: 8px;">Product images from your Shopify catalog</p>
                 </div>
             </div>
         </div>
@@ -1277,47 +1689,41 @@
             </div>
         </div>
 
-        <!-- Customer Satisfaction -->
+        <!-- AI Recommended Actions -->
         <div class="card">
-            <h2 class="section-title">Customer Satisfaction</h2>
-            <div class="grid-2col">
-                <div>
-                    <h3>NPS Summary</h3>
-                    <div style="background: linear-gradient(135deg, #E4E2DF 0%, #F6F5F3 100%); border-radius: 12px; padding: 24px; text-align: center; margin-top: 16px;">
-                        <div style="font-size: 48px; font-weight: 800; color: #41342A; margin-bottom: 8px;">72</div>
-                        <div style="font-size: 14px; color: #666; margin-bottom: 12px;">Net Promoter Score</div>
-                        <div style="font-size: 12px; color: #6B9C78; font-weight: 600;">↗ +8 points YoY</div>
-                        <div class="percentile-badge" style="margin-top: 12px; background: rgba(177,151,199,0.12); color: #b197c7;">Top 10% jewelry brands</div>
+            <h2 class="section-title">Recommended Next Steps</h2>
+            <p class="meta-info">AI-generated actions based on this month's customer data</p>
+            <div style="display: grid; gap: 12px; margin-top: 16px;">
+                <div style="display: flex; gap: 14px; align-items: flex-start; padding: 16px; background: #FAFAFA; border-radius: 10px; border-left: 4px solid #6B9C78;">
+                    <div style="background: #6B9C78; color: white; font-weight: 800; font-size: 13px; width: 28px; height: 28px; min-width: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center;">1</div>
+                    <div>
+                        <div style="font-weight: 600; font-size: 14px; color: #1A1A1A; margin-bottom: 4px;">Scale email acquisition — your cheapest growth channel</div>
+                        <div style="font-size: 12px; color: #666; line-height: 1.5;">Email drives new customers at $4.20 CAC (28.5x LTV:CAC) but only 12% of new customer volume. Add a first-purchase pop-up, grow subscribers, and optimize your Welcome Series — a 40% top-of-funnel increase could add ~100 new customers/month at near-zero marginal cost.</div>
+                        <a href="#" style="font-size: 12px; color: #6B9C78; font-weight: 600; text-decoration: none; margin-top: 6px; display: inline-block;">→ Create Email Acquisition Campaign in Marklo</a>
                     </div>
                 </div>
-                <div>
-                    <h3>Review Metrics</h3>
-                    <div style="margin-top: 16px;">
-                        <div style="margin-bottom: 16px;">
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                                <span style="font-weight: 600;">Avg Rating</span>
-                                <span style="font-size: 14px; font-weight: 700; color: #1A1A1A;">4.8/5.0</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 96%;"></div>
-                            </div>
-                        </div>
-                        <div style="margin-bottom: 16px;">
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                                <span style="font-weight: 600;">Total Reviews</span>
-                                <span style="font-size: 14px; font-weight: 700; color: #1A1A1A;">2,847</span>
-                            </div>
-                            <div style="font-size: 12px; color: #666;">+412 new this month</div>
-                        </div>
-                        <div style="margin-bottom: 16px;">
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                                <span style="font-weight: 600;">5-Star %</span>
-                                <span style="font-size: 14px; font-weight: 700; color: #6B9C78;">78%</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 78%;"></div>
-                            </div>
-                        </div>
+                <div style="display: flex; gap: 14px; align-items: flex-start; padding: 16px; background: #FAFAFA; border-radius: 10px; border-left: 4px solid #95c0a0;">
+                    <div style="background: #95c0a0; color: white; font-weight: 800; font-size: 13px; width: 28px; height: 28px; min-width: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center;">2</div>
+                    <div>
+                        <div style="font-weight: 600; font-size: 14px; color: #1A1A1A; margin-bottom: 4px;">Win back 389 at-risk customers before they churn</div>
+                        <div style="font-size: 12px; color: #666; line-height: 1.5;">$247K in LTV at risk. A targeted "we miss you" flow with their last-purchased category + 15% off could recover 30–40% of this segment within 30 days.</div>
+                        <a href="#" style="font-size: 12px; color: #6B9C78; font-weight: 600; text-decoration: none; margin-top: 6px; display: inline-block;">→ Create Win-Back Flow in Marklo</a>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 14px; align-items: flex-start; padding: 16px; background: #FAFAFA; border-radius: 10px; border-left: 4px solid #57719B;">
+                    <div style="background: #57719B; color: white; font-weight: 800; font-size: 13px; width: 28px; height: 28px; min-width: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center;">3</div>
+                    <div>
+                        <div style="font-weight: 600; font-size: 14px; color: #1A1A1A; margin-bottom: 4px;">Move Loyal customers up to Champion tier</div>
+                        <div style="font-size: 12px; color: #666; line-height: 1.5;">628 loyal customers are 18% below Champion AOV. A "spend $X more to unlock VIP" email with their most-viewed products could push 15–20% into the top tier — worth $320K+ in incremental LTV.</div>
+                        <a href="#" style="font-size: 12px; color: #57719B; font-weight: 600; text-decoration: none; margin-top: 6px; display: inline-block;">→ Create Tier-Up Campaign in Marklo</a>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 14px; align-items: flex-start; padding: 16px; background: #FAFAFA; border-radius: 10px; border-left: 4px solid #B0CEFF;">
+                    <div style="background: #B0CEFF; color: white; font-weight: 800; font-size: 13px; width: 28px; height: 28px; min-width: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center;">4</div>
+                    <div>
+                        <div style="font-weight: 600; font-size: 14px; color: #1A1A1A; margin-bottom: 4px;">Cross-sell your top repurchase product to one-time buyers</div>
+                        <div style="font-size: 12px; color: #666; line-height: 1.5;">The Gold Layering Chain has a 68% repeat rate — your best gateway product. Target customers who bought only once with a "complete the look" email featuring this product at the 30-day mark.</div>
+                        <a href="#" style="font-size: 12px; color: #57719B; font-weight: 600; text-decoration: none; margin-top: 6px; display: inline-block;">→ Create Cross-Sell Campaign in Marklo</a>
                     </div>
                 </div>
             </div>

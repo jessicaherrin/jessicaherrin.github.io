@@ -269,6 +269,42 @@
   .fc-card-channels { font-size: 11px; color: #999; margin-bottom: 8px; }
   .fc-card-desc { font-size: 12px; color: #666; line-height: 1.4; }
 
+  /* ─── Flow Performance Cards ─── */
+  .flow-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .flow-card {
+    background: #FAFAFA; border: 1px solid #E8E8E8; border-radius: 8px;
+    padding: 12px 14px; position: relative;
+  }
+  .flow-card.stale { border-color: #D4A843; }
+  .flow-card.declining { border-color: #D94B4B; }
+  .flow-header {
+    display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;
+  }
+  .flow-name { font-size: 12px; font-weight: 600; color: #1a1a1a; }
+  .flow-status {
+    font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px;
+    padding: 2px 6px; border-radius: 3px;
+  }
+  .flow-status.active { background: rgba(46,139,87,0.08); color: #2E8B57; }
+  .flow-status.stale { background: rgba(200,160,40,0.1); color: #B08A20; }
+  .flow-status.off { background: rgba(217,75,75,0.08); color: #D94B4B; }
+  .flow-revenue { font-size: 18px; font-weight: 700; color: #1a1a1a; }
+  .flow-revenue-label { font-size: 10px; color: #999; margin-bottom: 6px; }
+  .flow-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; font-size: 11px; }
+  .flow-metric-label { color: #999; }
+  .flow-metric-val { font-weight: 600; color: #1a1a1a; text-align: right; }
+  .flow-sparkline { display: flex; align-items: flex-end; gap: 1px; height: 16px; margin-top: 6px; }
+  .flow-sparkline-bar { flex: 1; border-radius: 1px; min-width: 3px; background: #E0E0E0; }
+  .flow-sparkline-bar.pos { background: #2E8B57; }
+  .flow-sparkline-bar.neg { background: #D94B4B; }
+  .flow-sparkline-bar.warn { background: #D4A843; }
+  .flow-updated { font-size: 9px; color: #999; margin-top: 4px; }
+  .flow-updated.stale { color: #B08A20; }
+  .flow-mini-funnel { display: flex; align-items: center; gap: 2px; margin-top: 6px; font-size: 10px; color: #999; }
+  .flow-mini-funnel .fm-step { text-align: center; }
+  .flow-mini-funnel .fm-arrow { color: #CCC; }
+  .flow-mini-funnel .fm-val { font-weight: 600; color: #666; display: block; }
+
   /* ─── Responsive ─── */
   @media (max-width: 900px) {
     .card-row-3, .card-row-4 { grid-template-columns: 1fr; }
@@ -953,9 +989,10 @@
     Email &amp; List Health
   </div>
 
+  <!-- Row 1: Send Performance + List Health -->
   <div class="card-row card-row-2">
     <div class="card">
-      <div class="card-title">Send Performance</div>
+      <div class="card-title">Campaign Send Performance</div>
       <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
         <div>
           <div class="kpi-big">6</div>
@@ -964,13 +1001,13 @@
         </div>
         <div>
           <div class="kpi-big">$1.12</div>
-          <div class="kpi-label">Avg RPR</div>
+          <div class="kpi-label">Avg Campaign RPR</div>
           <div style="font-size: 12px; color: #2E8B57;">↗ Stable</div>
         </div>
         <div>
-          <div class="kpi-big">70/30</div>
-          <div class="kpi-label">Campaign / Flow Split</div>
-          <div style="font-size: 12px; color: #2E8B57;">↗ Campaigns driving</div>
+          <div class="kpi-big">$38,220</div>
+          <div class="kpi-label">Campaign Revenue</div>
+          <div style="font-size: 12px; color: #999;">70% of email total</div>
         </div>
       </div>
       <div class="creative-row">
@@ -979,7 +1016,7 @@
             <span style="font-size: 20px;">💎</span>
           </div>
           <div class="creative-info">
-            <div class="creative-label top">Top Performing</div>
+            <div class="creative-label top">Top Campaign</div>
             <div class="creative-name">Spring Collection Launch</div>
             <div class="creative-metric">RPR: <strong>$1.48</strong> · 12.4K sent</div>
             <div class="creative-metric">Subj: "Your spring must-haves are here"</div>
@@ -990,7 +1027,7 @@
             <span style="font-size: 20px;">📦</span>
           </div>
           <div class="creative-info">
-            <div class="creative-label bottom">Lowest Performing</div>
+            <div class="creative-label bottom">Lowest Campaign</div>
             <div class="creative-name">Restock Alert: Classics</div>
             <div class="creative-metric">RPR: <strong>$0.34</strong> · 11.8K sent</div>
             <div class="creative-metric">Subj: "Back in stock — shop now"</div>
@@ -1028,6 +1065,161 @@
           <div style="font-size: 12px; color: #2E8B57;">↗ Healthy</div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- Row 2: Flow Performance -->
+  <div class="card" style="margin-bottom: 28px;">
+    <div class="card-title">
+      Flow Performance
+      <span style="font-size: 12px; font-weight: 500; color: #999; margin-left: auto;">$16,380 flow revenue · 30% of email total</span>
+    </div>
+
+    <div class="flow-cards">
+
+      <!-- Welcome Series -->
+      <div class="flow-card">
+        <div class="flow-header">
+          <span class="flow-name">Welcome Series</span>
+          <span class="flow-status active">Active</span>
+        </div>
+        <div class="flow-revenue">$6,240</div>
+        <div class="flow-revenue-label">Revenue this month</div>
+        <div class="flow-metrics">
+          <span class="flow-metric-label">RPR</span>
+          <span class="flow-metric-val" style="color: #2E8B57;">$2.18</span>
+          <span class="flow-metric-label">In queue</span>
+          <span class="flow-metric-val">1,420</span>
+          <span class="flow-metric-label">Entered</span>
+          <span class="flow-metric-val">2,860</span>
+          <span class="flow-metric-label">Converted</span>
+          <span class="flow-metric-val">312 (10.9%)</span>
+        </div>
+        <div class="flow-mini-funnel">
+          <div class="fm-step"><span class="fm-val">2,860</span>entered</div>
+          <span class="fm-arrow">→</span>
+          <div class="fm-step"><span class="fm-val">68%</span>opened</div>
+          <span class="fm-arrow">→</span>
+          <div class="fm-step"><span class="fm-val">24%</span>clicked</div>
+          <span class="fm-arrow">→</span>
+          <div class="fm-step"><span class="fm-val">10.9%</span>bought</div>
+        </div>
+        <div class="flow-sparkline">
+          <div class="flow-sparkline-bar pos" style="height: 60%;"></div>
+          <div class="flow-sparkline-bar pos" style="height: 65%;"></div>
+          <div class="flow-sparkline-bar pos" style="height: 70%;"></div>
+          <div class="flow-sparkline-bar pos" style="height: 68%;"></div>
+          <div class="flow-sparkline-bar pos" style="height: 75%;"></div>
+          <div class="flow-sparkline-bar pos" style="height: 80%;"></div>
+        </div>
+        <div class="flow-updated">Updated 12 days ago</div>
+      </div>
+
+      <!-- Abandoned Cart -->
+      <div class="flow-card">
+        <div class="flow-header">
+          <span class="flow-name">Abandoned Cart</span>
+          <span class="flow-status active">Active</span>
+        </div>
+        <div class="flow-revenue">$5,890</div>
+        <div class="flow-revenue-label">Revenue this month</div>
+        <div class="flow-metrics">
+          <span class="flow-metric-label">RPR</span>
+          <span class="flow-metric-val" style="color: #2E8B57;">$3.42</span>
+          <span class="flow-metric-label">In queue</span>
+          <span class="flow-metric-val">680</span>
+          <span class="flow-metric-label">Entered</span>
+          <span class="flow-metric-val">1,722</span>
+          <span class="flow-metric-label">Recovered</span>
+          <span class="flow-metric-val">218 (12.7%)</span>
+        </div>
+        <div class="flow-mini-funnel">
+          <div class="fm-step"><span class="fm-val">1,722</span>abandoned</div>
+          <span class="fm-arrow">→</span>
+          <div class="fm-step"><span class="fm-val">52%</span>opened</div>
+          <span class="fm-arrow">→</span>
+          <div class="fm-step"><span class="fm-val">18%</span>clicked</div>
+          <span class="fm-arrow">→</span>
+          <div class="fm-step"><span class="fm-val">12.7%</span>recovered</div>
+        </div>
+        <div class="flow-sparkline">
+          <div class="flow-sparkline-bar pos" style="height: 70%;"></div>
+          <div class="flow-sparkline-bar pos" style="height: 72%;"></div>
+          <div class="flow-sparkline-bar pos" style="height: 68%;"></div>
+          <div class="flow-sparkline-bar pos" style="height: 74%;"></div>
+          <div class="flow-sparkline-bar pos" style="height: 72%;"></div>
+          <div class="flow-sparkline-bar pos" style="height: 76%;"></div>
+        </div>
+        <div class="flow-updated">Updated 28 days ago</div>
+      </div>
+
+      <!-- Post-Purchase -->
+      <div class="flow-card stale">
+        <div class="flow-header">
+          <span class="flow-name">Post-Purchase</span>
+          <span class="flow-status stale">Stale</span>
+        </div>
+        <div class="flow-revenue">$2,180</div>
+        <div class="flow-revenue-label">Revenue this month</div>
+        <div class="flow-metrics">
+          <span class="flow-metric-label">RPR</span>
+          <span class="flow-metric-val" style="color: #B08A20;">$0.62</span>
+          <span class="flow-metric-label">In queue</span>
+          <span class="flow-metric-val">890</span>
+          <span class="flow-metric-label">Entered</span>
+          <span class="flow-metric-val">892</span>
+          <span class="flow-metric-label">Repeat buy</span>
+          <span class="flow-metric-val">48 (5.4%)</span>
+        </div>
+        <div class="flow-mini-funnel">
+          <div class="fm-step"><span class="fm-val">892</span>purchased</div>
+          <span class="fm-arrow">→</span>
+          <div class="fm-step"><span class="fm-val">41%</span>opened</div>
+          <span class="fm-arrow">→</span>
+          <div class="fm-step"><span class="fm-val">8%</span>clicked</div>
+          <span class="fm-arrow">→</span>
+          <div class="fm-step"><span class="fm-val">5.4%</span>rebought</div>
+        </div>
+        <div class="flow-sparkline">
+          <div class="flow-sparkline-bar pos" style="height: 60%;"></div>
+          <div class="flow-sparkline-bar pos" style="height: 55%;"></div>
+          <div class="flow-sparkline-bar warn" style="height: 48%;"></div>
+          <div class="flow-sparkline-bar warn" style="height: 42%;"></div>
+          <div class="flow-sparkline-bar neg" style="height: 35%;"></div>
+          <div class="flow-sparkline-bar neg" style="height: 30%;"></div>
+        </div>
+        <div class="flow-updated stale">⚠️ Last updated 94 days ago</div>
+      </div>
+
+      <!-- Win-Back -->
+      <div class="flow-card declining">
+        <div class="flow-header">
+          <span class="flow-name">Win-Back (90-day)</span>
+          <span class="flow-status off">Off</span>
+        </div>
+        <div class="flow-revenue" style="color: #D94B4B;">$0</div>
+        <div class="flow-revenue-label">Revenue this month</div>
+        <div class="flow-metrics">
+          <span class="flow-metric-label">RPR</span>
+          <span class="flow-metric-val" style="color: #D94B4B;">—</span>
+          <span class="flow-metric-label">Eligible</span>
+          <span class="flow-metric-val" style="color: #D94B4B;">3,200</span>
+          <span class="flow-metric-label">Last active</span>
+          <span class="flow-metric-val">Feb 14</span>
+          <span class="flow-metric-label">Status</span>
+          <span class="flow-metric-val" style="color: #D94B4B;">Paused</span>
+        </div>
+        <div style="font-size: 10px; color: #D94B4B; margin-top: 8px; line-height: 1.4; background: rgba(217,75,75,0.04); padding: 6px 8px; border-radius: 4px;">
+          3,200 customers eligible for win-back with no active flow. This is likely contributing to the repeat rate decline.
+        </div>
+        <div class="flow-updated stale">⚠️ Paused since Feb 14</div>
+      </div>
+
+    </div>
+
+    <div class="ai-insight-bar" style="margin-top: 16px; margin-bottom: 0;">
+      <span class="ai-icon">✦</span>
+      <div>Your Welcome Series ($2.18 RPR) and Abandoned Cart ($3.42 RPR) are performing well. But your Post-Purchase flow hasn't been updated in 94 days and RPR has dropped 50% — the content may be stale. The Win-Back flow has been paused since Feb 14 with 3,200 eligible customers sitting in limbo — this is likely connected to the 2pp repeat rate decline in the funnel. <a href="#">→ View Flow Analytics</a></div>
     </div>
   </div>
 
